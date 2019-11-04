@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:wizard2/card.dart';
 import 'package:wizard2/types.dart';
 import 'dart:math';
@@ -5,7 +7,16 @@ import 'dart:math';
 class Deck {
   List<Card> deck = new List(60);
   int topOfDeck = 0;
-  void distribution() {}
+
+  /* Returns the card that is on top of the Stack */
+  Card takeCard() {
+    if (topOfDeck < 60) {
+      return this.deck[topOfDeck++];
+    } else {
+      //todo implement this method in a way in that we don't need a new card
+      new Card(cardTypes.JESTER, 0);
+    }
+  }
 
   /* _createDeck() will create a new deck of cards in increasing order*/
   void _createDeck() {
