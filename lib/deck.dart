@@ -1,40 +1,36 @@
 import 'dart:io';
 
 import 'package:wizard2/card.dart';
-import 'package:wizard2/types.dart';
+import 'package:wizard2/cardTypes.dart';
 import 'dart:math';
 
 class Deck {
-  List<Card> deck = new List(60);
+  List<Card> deck = [];
   int _topOfDeck = 0;
 
   /* Returns the card that is on top of the Stack */
   Card takeCard() {
-    if (_topOfDeck < 60) {
-      return this.deck[_topOfDeck++];
-    } else {
-      //todo implement this method in a way in that we don't need a new card
-      new Card(cardTypes.JESTER, 0);
-    }
+    Card top = this.deck[0];
+    deck.removeAt(0);
+    return top;
   }
 
   /* _createDeck() will create a new deck of cards in increasing order*/
   void _createDeck() {
     //todo add Images for the GUI when ready
     // clubs (♣), diamonds (♦), hearts (♥) and spades (♠
-    int index = 0;
+
     // first loop for the four different types
     for (int i = 0; i < 4; i++) {
       // second loop for the fourteen different cards
       for (int j = 0; j < 15; j++) {
         if (j == 0) {
-          this.deck[index] = new Card(cardTypes.values[4], j);
+          this.deck.add(new Card(cardTypes.values[4], j));
         } else if (j == 14) {
-          this.deck[index] = new Card(cardTypes.values[5], j);
+          this.deck.add(new Card(cardTypes.values[5], j));
         } else {
-          this.deck[index] = new Card(cardTypes.values[i], j);
+          this.deck.add(new Card(cardTypes.values[i], j));
         }
-        index++;
       }
     }
   }
