@@ -1,4 +1,4 @@
-import 'package:wizard2/types.dart';
+import 'package:wizard2/cardTypes.dart';
 import 'package:wizard2/card.dart';
 //todo import the test package and implement the tests
 
