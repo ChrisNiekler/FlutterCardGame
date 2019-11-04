@@ -4,7 +4,7 @@ import 'package:wizard2/round.dart';
 
 // second main is just for backend
 void main() {
-  int _round = 0;
+  int _round = 5;
   int _maxRounds;
   int _playerAmount = 3;
   int dealerID;
@@ -13,16 +13,16 @@ void main() {
     print('How many players? (3-6)');
     playerNumber = int.parse(stdin.readLineSync());
   } while (3 > playerNumber || playerNumber > 6);*/
-  print('Okay $_playerAmount Players');
+  print('$_playerAmount Players');
 
   // set _maxRounds to 0 for testing reasons
-  _maxRounds = 0;
+  _maxRounds = 5;
 
   //todo implement createPlayers()
   List<Player> players = [
-    new Player('uno', 0),
-    new Player('dos', 1),
-    new Player('tres', 2)
+    new Player('Uno', 0),
+    new Player('Dos', 1),
+    new Player('Tres', 2)
   ];
   dealerID = _whoStarts(_playerAmount);
   do {
