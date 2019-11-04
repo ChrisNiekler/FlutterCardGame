@@ -1,7 +1,9 @@
 enum cardTypes {
   CLUB,
   DIAMOND,
-  HEARTS,
-  SPADES
+  HEART,
+  SPADE,
+  JESTER,
+  WIZARD
   // clubs (♣), diamonds (♦), hearts (♥) and spades (♠)
 }
