@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:wizard2/card.dart';
+import 'package:wizard2/deck.dart';
 import 'package:wizard2/types.dart';
 
 // second main is just for backend
@@ -11,19 +12,10 @@ void main() {
     playerNumber = int.parse(stdin.readLineSync());
   } while (3 > playerNumber || playerNumber > 6);*/
   print('Okay $playerNumber Players');
-
-  Card testCard = new Card(cardTypes.SPADE, 4);
-  print(testCard.card);
-  Card testCard2 = new Card(cardTypes.DIAMOND, 5);
-  print(testCard2.card);
-  Card testCard3 = new Card(cardTypes.HEART, 6);
-  print(testCard3.card);
-  Card testCard4 = new Card(cardTypes.CLUB, 7);
-  print(testCard4.card);
-  Card testCard5 = new Card(cardTypes.WIZARD, 14);
-  print(testCard5.card);
-  Card testCard6 = new Card(cardTypes.JESTER, 0);
-  print(testCard6.card);
+  Deck gameDeck = new Deck();
+  gameDeck.createDeck();
+  gameDeck.shuffleDeck();
+  gameDeck.deck.forEach((element) => print(element.card));
   print('the end!');
 }
 
