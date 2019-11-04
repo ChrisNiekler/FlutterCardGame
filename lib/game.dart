@@ -13,9 +13,7 @@ void main() {
   } while (3 > playerNumber || playerNumber > 6);*/
   print('Okay $playerNumber Players');
   Deck gameDeck = new Deck();
-  gameDeck.createDeck();
-  gameDeck.shuffleDeck();
-  gameDeck.deck.forEach((element) => print(element.card));
+  gameDeck.printDeckToConsole();
   print('the end!');
 }
 

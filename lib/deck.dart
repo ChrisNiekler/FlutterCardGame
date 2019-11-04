@@ -7,8 +7,8 @@ class Deck {
   int topOfDeck = 0;
   void distribution() {}
 
-  /*createDeck() will create a new deck of cards in increasing order*/
-  void createDeck() {
+  /* _createDeck() will create a new deck of cards in increasing order*/
+  void _createDeck() {
     //todo add Images for the GUI when ready
     // clubs (♣), diamonds (♦), hearts (♥) and spades (♠
     int index = 0;
@@ -52,5 +52,12 @@ class Deck {
 // for testing only
   void printDeckToConsole() {
     this.deck.forEach((element) => print(element.card));
+  }
+
+  /* Constructor
+  * When creating a new Deck, the cards will be created and shuffled;*/
+  Deck() {
+    this._createDeck();
+    this.shuffleDeck();
   }
 }
