@@ -1,4 +1,4 @@
-import 'package:wizard2/types.dart';
+import 'package:wizard2/cardTypes.dart';
 
 class Card {
   cardTypes cardType;

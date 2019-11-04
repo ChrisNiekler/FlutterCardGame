@@ -7,6 +7,9 @@ class Player {
   int bet;
   void putBet(int bet) {}
   void playCard(Card card) {}
+  void _printHandCards() {
+    this.handCards.forEach((crd) => print(crd.card));
+  }
 
   Player(this.name, this.id);
 }
