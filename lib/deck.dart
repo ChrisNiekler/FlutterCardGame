@@ -6,12 +6,12 @@ import 'dart:math';
 
 class Deck {
   List<Card> deck = new List(60);
-  int topOfDeck = 0;
+  int _topOfDeck = 0;
 
   /* Returns the card that is on top of the Stack */
   Card takeCard() {
-    if (topOfDeck < 60) {
-      return this.deck[topOfDeck++];
+    if (_topOfDeck < 60) {
+      return this.deck[_topOfDeck++];
     } else {
       //todo implement this method in a way in that we don't need a new card
       new Card(cardTypes.JESTER, 0);
