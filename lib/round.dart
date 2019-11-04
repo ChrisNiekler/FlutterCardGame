@@ -8,21 +8,34 @@ class Round {
   int dealerID;
 
   Round(this.trumpf, this.roundNumber, this.dealerID);
-  void cardDistribution() {}
-  void tricking() {}
-  void playCards() {}
-  void evaluation() {}
 }
 
 void playRound(
     int roundNumber, int maxRounds, List<Player> players, int dealerID) {
   Round currentRound = new Round(cardTypes.JESTER, roundNumber, dealerID);
-  print(players.length);
   Deck gameDeck = new Deck();
-  gameDeck.printDeckToConsole();
-  for (int i = 0; i < 50; i++) {
-    gameDeck.takeCard();
-    print('');
-  }
-  gameDeck.printDeckToConsole();
+  cardDistribution(players, roundNumber, gameDeck);
+  print('\n');
+  int cardsInHand = players[0].handCards.length;
+  print('cards in hand $cardsInHand');
+  players.forEach((element) {
+    String n = element.name;
+    print('Playername: $n');
+    print('Cards in hand!');
+    element.printHandCardsToConsole();
+    print('\n');
+  });
 }
+
+void cardDistribution(List<Player> players, int round, Deck deck) {
+  int lng = players.length;
+  for (int i = 0; i < round; i++) {
+    for (int j = 0; j < lng; j++) {
+      players[j].handCards.add(deck.takeCard());
+    }
+  }
+}
+
+void tricking() {}
+void playCards() {}
+void evaluation() {}
