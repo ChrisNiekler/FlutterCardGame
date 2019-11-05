@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wizard2/gamepage.dart';
@@ -32,17 +31,17 @@ class MyHomePage extends StatelessWidget{
             new Stack(
               alignment: Alignment.center,
               children: <Widget>[
-              new Container(
+                new Container(
 
-                height: 70.0,
-                width: 70.0,
-                decoration: new BoxDecoration(
-                  borderRadius:  new BorderRadius.circular(10.0),
-                  color: Colors.grey
+                  height: 70.0,
+                  width: 70.0,
+                  decoration: new BoxDecoration(
+                      borderRadius:  new BorderRadius.circular(10.0),
+                      color: Colors.grey
+                  ),
+
+
                 ),
-
-
-              ),
                 new Container(
 
                   height: 60.0,
@@ -54,17 +53,17 @@ class MyHomePage extends StatelessWidget{
                   child: new Icon(Icons.gamepad,color: Colors.white,),
 
                 )
-             ],
+              ],
             ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: new Text("Wizard",style: new TextStyle(fontSize: 30.0),),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new Text("Wizard",style: new TextStyle(fontSize: 30.0),),
 
-              )
-            ],),
+                )
+              ],),
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -74,8 +73,8 @@ class MyHomePage extends StatelessWidget{
                         left: 20.0, right: 20.0, top: 10.0),
                     child: GestureDetector(onTap: (){
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Gamepage()),
+                        context,
+                        MaterialPageRoute(builder: (context) => Gamepage()),
                       );},
 
                       child: new Container(
@@ -99,7 +98,11 @@ class MyHomePage extends StatelessWidget{
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
-                    child: GestureDetector(
+                    child: GestureDetector(onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Gamepage()),
+                      );},
 
                       child: new Container(
                           alignment: Alignment.center,

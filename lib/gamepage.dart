@@ -9,10 +9,9 @@ class Gamepage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-
                   color: Colors.black12,
                   height: 500.0,
                   width: 100,
@@ -20,15 +19,28 @@ class Gamepage extends StatelessWidget {
                   child: Text("Spieler 1"),
                 ),
                 Container(
-                  color: Colors.white,
-                  height: 500.0,
-                  width: 210.0,
-                  child: Text("Trumpf"),
+                  width: 200.0,
+                  height: 100.0,
+                  color: Colors.green,
                   alignment: Alignment.center,
+                  child: DragTarget(
+                    builder: (context, List<AssetImage> candidateData,
+                        rejectedData) {
+                      print(candidateData);
+                      return Center(
+                          child: Text(
+                            "Trumpf",
+                            style: TextStyle(color: Colors.white, fontSize: 22.0),
+                          ));
+                    },
+                    onWillAccept: (data) {
+                      return true;
+                    },
+                    onAccept: (data) {},
+                  ),
                 ),
                 Expanded(
                   child: Container(
-
                     color: Colors.black12,
                     height: 500.0,
                     width: 100.0,
@@ -39,18 +51,38 @@ class Gamepage extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: Row(children: <Widget>[
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Draggable(
+                    data: 5,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 100.0,
+                      width: 80.0,
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: new AssetImage('images/cards/2D.png'),
+                          fit: BoxFit.fill,
+                        ),
 
-                   Expanded(
-                     child: Container(
-                      color: Colors.black26,
+                      ),
+                    ),
+                    feedback: Container(
+                      alignment: Alignment.center,
+                      height: 100.0,
+                      width: 80.0,
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: new AssetImage('images/cards/2D.png'),
+                          fit: BoxFit.fill,
+                        ),
 
-                     alignment: Alignment.center,
-                      child: Text("Spieler 3"),
+                      ),
+                    ),
+                    childWhenDragging: Container(),
                   ),
-                   ),
-
-              ],
+                ],
               ),
             )
           ],
