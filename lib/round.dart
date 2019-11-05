@@ -52,40 +52,58 @@ class Round {
     String name = '';
     String input = '';
     int cardNr;
-    bool allowed;
-    players.forEach((gamer) {
-      allowed = false;
-      cardNr = -1;
-      size = gamer.handCards.length;
-      name = gamer.name;
-      print('$name\'s turn.');
+    bool inputAllowed;
 
-      // start of player choice
-      if (!gamer.ai) {
-        gamer.printHandCardsToConsole();
-        do {
-          print('Please pick one of your $size cards (by index) to play: ');
-          input = stdin.readLineSync();
-          if (_isNumeric(input)) {
-            cardNr = int.parse(input);
-          }
-          if (cardNr >= 0 && cardNr < size) {
-            allowed = true;
-          }
-        } while (!allowed);
-        playedCards.add(gamer.playCard(cardNr));
-      } else {
-        // if an AI playCard will be called with -1
-        playedCards.add(gamer.playCard(-1));
-      }
+    // todo check if playable cards are in hand
+    // if no playable card is in hand the player can play any card
+    // the first player can play any card
+    
+    players.forEach(
+      (gamer) {
+        inputAllowed = false;
+        cardNr = -1;
+        size = gamer.handCards.length;
+        name = gamer.name;
+        print('$name\'s turn.');
 
-      // end of player choice
+        // start of player choice
+        if (!gamer.ai) {
+          gamer.printHandCardsToConsole();
+          do {
+            print('Please pick one of your $size cards (by index) to play: ');
+            input = stdin.readLineSync();
+            if (_isNumeric(input)) {
+              cardNr = int.parse(input);
+            }
+            if (cardNr >= 0 && cardNr < size) {
+              inputAllowed = true;
+            }
+          } while (!inputAllowed);
+          playedCards.add(gamer.playCard(cardNr));
+        } else {
+          // if an AI playCard will be called with -1
+          playedCards.add(gamer.playCard(-1));
+        }
 
-      input = playedCards[playedCards.length - 1].card;
-      print('$name played $input');
+        // end of player choice
 
-      print('');
-    });
+        input = playedCards[playedCards.length - 1].card;
+        print('$name played $input');
+
+        print('');
+      },
+    );
+  }
+
+  void checkIfCardsPlayable(Player currentPlayer) {
+    // todo implement
+    // this method should iterate over the players cards and mark if they are
+    // allowedToPlay (mark their bool)
+  }
+  void playable(){
+    // todo implement
+    // this method should check after the first player did play what cards
+    // are (what color) supposed to be played
   }
 }
 
