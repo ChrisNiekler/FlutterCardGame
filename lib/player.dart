@@ -16,6 +16,10 @@ abstract class Player {
   }
 
   void printHandCardsToConsole() {
-    this.handCards.forEach((element) => print(element.card));
+    this.handCards.forEach(
+      (element) {
+        print(element.card);
+      },
+    );
   }
 }
