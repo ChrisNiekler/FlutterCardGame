@@ -47,8 +47,9 @@ class Round {
       }
     }
   }
+
+  void playCards() {}
 }
 
 void tricking() {}
-void playCards(cardTypes trump, List<Player> players) {}
 void evaluation() {}

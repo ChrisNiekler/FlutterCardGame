@@ -6,7 +6,7 @@ import 'package:wizard2/round.dart';
 void main() {
   int _round = 5;
   int _maxRounds;
-  int _playerAmount = 3;
+  int _playerAmount = 4;
   int dealerID;
   Round currentRound;
   //todo getPlayerNumber()
@@ -23,10 +23,12 @@ void main() {
   List<Player> players = [
     new Player('Uno', 0),
     new Player('Dos', 1),
-    new Player('Tres', 2)
+    new Player('Tres', 2),
+    new Player('Quadro', 3)
   ];
   dealerID = _whoStarts(_playerAmount);
   do {
+    print('Round $_round starts!');
     currentRound = new Round(_round, _maxRounds, dealerID, players);
     currentRound.playRound();
 
