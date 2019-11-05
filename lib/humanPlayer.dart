@@ -6,10 +6,6 @@ class HumanPlayer extends Player {
   int id;
   List<Card> handCards = [];
   int bet;
-  // for testing only
-  void printHandCardsToConsole() {
-    this.handCards.forEach((element) => print(element.card));
-  }
 
   @override
   Card playCard(int pick) {

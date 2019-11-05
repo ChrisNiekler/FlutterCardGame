@@ -4,6 +4,7 @@ class Card {
   cardTypes cardType;
   int value;
   String card;
+  bool allowedToPlay;
   // clubs (♣), diamonds (♦), hearts (♥) and spades (♠)
   Card(this.cardType, this.value) {
     String icon = '';

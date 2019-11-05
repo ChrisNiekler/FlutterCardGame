@@ -13,4 +13,8 @@ abstract class Player {
   void addCard(Deck deck) {
     handCards.add(deck.takeCard());
   }
+
+  void printHandCardsToConsole() {
+    this.handCards.forEach((element) => print(element.card));
+  }
 }

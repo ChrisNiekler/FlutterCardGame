@@ -9,7 +9,7 @@ class Round {
   int roundNumber;
   int maxRounds;
   int dealerID;
-  List<HumanPlayer> players;
+  List<Player> players;
   List<Card> playedCards = [];
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
