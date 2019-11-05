@@ -1,5 +1,6 @@
 import 'package:wizard2/card.dart';
 import 'package:wizard2/player.dart';
+import 'humanPlayer.dart';
 import 'package:wizard2/deck.dart';
 import 'dart:io';
 
@@ -8,7 +9,8 @@ class Round {
   int roundNumber;
   int maxRounds;
   int dealerID;
-  List<Player> players;
+  List<HumanPlayer> players;
+  List<Card> playedCards = [];
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
 
@@ -52,7 +54,6 @@ class Round {
     int cardNr;
     bool allowed;
     players.forEach((gamer) {
-      List<Card> playedCards = [];
       allowed = false;
       cardNr = -1;
       size = gamer.handCards.length;

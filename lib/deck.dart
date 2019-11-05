@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:wizard2/card.dart';
 import 'package:wizard2/cardTypes.dart';
 import 'dart:math';
