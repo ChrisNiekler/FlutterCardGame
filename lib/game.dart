@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:wizard2/humanPlayer.dart';
+import 'package:wizard2/ki.dart';
 import 'package:wizard2/round.dart';
 import 'package:wizard2/player.dart';
 
@@ -24,7 +25,8 @@ void main() {
     new HumanPlayer('Uno', 0),
     new HumanPlayer('Dos', 1),
     new HumanPlayer('Tres', 2),
-    new HumanPlayer('Quadro', 3)
+    //new HumanPlayer('Quadro', 3),
+    new Ki('Quadro', 3)
   ];
   dealerID = _whoStarts(_playerAmount);
   do {

@@ -6,12 +6,19 @@ import 'package:wizard2/deck.dart';
 import 'package:wizard2/cardTypes.dart';
 
 class Ki extends Player{
+  String name;
+  int id;
+
+
   @override
   Card playCard(int pick) {
     Card temp = this.handCards[0];
     handCards.removeAt(0);
     return temp;
   }
+
+
+  Ki(this.name, this.id);
 
 
   //karte legen
