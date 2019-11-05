@@ -5,10 +5,9 @@ import 'package:wizard2/card.dart';
 import 'package:wizard2/deck.dart';
 import 'package:wizard2/cardTypes.dart';
 
-class Ki extends Player{
+class Ki extends Player {
   String name;
   int id;
-
 
   @override
   Card playCard(int pick) {
@@ -17,9 +16,9 @@ class Ki extends Player{
     return temp;
   }
 
-
-  Ki(this.name, this.id);
-
+  Ki(this.name, this.id) {
+    this.ai = true;
+  }
 
   //karte legen
   //todo erste KI mit random oder erster Kart
@@ -30,7 +29,6 @@ class Ki extends Player{
   //todo fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
-
   //wetten
   //todo erste bet erstmal immer 1
   //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
@@ -38,8 +36,5 @@ class Ki extends Player{
   //todo an Hand der Wahrscheinlichkeit die dritte bet
 
   //todo Tests für KI
-
-
-
 
 }

@@ -6,6 +6,7 @@ abstract class Player {
   int id;
   List<Card> handCards = [];
   int bet;
+  bool ai;
   void putBet(int bet) {}
 
   Card playCard(int pick);

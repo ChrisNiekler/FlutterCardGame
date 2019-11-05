@@ -12,5 +12,7 @@ class HumanPlayer extends Player {
     return temp;
   }
 
-  HumanPlayer(this.name, this.id);
+  HumanPlayer(this.name, this.id) {
+    this.ai = false;
+  }
 }
