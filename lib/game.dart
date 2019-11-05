@@ -1,6 +1,7 @@
 import 'dart:math';
-import 'package:wizard2/player.dart';
+import 'package:wizard2/humanPlayer.dart';
 import 'package:wizard2/round.dart';
+import 'package:wizard2/Player.dart';
 
 // second main is just for backend
 void main() {
@@ -19,11 +20,11 @@ void main() {
   _maxRounds = 5;
 
   //todo implement createPlayers()
-  List<Player> players = [
-    new Player('Uno', 0),
-    new Player('Dos', 1),
-    new Player('Tres', 2),
-    new Player('Quadro', 3)
+  List<HumanPlayer> players = [
+    new HumanPlayer('Uno', 0),
+    new HumanPlayer('Dos', 1),
+    new HumanPlayer('Tres', 2),
+    new HumanPlayer('Quadro', 3)
   ];
   dealerID = _whoStarts(_playerAmount);
   do {
