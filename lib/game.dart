@@ -8,6 +8,7 @@ void main() {
   int _maxRounds;
   int _playerAmount = 3;
   int dealerID;
+  Round currentRound;
   //todo getPlayerNumber()
 /*  do {
     print('How many players? (3-6)');
@@ -26,7 +27,8 @@ void main() {
   ];
   dealerID = _whoStarts(_playerAmount);
   do {
-    playRound(_round, _maxRounds, players, dealerID++);
+    currentRound = new Round(_round, _maxRounds, dealerID, players);
+    currentRound.playRound();
 
     // reset the dealerID when the player with
     // the highest id dealt
@@ -34,6 +36,7 @@ void main() {
       dealerID = 0;
     }
   } while (_round < _maxRounds);
+  // indicates that the game is over
   print('the end!');
 }
 

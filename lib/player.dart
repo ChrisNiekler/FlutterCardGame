@@ -1,5 +1,6 @@
 import 'package:wizard2/card.dart';
 import 'package:wizard2/deck.dart';
+import 'package:wizard2/cardTypes.dart';
 
 class Player {
   String name;
@@ -8,9 +9,6 @@ class Player {
   int bet;
   void putBet(int bet) {}
   void playCard(Card card) {}
-  void _printHandCards() {
-    this.handCards.forEach((crd) => print(crd.card));
-  }
 
   void addCard(Deck deck) {
     handCards.add(deck.takeCard());
