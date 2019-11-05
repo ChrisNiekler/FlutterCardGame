@@ -14,7 +14,6 @@ void main() {
     print('How many players? (3-6)');
     playerNumber = int.parse(stdin.readLineSync());
   } while (3 > playerNumber || playerNumber > 6);*/
-  print('$_playerAmount Players');
 
   // set _maxRounds to 0 for testing reasons
   _maxRounds = 5;
@@ -28,6 +27,7 @@ void main() {
   ];
   dealerID = _whoStarts(_playerAmount);
   do {
+    print('$_playerAmount Players');
     print('Round $_round starts!');
     currentRound = new Round(_round, _maxRounds, dealerID, players);
     currentRound.playRound();

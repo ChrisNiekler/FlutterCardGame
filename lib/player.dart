@@ -8,7 +8,13 @@ class Player {
   List<Card> handCards = [];
   int bet;
   void putBet(int bet) {}
-  void playCard(Card card) {}
+
+  // takes an int value and returns the card with that index
+  Card playCard(int pick) {
+    Card temp = this.handCards[pick];
+    handCards.removeAt(pick);
+    return temp;
+  }
 
   void addCard(Deck deck) {
     handCards.add(deck.takeCard());

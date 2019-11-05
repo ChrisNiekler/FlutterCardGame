@@ -16,3 +16,17 @@ void cardTest() {
   Card testCard6 = new Card(cardTypes.JESTER, 0);
   print(testCard6.card);
 }
+
+// todo implement a test for testing the card distribution
+//// prints out all the cards of all the players to the console
+//players.forEach((element) {
+//String n = element.name;
+//print('Playername: $n');
+//print('Cards in hand!');
+//element.printHandCardsToConsole();
+//print('\n');
+//});
+//// print the current trump card
+//print('The trump is: ');
+//print(this.trump.card);
+//}
