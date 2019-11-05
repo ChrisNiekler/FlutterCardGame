@@ -2,9 +2,6 @@ import 'package:wizard2/card.dart';
 import 'package:wizard2/player.dart';
 
 class HumanPlayer extends Player {
-  String name;
-  int id;
-
   @override
   Card playCard(int pick) {
     Card temp = this.handCards[pick];
@@ -12,7 +9,9 @@ class HumanPlayer extends Player {
     return temp;
   }
 
-  HumanPlayer(this.name, this.id) {
+  HumanPlayer(name, id) {
     this.ai = false;
+    this.name = name;
+    this.id = id;
   }
 }
