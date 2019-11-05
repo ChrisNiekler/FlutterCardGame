@@ -59,22 +59,32 @@ class Round {
       size = gamer.handCards.length;
       name = gamer.name;
       print('$name\'s turn.');
-      gamer.printHandCardsToConsole();
-      do {
-        print('Please pick one of your $size cards (by index) to play: ');
-        input = stdin.readLineSync();
-        if (_isNumeric(input)) {
-          cardNr = int.parse(input);
-        }
-        if (cardNr >= 0 && cardNr < size) {
-          allowed = true;
-        }
-      } while (!allowed);
-      playedCards.add(gamer.playCard(cardNr));
+
+      // start of player choice
+      if (!gamer.ai) {
+        gamer.printHandCardsToConsole();
+        do {
+          print('Please pick one of your $size cards (by index) to play: ');
+          input = stdin.readLineSync();
+          if (_isNumeric(input)) {
+            cardNr = int.parse(input);
+          }
+          if (cardNr >= 0 && cardNr < size) {
+            allowed = true;
+          }
+        } while (!allowed);
+        playedCards.add(gamer.playCard(cardNr));
+      } else {
+        // if an AI playCard will be called with -1
+        playedCards.add(gamer.playCard(-1));
+      }
+
+      // end of player choice
+
       input = playedCards[playedCards.length - 1].card;
       print('$name played $input');
 
-      print('\n');
+      print('');
     });
   }
 }

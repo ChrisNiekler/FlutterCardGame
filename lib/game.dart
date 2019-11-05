@@ -23,8 +23,8 @@ void main() {
   //todo implement createPlayers()
   List<Player> players = [
     new HumanPlayer('Uno', 0),
-    new HumanPlayer('Dos', 1),
-    new HumanPlayer('Tres', 2),
+    new Ki('Dos', 1),
+    new Ki('Tres', 2),
     //new HumanPlayer('Quadro', 3),
     new Ki('Quadro', 3)
   ];
