@@ -4,7 +4,6 @@ import 'package:wizard2/player.dart';
 class HumanPlayer extends Player {
   String name;
   int id;
-  List<Card> handCards = [];
   int bet;
 
   @override
