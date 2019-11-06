@@ -4,7 +4,7 @@ class Card {
   cardTypes cardType;
   int value;
   String card;
-  bool allowedToPlay;
+  bool allowedToPlay = false;
   // clubs (♣), diamonds (♦), hearts (♥) and spades (♠)
   Card(this.cardType, this.value) {
     String icon = '';
@@ -29,8 +29,13 @@ class Card {
       this.card += value.toString();
     }
   }
-}
-
-bool compare(Card foe) {
-  return true;
+  Card compare(Card foe, Card trump) {
+    if(foe.value == 14) return Card(foe.cardType, foe.value);
+    else if (this.cardType == trump.cardType && foe.cardType != trump.cardType) return Card(this.cardType, this.value);
+    else if(this.cardType == foe.cardType){
+      if(this.value > foe.value) return Card(this.cardType, this.value);
+      else return Card(foe.cardType, foe.value);
+    }
+    else return Card(foe.cardType, foe.value);
+  }
 }

@@ -11,11 +11,11 @@ class Ki extends Player {
   Card playCard(int pick) {
     var rndm = new Random();
     var numpick = rndm.nextInt(4);
+    //print(numpick);   //Test if it's random
     Card temp = this.handCards[numpick];      //used for play random card
     handCards.removeAt(numpick);
     //Card temp = this.handCards[0];      //used for play first card
     //handCards.removeAt(0);
-    print(numpick);
     return temp;
   }
 
@@ -34,6 +34,11 @@ class Ki extends Player {
   //todo fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
+
+
+  void putBet(int bet) {
+    //return 0;
+  }
   //wetten
   //todo erste bet erstmal immer 1
   //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
@@ -41,5 +46,10 @@ class Ki extends Player {
   //todo an Hand der Wahrscheinlichkeit die dritte bet
 
   //todo Tests für KI
+
+  void  findBestCard(){
+    //find algorithm for finding best card of the Hand  (and worst)
+    //then only if trick can be made
+  }
 
 }
