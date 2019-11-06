@@ -18,10 +18,14 @@ abstract class Player {
   }
 
   void printHandCardsToConsole() {
+    String temp;
     this.handCards.forEach(
       (element) {
+        temp = element.card;
         if (element.allowedToPlay) {
-          print(element.card);
+          print(temp + '+');
+        } else {
+          print(temp + '-');
         }
       },
     );
