@@ -27,7 +27,9 @@ class Round {
     // after the distribution the card on top will determine the new trump
     determineTrump();
 
-    playCards();
+    for (int i = 0; i <= roundNumber; i++) {
+      playTrick();
+    }
   }
 
   // distributes the cards
@@ -39,6 +41,11 @@ class Round {
         players[j].handCards.add(gameDeck.takeCard());
       }
     }
+  }
+
+  void playTrick() {
+    playCards();
+    print('-------------------------------');
   }
 
   /*ask every player to play a card*/
@@ -77,7 +84,7 @@ class Round {
           playedCards.add(gamer.playCard(cardNr));
         } else {
           // if an AI playCard will be called with -1
-          playedCards.add(gamer.playCard(-1));
+          playedCards.add(gamer.playCard(gamer.handCards.length));
         }
 
         // end of player choice
