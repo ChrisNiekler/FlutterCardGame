@@ -30,12 +30,12 @@ class Card {
     }
   }
   Card compare(Card foe, Card trump) {
-    if(foe.value == 14) return Card(foe.cardType, foe.value);
-    else if (this.cardType == trump.cardType && foe.cardType != trump.cardType) return Card(this.cardType, this.value);
+    if(foe.value == 14) return foe;
+    else if (this.cardType == trump.cardType && foe.cardType != trump.cardType) return this;
     else if(this.cardType == foe.cardType){
-      if(this.value > foe.value) return Card(this.cardType, this.value);
-      else return Card(foe.cardType, foe.value);
+      if(this.value > foe.value) return this;
+      else return foe;
     }
-    else return Card(foe.cardType, foe.value);
+    else return foe;
   }
 }
