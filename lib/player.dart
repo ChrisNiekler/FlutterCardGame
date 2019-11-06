@@ -21,25 +21,26 @@ abstract class Player {
 
   void printHandCardsToConsole() {
     String temp;
+    int index = 0;
     this.handCards.forEach(
       (element) {
         temp = element.card;
+
         if (element.allowedToPlay) {
-          print(temp + '+');
+          print('[$index][+] ' + temp);
         } else {
-          print(temp + '-');
+          print('[$index][-]' + temp);
         }
+        index++;
       },
     );
   }
 
-  void creatingPlayableHandCardsList (){
-    this.handCards.forEach(
-        (element) {
-          if(element.allowedToPlay){
-            playableHandCards.add(element);
-          }
-        }
-    );
+  void creatingPlayableHandCardsList() {
+    this.handCards.forEach((element) {
+      if (element.allowedToPlay) {
+        playableHandCards.add(element);
+      }
+    });
   }
 }

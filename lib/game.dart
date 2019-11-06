@@ -8,7 +8,7 @@ import 'package:wizard2/card.dart';
 
 // second main is just for backend
 void main() {
-  int _round = 1;
+  int _round = 4;
   int _maxRounds;
   int _playerAmount = 4;
   int dealerID;
@@ -20,7 +20,7 @@ void main() {
   } while (3 > playerNumber || playerNumber > 6);*/
 
   // set _maxRounds to 0 for testing reasons
-  _maxRounds = 5;
+  _maxRounds = 6;
 
   //todo implement createPlayers()
   List<Player> players = [
