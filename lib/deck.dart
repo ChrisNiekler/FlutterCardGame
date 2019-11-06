@@ -8,9 +8,7 @@ class Deck {
 
   /* Returns the card that is on top of the Stack */
   Card takeCard() {
-    Card top = this.deck[0];
-    deck.removeAt(0);
-    return top;
+    return deck.removeAt(0);
   }
 
   /* _createDeck() will create a new deck of cards in increasing order*/
