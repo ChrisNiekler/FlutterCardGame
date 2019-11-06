@@ -28,6 +28,8 @@ class Round {
     print('\n');
 
     // print the current trump card
+    // todo what to do when the trump is a wizard
+    //  todo what to do when the trump is a jester
     print('The trump is: ');
     print(this.trump.card);
     print('\n');
@@ -54,7 +56,6 @@ class Round {
     int cardNr;
     bool inputAllowed;
 
-    // todo check if playable cards are in hand
     // if no playable card is in hand the player can play any card
     // the first player can play any card
 
@@ -91,6 +92,8 @@ class Round {
         print('$name played $input');
 
         // determine the color that has to be served
+        // todo what to do when a wizard is played
+        // todo what to do when a jester is played
         if (toServe == null) {
           toServe = playedCards[playedCards.length - 1].cardType;
           print('$toServe has to be served!');
@@ -116,7 +119,7 @@ class Round {
 
   List<Card> playable(Player player) {
     int n = 0;
-    // if the toServer Value is NULL there is no card played yet
+    // if the toServe Value is NULL there is no card played yet
     List<Card> hand = player.handCards;
     if (toServe == null) {
       hand.forEach(
@@ -130,9 +133,12 @@ class Round {
       // that is required
       hand.forEach(
         (crd) {
-          if (crd.cardType == toServe) {
+          cardTypes type = crd.cardType;
+          if (type == toServe) {
             crd.allowedToPlay = true;
             n++;
+          } else if (type == cardTypes.WIZARD || type == cardTypes.JESTER) {
+            crd.allowedToPlay = true;
           }
         },
       );
