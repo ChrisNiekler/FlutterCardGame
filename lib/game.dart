@@ -24,7 +24,7 @@ void main() {
 
   //todo implement createPlayers()
   List<Player> players = [
-    new HumanPlayer('Uno', 0),
+    new Ki('Uno', 0),
     new Ki('Dos', 1),
     new Ki('Tres', 2),
     //new HumanPlayer('Quadro', 3),
@@ -32,8 +32,8 @@ void main() {
   ];
   dealerID = _whoStarts(_playerAmount);
   do {
-    print('$_playerAmount Players');
-    print('Round $_round starts!');
+    print('--- $_playerAmount Players ---');
+    print('--- Round $_round ---');
     currentRound = new Round(_round, _maxRounds, dealerID, players);
     currentRound.playRound();
 

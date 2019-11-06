@@ -47,13 +47,14 @@ class Round {
   void playTrick() {
     playCards();
     print('-------------------------------');
+    toServe = null;
   }
 
   /*ask every player to play a card*/
 
   void playCards() {
     String name = '';
-    String input = '';
+    String temp = '';
 
     players.forEach(
       (gamer) {
@@ -67,20 +68,21 @@ class Round {
         if (!gamer.ai) {
           humanPlayCard(gamer);
         } else {
-          // if an AI playCard will be called with -1
+          // AI will be called with number of cards in hand
           playedCards.add(gamer.playCard(gamer.handCards.length));
         }
-        // end of player choice
 
-        input = playedCards[playedCards.length - 1].card;
-        print('$name played $input');
+        temp = playedCards[playedCards.length - 1].card;
+        print('$name played $temp');
 
         // determine the color that has to be served
         // todo what to do when a wizard is played
         // todo what to do when a jester is played
         if (toServe == null) {
           toServe = playedCards[playedCards.length - 1].cardType;
-          print('$toServe has to be served!');
+          temp =
+              toServe.toString().substring(toServe.toString().indexOf('.') + 1);
+          print('$temp has to be served!');
         }
         print('');
       },
