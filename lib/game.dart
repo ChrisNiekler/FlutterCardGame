@@ -24,7 +24,7 @@ void main() {
 
   //todo implement createPlayers()
   List<Player> players = [
-    new Ki('Uno', 0),
+    new HumanPlayer('Uno', 0),
     new Ki('Dos', 1),
     new Ki('Tres', 2),
     //new HumanPlayer('Quadro', 3),
@@ -45,7 +45,6 @@ void main() {
   } while (_round < _maxRounds);
   // indicates that the game is over
   print('the end!');
-
 
   /* Test ob Compare() funktioniert
   *Card playedCard = new Card(cardTypes.DIAMOND, 3);

@@ -27,7 +27,8 @@ class Round {
     // after the distribution the card on top will determine the new trump
     determineTrump();
 
-    for (int i = 0; i <= roundNumber; i++) {
+    for (int i = 1; i <= roundNumber; i++) {
+      print('---- Trick $i ----');
       playTrick();
     }
   }
@@ -51,42 +52,24 @@ class Round {
   /*ask every player to play a card*/
 
   void playCards() {
-    int size;
     String name = '';
     String input = '';
-    int cardNr;
-    bool inputAllowed;
-
-    // if no playable card is in hand the player can play any card
-    // the first player can play any card
 
     players.forEach(
       (gamer) {
-        inputAllowed = false;
-        cardNr = -1;
-        size = gamer.handCards.length;
+        //inputAllowed = false;
+        //cardNr = -1;
+
         name = gamer.name;
         print('$name\'s turn.');
         playable(gamer);
         // start of player choice
         if (!gamer.ai) {
-          gamer.printHandCardsToConsole();
-          do {
-            print('Please pick one of your $size cards (by index) to play: ');
-            input = stdin.readLineSync();
-            if (_isNumeric(input)) {
-              cardNr = int.parse(input);
-            }
-            if (cardNr >= 0 && cardNr < size) {
-              inputAllowed = true;
-            }
-          } while (!inputAllowed);
-          playedCards.add(gamer.playCard(cardNr));
+          humanPlayCard(gamer);
         } else {
           // if an AI playCard will be called with -1
           playedCards.add(gamer.playCard(gamer.handCards.length));
         }
-
         // end of player choice
 
         input = playedCards[playedCards.length - 1].card;
@@ -102,6 +85,28 @@ class Round {
         print('');
       },
     );
+  }
+
+  void humanPlayCard(Player gamer) {
+    bool inputAllowed = false;
+    String input = '';
+    int size;
+    int cardNr = -1;
+    size = gamer.handCards.length;
+    if (!gamer.ai) {
+      gamer.printHandCardsToConsole();
+      do {
+        print('Please pick one of your $size cards (by index) to play: ');
+        input = stdin.readLineSync();
+        if (_isNumeric(input)) {
+          cardNr = int.parse(input);
+        }
+        if (cardNr >= 0 && cardNr < size) {
+          inputAllowed = true;
+        }
+      } while (!inputAllowed);
+      playedCards.add(gamer.playCard(cardNr));
+    }
   }
 
   void checkIfCardsPlayable(Player currentPlayer) {
