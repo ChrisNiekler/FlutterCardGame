@@ -10,7 +10,7 @@ class Round {
   int roundNumber;
   int maxRounds;
   int dealerID;
-  cardTypes toServe = cardTypes.HEART; // the type of card that has to be served
+  cardTypes toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
   // creates a brand new Deck that gets shuffled twice
@@ -90,6 +90,11 @@ class Round {
         input = playedCards[playedCards.length - 1].card;
         print('$name played $input');
 
+        // determine the color that has to be served
+        if (toServe == null) {
+          toServe = playedCards[playedCards.length - 1].cardType;
+          print('$toServe has to be served!');
+        }
         print('');
       },
     );
