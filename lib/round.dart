@@ -63,7 +63,7 @@ class Round {
 
         name = gamer.name;
         print('$name\'s turn.');
-        playable(gamer);
+        setAllowedToPlay(gamer);
         // start of player choice
         if (!gamer.ai) {
           humanPlayCard(gamer);
@@ -85,6 +85,7 @@ class Round {
           print('$temp has to be served!');
         }
         print('');
+        resetAllowedToPlay(gamer);
       },
     );
   }
@@ -125,7 +126,7 @@ class Round {
    JESTERS and WIZARDS can be played even if the player
    has a card of a servable color*/
 
-  List<Card> playable(Player player) {
+  List<Card> setAllowedToPlay(Player player) {
     int n = 0;
     // if the toServe Value is NULL there is no card played yet
     List<Card> hand = player.handCards;
@@ -161,6 +162,16 @@ class Round {
       );
     }
 
+    return hand;
+  }
+
+  List<Card> resetAllowedToPlay(Player player) {
+    List<Card> hand = player.handCards;
+    hand.forEach(
+      (crd) {
+        crd.allowedToPlay = false;
+      },
+    );
     return hand;
   }
 
