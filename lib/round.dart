@@ -10,7 +10,7 @@ class Round {
   int roundNumber;
   int maxRounds;
   int dealerID;
-  cardTypes toServe; // the type of card that has to be served
+  cardTypes toServe = cardTypes.HEART; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
   // creates a brand new Deck that gets shuffled twice
@@ -65,7 +65,7 @@ class Round {
         size = gamer.handCards.length;
         name = gamer.name;
         print('$name\'s turn.');
-
+        playable(gamer);
         // start of player choice
         if (!gamer.ai) {
           gamer.printHandCardsToConsole();

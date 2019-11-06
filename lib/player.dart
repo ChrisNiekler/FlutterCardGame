@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:wizard2/card.dart';
 import 'package:wizard2/deck.dart';
 
@@ -18,7 +20,9 @@ abstract class Player {
   void printHandCardsToConsole() {
     this.handCards.forEach(
       (element) {
-        print(element.card);
+        if (element.allowedToPlay) {
+          print(element.card);
+        }
       },
     );
   }
