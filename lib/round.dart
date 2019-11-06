@@ -19,20 +19,14 @@ class Round {
   Round(this.roundNumber, this.maxRounds, this.dealerID, this.players);
 
   void playRound() {
-    // distributes the cards evenly throughout the players
     // todo involve the dealer
+    // distributes the cards evenly throughout the players
+
     cardDistribution();
 
-    // after the distribution the card on top will be the new trump
-    this.trump = gameDeck.takeCard();
-    print('\n');
+    // after the distribution the card on top will determine the new trump
+    determineTrump();
 
-    // print the current trump card
-    // todo what to do when the trump is a wizard
-    //  todo what to do when the trump is a jester
-    print('The trump is: ');
-    print(this.trump.card);
-    print('\n');
     playCards();
   }
 
@@ -109,9 +103,9 @@ class Round {
     // allowedToPlay (mark their bool)
   }
 
-  /*check if the player has cards th
+  /*check if the player has cards that are playable
    the first player plays any card he wants
-   the second player has to play  the same color
+   the second and later player has to play  the same color
    if he has a card of that color, if not he can
    play any card he wants
    JESTERS and WIZARDS can be played even if the player
@@ -154,6 +148,31 @@ class Round {
     }
 
     return hand;
+  }
+
+  void determineTrump() {
+    this.trump = gameDeck.takeCard();
+    cardTypes type = trump.cardType;
+    String cardName = trump.card;
+    String temp;
+    print('');
+
+    // print the current trump card
+    //  todo what to do when the trump is a wizard
+    //  todo what to do when the trump is a jester
+    if (!(type == cardTypes.JESTER || type == cardTypes.WIZARD)) {
+      temp = trump.cardType
+          .toString()
+          .substring(trump.cardType.toString().indexOf('.') + 1);
+      print('The open card is $cardName, therefore the trump is $temp');
+    } else if (type == cardTypes.JESTER) {
+      print(
+          'The open card is $cardName, therefore there is no trump for this round.');
+    } else if (type == cardTypes.WIZARD) {
+      print(
+          'The open card is $cardName, therefore the dealer picks the trump.');
+    }
+    print('');
   }
 }
 
