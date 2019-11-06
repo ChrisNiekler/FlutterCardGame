@@ -1,4 +1,5 @@
 import 'package:wizard2/card.dart';
+import 'package:wizard2/cardTypes.dart';
 import 'package:wizard2/player.dart';
 import 'humanPlayer.dart';
 import 'package:wizard2/deck.dart';
@@ -9,6 +10,7 @@ class Round {
   int roundNumber;
   int maxRounds;
   int dealerID;
+  cardTypes toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
   // creates a brand new Deck that gets shuffled twice
@@ -42,10 +44,8 @@ class Round {
       }
     }
   }
-  /* todo asked every player to play one card
-   * to do that you have to specify which cards are allowed to be played
-   *
-   */
+
+  /*ask every player to play a card*/
 
   void playCards() {
     int size;
@@ -57,7 +57,7 @@ class Round {
     // todo check if playable cards are in hand
     // if no playable card is in hand the player can play any card
     // the first player can play any card
-    
+
     players.forEach(
       (gamer) {
         inputAllowed = false;
@@ -100,10 +100,15 @@ class Round {
     // this method should iterate over the players cards and mark if they are
     // allowedToPlay (mark their bool)
   }
-  void playable(){
+  void playable() {
     // todo implement
-    // this method should check after the first player did play what cards
-    // are (what color) supposed to be played
+    // check if the player has cards th
+    // the first player plays any card he wants
+    // the second player has to play  the same color
+    // if he has a card of that color, if not he can
+    // play any card he wants
+    // JESTERS and WIZARDS can be played even if the player
+    // has a card of a servable color
   }
 }
 
