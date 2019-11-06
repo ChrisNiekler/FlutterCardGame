@@ -10,19 +10,34 @@ import 'package:wizard2/round.dart';
 class Ki extends Player {
   @override
   Card playCard(int pick) {
-    var rndm = new Random();
+    this.creatingPlayableHandCardsList();
 
 
-    //here between all handcards is chosen
+    //here it is chosen between all handcards
+    //var rndm = new Random();
     //var numpick = rndm.nextInt(pick);
     ////print(numpick);   //Test if it's random
     //Card temp = this.handCards[numpick]; //used for play random card
     //handCards.removeAt(numpick);
 
-    this.creatingPlayableHandCardsList();
+    //here it is chosen between all playable handcards
     var numpick = rndm.nextInt(playableHandCards.length);
     Card temp = this.playableHandCards[numpick]; //used for play random card
     handCards.remove(this.playableHandCards[numpick]);
+
+
+    //here play best or worst Card -> at the  moment problem caching value of the best played card
+    //todo value of best playedcard in round
+//    if(findBestCard().value > ){
+//      Card temp = this.findBestCard();
+//      handCards.remove(this.findBestCard());
+//    }
+//    else{
+//      Card temp = this.findWorstCard();
+//      handCards.removeAt(this.findWorstCard());
+//    }
+
+
 
     //Card temp = this.handCards[0];      //used for play first card
     //handCards.removeAt(0);
@@ -55,8 +70,21 @@ class Ki extends Player {
 
   //todo Tests für KI
 
-  void findBestCard() {
+  Card findBestCard() {
     //find algorithm for finding best card of the Hand  (and worst)
     //then only if trick can be made
+    Card bestCard = this.playableHandCards[0];
+    for(int i = 1; i < playableHandCards.length; i++){
+      if(bestCard.value < playableHandCards[i].value) bestCard = playableHandCards[i];
+    }
+    return bestCard;
+  }
+
+  Card findWorstCard(){
+    Card worstCard = this.playableHandCards[0];
+    for(int i = 1; i < playableHandCards.length; i++){
+      if(worstCard.value > playableHandCards[i].value) worstCard = playableHandCards[i];
+    }
+    return worstCard;
   }
 }
