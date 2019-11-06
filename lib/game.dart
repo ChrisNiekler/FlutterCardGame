@@ -8,7 +8,7 @@ import 'package:wizard2/card.dart';
 
 // second main is just for backend
 void main() {
-  int _round = 5;
+  int _round = 1;
   int _maxRounds;
   int _playerAmount = 4;
   int dealerID;
@@ -42,7 +42,8 @@ void main() {
     if (!(dealerID < _playerAmount)) {
       dealerID = 0;
     }
-  } while (_round < _maxRounds);
+    _round++;
+  } while (_round <= _maxRounds);
   // indicates that the game is over
   print('the end!');
 
