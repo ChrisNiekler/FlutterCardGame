@@ -100,15 +100,49 @@ class Round {
     // this method should iterate over the players cards and mark if they are
     // allowedToPlay (mark their bool)
   }
-  void playable() {
-    // todo implement
-    // check if the player has cards th
-    // the first player plays any card he wants
-    // the second player has to play  the same color
-    // if he has a card of that color, if not he can
-    // play any card he wants
-    // JESTERS and WIZARDS can be played even if the player
-    // has a card of a servable color
+
+  /*check if the player has cards th
+   the first player plays any card he wants
+   the second player has to play  the same color
+   if he has a card of that color, if not he can
+   play any card he wants
+   JESTERS and WIZARDS can be played even if the player
+   has a card of a servable color*/
+
+  List<Card> playable(Player player) {
+    int n = 0;
+    // if the toServer Value is NULL there is no card played yet
+    List<Card> hand = player.handCards;
+    if (toServe == null) {
+      hand.forEach(
+        (crd) {
+          crd.allowedToPlay = true;
+          n++;
+        },
+      );
+    } else {
+      // else every card in the hand will be compared if it is from type
+      // that is required
+      hand.forEach(
+        (crd) {
+          if (crd.cardType == toServe) {
+            crd.allowedToPlay = true;
+            n++;
+          }
+        },
+      );
+    }
+    if (n == 0) {
+      // if no card is from the required type
+      // any card can be played
+      hand.forEach(
+        (crd) {
+          crd.allowedToPlay = true;
+        },
+      );
+    }
+
+    return hand;
   }
 }
 
