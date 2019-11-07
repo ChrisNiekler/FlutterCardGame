@@ -85,6 +85,8 @@ class Round {
               toServe.toString().substring(toServe.toString().indexOf('.') + 1);
           print('$temp has to be served!');
         }
+
+        // reset all temp data
         print('');
         resetAllowedToPlay(gamer);
         gamer.playableHandCards = [];
@@ -107,7 +109,11 @@ class Round {
         cardNr = int.parse(input);
       }
       if (cardNr >= 0 && cardNr < size) {
-        inputAllowed = true;
+        if (gamer.handCards[cardNr].allowedToPlay) {
+          inputAllowed = true;
+        } else {
+          print('Please pick another card!');
+        }
       }
     } while (!inputAllowed);
     playedCards.add(gamer.playCard(cardNr));
