@@ -86,6 +86,7 @@ class Round {
         }
         print('');
         resetAllowedToPlay(gamer);
+        gamer.playableHandCards = [];
       },
     );
   }
@@ -96,20 +97,19 @@ class Round {
     int size;
     int cardNr = -1;
     size = gamer.handCards.length;
-    if (!gamer.ai) {
-      gamer.printHandCardsToConsole();
-      do {
-        print('Please pick one of your $size cards (by index) to play: ');
-        input = stdin.readLineSync();
-        if (_isNumeric(input)) {
-          cardNr = int.parse(input);
-        }
-        if (cardNr >= 0 && cardNr < size) {
-          inputAllowed = true;
-        }
-      } while (!inputAllowed);
-      playedCards.add(gamer.playCard(cardNr));
-    }
+
+    gamer.printHandCardsToConsole();
+    do {
+      print('Please pick one of your $size cards (by index) to play: ');
+      input = stdin.readLineSync();
+      if (_isNumeric(input)) {
+        cardNr = int.parse(input);
+      }
+      if (cardNr >= 0 && cardNr < size) {
+        inputAllowed = true;
+      }
+    } while (!inputAllowed);
+    playedCards.add(gamer.playCard(cardNr));
   }
 
   void checkIfCardsPlayable(Player currentPlayer) {
