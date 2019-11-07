@@ -34,7 +34,7 @@ class Ki extends Player {
     //2. here it is chosen between all playable handcards
     var numpick = rndm.nextInt(playableHandCards.length);
     Card temp = this.playableHandCards[numpick]; //used for play random card
-    handCards.remove(this.playableHandCards[numpick]);
+    handCards.remove(playableHandCards[numpick]);
 
     //0. lege erste Karte vom Hand
     //Card temp = this.handCards[0];      //used for play first card
@@ -52,12 +52,12 @@ class Ki extends Player {
 //    Card nowbest = bestPlayedCardYet();
     if(bestCard == bestCard.compare(foe, trump) ){
       Card temp = bestCard;
-      handCards.remove(findIndexBestCard());
+      handCards.remove(playableHandCards[findIndexBestCard()]);
       return temp;
     }
     else{
       Card temp = worstCard;
-      handCards.removeAt(findIndexWorstCard());
+      handCards.remove(playableHandCards[findIndexWorstCard()]);
       return temp;
     }
   }
