@@ -10,7 +10,10 @@ import 'package:wizard2/round.dart';
 class Ki extends Player {
   @override
   Card playCard(int pick) {
-    this.creatingPlayableHandCardsList();
+    //this.creatingPlayableHandCardsList();
+    // habs rausgenommen weil ich creatingPlayableHandCards für alle Player
+    // in playCards() aufrufe --> mfg Chris
+    // ps Delete this message
 
     //here it is chosen between all handcards
     var rndm = new Random();

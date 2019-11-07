@@ -64,6 +64,7 @@ class Round {
         name = gamer.name;
         print('$name\'s turn.');
         setAllowedToPlay(gamer);
+        gamer.creatingPlayableHandCardsList();
         // start of player choice
         if (!gamer.ai) {
           humanPlayCard(gamer);
