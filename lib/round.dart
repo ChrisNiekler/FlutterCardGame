@@ -39,7 +39,7 @@ class Round {
       playTrick();
     }
 
-    evaluation(); // does nothing so far
+    roundEvaluation(); // does nothing so far
   }
 
   // distributes the cards
@@ -57,6 +57,7 @@ class Round {
     playCards();
     print('-------------------------------');
     toServe = null;
+    trickEvaluation();
     playedCards = [];
   }
 
@@ -83,7 +84,7 @@ class Round {
           //playedCards.add(gamer.playCard(gamer.handCards.length));
 
           //Aufrufen der AI mit trump und highest Card
-          Card findHighestCard (List<Card> cards) {
+          Card findHighestCard(List<Card> cards) {
             if (cards.length == null)
               //betAI()
               return playedCards[0];
@@ -99,7 +100,6 @@ class Round {
           Ki aitemp = gamer;
           Card highestCard = findHighestCard(playedCards);
           playedCards.add(aitemp.playCardAI(highestCard, trumpCard));
-
         }
 
         temp = playedCards[playedCards.length - 1].card;
@@ -252,7 +252,10 @@ class Round {
 }
 
 void tricking() {}
-void evaluation() {}
+void roundEvaluation() {}
+void trickEvaluation() {
+  //todo give a token to the trick winner
+}
 
 bool _isNumeric(String str) {
   if (str == null) {
