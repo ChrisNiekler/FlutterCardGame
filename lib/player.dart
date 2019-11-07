@@ -15,8 +15,9 @@ abstract class Player {
 
   Card playCard(int pick);
 
-  //todo wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
-  Card playCardAI(Card foe, Card trump);
+//  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
+  //not necessary anymore
+//  Card playCardAI(Card foe, Card trump);
 
   void addCard(Deck deck) {
     handCards.add(deck.takeCard());

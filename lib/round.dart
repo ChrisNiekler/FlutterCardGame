@@ -5,6 +5,7 @@ import 'humanPlayer.dart';
 import 'package:wizard2/deck.dart';
 import 'dart:io';
 import 'dart:math';
+import 'package:wizard2/ki.dart';
 
 class Round {
   Card trumpCard;
@@ -56,6 +57,7 @@ class Round {
     playCards();
     print('-------------------------------');
     toServe = null;
+    playedCards = [];
   }
 
   /*ask every player to play a card*/
@@ -94,8 +96,9 @@ class Round {
             }
           }
 
+          Ki aitemp = gamer;
           Card highestCard = findHighestCard(playedCards);
-          playedCards.add(gamer.playCardAI(highestCard, trumpCard));
+          playedCards.add(aitemp.playCardAI(highestCard, trumpCard));
 
         }
 

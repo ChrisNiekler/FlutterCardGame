@@ -42,7 +42,7 @@ class Ki extends Player {
     return temp;
   }
 
-  @override
+// @override
   Card playCardAI(Card foe, Card trump) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo value of best playedcard in round
