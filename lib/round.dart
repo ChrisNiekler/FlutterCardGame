@@ -29,10 +29,16 @@ class Round {
     // after the distribution the card on top will determine the new trump
     determineTrump();
 
+    // put bets
+    tricking(); // does nothing so far
+
+    //play tricks
     for (int i = 1; i <= roundNumber; i++) {
       print('---- Trick $i ----');
       playTrick();
     }
+
+    evaluation(); // does nothing so far
   }
 
   // distributes the cards
@@ -220,7 +226,7 @@ class Round {
     trumpType = cardTypes.values[Random().nextInt(4)];
     type =
         trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
-    print('$name pickt $type');
+    print('$name pickt $type (yet random)');
   }
 }
 
