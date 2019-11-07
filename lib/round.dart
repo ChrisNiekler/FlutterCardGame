@@ -54,6 +54,7 @@ class Round {
   }
 
   void playTrick() {
+    // todo the winner of a trick starts the next trick
     playCards();
     print('-------------------------------');
     toServe = null;
@@ -106,7 +107,9 @@ class Round {
         print('$name played $temp');
 
         // determine the color that has to be served
-        // todo what to do when a wizard is played
+        // todo when a wizard is played as first card, everybody else can play
+        //       anything they want, wizard is trump but doesn't have to be played
+
         // todo what to do when a jester is played
         if (toServe == null) {
           toServe = playedCards[playedCards.length - 1].cardType;
@@ -254,7 +257,7 @@ class Round {
 void tricking() {}
 void roundEvaluation() {}
 void trickEvaluation() {
-  //todo give a token to the trick winner
+  // todo give a token to the trick winner
 }
 
 bool _isNumeric(String str) {
