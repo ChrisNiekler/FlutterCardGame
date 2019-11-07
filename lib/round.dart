@@ -4,9 +4,11 @@ import 'package:wizard2/player.dart';
 import 'humanPlayer.dart';
 import 'package:wizard2/deck.dart';
 import 'dart:io';
+import 'dart:math';
 
 class Round {
-  Card trump;
+  Card trumpCard;
+  cardTypes trumpType;
   int roundNumber;
   int maxRounds;
   int dealerID;
@@ -183,28 +185,38 @@ class Round {
   }
 
   void determineTrump() {
-    this.trump = gameDeck.takeCard();
-    cardTypes type = trump.cardType;
-    String cardName = trump.card;
+    this.trumpCard = gameDeck.takeCard();
+    cardTypes type = trumpCard.cardType;
+    String cardName = trumpCard.card;
     String temp;
     print('');
 
     // print the current trump card
-    //  todo what to do when the trump is a wizard
-    //  todo what to do when the trump is a jester
+    //  todo when wizard then dealer picks trump
+    //  todo what jester no trump
     if (!(type == cardTypes.JESTER || type == cardTypes.WIZARD)) {
-      temp = trump.cardType
+      temp = trumpCard.cardType
           .toString()
-          .substring(trump.cardType.toString().indexOf('.') + 1);
+          .substring(trumpCard.cardType.toString().indexOf('.') + 1);
       print('The open card is $cardName, therefore the trump is $temp');
+      trumpType = type;
     } else if (type == cardTypes.JESTER) {
       print(
           'The open card is $cardName, therefore there is no trump for this round.');
+      trumpType = null;
     } else if (type == cardTypes.WIZARD) {
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');
+      pickTrumpCard(players[dealerID]);
     }
     print('');
+  }
+
+  void pickTrumpCard(Player player) {
+    // todo implement this
+
+    trumpType = cardTypes.values[Random().nextInt(4)];
+    print('$player pickt $trumpType');
   }
 }
 
