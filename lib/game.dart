@@ -31,6 +31,8 @@ void main() {
     new Ki('Quadro', 3)
   ];
   dealerID = _whoStarts(_playerAmount);
+  // dealerID is 0 for testing reasons
+  dealerID = 0;
   do {
     print('--- $_playerAmount Players ---');
     print('--- Round $_round ---');
