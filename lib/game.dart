@@ -32,8 +32,9 @@ void main() {
   // dealerID is 0 for testing reasons
   dealerID = 0;
   do {
-    print('--- $_playerAmount Players ---');
-    print('--- Round $_round ---');
+    print('---------- $_playerAmount Players ----------');
+    print('----------- Round $_round -----------');
+    print('-------------------------------');
     currentRound = new Round(_round, _maxRounds, dealerID, players);
     currentRound.playRound();
 
