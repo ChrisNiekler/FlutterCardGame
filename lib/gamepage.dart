@@ -89,17 +89,16 @@ class MidPart extends StatelessWidget {
             builder:
                 (context, List<prefix0.Card> acceptedCards, rejectedCards) {
               print(acceptedCards);
-              return Center(
-                  child: Container(
+              return Container(
                 height: 300.0,
                 width: 200.0,
                 color: Colors.white70,
                 alignment: Alignment.center,
                 child: Text(
-                  "Trump",
-                  style: TextStyle(color: Colors.white, fontSize: 22.0),
+              "Trump",
+              style: TextStyle(color: Colors.white, fontSize: 22.0),
                 ),
-              ));
+              );
             },
             onWillAccept: (data) {
               return true;
