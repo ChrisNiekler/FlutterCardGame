@@ -4,8 +4,6 @@ import 'package:wizard2/player.dart';
 import 'humanPlayer.dart';
 import 'package:wizard2/deck.dart';
 import 'dart:io';
-import 'dart:math';
-import 'package:wizard2/ki.dart';
 
 class Round {
   Card trumpCard;
@@ -76,16 +74,13 @@ class Round {
 
     players.forEach(
       (gamer) {
-        //inputAllowed = false;
-        //cardNr = -1;
-
         name = gamer.name;
         print('$name\'s turn.');
         setAllowedToPlay(gamer);
         gamer.creatingPlayableHandCardsList();
         // start of player choice
         if (!gamer.ai) {
-          //humanPlayCard(gamer);
+          // the human player will play a card
           playedCards.add((gamer as HumanPlayer).humanPlayCard());
         } else {
           // the ai will  play a card
@@ -98,7 +93,6 @@ class Round {
 
         // check if the card is higher then what is played yet
         if (playedCards.length > 1) {
-          // todo implement check if played card is higher
           highestPlayedCard =
               playedCards.last.compare(highestPlayedCard, trumpType);
           if (highestPlayedCard == playedCards.last) {

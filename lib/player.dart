@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:wizard2/card.dart';
 import 'package:wizard2/cardTypes.dart';
 import 'package:wizard2/deck.dart';
-import 'package:wizard2/round.dart';
 
 abstract class Player {
   String name;

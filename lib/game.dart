@@ -1,10 +1,8 @@
 import 'dart:math';
-import 'package:wizard2/cardTypes.dart';
 import 'package:wizard2/humanPlayer.dart';
 import 'package:wizard2/ki.dart';
 import 'package:wizard2/round.dart';
 import 'package:wizard2/player.dart';
-import 'package:wizard2/card.dart';
 
 // second main is just for backend
 void main() {
@@ -48,14 +46,6 @@ void main() {
   } while (_round <= _maxRounds);
   // indicates that the game is over
   print('the end!');
-
-  /* Test ob Compare() funktioniert
-  *Card playedCard = new Card(cardTypes.DIAMOND, 3);
-  *Card highestCard = new Card(cardTypes.DIAMOND, 10);
-  *Card trumpCard = new Card(cardTypes.DIAMOND, 3);
-  *Card ergebnisCard = playedCard.compare(highestCard, trumpCard);
-  *print(ergebnisCard.card );
-  * */
 }
 
 void startGame() {}
