@@ -98,8 +98,7 @@ class Round {
         // what to serve
         if (toServe == null) {
           // todo put in method F4N
-          // todo test this
-          toServe = playedCards[0].cardType;
+          toServe = playedCards[playedCards.length - 1].cardType;
           temp =
               toServe.toString().substring(toServe.toString().indexOf('.') + 1);
           if (toServe == cardTypes.WIZARD) {

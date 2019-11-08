@@ -11,7 +11,7 @@ abstract class Player {
   List<Card> handCards = [];
   List<Card> playableHandCards = [];
   int bet;
-  int tricks;
+  int tricks = 0;
   bool ai;
   void putBet(int bet) {}
 
