@@ -13,7 +13,7 @@ class Deck {
 
   /* _createDeck() will create a new deck of cards in increasing order*/
   void _createDeck() {
-    //todo add Images for the GUI when ready
+    //todo add Images for the GUI when ready F4N
     // clubs (♣), diamonds (♦), hearts (♥) and spades (♠
 
     // first loop for the four different types

@@ -52,7 +52,7 @@ abstract class Player {
   cardTypes pickTrumpCard() {
     cardTypes trumpType;
     String type;
-    // todo implement this or just override it
+    // todo implement this or just override it F4N
     // ask the player who deals to pick the card
     trumpType = cardTypes.values[Random().nextInt(4)];
     type =

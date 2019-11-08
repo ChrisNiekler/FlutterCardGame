@@ -13,7 +13,7 @@ void main() {
   int _playerAmount = 4;
   int dealerID;
   Round currentRound;
-  //todo getPlayerNumber()
+  //todo getPlayerNumber() F4N
 /*  do {
     print('How many players? (3-6)');
     playerNumber = int.parse(stdin.readLineSync());
@@ -22,7 +22,7 @@ void main() {
   // set _maxRounds to 0 for testing reasons
   _maxRounds = 6;
 
-  //todo implement createPlayers()
+  //todo implement createPlayers() F4N
   List<Player> players = [
     new HumanPlayer('Uno', 0),
     new Ki('Dos', 1),

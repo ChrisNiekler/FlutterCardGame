@@ -150,12 +150,6 @@ class Round {
     playedCards.add(gamer.playCard(cardNr));
   }
 
-  void checkIfCardsPlayable(Player currentPlayer) {
-    // todo implement
-    // this method should iterate over the players cards and mark if they are
-    // allowedToPlay (mark their bool)
-  }
-
   /*check if the player has cards that are playable
    the first player plays any card he wants
    the second and later player has to play  the same color
@@ -236,20 +230,21 @@ class Round {
     } else if (type == cardTypes.WIZARD) {
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');
-      pickTrumpCard(players[dealerID]);
+      players[dealerID].pickTrumpCard();
     }
     print('');
   }
-
-  void pickTrumpCard(Player player) {
-    player.pickTrumpCard();
-  }
 }
 
-void tricking() {}
-void roundEvaluation() {}
+void tricking() {
+  // todo implement tricking()
+}
+void roundEvaluation() {
+  // todo implement roundEvaluation()
+}
 void trickEvaluation() {
-  // todo give a token to the trick winner
+  // todo implement trickEvaluation()
+  // give a token to the trick winner
 }
 
 bool _isNumeric(String str) {
