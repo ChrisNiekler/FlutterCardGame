@@ -85,22 +85,20 @@ class Round {
           //playedCards.add(gamer.playCard(gamer.handCards.length));
 
           //Aufrufen der AI mit trump und highest Card
-          Card findHighestCard(List<Card> cards) {
-            if (cards.length == null)
-              //betAI()
-              return playedCards[0];
-            else {
-              Card highestCard = playedCards[0];
-              for (int i = 1; i < playedCards.length; i++) {
-                highestCard = highestCard.compare(playedCards[i], trumpCard);
-              }
-              return highestCard;
-            }
-          }
+//          Card findHighestCard(List<Card> cards) {
+//            if (cards.length == null)
+//              //betAI()
+//              return playedCards[0];
+//            else {
+//              Card highestCard = playedCards[0];
+//              for (int i = 1; i < playedCards.length; i++) {
+//                highestCard = highestCard.compare(playedCards[i], trumpCard);
+//              }
+//              return highestCard;
+//            }
+//          }
 
-          Ki aitemp = gamer;
-          Card highestCard = findHighestCard(playedCards);
-          playedCards.add(aitemp.playCardAI(highestCard, trumpCard));
+          playedCards.add(gamer.playCard(gamer.handCards.length));
         }
 
         temp = playedCards[playedCards.length - 1].card;
