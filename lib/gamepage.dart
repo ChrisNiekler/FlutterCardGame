@@ -1,34 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:wizard2/card.dart' as prefix0;
 
 class Gamepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         body: SafeArea(
-          child: Container(
-            child: Column(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    LeftPart(),
-                    MidPart(),
-                    RightPart(),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    BottomPart(),
-                  ],
-                ),
+                LeftPart(),
+                MidPart(),
+                RightPart(),
               ],
             ),
-          ),
-        ));
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Center(child: BottomPart()),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }
 
@@ -82,21 +82,31 @@ class MidPart extends StatelessWidget {
       ),
       color: Colors.grey,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("Mid"),
           DragTarget(
-            builder: (context, List<AssetImage> candidateData, rejectedData) {
-              print(candidateData);
+            builder:
+                (context, List<prefix0.Card> acceptedCards, rejectedCards) {
+              print(acceptedCards);
               return Center(
-                  child: Text(
-                    "Trump",
-                    style: TextStyle(color: Colors.white, fontSize: 22.0),
-                  ));
+                  child: Container(
+                height: 300.0,
+                width: 200.0,
+                color: Colors.white70,
+                alignment: Alignment.center,
+                child: Text(
+                  "Trump",
+                  style: TextStyle(color: Colors.white, fontSize: 22.0),
+                ),
+              ));
             },
             onWillAccept: (data) {
               return true;
             },
-            onAccept: (data) {},
+            onAccept: (data) {
+
+            },
           ),
         ],
       ),
@@ -111,18 +121,21 @@ class BottomPart extends StatelessWidget {
       color: Colors.grey,
       width: MediaQuery.of(context).size.width,
       height: 159.0,
-
       child: Column(
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              CreateCardImage(Offset(100.0, 100.0),'2D'),
-              CreateCardImage(Offset(100.0, 100.0),'3D'),
-              CreateCardImage(Offset(100.0, 100.0),'5S'),
-              CreateCardImage(Offset(100.0, 100.0),'AH'),
+              CreateCardImage(Offset(100.0, 100.0), '2D'),
+              CreateCardImage(Offset(100.0, 100.0), '3D'),
+              CreateCardImage(Offset(100.0, 100.0), '5S'),
+              CreateCardImage(Offset(100.0, 100.0), 'AH'),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
                 child: Text("Player 1"),
@@ -148,9 +161,7 @@ class CreateCardImage extends StatefulWidget {
   @override
   _CreateCardImageState createState() => _CreateCardImageState();
 
-  CreateCardImage(this.offset,this.cardId);
-
-
+  CreateCardImage(this.offset, this.cardId);
 }
 
 class _CreateCardImageState extends State<CreateCardImage> {
@@ -186,6 +197,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
             width: 50.0,
           )),
       childWhenDragging: Container(),
+        data: cardID,
       onDraggableCanceled: (v, o) {
         setState(() {
           offset = o;
