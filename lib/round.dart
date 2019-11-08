@@ -15,6 +15,7 @@ class Round {
   cardTypes toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
+
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
 
@@ -35,12 +36,14 @@ class Round {
 
     //play tricks
     for (int i = 1; i <= roundNumber; i++) {
-      print('---- Trick $i ----');
+      print('----------- Trick $i -----------');
       playTrick();
       wizardIsPlayed = false;
     }
 
-    roundEvaluation(); // does nothing so far
+    roundEvaluation();
+    print('-------------------------------');
+    sleep(const Duration(seconds: 3));
   }
 
   // distributes the cards
@@ -241,12 +244,22 @@ class Round {
       },
     );
   }
-}
 
-void roundEvaluation() {
-  // todo implement roundEvaluation()
-}
-void trickEvaluation() {
-  // todo implement trickEvaluation()
-  // give a token to the trick winner
+  void trickEvaluation() {
+    // todo see if this method is still necessary
+  }
+
+  void roundEvaluation() {
+    // todo print the current points
+    players.forEach(
+      (gamer) {
+        if (gamer.tricks == gamer.bet) {
+          //todo get some points
+        } else {
+          // todo distract some points
+        }
+        gamer.printPoints();
+      },
+    );
+  }
 }

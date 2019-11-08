@@ -10,6 +10,7 @@ abstract class Player {
   List<Card> playableHandCards = [];
   int bet;
   int tricks = 0;
+  int points = 0;
   bool ai;
   void putBet();
 
@@ -58,5 +59,9 @@ abstract class Player {
         trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
     print('$name pickt $type (yet random)');
     return trumpType;
+  }
+
+  void printPoints() {
+    print('$name has $points points.');
   }
 }
