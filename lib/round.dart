@@ -33,6 +33,7 @@ class Round {
 
     // put bets
     tricking(); // does nothing so far
+    print('');
 
     //play tricks
     for (int i = 1; i <= roundNumber; i++) {
@@ -84,7 +85,8 @@ class Round {
         gamer.creatingPlayableHandCardsList();
         // start of player choice
         if (!gamer.ai) {
-          humanPlayCard(gamer);
+          //humanPlayCard(gamer);
+          playedCards.add((gamer as HumanPlayer).humanPlayCard());
         } else {
           // the ai will  play a card
           playedCards
@@ -138,40 +140,19 @@ class Round {
 
         resetAllowedToPlay(gamer);
         gamer.playableHandCards = [];
+
+        // sleeper --> just for the console game
+        // so it looks more nature
+        sleep(const Duration(seconds: 1));
       },
     ); // end of for each
     temp = trickWinner.name;
     print('$temp has won the trick!');
-    // todo safe the result
+    players[players.indexOf(trickWinner)].tricks++;
     // todo give points
 
     trickEvaluation();
   } // end of playCards()
-
-  void humanPlayCard(Player gamer) {
-    bool inputAllowed = false;
-    String input = '';
-    int size;
-    int cardNr = -1;
-    size = gamer.handCards.length;
-
-    gamer.printHandCardsToConsole();
-    do {
-      print('Please pick one of your $size cards (by index) to play: ');
-      input = stdin.readLineSync();
-      if (_isNumeric(input)) {
-        cardNr = int.parse(input);
-      }
-      if (cardNr >= 0 && cardNr < size) {
-        if (gamer.handCards[cardNr].allowedToPlay) {
-          inputAllowed = true;
-        } else {
-          print('Please pick another card!');
-        }
-      }
-    } while (!inputAllowed);
-    playedCards.add(gamer.playCard(cardNr));
-  }
 
   /*check if the player has cards that are playable
    the first player plays any card he wants
@@ -258,22 +239,20 @@ class Round {
     }
     print('');
   }
+
+  void tricking() {
+    players.forEach(
+      (gamer) {
+        gamer.putBet();
+      },
+    );
+  }
 }
 
-void tricking() {
-  // todo implement tricking()
-}
 void roundEvaluation() {
   // todo implement roundEvaluation()
 }
 void trickEvaluation() {
   // todo implement trickEvaluation()
   // give a token to the trick winner
-}
-
-bool _isNumeric(String str) {
-  if (str == null) {
-    return false;
-  }
-  return int.tryParse(str) != null;
 }

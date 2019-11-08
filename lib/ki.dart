@@ -57,8 +57,10 @@ class Ki extends Player {
   //todo fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
-  void putBet(int bet) {
-    //return 1;
+  @override
+  void putBet() {
+    this.bet = 1;
+    print('$name bet he/she wins $bet tricks!');
   }
   //wetten
   //todo erste bet erstmal immer 1

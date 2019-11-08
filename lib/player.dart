@@ -13,7 +13,7 @@ abstract class Player {
   int bet;
   int tricks = 0;
   bool ai;
-  void putBet(int bet) {}
+  void putBet();
 
   Card playCard(int pick, {cardTypes trump, Card foe});
 
