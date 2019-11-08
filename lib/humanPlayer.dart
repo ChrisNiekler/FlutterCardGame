@@ -11,13 +11,6 @@ class HumanPlayer extends Player {
     return temp;
   }
 
-//  //done fix it and make it work without this underneath
-  //not necessary anymore
-//  @override
-//  Card playCardAI(Card foe, Card trump){
-//    return foe;
-//  }
-
   HumanPlayer(name, id) {
     this.ai = false;
     this.name = name;

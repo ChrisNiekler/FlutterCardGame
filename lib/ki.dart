@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:wizard2/player.dart';
 import 'package:wizard2/card.dart';
-import 'package:wizard2/deck.dart';
 import 'package:wizard2/cardTypes.dart';
 import 'dart:math' show Random;
-import 'package:wizard2/round.dart';
 
 class Ki extends Player {
   Ki(name, id) {
