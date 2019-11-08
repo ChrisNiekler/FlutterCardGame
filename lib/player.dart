@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:wizard2/card.dart';
+import 'package:wizard2/cardTypes.dart';
 import 'package:wizard2/deck.dart';
 import 'package:wizard2/round.dart';
 
@@ -13,7 +14,7 @@ abstract class Player {
   bool ai;
   void putBet(int bet) {}
 
-  Card playCard(int pick);
+  Card playCard(int pick, {cardTypes trump, Card foe});
 
 //  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
   //not necessary anymore
