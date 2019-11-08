@@ -57,6 +57,7 @@ class Round {
 
   void playTrick() {
     // todo the winner of a trick starts the next trick F4N
+
     playCards();
     print('-------------------------------');
     toServe = null;
@@ -69,6 +70,8 @@ class Round {
   void playCards() {
     String name = '';
     String temp = '';
+    Card highestPlayedCard;
+    Player trickWinner;
 
     players.forEach(
       (gamer) {
@@ -90,6 +93,23 @@ class Round {
 
         temp = playedCards[playedCards.length - 1].card;
         print('$name played $temp');
+
+        // check if the card is higher then what is played yet
+        if (playedCards.length > 1) {
+          // todo implement check if played card is higher
+          highestPlayedCard =
+              playedCards.last.compare(highestPlayedCard, trumpType);
+          if (highestPlayedCard == playedCards.last) {
+            trickWinner = gamer;
+            temp = gamer.name;
+            print('$temp is leading now');
+          }
+        } else if (playedCards.length == 1) {
+          highestPlayedCard = playedCards[0];
+          trickWinner = gamer;
+          temp = trickWinner.name;
+          print('$temp is leading now');
+        }
 
         // determine the color that has to be served
         // when a wizard is played as first card, everybody else can play
@@ -115,12 +135,18 @@ class Round {
 
         // reset all temp data
         print('');
+
         resetAllowedToPlay(gamer);
         gamer.playableHandCards = [];
       },
-    );
-    void whatToServe() {}
-  }
+    ); // end of for each
+    temp = trickWinner.name;
+    print('$temp has won the trick!');
+    // todo safe the result
+    // todo give points
+
+    trickEvaluation();
+  } // end of playCards()
 
   void humanPlayCard(Player gamer) {
     bool inputAllowed = false;
