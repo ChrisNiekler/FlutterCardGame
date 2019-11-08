@@ -57,8 +57,9 @@ class Ki extends Player {
   //todo fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
-  void putBet(int bet) {
-    //return 1;
+  @override
+  int putBet(int bet) {
+    return 1;
   }
   //wetten
   //todo erste bet erstmal immer 1
