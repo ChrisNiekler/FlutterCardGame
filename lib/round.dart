@@ -13,6 +13,7 @@ class Round {
   int roundNumber;
   int maxRounds;
   int dealerID;
+  bool wizardIsPlayed = false;
   cardTypes toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
@@ -37,6 +38,7 @@ class Round {
     for (int i = 1; i <= roundNumber; i++) {
       print('---- Trick $i ----');
       playTrick();
+      wizardIsPlayed = false;
     }
 
     roundEvaluation(); // does nothing so far
@@ -54,7 +56,7 @@ class Round {
   }
 
   void playTrick() {
-    // todo the winner of a trick starts the next trick
+    // todo the winner of a trick starts the next trick F4N
     playCards();
     print('-------------------------------');
     toServe = null;
@@ -81,23 +83,7 @@ class Round {
         if (!gamer.ai) {
           humanPlayCard(gamer);
         } else {
-          // AI will be called with number of cards in hand
-          //playedCards.add(gamer.playCard(gamer.handCards.length));
-
-          //Aufrufen der AI mit trump und highest Card
-//          Card findHighestCard(List<Card> cards) {
-//            if (cards.length == null)
-//              //betAI()
-//              return playedCards[0];
-//            else {
-//              Card highestCard = playedCards[0];
-//              for (int i = 1; i < playedCards.length; i++) {
-//                highestCard = highestCard.compare(playedCards[i], trumpCard);
-//              }
-//              return highestCard;
-//            }
-//          }
-
+          // the ai will  play a card
           playedCards
               .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
         }
@@ -106,15 +92,26 @@ class Round {
         print('$name played $temp');
 
         // determine the color that has to be served
-        // todo when a wizard is played as first card, everybody else can play
-        //       anything they want, wizard is trump but doesn't have to be played
+        // when a wizard is played as first card, everybody else can play
+        // anything they want, wizard is trump but doesn't have to be played
 
-        // todo what to do when a jester is played
+        // what to serve
         if (toServe == null) {
-          toServe = playedCards[playedCards.length - 1].cardType;
+          // todo put in method F4N
+          // todo test this
+          toServe = playedCards[0].cardType;
           temp =
               toServe.toString().substring(toServe.toString().indexOf('.') + 1);
-          print('$temp has to be served!');
+          if (toServe == cardTypes.WIZARD) {
+            print('WIZARD was played, everybody else can play any card.');
+            toServe = cardTypes.WIZARD;
+          } else if (toServe == cardTypes.JESTER) {
+            print('JESTER was played as first card.');
+            print('The next card will determine the played color');
+            toServe = null;
+          } else {
+            print('$temp has to be served!');
+          }
         }
 
         // reset all temp data
@@ -123,6 +120,7 @@ class Round {
         gamer.playableHandCards = [];
       },
     );
+    void whatToServe() {}
   }
 
   void humanPlayCard(Player gamer) {
@@ -184,8 +182,9 @@ class Round {
         },
       );
     }
-    if (n == 0) {
+    if (n == 0 || wizardIsPlayed) {
       // if no card is from the required type
+      // of if a wizard was played
       // any card can be played
       hand.forEach(
         (crd) {
@@ -215,8 +214,6 @@ class Round {
     print('');
 
     // print the current trump card
-    //  todo when wizard then dealer picks trump
-    //  todo what jester no trump
     if (!(type == cardTypes.JESTER || type == cardTypes.WIZARD)) {
       temp = trumpCard.cardType
           .toString()
@@ -224,10 +221,12 @@ class Round {
       print('The open card is $cardName, therefore the trump is $temp');
       trumpType = type;
     } else if (type == cardTypes.JESTER) {
+      // when jester is trump card there is no trump
       print(
           'The open card is $cardName, therefore there is no trump for this round.');
       trumpType = null;
     } else if (type == cardTypes.WIZARD) {
+      // when wizard is trump card then the dealer picks the trump
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');
       players[dealerID].pickTrumpCard();
