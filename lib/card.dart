@@ -29,13 +29,17 @@ class Card {
       this.card += value.toString();
     }
   }
-  Card compare(Card foe, Card trump) {
-    if(foe.value == 14) return foe;
-    else if (this.cardType == trump.cardType && foe.cardType != trump.cardType) return this;
-    else if (this.cardType == foe.cardType){
-      if (this.value > foe.value) return this;
-      else return foe;
-    }
-    else return foe;
+  Card compare(Card foe, cardTypes trump) {
+    if (foe.value == 14)
+      return foe;
+    else if (this.cardType == trump && foe.cardType != trump)
+      return this;
+    else if (this.cardType == foe.cardType) {
+      if (this.value > foe.value)
+        return this;
+      else
+        return foe;
+    } else
+      return foe;
   }
 }

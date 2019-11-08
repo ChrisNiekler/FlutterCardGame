@@ -8,60 +8,45 @@ import 'dart:math' show Random;
 import 'package:wizard2/round.dart';
 
 class Ki extends Player {
-
   Ki(name, id) {
     this.ai = true;
     this.name = name;
     this.id = id;
   }
 
-
   @override
-  Card playCard(int pick) {
-    //this.creatingPlayableHandCardsList();
-    // habs rausgenommen weil ich creatingPlayableHandCards für alle Player
-    // in playCards() aufrufe --> mfg Chris
-    // ps Delete this message
-
-    var rndm = new Random();
-
+  Card playCard(int pick, {cardTypes trump, Card foe}) {
     //1. here it is chosen between all handcards
-    //var numpick = rndm.nextInt(pick);
-    ////print(numpick);   //Test if it's random
-    //Card temp = this.handCards[numpick]; //used for play random card
-    //handCards.removeAt(numpick);
+    if (trump == null) {
+      //2. here it is chosen between all playable handcards
+      pick = Random().nextInt(playableHandCards.length);
+      //Card temp = this.playableHandCards[numpick]; //used for play random card
+      return handCards.removeAt(pick);
+    } else {
+      return playCardAI(foe, trump);
+    }
 
-    //2. here it is chosen between all playable handcards
-    var numpick = rndm.nextInt(playableHandCards.length);
-    Card temp = this.playableHandCards[numpick]; //used for play random card
-    handCards.remove(this.playableHandCards[numpick]);
-
-    //0. lege erste Karte vom Hand
-    //Card temp = this.handCards[0];      //used for play first card
-    //handCards.removeAt(0);
-    return temp;
+    //return temp;
   }
 
 // @override
-  Card playCardAI(Card foe, Card trump) {
+  Card playCardAI(Card foe, cardTypes trump) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo value of best playedcard in round
     Card bestCard = findBestCard();
     Card worstCard = findWorstCard();
 //    Card tump = Round.giveTrumpCard();
 //    Card nowbest = bestPlayedCardYet();
-    if(bestCard == bestCard.compare(foe, trump) ){
+    if (bestCard == bestCard.compare(foe, trump)) {
       Card temp = bestCard;
       handCards.remove(this.playableHandCards[findIndexBestCard()]);
       return temp;
-    }
-    else{
+    } else {
       Card temp = worstCard;
       handCards.remove(this.playableHandCards[findIndexWorstCard()]);
       return temp;
     }
   }
-
 
   //karte legen
   //both done erste KI mit random oder erster Kart
@@ -83,7 +68,6 @@ class Ki extends Player {
 
   //todo Tests für KI
 
-
   Card findBestCard() {
     //find algorithm for finding best card of the Hand  (and worst)
     //then only if trick can be made
@@ -97,12 +81,12 @@ class Ki extends Player {
     //for(int i = 0; i < playableHandCards.length; i++) {
     //  playableHandCards.compareHandCards(foe, turmp)
   }
+
   int findIndexBestCard() {
     Card bestCard = this.playableHandCards[0];
     int x = 0;
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (bestCard.value < playableHandCards[i].value)
-        x = i;
+      if (bestCard.value < playableHandCards[i].value) x = i;
     }
     return x;
   }
@@ -115,12 +99,12 @@ class Ki extends Player {
     }
     return worstCard;
   }
+
   int findIndexWorstCard() {
     Card worstCard = this.playableHandCards[0];
     int x = 0;
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (worstCard.value > playableHandCards[i].value)
-        x = i;
+      if (worstCard.value > playableHandCards[i].value) x = i;
     }
     return x;
   }

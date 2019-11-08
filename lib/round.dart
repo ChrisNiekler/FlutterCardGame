@@ -98,7 +98,8 @@ class Round {
 //            }
 //          }
 
-          playedCards.add(gamer.playCard(gamer.handCards.length));
+          playedCards
+              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
         }
 
         temp = playedCards[playedCards.length - 1].card;
