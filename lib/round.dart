@@ -242,14 +242,7 @@ class Round {
   }
 
   void pickTrumpCard(Player player) {
-    String name = player.name;
-    String type;
-    // todo implement this
-    // todo ask the player who deals to pick the card
-    trumpType = cardTypes.values[Random().nextInt(4)];
-    type =
-        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
-    print('$name pickt $type (yet random)');
+    player.pickTrumpCard();
   }
 }
 

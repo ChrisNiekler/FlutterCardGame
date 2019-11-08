@@ -48,4 +48,16 @@ abstract class Player {
       }
     });
   }
+
+  cardTypes pickTrumpCard() {
+    cardTypes trumpType;
+    String type;
+    // todo implement this or just override it
+    // todo ask the player who deals to pick the card
+    trumpType = cardTypes.values[Random().nextInt(4)];
+    type =
+        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
+    print('$name pickt $type (yet random)');
+    return trumpType;
+  }
 }
