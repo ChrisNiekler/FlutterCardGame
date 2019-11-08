@@ -116,10 +116,10 @@ class BottomPart extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              CreateCardImage(Offset(100.0, 100.0)),
-              CreateCardImage(Offset(100.0, 100.0)),
-              CreateCardImage(Offset(100.0, 100.0)),
-              CreateCardImage(Offset(100.0, 100.0)),
+              CreateCardImage(Offset(100.0, 100.0),'2D'),
+              CreateCardImage(Offset(100.0, 100.0),'3D'),
+              CreateCardImage(Offset(100.0, 100.0),'5S'),
+              CreateCardImage(Offset(100.0, 100.0),'AH'),
             ],
           ),
           Row(
@@ -141,22 +141,27 @@ class BottomPart extends StatelessWidget {
 
 class CreateCardImage extends StatefulWidget {
   final Offset offset;
+  final String cardId;
 
   //CreateCardImage({Key key, this.offset}) : super(key: key);
 
   @override
   _CreateCardImageState createState() => _CreateCardImageState();
 
-  CreateCardImage(this.offset);
+  CreateCardImage(this.offset,this.cardId);
+
+
 }
 
 class _CreateCardImageState extends State<CreateCardImage> {
   Offset offset = Offset(0.0, 0.0);
+  String cardID;
 
   @override
   void initState() {
     super.initState();
     offset = widget.offset;
+    cardID = widget.cardId;
   }
 
   @override
@@ -167,7 +172,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
           height: 80.0,
           width: 50.0,
           child: Image.asset(
-            "images/cards/3C.png",
+            "images/cards/$cardID.png",
             height: 80.0,
             width: 50.0,
           )),
@@ -176,7 +181,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
           height: 80.0,
           width: 50.0,
           child: Image.asset(
-            "images/cards/3C.png",
+            "images/cards/$cardID.png",
             height: 80.0,
             width: 50.0,
           )),
