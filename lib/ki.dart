@@ -58,8 +58,9 @@ class Ki extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  int putBet(int bet) {
-    return 1;
+  void putBet() {
+    this.bet = 1;
+    print('$name bet he/she wins $bet tricks!');
   }
   //wetten
   //todo erste bet erstmal immer 1

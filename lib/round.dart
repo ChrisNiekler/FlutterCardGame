@@ -33,6 +33,7 @@ class Round {
 
     // put bets
     tricking(); // does nothing so far
+    print('');
 
     //play tricks
     for (int i = 1; i <= roundNumber; i++) {
@@ -147,7 +148,7 @@ class Round {
     ); // end of for each
     temp = trickWinner.name;
     print('$temp has won the trick!');
-    // todo safe the result
+    players[players.indexOf(trickWinner)].tricks++;
     // todo give points
 
     trickEvaluation();
@@ -238,11 +239,16 @@ class Round {
     }
     print('');
   }
+
+  void tricking() {
+    players.forEach(
+      (gamer) {
+        gamer.putBet();
+      },
+    );
+  }
 }
 
-void tricking() {
-  // todo implement tricking()
-}
 void roundEvaluation() {
   // todo implement roundEvaluation()
 }

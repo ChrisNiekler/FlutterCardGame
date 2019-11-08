@@ -25,8 +25,9 @@ class HumanPlayer extends Player {
   }
 
   @override
-  int putBet(int bet) {
-    return bet;
+  void putBet() {
+    this.bet = 1;
+    print('$name bet he/she wins $bet tricks!');
   }
 
   Card humanPlayCard() {
