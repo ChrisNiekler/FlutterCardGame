@@ -244,7 +244,7 @@ class Round {
     players.forEach(
       (gamer) {
         //todo improve that this is really the last player
-        if(gamer.name == 'Quadro') lastPlayer = true;
+        if (gamer.name == 'Quadro') lastPlayer = true;
         gamer.putBet(round, betsNumber, lastPlayer, trump: trump);
         betsNumber += gamer.getBetsNumber();
       },
@@ -256,13 +256,14 @@ class Round {
   }
 
   void roundEvaluation() {
-    // todo print the current points
+    // todo test this
     players.forEach(
       (gamer) {
         if (gamer.tricks == gamer.bet) {
-          //todo get some points
+          gamer.points += 20; // for being right
+          gamer.points += (10 * gamer.tricks); // 10 for each trick
         } else {
-          // todo distract some points
+          gamer.points -= 10 * (gamer.tricks - gamer.bet).abs();
         }
         gamer.printPoints();
       },
