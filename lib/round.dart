@@ -210,6 +210,7 @@ class Round {
   }
 
   void determineTrump() {
+    //todo what upz if a jester is trump?!
     this.trumpCard = gameDeck.takeCard();
     cardTypes type = trumpCard.cardType;
     String cardName = trumpCard.card;
@@ -242,6 +243,7 @@ class Round {
     int betsNumber = 0;
     players.forEach(
       (gamer) {
+        //todo improve that this is really the last player
         if(gamer.name == 'Quadro') lastPlayer = true;
         gamer.putBet(round, betsNumber, lastPlayer, trump: trump);
         betsNumber += gamer.getBetsNumber();

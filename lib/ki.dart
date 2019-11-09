@@ -28,12 +28,12 @@ class Ki extends Player {
 // @override
   Card playCardAI(Card foe, cardTypes trump) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
-    //todo value of best playedcard in round
+    //todo value of best playedcard in round F4N
     Card bestCard = findBestCard();
     Card worstCard = findWorstCard();
 //    Card tump = Round.giveTrumpCard();
 //    Card nowbest = bestPlayedCardYet();
-    if (bestCard == bestCard.compare(foe, trump)) {
+    if (bestCard == bestCard.compare(foe, trump) && tricks < bet) {
       Card temp = bestCard;
       handCards.remove(bestCard);
       return temp;
