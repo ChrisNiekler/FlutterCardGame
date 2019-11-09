@@ -32,14 +32,15 @@ class Card {
   Card compare(Card foe, cardTypes trump) {
     if (foe.value == 14)
       return foe;
+    else if (this.value == 14)
+      return this;
+    else if (foe.value == 0 && this.value != 0)
+      return this;
     else if (this.cardType == trump && foe.cardType != trump)
       return this;
-    else if (this.cardType == foe.cardType) {
-      if (this.value > foe.value)
-        return this;
-      else
-        return foe;
-    } else
+    else if (this.cardType == foe.cardType && this.value > foe.value)
+      return this;
+    else
       return foe;
   }
 }
