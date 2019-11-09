@@ -18,20 +18,30 @@ class HumanPlayer extends Player {
   }
 
   @override
-  void putBet() {
+  void putBet(int round, int betsNumber, bool lastPlayer, {cardTypes trump}) {
     bool inputAllowed = false;
     String inputString = '';
+    int check;
     this.printHandCardsToConsole();
     do {
       print('Put your bet:');
       inputString = stdin.readLineSync();
       if (_isNumeric(inputString)) {
         this.bet = int.parse(inputString);
-        inputAllowed = true;
+        check = bet + betsNumber;
+        if(!lastPlayer && round != check) {
+          inputAllowed = true;
+        }
+        else print('Please take another number, because the bets have to differ the possible tricks!');
       }
       print('Please put a number!');
     } while (!inputAllowed);
     print('$name bet he/she wins $bet tricks!');
+  }
+
+  @override
+  int getBetsNumber(){
+    return bet;
   }
 
   Card humanPlayCard() {

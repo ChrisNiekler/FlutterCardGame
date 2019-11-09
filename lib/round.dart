@@ -31,7 +31,7 @@ class Round {
     determineTrump();
 
     // put bets
-    tricking(); // does nothing so far
+    tricking(trumpCard.cardType, roundNumber); // does nothing so far
     print('');
 
     //play tricks
@@ -237,10 +237,14 @@ class Round {
     print('');
   }
 
-  void tricking() {
+  void tricking(cardTypes trump, int round) {
+    bool lastPlayer = false;
+    int betsNumber = 0;
     players.forEach(
       (gamer) {
-        gamer.putBet();
+        if(gamer.name == 'Quadro') lastPlayer = true;
+        gamer.putBet(round, betsNumber, lastPlayer, trump: trump);
+        betsNumber += gamer.getBetsNumber();
       },
     );
   }

@@ -12,7 +12,9 @@ abstract class Player {
   int tricks = 0;
   int points = 0;
   bool ai;
-  void putBet();
+  void putBet(int roundNumber, int betsNumber, bool lastPlayer, {cardTypes trump});
+
+  int getBetsNumber();
 
   Card playCard(int pick, {cardTypes trump, Card foe});
 

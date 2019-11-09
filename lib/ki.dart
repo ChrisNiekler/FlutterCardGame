@@ -35,18 +35,18 @@ class Ki extends Player {
 //    Card nowbest = bestPlayedCardYet();
     if (bestCard == bestCard.compare(foe, trump)) {
       Card temp = bestCard;
-      handCards.remove(this.playableHandCards[findIndexBestCard()]);
+      handCards.remove(bestCard);
       return temp;
     } else {
       Card temp = worstCard;
-      handCards.remove(this.playableHandCards[findIndexWorstCard()]);
+      handCards.remove(worstCard);
       return temp;
     }
   }
 
   //karte legen
-  //both done erste KI mit random oder erster Kart
-  //done zweite KI mit erster (oder random) legbarer Karte
+  //todo done erste KI mit random oder erster Kart F4N
+  //todo zweite KI mit erster (oder random) legbarer Karte F4N
   //todo dritte KI mit bester legbarer Karte
   //todo Wahrscheinlichkeitsberechnung für Gewinn des Stichs
   //todo vierte KI beste legbare Kartodote, wenn Wahrscheinlichkeit für Stich größer 0,75
@@ -54,13 +54,25 @@ class Ki extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  void putBet() {
-    this.bet = 1;
+  void putBet(int round, int betsNumber, bool lastPlayer, {cardTypes trump}) {
+    int check;
+    this.bet = 0;
+    for (int i = 0; i < handCards.length; i++){
+      if(handCards[i].cardType == trump && handCards[i].value > 5) bet++;
+      else if(handCards[i].value > 10) bet++;
+    }
+    check = bet + betsNumber;
+    if(!lastPlayer && round != check) bet++;
     print('$name bet he/she wins $bet tricks!');
   }
+
+  @override
+  int getBetsNumber() {
+    return bet;
+  }
   //wetten
-  //todo erste bet erstmal immer 1
-  //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
+  //todo erste bet erstmal immer 1 F4N
+  //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet F4N -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
   //todo Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
   //todo an Hand der Wahrscheinlichkeit die dritte bet
 
@@ -80,7 +92,7 @@ class Ki extends Player {
     //  playableHandCards.compareHandCards(foe, turmp)
   }
 
-  int findIndexBestCard() {
+  int findIndexBestCard() {                 //no usage
     Card bestCard = this.playableHandCards[0];
     int x = 0;
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -98,7 +110,7 @@ class Ki extends Player {
     return worstCard;
   }
 
-  int findIndexWorstCard() {
+  int findIndexWorstCard() {                //no usage
     Card worstCard = this.playableHandCards[0];
     int x = 0;
     for (int i = 1; i < playableHandCards.length; i++) {
