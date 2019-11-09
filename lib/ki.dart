@@ -58,8 +58,8 @@ class Ki extends Player {
     int check;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++){
-      if(handCards[i].cardType == trump && handCards[i].value > 5) bet++;
-      else if(handCards[i].value > 10) bet++;
+      if(handCards[i].cardType == trump && handCards[i].value > 8) bet++;
+      else if(handCards[i].value > 11) bet++;
     }
     check = bet + betsNumber;
     if(!lastPlayer && round != check) bet++;
