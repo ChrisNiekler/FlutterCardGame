@@ -43,6 +43,11 @@ class Round {
 
     roundEvaluation();
     print('-------------------------------');
+    players.forEach(
+      (element) {
+        element.tricks = 0;
+      },
+    );
     sleep(const Duration(seconds: 3));
   }
 
