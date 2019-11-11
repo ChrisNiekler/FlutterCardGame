@@ -69,7 +69,7 @@ class Ki extends Player {
     }
     check = bet + betsNumber;
     //todo cannot bet more than the possible handcards F4N
-    if (!lastPlayer && round != check) bet--;
+    if (lastPlayer && check == round) bet--;
     print('$name bet he/she wins $bet tricks!');
   }
 
