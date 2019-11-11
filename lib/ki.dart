@@ -13,7 +13,7 @@ class Ki extends Player {
   @override
   Card playCard(int pick, {cardTypes trump, Card foe}) {
     //1. here it is chosen between all handcards
-    if (trump == null) {
+    if (trump == null || foe == null) {
       //2. here it is chosen between all playable handcards
       pick = Random().nextInt(playableHandCards.length);
       //Card temp = this.playableHandCards[numpick]; //used for play random card
