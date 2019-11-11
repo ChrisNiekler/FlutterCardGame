@@ -74,75 +74,88 @@ class Round {
     String temp = '';
     Card highestPlayedCard;
     Player trickWinner;
+    int playerTurn = trickStarter;
+    Player gamer;
+    for (int i = 0, n = players.length; i < n; i++) {
+      gamer = players[playerTurn];
 
-    players.forEach(
-      (gamer) {
-        name = gamer.name;
-        print('$name\'s turn.');
-        setAllowedToPlay(gamer);
-        gamer.creatingPlayableHandCardsList();
-        // start of player choice
-        if (!gamer.ai) {
-          // the human player will play a card
-          playedCards.add((gamer as HumanPlayer).humanPlayCard());
+      name = gamer.name;
+      print('$name\'s turn.');
+      setAllowedToPlay(gamer);
+      gamer.creatingPlayableHandCardsList();
+      // start of player choice
+      if (!gamer.ai) {
+        // the human player will play a card
+        playedCards.add((gamer as HumanPlayer).humanPlayCard());
+      } else {
+        // the ai will  play a card
+        if (playedCards.length == 0) {
+          // when no card is played yet
+          playedCards.add(
+            gamer.playCard(
+              1,
+              trump: trumpType,
+            ),
+          );
         } else {
-          // the ai will  play a card
           playedCards
               .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
         }
+      }
 
-        temp = playedCards[playedCards.length - 1].card;
-        print('$name played $temp');
+      temp = playedCards[playedCards.length - 1].card;
+      print('$name played $temp');
 
-        // check if the card is higher then what is played yet
-        if (playedCards.length > 1) {
-          highestPlayedCard =
-              playedCards.last.compare(highestPlayedCard, trumpType);
-          if (highestPlayedCard == playedCards.last) {
-            trickWinner = gamer;
-            temp = gamer.name;
-            print('$temp is leading now');
-          }
-        } else if (playedCards.length == 1) {
-          highestPlayedCard = playedCards[0];
+      // check if the card is higher then what is played yet
+      if (playedCards.length > 1) {
+        highestPlayedCard =
+            playedCards.last.compare(highestPlayedCard, trumpType);
+        if (highestPlayedCard == playedCards.last) {
           trickWinner = gamer;
-          temp = trickWinner.name;
+          temp = gamer.name;
           print('$temp is leading now');
         }
+      } else if (playedCards.length == 1) {
+        highestPlayedCard = playedCards[0];
+        trickWinner = gamer;
+        temp = trickWinner.name;
+        print('$temp is leading now');
+      }
 
-        // determine the color that has to be served
-        // when a wizard is played as first card, everybody else can play
-        // anything they want, wizard is trump but doesn't have to be played
+      // determine the color that has to be served
+      // when a wizard is played as first card, everybody else can play
+      // anything they want, wizard is trump but doesn't have to be played
 
-        // what to serve
-        if (toServe == null) {
-          // todo put in method F4N
-          toServe = playedCards[playedCards.length - 1].cardType;
-          temp =
-              toServe.toString().substring(toServe.toString().indexOf('.') + 1);
-          if (toServe == cardTypes.WIZARD) {
-            print('WIZARD was played, everybody else can play any card.');
-            toServe = cardTypes.WIZARD;
-          } else if (toServe == cardTypes.JESTER) {
-            print('JESTER was played as first card.');
-            print('The next card will determine the played color');
-            toServe = null;
-          } else {
-            print('$temp has to be served!');
-          }
+      // what to serve
+      if (toServe == null) {
+        // todo put in method F4N
+        toServe = playedCards[playedCards.length - 1].cardType;
+        temp =
+            toServe.toString().substring(toServe.toString().indexOf('.') + 1);
+        if (toServe == cardTypes.WIZARD) {
+          print('WIZARD was played, everybody else can play any card.');
+          toServe = cardTypes.WIZARD;
+        } else if (toServe == cardTypes.JESTER) {
+          print('JESTER was played as first card.');
+          print('The next card will determine the played color');
+          toServe = null;
+        } else {
+          print('$temp has to be served!');
         }
+      }
 
-        // reset all temp data
-        print('');
+      // reset all temp data
+      print('');
 
-        resetAllowedToPlay(gamer);
-        gamer.playableHandCards = [];
+      resetAllowedToPlay(gamer);
+      gamer.playableHandCards = [];
 
-        // sleeper --> just for the console game
-        // so it looks more nature
-        sleep(const Duration(seconds: 1));
-      },
-    ); // end of for each
+      // sleeper --> just for the console game
+      // so it looks more nature
+      sleep(const Duration(seconds: 1));
+    }
+
+    // end of for each
     temp = trickWinner.name;
     print('$temp has won the trick!');
     players[players.indexOf(trickWinner)].tricks++;
