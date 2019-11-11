@@ -3,6 +3,7 @@ import 'package:wizard2/humanPlayer.dart';
 import 'package:wizard2/ki.dart';
 import 'package:wizard2/round.dart';
 import 'package:wizard2/player.dart';
+import 'dart:io';
 
 // second main is just for backend
 void main() {
@@ -12,24 +13,25 @@ void main() {
   int trickStarter;
   Round currentRound;
   List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
-  List<String> names = ['Dos', 'Tres', 'Quadro', 'Sinco', 'Seis'];
+  List<String> names = ['Uno', 'Dos', 'Tres', 'Quadro', 'Sinco', 'Seis'];
+  List<Player> players = [];
   //todo getPlayerNumber() F4N
-/*  do {
+  do {
     print('How many players? (3-6)');
-    playerNumber = int.parse(stdin.readLineSync());
-  } while (3 > playerNumber || playerNumber > 6);*/
+    _playerAmount = int.parse(stdin.readLineSync());
+  } while (3 > _playerAmount || _playerAmount > 6);
 
   // set _maxRounds to 0 for testing reasons
-  _maxRounds = 15;
+  _maxRounds = numberRounds[_playerAmount];
 
   //todo implement createPlayers() F4N
-  List<Player> players = [
-    new HumanPlayer('Uno', 0),
-    new Ki('Dos', 1),
-    new Ki('Tres', 2),
-    //new HumanPlayer('Quadro', 3),
-    new Ki('Quadro', 3)
-  ];
+  for (int i = 0; i < _playerAmount; i++) {
+    if (i == 0)
+      players.add(new HumanPlayer(names[i], i));
+    else
+      players.add(new Ki(names[i], i));
+  }
+
   trickStarter = _whoStarts(_playerAmount);
   do {
     print('---------- $_playerAmount Players ----------');
