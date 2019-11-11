@@ -13,16 +13,16 @@ class Gamepage extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                LeftPart(),
-                MidPart(),
-                RightPart(),
+                Expanded(flex: 2, child: LeftPart()),
+                Expanded(flex: 5, child: MidPart()),
+                Expanded(flex: 2, child: RightPart()),
               ],
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Center(child: BottomPart()),
+                 BottomPart(),
               ],
             ),
           ],
@@ -95,17 +95,15 @@ class MidPart extends StatelessWidget {
                 color: Colors.white70,
                 alignment: Alignment.center,
                 child: Text(
-              "Trump",
-              style: TextStyle(color: Colors.white, fontSize: 22.0),
+                  "Trump",
+                  style: TextStyle(color: Colors.white, fontSize: 22.0),
                 ),
               );
             },
             onWillAccept: (data) {
               return true;
             },
-            onAccept: (data) {
-
-            },
+            onAccept: (data) {},
           ),
         ],
       ),
@@ -196,7 +194,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
             width: 50.0,
           )),
       childWhenDragging: Container(),
-        data: cardID,
+      data: cardID,
       onDraggableCanceled: (v, o) {
         setState(() {
           offset = o;
