@@ -29,18 +29,19 @@ class HumanPlayer extends Player {
       if (_isNumeric(inputString)) {
         this.bet = int.parse(inputString);
         check = bet + betsNumber;
-        if(!lastPlayer && round != check) {
+        if (lastPlayer && round == check) {
+          print(
+              'Please take another number, because the bets have to differ the possible tricks!');
+        } else
           inputAllowed = true;
-        }
-        else print('Please take another number, because the bets have to differ the possible tricks!');
-      }
-      else print('Please put a number!');
+      } else
+        print('Please put a number!');
     } while (!inputAllowed);
     print('$name bet he/she wins $bet tricks!');
   }
 
   @override
-  int getBetsNumber(){
+  int getBetsNumber() {
     return bet;
   }
 
