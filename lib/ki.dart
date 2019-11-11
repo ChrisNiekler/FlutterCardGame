@@ -38,7 +38,9 @@ class Ki extends Player {
     Card worstCard = findWorstCard();
 //    Card tump = Round.giveTrumpCard();
 //    Card nowbest = bestPlayedCardYet();
-    if (bestCard == bestCard.compare(foe, trump) && tricks < bet) {
+    if (bestCard == bestCard.compare(foe, trump) &&
+        tricks < bet &&
+        foe.cardType != cardTypes.WIZARD) {
       Card temp = bestCard;
       handCards.remove(bestCard);
       return temp;
@@ -126,5 +128,5 @@ class Ki extends Player {
     return x;
   }
 
-//todo if wizard is played (pick trump)
+//todo if wizard is trump (pick trump)
 }
