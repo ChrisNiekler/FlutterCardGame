@@ -89,8 +89,18 @@ class Round {
         playedCards.add((gamer as HumanPlayer).humanPlayCard());
       } else {
         // the ai will  play a card
-        playedCards
-            .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
+        if (playedCards.length == 0) {
+          // when no card is played yet
+          playedCards.add(
+            gamer.playCard(
+              1,
+              trump: trumpType,
+            ),
+          );
+        } else {
+          playedCards
+              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
+        }
       }
 
       temp = playedCards[playedCards.length - 1].card;
