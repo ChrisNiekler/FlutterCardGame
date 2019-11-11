@@ -13,7 +13,12 @@ class Ki extends Player {
   @override
   Card playCard(int pick, {cardTypes trump, Card foe}) {
     //1. here it is chosen between all handcards
-    if (trump == null || foe == null) {
+    if (trump == null) {
+      Card temp = findBestCard();
+      handCards.remove(temp);
+      return temp;
+    } else if (foe == null) {
+      //todo if no card is played yet (improve this)
       //2. here it is chosen between all playable handcards
       pick = Random().nextInt(playableHandCards.length);
       //Card temp = this.playableHandCards[numpick]; //used for play random card
@@ -57,12 +62,14 @@ class Ki extends Player {
   void putBet(int round, int betsNumber, bool lastPlayer, {cardTypes trump}) {
     int check;
     this.bet = 0;
-    for (int i = 0; i < handCards.length; i++){
-      if(handCards[i].cardType == trump && handCards[i].value > 8) bet++;
-      else if(handCards[i].value > 11) bet++;
+    for (int i = 0; i < handCards.length; i++) {
+      if (handCards[i].cardType == trump && handCards[i].value > 8)
+        bet++;
+      else if (handCards[i].value > 11) bet++;
     }
     check = bet + betsNumber;
-    if(!lastPlayer && round != check) bet++;
+    //todo cannot bet more than the possible handcards F4N
+    if (!lastPlayer && round != check) bet--;
     print('$name bet he/she wins $bet tricks!');
   }
 
@@ -70,6 +77,7 @@ class Ki extends Player {
   int getBetsNumber() {
     return bet;
   }
+
   //wetten
   //todo erste bet erstmal immer 1 F4N
   //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet F4N -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
@@ -92,7 +100,8 @@ class Ki extends Player {
     //  playableHandCards.compareHandCards(foe, turmp)
   }
 
-  int findIndexBestCard() {                 //no usage
+  int findIndexBestCard() {
+    //no usage
     Card bestCard = this.playableHandCards[0];
     int x = 0;
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -110,7 +119,8 @@ class Ki extends Player {
     return worstCard;
   }
 
-  int findIndexWorstCard() {                //no usage
+  int findIndexWorstCard() {
+    //no usage
     Card worstCard = this.playableHandCards[0];
     int x = 0;
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -118,4 +128,6 @@ class Ki extends Player {
     }
     return x;
   }
+
+//todo if wizard is played (pick trump)
 }
