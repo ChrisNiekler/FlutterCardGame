@@ -109,6 +109,9 @@ class Round {
       }
 
       temp = playedCards[playedCards.length - 1].card;
+      if (temp == 'WIZARD') {
+        wizardIsPlayed = true;
+      }
       print('$name played $temp');
 
       // check if the card is higher then what is played yet
