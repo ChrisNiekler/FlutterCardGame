@@ -59,7 +59,7 @@ class Ki extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  void putBet(int round, int betsNumber, bool lastPlayer, {cardTypes trump}) {
+  void putBet(int round, int betsNumber, {cardTypes trump}) {
     int check;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {
@@ -69,8 +69,8 @@ class Ki extends Player {
     }
     check = bet + betsNumber;
     //todo cannot bet more than the possible handcards  -> NOT ALLOWED TO bet -1 F4N
-    if (lastPlayer && check == round && bet == 0) bet++;
-    else if (lastPlayer && check == round) bet--;
+    if (this.lastPlayer && check == round && bet == 0) bet++;
+    else if (this.lastPlayer && check == round) bet--;
     print('$name bet he/she wins $bet tricks!');
   }
 
