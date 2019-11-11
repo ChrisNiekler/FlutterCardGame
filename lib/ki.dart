@@ -68,8 +68,9 @@ class Ki extends Player {
       else if (handCards[i].value > 11) bet++;
     }
     check = bet + betsNumber;
-    //todo cannot bet more than the possible handcards  -> NOT ALLOWED TO bet -1
-    if (lastPlayer && check == round) bet--;
+    //todo cannot bet more than the possible handcards  -> NOT ALLOWED TO bet -1 F4N
+    if (lastPlayer && check == round && bet == 0) bet++;
+    else if (lastPlayer && check == round) bet--;
     print('$name bet he/she wins $bet tricks!');
   }
 
