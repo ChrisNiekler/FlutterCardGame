@@ -31,7 +31,7 @@ class Round {
     determineTrump();
 
     // put bets
-    tricking(trumpCard.cardType, roundNumber); // does nothing so far
+    tricking();
     print('');
 
     //play tricks
@@ -74,10 +74,10 @@ class Round {
     String temp = '';
     Card highestPlayedCard;
     Player trickWinner;
-    int playerTurn = trickStarter;
+
     Player gamer;
     for (int i = 0, n = players.length; i < n; i++) {
-      gamer = players[playerTurn];
+      gamer = players[trickStarter];
 
       name = gamer.name;
       print('$name\'s turn.');
@@ -153,11 +153,16 @@ class Round {
       // sleeper --> just for the console game
       // so it looks more nature
       sleep(const Duration(seconds: 1));
+      trickStarter++;
+      if (!(trickStarter < players.length)) {
+        trickStarter = 0;
+      }
     }
 
     // end of for each
     temp = trickWinner.name;
     print('$temp has won the trick!');
+    trickStarter = trickWinner.id;
     players[players.indexOf(trickWinner)].tricks++;
     // todo give points
 
@@ -251,14 +256,14 @@ class Round {
     print('');
   }
 
-  void tricking(cardTypes trump, int round) {
+  void tricking() {
     bool lastPlayer = false;
     int betsNumber = 0;
     players.forEach(
       (gamer) {
         //todo improve that this is really the last player
         if (gamer.name == 'Quadro') lastPlayer = true;
-        gamer.putBet(round, betsNumber, lastPlayer, trump: trump);
+        gamer.putBet(roundNumber, betsNumber, lastPlayer, trump: trumpType);
         betsNumber += gamer.getBetsNumber();
       },
     );
