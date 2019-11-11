@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wizard2/card.dart' as prefix0;
+
 
 class Gamepage extends StatelessWidget {
   @override
@@ -87,29 +87,80 @@ class MidPart extends StatelessWidget {
           Text("Mid"),
           DragTarget(
             builder:
-                (context, List<prefix0.Card> acceptedCards, rejectedCards) {
+                (context, List<String> acceptedCards, rejectedCards) {
               print(acceptedCards);
               return Container(
                 height: 300.0,
                 width: 200.0,
                 color: Colors.white70,
                 alignment: Alignment.center,
-                child: Text(
-                  "Trump",
-                  style: TextStyle(color: Colors.white, fontSize: 22.0),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      "Trump",
+                      style: TextStyle(color: Colors.white, fontSize: 22.0),
+                    )
+                  ],
                 ),
               );
             },
             onWillAccept: (data) {
+
               return true;
             },
-            onAccept: (data) {},
+            onAccept: (data) {
+              return midPartNew(data);
+            },
           ),
         ],
       ),
     );
   }
 }
+
+  Widget midPartNew(String cardID) {
+    return Container(
+      constraints: BoxConstraints.tightForFinite(
+        height: 500.0,
+        width: 211.4,
+      ),
+      color: Colors.grey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text("Mid"),
+          DragTarget(
+            builder:
+                (context, List<String> acceptedCards, rejectedCards) {
+              print(acceptedCards);
+              return Container(
+                height: 300.0,
+                width: 200.0,
+                color: Colors.white70,
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      "Trump2",
+                      style: TextStyle(color: Colors.white, fontSize: 22.0),
+                    ),
+                    CreateCardImage(Offset(100.0,100.0), cardID)
+                  ],
+                ),
+              );
+            },
+            onWillAccept: (data) {
+              return true;
+            },
+            onAccept: (data) {
+              return MidPart();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
 
 class BottomPart extends StatelessWidget {
   @override
@@ -175,6 +226,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
   @override
   Widget build(BuildContext context) {
     return Draggable(
+
       child: Container(
           alignment: Alignment.center,
           height: 80.0,
