@@ -52,7 +52,7 @@ class Ki extends Player {
   //karte legen
   //todo done erste KI mit random oder erster Kart F4N
   //todo zweite KI mit erster (oder random) legbarer Karte F4N
-  //todo dritte KI mit bester legbarer Karte
+  //todo dritte KI mit bester legbarer Karte F4N
   //todo Wahrscheinlichkeitsberechnung für Gewinn des Stichs
   //todo vierte KI beste legbare Kartodote, wenn Wahrscheinlichkeit für Stich größer 0,75
   //todo fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
@@ -68,7 +68,7 @@ class Ki extends Player {
       else if (handCards[i].value > 11) bet++;
     }
     check = bet + betsNumber;
-    //todo cannot bet more than the possible handcards F4N
+    //todo cannot bet more than the possible handcards  -> NOT ALLOWED TO bet -1
     if (lastPlayer && check == round) bet--;
     print('$name bet he/she wins $bet tricks!');
   }
@@ -80,7 +80,7 @@ class Ki extends Player {
 
   //wetten
   //todo erste bet erstmal immer 1 F4N
-  //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet F4N -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
+  //todo zweite bet alle Karten größer gleich 10 ist Anzahl der bet F4N -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten F4N
   //todo Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
   //todo an Hand der Wahrscheinlichkeit die dritte bet
 

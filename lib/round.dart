@@ -262,7 +262,7 @@ class Round {
     players.forEach(
       (gamer) {
         //todo improve that this is really the last player
-        if (gamer.name == 'Quadro') lastPlayer = true;
+        if (gamer.id == players.length-1) lastPlayer = true;
         gamer.putBet(roundNumber, betsNumber, lastPlayer, trump: trumpType);
         betsNumber += gamer.getBetsNumber();
       },
