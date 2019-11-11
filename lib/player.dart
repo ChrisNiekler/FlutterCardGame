@@ -8,15 +8,13 @@ abstract class Player {
   int id;
   List<Card> handCards = [];
   List<Card> playableHandCards = [];
-  int bet;
+  int bet = 0;
   int tricks = 0;
   int points = 0;
   bool ai;
   bool lastPlayer = false;
 
   void putBet(int roundNumber, int betsNumber, {cardTypes trump});
-
-  int getBetsNumber();
 
   Card playCard(int pick, {cardTypes trump, Card foe});
 

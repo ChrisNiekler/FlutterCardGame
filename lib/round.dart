@@ -266,13 +266,19 @@ class Round {
 
   void tricking() {
     int betsNumber = 0;
-    players.forEach(
-      (gamer) {
-        //todo improve that this is really the last player F4N
-        gamer.putBet(roundNumber, betsNumber, trump: trumpType);
-        betsNumber += gamer.getBetsNumber();
-      },
-    );
+    int p = trickStarter;
+    for (int i = 0, n = players.length; i < n; i++) {
+      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType);
+      p++;
+      betsNumber += players[p % n].bet;
+    }
+//    players.forEach(
+//      (gamer) {
+//        //todo improve that this is really the last player F4N
+//        gamer.putBet(roundNumber, betsNumber, trump: trumpType);
+//        betsNumber += gamer.getBetsNumber();
+//      },
+//    );
   }
 
   void determineLastPlayer() {

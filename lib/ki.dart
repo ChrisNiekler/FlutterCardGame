@@ -69,14 +69,10 @@ class Ki extends Player {
     }
     check = bet + betsNumber;
     //todo cannot bet more than the possible handcards  -> NOT ALLOWED TO bet -1 F4N
-    if (this.lastPlayer && check == round && bet == 0) bet++;
+    if (this.lastPlayer && check == round && bet == 0)
+      bet++;
     else if (this.lastPlayer && check == round) bet--;
     print('$name bet he/she wins $bet tricks!');
-  }
-
-  @override
-  int getBetsNumber() {
-    return bet;
   }
 
   //wetten

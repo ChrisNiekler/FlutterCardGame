@@ -40,11 +40,6 @@ class HumanPlayer extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
-  @override
-  int getBetsNumber() {
-    return bet;
-  }
-
   Card humanPlayCard() {
     bool inputAllowed = false;
     String input = '';
