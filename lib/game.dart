@@ -6,11 +6,13 @@ import 'package:wizard2/player.dart';
 
 // second main is just for backend
 void main() {
-  int _round = 4;
+  int _round = 1;
   int _maxRounds;
   int _playerAmount = 4;
   int trickStarter;
   Round currentRound;
+  List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
+  List<String> names = ['Dos', 'Tres', 'Quadro', 'Sinco', 'Seis'];
   //todo getPlayerNumber() F4N
 /*  do {
     print('How many players? (3-6)');
@@ -18,7 +20,7 @@ void main() {
   } while (3 > playerNumber || playerNumber > 6);*/
 
   // set _maxRounds to 0 for testing reasons
-  _maxRounds = 6;
+  _maxRounds = 15;
 
   //todo implement createPlayers() F4N
   List<Player> players = [
