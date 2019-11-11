@@ -38,7 +38,9 @@ class Ki extends Player {
     Card worstCard = findWorstCard();
 //    Card tump = Round.giveTrumpCard();
 //    Card nowbest = bestPlayedCardYet();
-    if (bestCard == bestCard.compare(foe, trump) && tricks < bet) {
+    if (bestCard == bestCard.compare(foe, trump) &&
+        tricks < bet &&
+        foe.cardType != cardTypes.WIZARD) {
       Card temp = bestCard;
       handCards.remove(bestCard);
       return temp;
@@ -69,7 +71,8 @@ class Ki extends Player {
     }
     check = bet + betsNumber;
     //todo cannot bet more than the possible handcards  -> NOT ALLOWED TO bet -1 F4N
-    if (this.lastPlayer && check == round && bet == 0) bet++;
+    if (this.lastPlayer && check == round && bet == 0)
+      bet++;
     else if (this.lastPlayer && check == round) bet--;
     print('$name bet he/she wins $bet tricks!');
   }
@@ -130,5 +133,5 @@ class Ki extends Player {
     return x;
   }
 
-//todo if wizard is played (pick trump)
+//todo if wizard is trump (pick trump)
 }
