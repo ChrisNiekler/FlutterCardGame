@@ -43,6 +43,11 @@ class Round {
 
     roundEvaluation();
     print('-------------------------------');
+    players.forEach(
+      (element) {
+        element.tricks = 0;
+      },
+    );
     sleep(const Duration(seconds: 3));
   }
 
@@ -257,16 +262,21 @@ class Round {
   }
 
   void tricking() {
-    bool lastPlayer = false;
     int betsNumber = 0;
     players.forEach(
       (gamer) {
-        //todo improve that this is really the last player
-        if (gamer.name == 'Quadro') lastPlayer = true;
-        gamer.putBet(roundNumber, betsNumber, lastPlayer, trump: trumpType);
+        //todo improve that this is really the last player F4N
+        gamer.putBet(roundNumber, betsNumber, trump: trumpType);
         betsNumber += gamer.getBetsNumber();
       },
     );
+  }
+
+  void determineLastPlayer() {
+    if (trickStarter == 0)
+      players.last.lastPlayer = true;
+    else
+      players[trickStarter - 1].lastPlayer = true;
   }
 
   void trickEvaluation() {

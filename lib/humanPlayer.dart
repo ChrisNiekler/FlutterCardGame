@@ -18,7 +18,7 @@ class HumanPlayer extends Player {
   }
 
   @override
-  void putBet(int round, int betsNumber, bool lastPlayer, {cardTypes trump}) {
+  void putBet(int round, int betsNumber, {cardTypes trump}) {
     bool inputAllowed = false;
     String inputString = '';
     int check;
@@ -29,7 +29,7 @@ class HumanPlayer extends Player {
       if (_isNumeric(inputString)) {
         this.bet = int.parse(inputString);
         check = bet + betsNumber;
-        if (lastPlayer && round == check) {
+        if (this.lastPlayer && round == check) {
           print(
               'Please take another number, because the bets have to differ the possible tricks!');
         } else
