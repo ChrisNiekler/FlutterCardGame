@@ -9,7 +9,7 @@ void main() {
   int _round = 4;
   int _maxRounds;
   int _playerAmount = 4;
-  int dealerID;
+  int trickStarter;
   Round currentRound;
   //todo getPlayerNumber() F4N
 /*  do {
@@ -28,20 +28,18 @@ void main() {
     //new HumanPlayer('Quadro', 3),
     new Ki('Quadro', 3)
   ];
-  dealerID = _whoStarts(_playerAmount);
-  // dealerID is 0 for testing reasons
-  dealerID = 0;
+  trickStarter = _whoStarts(_playerAmount);
   do {
     print('---------- $_playerAmount Players ----------');
     print('----------- Round $_round -----------');
     print('-------------------------------');
-    currentRound = new Round(_round, _maxRounds, dealerID, players);
+    currentRound = new Round(_round, _maxRounds, trickStarter, players);
     currentRound.playRound();
 
-    // reset the dealerID when the player with
+    // reset the trickStarter when the player with
     // the highest id dealt
-    if (!(dealerID < _playerAmount)) {
-      dealerID = 0;
+    if (!(trickStarter < _playerAmount)) {
+      trickStarter = 0;
     }
     _round++;
   } while (_round <= _maxRounds);

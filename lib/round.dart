@@ -10,7 +10,7 @@ class Round {
   cardTypes trumpType;
   int roundNumber;
   int maxRounds;
-  int dealerID;
+  int trickStarter;
   bool wizardIsPlayed = false;
   cardTypes toServe; // the type of card that has to be served
   List<Player> players;
@@ -19,7 +19,7 @@ class Round {
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
 
-  Round(this.roundNumber, this.maxRounds, this.dealerID, this.players);
+  Round(this.roundNumber, this.maxRounds, this.trickStarter, this.players);
 
   void playRound() {
     // todo involve the dealer
@@ -233,7 +233,7 @@ class Round {
       // when wizard is trump card then the dealer picks the trump
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');
-      players[dealerID].pickTrumpCard();
+      players[trickStarter].pickTrumpCard();
     }
     print('');
   }
