@@ -9,7 +9,7 @@ import 'dart:io';
 void main() {
   int _round = 1;
   int _maxRounds;
-  int _playerAmount = 4;
+  int _playerAmount = 0;
   int trickStarter;
   Round currentRound;
   List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
@@ -18,7 +18,10 @@ void main() {
   //todo getPlayerNumber() F4N
   do {
     print('How many players? (3-6)');
-    _playerAmount = int.parse(stdin.readLineSync());
+    String input = stdin.readLineSync();
+    if (_isNumeric(input)) {
+      _playerAmount = int.parse(input);
+    }
   } while (3 > _playerAmount || _playerAmount > 6);
 
   // set _maxRounds to 0 for testing reasons
@@ -68,4 +71,11 @@ class PointsTable {
 * player number */
 int _whoStarts(int players) {
   return Random().nextInt(players);
+}
+
+bool _isNumeric(String str) {
+  if (str == null) {
+    return false;
+  }
+  return int.tryParse(str) != null;
 }
