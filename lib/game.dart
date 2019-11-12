@@ -42,7 +42,7 @@ void main() {
     print('-------------------------------');
     currentRound = new Round(_round, _maxRounds, trickStarter, players);
     currentRound.playRound();
-
+    trickStarter++;
     // reset the trickStarter when the player with
     // the highest id dealt
     if (!(trickStarter < _playerAmount)) {
