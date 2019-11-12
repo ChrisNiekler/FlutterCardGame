@@ -7,6 +7,8 @@ import 'dart:io';
 
 // second main is just for backend
 void main() {
+  // todo when all are done
+  //  put more comments + clean code
   int _round = 1;
   int _maxRounds;
   int _playerAmount = 0;
@@ -15,7 +17,7 @@ void main() {
   List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
   List<String> names = ['Uno', 'Dos', 'Tres', 'Quadro', 'Sinco', 'Seis'];
   List<Player> players = [];
-  //todo getPlayerNumber() F4N
+
   do {
     print('How many players? (3-6)');
     String input = stdin.readLineSync();
@@ -27,7 +29,7 @@ void main() {
   // set _maxRounds to 0 for testing reasons
   _maxRounds = numberRounds[_playerAmount];
 
-  //todo implement createPlayers() F4N
+  //todo implement createPlayers()
   for (int i = 0; i < _playerAmount; i++) {
     if (i == 0)
       players.add(new HumanPlayer(names[i], i));

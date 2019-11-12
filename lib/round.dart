@@ -22,7 +22,7 @@ class Round {
   Round(this.roundNumber, this.maxRounds, this.trickStarter, this.players);
 
   void playRound() {
-    // todo involve the dealer
+    // involve the dealer??
     // distributes the cards evenly throughout the players
 
     cardDistribution();
@@ -63,12 +63,9 @@ class Round {
   }
 
   void playTrick() {
-    // todo the winner of a trick starts the next trick F4N
-
     playCards();
     print('-------------------------------');
     toServe = null;
-    trickEvaluation();
     playedCards = [];
   }
 
@@ -91,6 +88,7 @@ class Round {
       // start of player choice
       if (!gamer.ai) {
         // the human player will play a card
+        // todo print the trump everytime the player plays a card
         playedCards.add((gamer as HumanPlayer).humanPlayCard());
       } else {
         // the ai will  play a card
@@ -136,7 +134,7 @@ class Round {
 
       // what to serve
       if (toServe == null) {
-        // todo put in method F4N
+        // todo put in method
         toServe = playedCards[playedCards.length - 1].cardType;
         temp =
             toServe.toString().substring(toServe.toString().indexOf('.') + 1);
@@ -172,9 +170,6 @@ class Round {
     print('$temp has won the trick!');
     trickStarter = trickWinner.id;
     players[players.indexOf(trickWinner)].tricks++;
-    // todo give points
-
-    trickEvaluation();
   } // end of playCards()
 
   /*check if the player has cards that are playable
@@ -236,7 +231,6 @@ class Round {
   }
 
   void determineTrump() {
-    //todo what upz if a jester is trump?!
     this.trumpCard = gameDeck.takeCard();
     cardTypes type = trumpCard.cardType;
     String cardName = trumpCard.card;
@@ -272,13 +266,6 @@ class Round {
       p++;
       betsNumber += players[p % n].bet;
     }
-//    players.forEach(
-//      (gamer) {
-//        //todo improve that this is really the last player F4N
-//        gamer.putBet(roundNumber, betsNumber, trump: trumpType);
-//        betsNumber += gamer.getBetsNumber();
-//      },
-//    );
   }
 
   void determineLastPlayer() {
@@ -286,10 +273,6 @@ class Round {
       players.last.lastPlayer = true;
     else
       players[trickStarter - 1].lastPlayer = true;
-  }
-
-  void trickEvaluation() {
-    // todo see if this method is still necessary
   }
 
   void roundEvaluation() {
@@ -300,6 +283,7 @@ class Round {
           gamer.points += 20; // for being right
           gamer.points += (10 * gamer.tricks); // 10 for each trick
         } else {
+          // subtract 10 points times the distance between bet and tricks
           gamer.points -= 10 * (gamer.tricks - gamer.bet).abs();
         }
         gamer.printPoints();
