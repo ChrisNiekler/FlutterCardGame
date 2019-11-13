@@ -14,6 +14,7 @@ class HumanPlayer extends Player {
   // todo test this
   @override
   cardTypes pickTrumpCard() {
+    this.printHandCardsToConsole();
     String input;
     List<String> types = ['club', 'diamond', 'heart', 'spade'];
 
@@ -49,10 +50,11 @@ class HumanPlayer extends Player {
         if (this.lastPlayer && round == check) {
           print(
               'Please take another number, because the bets have to differ the possible tricks!');
-        } else
+        } else if (!(bet < 0)) {
           inputAllowed = true;
+        }
       } else
-        print('Please put a number!');
+        print('Please select a positive number!');
     } while (!inputAllowed);
     print('$name bet he/she wins $bet tricks!');
   }

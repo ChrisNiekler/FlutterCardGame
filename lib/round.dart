@@ -92,8 +92,12 @@ class Round {
         temp = trumpType
             .toString()
             .substring(trumpType.toString().indexOf('.') + 1);
-        print('The trump is $temp');
-        playedCards.add((gamer as HumanPlayer).humanPlayCard());
+        if (trumpType != null) {
+          print('The trump is $temp');
+          playedCards.add((gamer as HumanPlayer).humanPlayCard());
+        } else {
+          print('There is no trump in this round!');
+        }
       } else {
         // the ai will  play a card
         if (playedCards.length == 0) {
@@ -122,14 +126,12 @@ class Round {
             playedCards.last.compare(highestPlayedCard, trumpType);
         if (highestPlayedCard == playedCards.last) {
           trickWinner = gamer;
-          temp = gamer.name;
-          print('$temp is leading now');
+          print('${gamer.name} is leading now');
         }
       } else if (playedCards.length == 1) {
         highestPlayedCard = playedCards[0];
         trickWinner = gamer;
-        temp = trickWinner.name;
-        print('$temp is leading now');
+        print('${trickWinner.name} is leading now');
       }
 
       // determine the color that has to be served
@@ -170,8 +172,7 @@ class Round {
     }
 
     // end of for each
-    temp = trickWinner.name;
-    print('$temp has won the trick!');
+    print('${trickWinner.name} has won the trick!');
     trickStarter = trickWinner.id;
     players[players.indexOf(trickWinner)].tricks++;
   } // end of playCards()
