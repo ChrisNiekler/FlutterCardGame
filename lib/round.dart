@@ -88,10 +88,8 @@ class Round {
       // start of player choice
       if (!gamer.ai) {
         // the human player will play a card
-        // todo print the trump everytime the player plays a card
-        temp = trumpType
-            .toString()
-            .substring(trumpType.toString().indexOf('.') + 1);
+        temp = CardTypeHelper.getValue(trumpType);
+
         if (trumpType != null) {
           print('The trump is $temp');
           playedCards.add((gamer as HumanPlayer).humanPlayCard());
@@ -142,8 +140,8 @@ class Round {
       if (toServe == null) {
         // todo put in method
         toServe = playedCards[playedCards.length - 1].cardType;
-        temp =
-            toServe.toString().substring(toServe.toString().indexOf('.') + 1);
+        temp = CardTypeHelper.getValue(toServe);
+
         if (toServe == CardType.WIZARD) {
           print('WIZARD was played, everybody else can play any card.');
           toServe = CardType.WIZARD;

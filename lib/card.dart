@@ -8,13 +8,13 @@ class Card {
   // clubs (♣), diamonds (♦), hearts (♥) and spades (♠)
 
   String typeToString() {
-    return cardType.toString().substring(cardType.toString().indexOf('.') + 1);
+    return CardTypeHelper.getValue(cardType);
   }
 
   Card(this.cardType, this.value) {
     String icon = '';
     this.card = this.typeToString();
-    // cardType.toString().substring(cardType.toString().indexOf('.') + 1);
+
     if (this.card == 'SPADE') {
       icon = '   (♠)';
     } else if (this.card == 'CLUB') {
