@@ -51,11 +51,13 @@ abstract class Player {
     });
   }
 
+  /* override this in  derivatives
+      ask the player who deals to pick the card */
+
   cardTypes pickTrumpCard() {
     cardTypes trumpType;
     String type;
-    // todo implement this or just override it
-    // ask the player who deals to pick the card
+
     trumpType = cardTypes.values[Random().nextInt(4)];
     type =
         trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);

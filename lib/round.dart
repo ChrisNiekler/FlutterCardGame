@@ -89,6 +89,10 @@ class Round {
       if (!gamer.ai) {
         // the human player will play a card
         // todo print the trump everytime the player plays a card
+        temp = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
+        print('The trump is $temp');
         playedCards.add((gamer as HumanPlayer).humanPlayCard());
       } else {
         // the ai will  play a card

@@ -11,6 +11,23 @@ class HumanPlayer extends Player {
     return temp;
   }
 
+  // todo test this
+  @override
+  cardTypes pickTrumpCard() {
+    String input;
+    List<String> types = ['club', 'diamond', 'heart', 'spade'];
+
+    print('Please pick the trump');
+    do {
+      print('Enter "club" (♣), "diamond" (♦), "heart" (♥) or "spade" (♠)' +
+          ('\nto do so.'));
+      input = stdin.readLineSync();
+      input = input.toLowerCase();
+    } while (!types.contains(input));
+    print('$name pickt $input');
+    return cardTypes.values[types.indexOf(input)];
+  }
+
   HumanPlayer(name, id) {
     this.ai = false;
     this.name = name;

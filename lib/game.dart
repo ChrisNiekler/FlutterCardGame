@@ -29,7 +29,7 @@ void main() {
   // set _maxRounds to 0 for testing reasons
   _maxRounds = numberRounds[_playerAmount];
 
-  //todo implement createPlayers()
+  //create Players
   for (int i = 0; i < _playerAmount; i++) {
     if (i == 0)
       players.add(new HumanPlayer(names[i], i));
@@ -38,10 +38,13 @@ void main() {
   }
 
   trickStarter = _whoStarts(_playerAmount);
+  String temp = '';
   do {
     print('---------- $_playerAmount Players ----------');
     print('----------- Round $_round -----------');
     print('-------------------------------');
+    temp = players[trickStarter].name;
+    print('\n$temp will start this round.');
     currentRound = new Round(_round, _maxRounds, trickStarter, players);
     currentRound.playRound();
     trickStarter++;
