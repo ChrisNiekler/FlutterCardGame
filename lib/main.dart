@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wizard2/gamepage.dart';
+import 'package:wizard/gamepage.dart';
 
 void main() => runApp(MyApp());
 
@@ -178,16 +178,18 @@ class MyHomePage extends StatelessWidget {
     return AlertDialog(
       title: new Text("How many players"),
       actions: <Widget>[
-        Column(crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[new FlatButton(
-            child: new Text("3 Players"),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Gamepage()),
-              );
-            },
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            new FlatButton(
+              child: new Text("3 Players"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Gamepage()),
+                );
+              },
+            ),
             new FlatButton(
               child: new Text("4 Players"),
               onPressed: () {
@@ -220,8 +222,9 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-            ),],)
-
+            ),
+          ],
+        )
       ],
     );
   }

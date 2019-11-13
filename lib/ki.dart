@@ -1,6 +1,6 @@
-import 'package:wizard2/player.dart';
-import 'package:wizard2/card.dart';
-import 'package:wizard2/cardType.dart';
+import 'package:wizard/player.dart';
+import 'package:wizard/card.dart';
+import 'package:wizard/cardType.dart';
 import 'dart:math' show Random;
 
 class Ki extends Player {

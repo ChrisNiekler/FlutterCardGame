@@ -1,5 +1,5 @@
-import 'package:wizard2/card.dart';
-import 'package:wizard2/player.dart';
+import 'package:wizard/card.dart';
+import 'package:wizard/player.dart';
 import 'cardType.dart';
 import 'dart:io';
 

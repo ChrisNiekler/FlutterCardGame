@@ -1,8 +1,8 @@
 import 'dart:math';
-import 'package:wizard2/humanPlayer.dart';
-import 'package:wizard2/ki.dart';
-import 'package:wizard2/round.dart';
-import 'package:wizard2/player.dart';
+import 'package:wizard/humanPlayer.dart';
+import 'package:wizard/ki.dart';
+import 'package:wizard/round.dart';
+import 'package:wizard/player.dart';
 import 'dart:io';
 
 // second main is just for backend

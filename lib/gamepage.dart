@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:wizard2/round.dart';
+import 'package:wizard/round.dart';
 import 'playerTemplateGUI.dart';
 
 class Gamepage extends StatelessWidget {
@@ -9,28 +9,28 @@ class Gamepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: SafeArea(
-          child: Container(
-            child: Column(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Expanded(flex: 2, child: LeftPart()),
-                    Expanded(flex: 5, child: MidPartNew()),
-                    Expanded(flex: 2, child: RightPart()),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    BottomPart(),
-                  ],
-                ),
+                Expanded(flex: 2, child: LeftPart()),
+                Expanded(flex: 5, child: MidPartNew()),
+                Expanded(flex: 2, child: RightPart()),
               ],
             ),
-          ),
-        ));
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                BottomPart(),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }
 
@@ -44,7 +44,9 @@ class LeftPart extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text("Left"),
-          PlayerTemplate(playerName: "Playername",)
+          PlayerTemplate(
+            playerName: "Playername",
+          )
         ],
       ),
     );
@@ -151,7 +153,8 @@ class _MidPartNewState extends State<MidPartNew> {
                       'Trump$counter',
                       style: TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
-                    CreateCardImage(Offset(100.0, 100.0), '$cardID'), //not working
+                    CreateCardImage(
+                        Offset(100.0, 100.0), '$cardID'), //not working
                     Text("$cardID"),
                     TrickCard('$cardID')
                   ],

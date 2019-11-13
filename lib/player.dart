@@ -1,7 +1,7 @@
 import 'dart:math';
-import 'package:wizard2/card.dart';
-import 'package:wizard2/cardType.dart';
-import 'package:wizard2/deck.dart';
+import 'package:wizard/card.dart';
+import 'package:wizard/cardType.dart';
+import 'package:wizard/deck.dart';
 
 abstract class Player {
   String name;
