@@ -1,11 +1,11 @@
 import 'package:wizard2/card.dart';
 import 'package:wizard2/player.dart';
-import 'cardTypes.dart';
+import 'cardType.dart';
 import 'dart:io';
 
 class HumanPlayer extends Player {
   @override
-  Card playCard(int pick, {cardTypes trump, Card foe}) {
+  Card playCard(int pick, {CardType trump, Card foe}) {
     Card temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;
@@ -13,7 +13,7 @@ class HumanPlayer extends Player {
 
   // todo test this
   @override
-  cardTypes pickTrumpCard() {
+  CardType pickTrumpCard() {
     this.printHandCardsToConsole();
     String input;
     List<String> types = ['club', 'diamond', 'heart', 'spade'];
@@ -26,7 +26,7 @@ class HumanPlayer extends Player {
       input = input.toLowerCase();
     } while (!types.contains(input));
     print('$name pickt $input');
-    return cardTypes.values[types.indexOf(input)];
+    return CardType.values[types.indexOf(input)];
   }
 
   HumanPlayer(name, id) {
@@ -36,7 +36,7 @@ class HumanPlayer extends Player {
   }
 
   @override
-  void putBet(int round, int betsNumber, {cardTypes trump}) {
+  void putBet(int round, int betsNumber, {CardType trump}) {
     bool inputAllowed = false;
     String inputString = '';
     int check;

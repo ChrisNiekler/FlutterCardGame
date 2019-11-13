@@ -1,15 +1,20 @@
-import 'package:wizard2/cardTypes.dart';
+import 'package:wizard2/cardType.dart';
 
 class Card {
-  cardTypes cardType;
+  CardType cardType;
   int value;
   String card;
   bool allowedToPlay = false;
   // clubs (♣), diamonds (♦), hearts (♥) and spades (♠)
+
+  String typeToString() {
+    return cardType.toString().substring(cardType.toString().indexOf('.') + 1);
+  }
+
   Card(this.cardType, this.value) {
     String icon = '';
-    this.card =
-        cardType.toString().substring(cardType.toString().indexOf('.') + 1);
+    this.card = this.typeToString();
+    // cardType.toString().substring(cardType.toString().indexOf('.') + 1);
     if (this.card == 'SPADE') {
       icon = '   (♠)';
     } else if (this.card == 'CLUB') {
@@ -24,12 +29,11 @@ class Card {
       icon = '  (🤡)';
     }
     this.card += icon;
-    if (this.cardType != cardTypes.JESTER &&
-        this.cardType != cardTypes.WIZARD) {
+    if (this.cardType != CardType.JESTER && this.cardType != CardType.WIZARD) {
       this.card += value.toString();
     }
   }
-  Card compare(Card foe, cardTypes trump) {
+  Card compare(Card foe, CardType trump) {
     if (foe.value == 14)
       return foe;
     else if (this.value == 14)

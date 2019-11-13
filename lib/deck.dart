@@ -1,5 +1,5 @@
 import 'package:wizard2/card.dart';
-import 'package:wizard2/cardTypes.dart';
+import 'package:wizard2/cardType.dart';
 import 'dart:math';
 
 class Deck {
@@ -21,11 +21,11 @@ class Deck {
       // second loop for the fourteen different cards
       for (int j = 0; j < 15; j++) {
         if (j == 0) {
-          this.deck.add(new Card(cardTypes.values[4], j));
+          this.deck.add(new Card(CardType.values[4], j));
         } else if (j == 14) {
-          this.deck.add(new Card(cardTypes.values[5], j));
+          this.deck.add(new Card(CardType.values[5], j));
         } else {
-          this.deck.add(new Card(cardTypes.values[i], j));
+          this.deck.add(new Card(CardType.values[i], j));
         }
       }
     }

@@ -1,5 +1,5 @@
 import 'package:wizard2/card.dart';
-import 'package:wizard2/cardTypes.dart';
+import 'package:wizard2/cardType.dart';
 import 'package:wizard2/player.dart';
 import 'humanPlayer.dart';
 import 'package:wizard2/deck.dart';
@@ -7,12 +7,12 @@ import 'dart:io';
 
 class Round {
   Card trumpCard;
-  cardTypes trumpType;
+  CardType trumpType;
   int roundNumber;
   int maxRounds;
   int trickStarter;
   bool wizardIsPlayed = false;
-  cardTypes toServe; // the type of card that has to be served
+  CardType toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
 
@@ -144,10 +144,10 @@ class Round {
         toServe = playedCards[playedCards.length - 1].cardType;
         temp =
             toServe.toString().substring(toServe.toString().indexOf('.') + 1);
-        if (toServe == cardTypes.WIZARD) {
+        if (toServe == CardType.WIZARD) {
           print('WIZARD was played, everybody else can play any card.');
-          toServe = cardTypes.WIZARD;
-        } else if (toServe == cardTypes.JESTER) {
+          toServe = CardType.WIZARD;
+        } else if (toServe == CardType.JESTER) {
           print('JESTER was played as first card.');
           print('The next card will determine the played color');
           toServe = null;
@@ -201,11 +201,11 @@ class Round {
       // that is required
       hand.forEach(
         (crd) {
-          cardTypes type = crd.cardType;
+          CardType type = crd.cardType;
           if (type == toServe) {
             crd.allowedToPlay = true;
             n++;
-          } else if (type == cardTypes.WIZARD || type == cardTypes.JESTER) {
+          } else if (type == CardType.WIZARD || type == CardType.JESTER) {
             crd.allowedToPlay = true;
           }
         },
@@ -237,24 +237,22 @@ class Round {
 
   void determineTrump() {
     this.trumpCard = gameDeck.takeCard();
-    cardTypes type = trumpCard.cardType;
+    CardType type = trumpCard.cardType;
     String cardName = trumpCard.card;
     String temp;
     print('');
 
     // print the current trump card
-    if (!(type == cardTypes.JESTER || type == cardTypes.WIZARD)) {
-      temp = trumpCard.cardType
-          .toString()
-          .substring(trumpCard.cardType.toString().indexOf('.') + 1);
+    if (!(type == CardType.JESTER || type == CardType.WIZARD)) {
+      temp = trumpCard.typeToString();
       print('The open card is $cardName, therefore the trump is $temp');
       trumpType = type;
-    } else if (type == cardTypes.JESTER) {
+    } else if (type == CardType.JESTER) {
       // when jester is trump card there is no trump
       print(
           'The open card is $cardName, therefore there is no trump for this round.');
       trumpType = null;
-    } else if (type == cardTypes.WIZARD) {
+    } else if (type == CardType.WIZARD) {
       // when wizard is trump card then the dealer picks the trump
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');

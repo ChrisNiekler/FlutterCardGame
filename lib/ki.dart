@@ -1,6 +1,6 @@
 import 'package:wizard2/player.dart';
 import 'package:wizard2/card.dart';
-import 'package:wizard2/cardTypes.dart';
+import 'package:wizard2/cardType.dart';
 import 'dart:math' show Random;
 
 class Ki extends Player {
@@ -11,7 +11,7 @@ class Ki extends Player {
   }
 
   @override
-  Card playCard(int pick, {cardTypes trump, Card foe}) {
+  Card playCard(int pick, {CardType trump, Card foe}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       Card temp = findBestCard();
@@ -31,7 +31,7 @@ class Ki extends Player {
   }
 
 // @override
-  Card playCardAI(Card foe, cardTypes trump) {
+  Card playCardAI(Card foe, CardType trump) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo value of best playedcard in round F4N
     Card bestCard = findBestCard();
@@ -40,7 +40,7 @@ class Ki extends Player {
 //    Card nowbest = bestPlayedCardYet();
     if (bestCard == bestCard.compare(foe, trump) &&
         tricks < bet &&
-        foe.cardType != cardTypes.WIZARD) {
+        foe.cardType != CardType.WIZARD) {
       Card temp = bestCard;
       handCards.remove(bestCard);
       return temp;
@@ -61,7 +61,7 @@ class Ki extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  void putBet(int round, int betsNumber, {cardTypes trump}) {
+  void putBet(int round, int betsNumber, {CardType trump}) {
     int check;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {

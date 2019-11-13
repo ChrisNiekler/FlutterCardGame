@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:wizard2/card.dart';
-import 'package:wizard2/cardTypes.dart';
+import 'package:wizard2/cardType.dart';
 import 'package:wizard2/deck.dart';
 
 abstract class Player {
@@ -14,9 +14,9 @@ abstract class Player {
   bool ai;
   bool lastPlayer = false;
 
-  void putBet(int roundNumber, int betsNumber, {cardTypes trump});
+  void putBet(int roundNumber, int betsNumber, {CardType trump});
 
-  Card playCard(int pick, {cardTypes trump, Card foe});
+  Card playCard(int pick, {CardType trump, Card foe});
 
 //  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
   //not necessary anymore
@@ -54,11 +54,11 @@ abstract class Player {
   /* override this in  derivatives
       ask the player who deals to pick the card */
 
-  cardTypes pickTrumpCard() {
-    cardTypes trumpType;
+  CardType pickTrumpCard() {
+    CardType trumpType;
     String type;
 
-    trumpType = cardTypes.values[Random().nextInt(4)];
+    trumpType = CardType.values[Random().nextInt(4)];
     type =
         trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
     print('$name pickt $type (yet random)');

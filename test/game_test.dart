@@ -1,13 +1,16 @@
 import 'package:test/test.dart';
-import 'package:wizard2/game.dart';
+import 'package:wizard2/card.dart';
+import 'package:wizard2/cardType.dart';
 
 void main() {
-  group('Game:', () {
-    test('Something', () {
-      fail('not yet implemented');
+  group('Card:', () {
+    test('Card is created', () {
+      Card card = new Card(CardType.WIZARD, 14);
+      expect(card, isNotNull);
     });
-    test('Something esle', () {
-      fail('not yet implemented');
+    test('Card has expected name', () {
+      Card card = new Card(CardType.WIZARD, 14);
+      expect(card.card, 'WIZARD  (🧙)');
     });
   });
 }
