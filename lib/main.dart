@@ -19,39 +19,36 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-class MyHomePage extends StatelessWidget{
+
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       /*appBar: AppBar(leading: new IconButton(icon: new Icon(Icons.arrow_back_ios, color: Colors.black), onPressed: null)),*/
       body: Center(
-        child:  Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Stack(
               alignment: Alignment.center,
               children: <Widget>[
                 new Container(
-
                   height: 70.0,
                   width: 70.0,
                   decoration: new BoxDecoration(
-                      borderRadius:  new BorderRadius.circular(10.0),
-                      color: Colors.grey
-                  ),
-
-
+                      borderRadius: new BorderRadius.circular(10.0),
+                      color: Colors.grey),
                 ),
                 new Container(
-
                   height: 60.0,
                   width: 60.0,
                   decoration: new BoxDecoration(
-                      borderRadius:  new BorderRadius.circular(10.0),
-                      color: Colors.green
+                      borderRadius: new BorderRadius.circular(10.0),
+                      color: Colors.green),
+                  child: new Icon(
+                    Icons.gamepad,
+                    color: Colors.white,
                   ),
-                  child: new Icon(Icons.gamepad,color: Colors.white,),
-
                 )
               ],
             ),
@@ -60,10 +57,13 @@ class MyHomePage extends StatelessWidget{
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: new Text("Wizard",style: new TextStyle(fontSize: 30.0),),
-
+                  child: new Text(
+                    "Wizard",
+                    style: new TextStyle(fontSize: 30.0),
+                  ),
                 )
-              ],),
+              ],
+            ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -71,12 +71,16 @@ class MyHomePage extends StatelessWidget{
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
-                    child: GestureDetector(onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Gamepage()),
-                      );},
-
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            // return object of type Dialog
+                            return choosePlayerNumberDialog(context);
+                          },
+                        );
+                      },
                       child: new Container(
                           alignment: Alignment.center,
                           height: 60.0,
@@ -98,12 +102,13 @@ class MyHomePage extends StatelessWidget{
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
-                    child: GestureDetector(onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Gamepage()),
-                      );},
-
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Gamepage()),
+                        );
+                      },
                       child: new Container(
                           alignment: Alignment.center,
                           height: 60.0,
@@ -126,7 +131,6 @@ class MyHomePage extends StatelessWidget{
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
                     child: GestureDetector(
-
                       child: new Container(
                           alignment: Alignment.center,
                           height: 60.0,
@@ -148,8 +152,8 @@ class MyHomePage extends StatelessWidget{
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
-                    child: GestureDetector(onTap: ()=>exit(0),
-
+                    child: GestureDetector(
+                      onTap: () => exit(0),
                       child: new Container(
                           alignment: Alignment.center,
                           height: 60.0,
@@ -164,13 +168,61 @@ class MyHomePage extends StatelessWidget{
                 )
               ],
             ),
-
           ],
         ),
       ),
     );
   }
+
+  AlertDialog choosePlayerNumberDialog(BuildContext context) {
+    return AlertDialog(
+      title: new Text("How many players"),
+      actions: <Widget>[
+        Column(crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[new FlatButton(
+            child: new Text("3 Players"),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Gamepage()),
+              );
+            },
+          ),
+            new FlatButton(
+              child: new Text("4 Players"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Gamepage()),
+                );
+              },
+            ),
+            new FlatButton(
+              child: new Text("5 Players"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Gamepage()),
+                );
+              },
+            ),
+            new FlatButton(
+              child: new Text("6 Players"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Gamepage()),
+                );
+              },
+            ),
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),],)
+
+      ],
+    );
+  }
 }
-
-
-
