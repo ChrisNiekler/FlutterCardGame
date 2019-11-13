@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 //todo import the test package and implement the tests
 // https://flutter.dev/docs/cookbook/testing/unit/introduction
 void main() {
-  group('Cards:', () {
+  group('Card:', () {
     test('Card is created', () {
       Card card = new Card(cardTypes.WIZARD, 14);
       expect(card, isNotNull);
