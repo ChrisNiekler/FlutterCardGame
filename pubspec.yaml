@@ -27,9 +27,9 @@ dependencies:
   cloud_firestore: ^0.12.10
 
 dev_dependencies:
-  #flutter_test:
-   # sdk: flutter
-  test: ^1.9.4
+  flutter_test:
+    sdk: flutter
+  test: any
 
 
 # For information on the generic Dart part of this file, see the
