@@ -1,34 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:wizard2/round.dart';
+import 'playerTemplateGUI.dart';
 
 class Gamepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         body: SafeArea(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisSize: MainAxisSize.max,
+          child: Container(
+            child: Column(
               children: <Widget>[
-                Expanded(flex: 2, child: LeftPart()),
-                Expanded(flex: 5, child: MidPart()),
-                Expanded(flex: 2, child: RightPart()),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Expanded(flex: 2, child: LeftPart()),
+                    Expanded(flex: 5, child: MidPartNew()),
+                    Expanded(flex: 2, child: RightPart()),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    BottomPart(),
+                  ],
+                ),
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                 BottomPart(),
-              ],
-            ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }
 
@@ -42,10 +44,7 @@ class LeftPart extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text("Left"),
-          CreateCardImageBack(Offset(100.0, 100.0)),
-          CreateCardImageBack(Offset(100.0, 100.0)),
-          CreateCardImageBack(Offset(100.0, 100.0)),
-          CreateCardImageBack(Offset(100.0, 100.0)),
+          PlayerTemplate(playerName: "Playername",)
         ],
       ),
     );
@@ -62,10 +61,12 @@ class RightPart extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text("Right"),
-          CreateCardImageBack(Offset(100.0, 100.0)),
-          CreateCardImageBack(Offset(100.0, 100.0)),
-          CreateCardImageBack(Offset(100.0, 100.0)),
-          CreateCardImageBack(Offset(100.0, 100.0)),
+          PlayerTemplate(
+            playerName: "Playername",
+          ),
+          PlayerTemplate(
+            playerName: "Duc",
+          )
         ],
       ),
     );
@@ -86,8 +87,7 @@ class MidPart extends StatelessWidget {
         children: <Widget>[
           Text("Mid"),
           DragTarget(
-            builder:
-                (context, List<String> acceptedCards, rejectedCards) {
+            builder: (context, List<String> acceptedCards, rejectedCards) {
               print(acceptedCards);
               return Container(
                 height: 300.0,
@@ -105,12 +105,9 @@ class MidPart extends StatelessWidget {
               );
             },
             onWillAccept: (data) {
-
               return true;
             },
-            onAccept: (data) {
-              return midPartNew(data);
-            },
+            onAccept: (data) {},
           ),
         ],
       ),
@@ -118,7 +115,18 @@ class MidPart extends StatelessWidget {
   }
 }
 
-  Widget midPartNew(String cardID) {
+class MidPartNew extends StatefulWidget {
+  @override
+  _MidPartNewState createState() => _MidPartNewState();
+}
+
+class _MidPartNewState extends State<MidPartNew> {
+  int counter = 0;
+  String cardID;
+  Round round;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints.tightForFinite(
         height: 500.0,
@@ -130,8 +138,7 @@ class MidPart extends StatelessWidget {
         children: <Widget>[
           Text("Mid"),
           DragTarget(
-            builder:
-                (context, List<String> acceptedCards, rejectedCards) {
+            builder: (context, List<String> acceptedCards, rejectedCards) {
               print(acceptedCards);
               return Container(
                 height: 300.0,
@@ -141,26 +148,35 @@ class MidPart extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      "Trump2",
+                      'Trump$counter',
                       style: TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
-                    CreateCardImage(Offset(100.0,100.0), cardID)
+                    CreateCardImage(Offset(100.0, 100.0), '$cardID'), //not working
+                    Text("$cardID"),
+                    TrickCard('$cardID')
                   ],
                 ),
               );
             },
             onWillAccept: (data) {
-              return true;
+              if (data == null)
+                return false;
+              else
+                return true;
             },
             onAccept: (data) {
-              return MidPart();
+              setState(() {
+                counter = counter + 1;
+
+                cardID = data;
+              });
             },
           ),
         ],
       ),
     );
   }
-
+}
 
 class BottomPart extends StatelessWidget {
   @override
@@ -200,6 +216,39 @@ class BottomPart extends StatelessWidget {
   }
 }
 
+class TrickCard extends StatefulWidget {
+  final String cardID;
+
+  @override
+  _TrickCardState createState() => _TrickCardState();
+
+  TrickCard(this.cardID);
+}
+
+class _TrickCardState extends State<TrickCard> {
+  String cardID;
+
+  @override
+  void initState() {
+    super.initState();
+
+    cardID = widget.cardID;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        alignment: Alignment.center,
+        height: 80.0,
+        width: 50.0,
+        child: Image.asset(
+          "images/cards/$cardID.png",
+          height: 80.0,
+          width: 50.0,
+        ));
+  }
+}
+
 class CreateCardImage extends StatefulWidget {
   final Offset offset;
   final String cardId;
@@ -226,7 +275,6 @@ class _CreateCardImageState extends State<CreateCardImage> {
   @override
   Widget build(BuildContext context) {
     return Draggable(
-
       child: Container(
           alignment: Alignment.center,
           height: 80.0,
@@ -278,29 +326,26 @@ class _CreateCardImageBackState extends State<CreateCardImageBack> {
   Widget build(BuildContext context) {
     return Draggable(
       child: Container(
-          alignment: Alignment.center,
-          height: 80.0,
-          width: 50.0,
+          margin: EdgeInsets.all(10.0),
           child: RotatedBox(
             quarterTurns: 5,
             child: Image.asset(
               "images/cards/blue_back.png",
-              height: 80.0,
-              width: 50.0,
+              width: 25.0,
             ),
           )),
       feedback: Container(
-          alignment: Alignment.center,
-          height: 80.0,
-          width: 50.0,
-          child: RotatedBox(
-            quarterTurns: 5,
-            child: Image.asset(
-              "images/cards/blue_back.png",
-              height: 80.0,
-              width: 50.0,
-            ),
-          )),
+        margin: EdgeInsets.all(10.0),
+        width: 25.0,
+        child: RotatedBox(
+          quarterTurns: 5,
+          child: Image.asset(
+            "images/cards/blue_back.png",
+            height: 80.0,
+            width: 50.0,
+          ),
+        ),
+      ),
       childWhenDragging: Container(),
       onDraggableCanceled: (v, o) {
         setState(() {
