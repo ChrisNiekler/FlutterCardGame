@@ -50,11 +50,14 @@ class HumanPlayer extends Player {
         if (this.lastPlayer && round == check) {
           print(
               'Please take another number, because the bets have to differ the possible tricks!');
-        } else if (!(bet < 0)) {
+        } else if (bet < 0) {
+          print('Please enter a positive number!');
+        } else {
           inputAllowed = true;
         }
-      } else
-        print('Please select a positive number!');
+      } else {
+        print('Please enter a number!');
+      }
     } while (!inputAllowed);
     print('$name bet he/she wins $bet tricks!');
   }
