@@ -10,43 +10,33 @@ void main() {
       Card card = new Card(CardType.WIZARD, 14);
       expect(card, isNotNull);
     });
-    test('Card has expected name', () {
+    test('Card is Wizard', () {
       Card card = new Card(CardType.WIZARD, 14);
-      expect(card.card, 'WIZARD  (🧙)');
+      expect(card.typeToString(), 'WIZARD');
+      expect(card.value, 14);
     });
     test('Card has expected name', () {
-      Card card = new Card(CardType.WIZARD, 14);
-      expect(card.card, 'WIZARD  (🧙)');
+      Card card = new Card(CardType.HEART, 13);
+      expect(card.typeToString(), 'HEART');
+      expect(card.value, 13);
     });
     test('Card has expected name', () {
-      Card card = new Card(CardType.WIZARD, 14);
-      expect(card.card, 'WIZARD  (🧙)');
+      Card card = new Card(CardType.DIAMOND, 1);
+      expect(card.typeToString(), 'DIAMOND');
+      expect(card.value, 1);
     });
     test('Card has expected name', () {
-      Card card = new Card(CardType.WIZARD, 14);
-      expect(card.card, 'WIZARD  (🧙)');
+      Card card = new Card(CardType.JESTER, 0);
+      expect(card.typeToString(), 'JESTER');
+      expect(card.value, 0);
     });
     test('Card has expected name', () {
-      Card card = new Card(CardType.WIZARD, 14);
-      expect(card.card, 'WIZARD  (🧙)');
+      Card card = new Card(CardType.CLUB, 8);
+      expect(card.typeToString(), 'CLUB');
+      expect(card.value, 8);
     });
   });
 }
-
-//void cardTest() {
-//  Card testCard = new Card(cardTypes.SPADE, 4);
-//  print(testCard.card);
-//  Card testCard2 = new Card(cardTypes.DIAMOND, 5);
-//  print(testCard2.card);
-//  Card testCard3 = new Card(cardTypes.HEART, 6);
-//  print(testCard3.card);
-//  Card testCard4 = new Card(cardTypes.CLUB, 7);
-//  print(testCard4.card);
-//  Card testCard5 = new Card(cardTypes.WIZARD, 14);
-//  print(testCard5.card);
-//  Card testCard6 = new Card(cardTypes.JESTER, 0);
-//  print(testCard6.card);
-//}
 
 // todo implement a test for testing the card distribution
 //// prints out all the cards of all the players to the console
