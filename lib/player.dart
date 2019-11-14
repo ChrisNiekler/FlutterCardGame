@@ -14,7 +14,8 @@ abstract class Player {
   bool ai;
   bool lastPlayer = false;
 
-  void putBet(int roundNumber, int betsNumber, {CardType trump});
+  void putBet(int roundNumber, int betsNumber,
+      {CardType trump, String testValue});
 
   Card playCard(int pick, {CardType trump, Card foe});
 
@@ -54,7 +55,7 @@ abstract class Player {
   /* override this in  derivatives
       ask the player who deals to pick the card */
 
-  CardType pickTrumpCard() {
+  CardType pickTrumpCard({String testValue}) {
     CardType trumpType;
     String type;
 

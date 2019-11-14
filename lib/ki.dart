@@ -61,7 +61,7 @@ class Ki extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump}) {
+  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
     int check;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {

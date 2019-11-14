@@ -52,9 +52,8 @@ class Deck {
     }
   }
 
-// for testing only
-  void printDeckToConsole() {
-    this.deck.forEach((element) => print(element.card));
+  int size() {
+    return this.deck.length;
   }
 
   /* Constructor
