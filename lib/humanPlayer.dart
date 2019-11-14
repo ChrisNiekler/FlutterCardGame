@@ -1,5 +1,5 @@
-import 'package:wizard2/card.dart';
-import 'package:wizard2/player.dart';
+import 'package:wizard/card.dart';
+import 'package:wizard/player.dart';
 import 'cardType.dart';
 import 'dart:io';
 
@@ -11,21 +11,25 @@ class HumanPlayer extends Player {
     return temp;
   }
 
-  // todo test this
   @override
-  CardType pickTrumpCard() {
+  CardType pickTrumpCard({String testValue}) {
     this.printHandCardsToConsole();
     String input;
     List<String> types = ['club', 'diamond', 'heart', 'spade'];
 
     print('Please pick the trump');
     do {
-      print('Enter "club" (♣), "diamond" (♦), "heart" (♥) or "spade" (♠)' +
-          ('\nto do so.'));
-      input = stdin.readLineSync();
+      if (testValue == null) {
+        print('Enter "club" (♣), "diamond" (♦), "heart" (♥) or "spade" (♠)' +
+            ('\nto do so.'));
+        input = stdin.readLineSync();
+      } else {
+        input = testValue;
+      }
       input = input.toLowerCase();
-    } while (!types.contains(input));
+    } while ((!types.contains(input)) && testValue == null);
     print('$name pickt $input');
+
     return CardType.values[types.indexOf(input)];
   }
 
@@ -36,7 +40,7 @@ class HumanPlayer extends Player {
   }
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump}) {
+  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
     bool inputAllowed = false;
     String inputString = '';
     int check;
@@ -62,12 +66,11 @@ class HumanPlayer extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
-  Card humanPlayCard() {
+  Card humanPlayCard({String testValue}) {
     bool inputAllowed = false;
     String input = '';
-    int size;
+    int size = this.handCards.length;
     int cardNr = -1;
-    size = this.handCards.length;
 
     this.printHandCardsToConsole();
     do {

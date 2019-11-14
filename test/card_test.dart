@@ -1,5 +1,5 @@
-import 'package:wizard2/cardType.dart';
-import 'package:wizard2/card.dart';
+import 'package:wizard/cardType.dart';
+import 'package:wizard/card.dart';
 import 'package:test/test.dart';
 
 //todo import the test package and implement the tests
@@ -98,25 +98,3 @@ void main() {
     }); // end of group Compare
   }); // end of group ALL
 }
-
-// todo implement a test for testing the card distribution
-//// prints out all the cards of all the players to the console
-//players.forEach((element) {
-//String n = element.name;
-//print('Playername: $n');
-//print('Cards in hand!');
-//element.printHandCardsToConsole();
-//print('\n');
-//});
-//// print the current trump card
-//print('The trump is: ');
-//print(this.trump.card);
-//}
-
-/* Test ob Compare() funktioniert
-  *Card playedCard = new Card(cardTypes.DIAMOND, 3);
-  *Card highestCard = new Card(cardTypes.DIAMOND, 10);
-  *Card trumpCard = new Card(cardTypes.DIAMOND, 3);
-  *Card ergebnisCard = playedCard.compare(highestCard, trumpCard);
-  *print(ergebnisCard.card );
-  * */

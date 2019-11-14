@@ -1,4 +1,4 @@
-# wizard2
+# wizard
 
 A new Flutter application.
 

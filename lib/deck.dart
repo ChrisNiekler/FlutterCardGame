@@ -1,5 +1,5 @@
-import 'package:wizard2/card.dart';
-import 'package:wizard2/cardType.dart';
+import 'package:wizard/card.dart';
+import 'package:wizard/cardType.dart';
 import 'dart:math';
 
 class Deck {
@@ -52,9 +52,8 @@ class Deck {
     }
   }
 
-// for testing only
-  void printDeckToConsole() {
-    this.deck.forEach((element) => print(element.card));
+  int size() {
+    return this.deck.length;
   }
 
   /* Constructor

@@ -1,7 +1,7 @@
 import 'dart:math';
-import 'package:wizard2/card.dart';
-import 'package:wizard2/cardType.dart';
-import 'package:wizard2/deck.dart';
+import 'package:wizard/card.dart';
+import 'package:wizard/cardType.dart';
+import 'package:wizard/deck.dart';
 
 abstract class Player {
   String name;
@@ -14,7 +14,8 @@ abstract class Player {
   bool ai;
   bool lastPlayer = false;
 
-  void putBet(int roundNumber, int betsNumber, {CardType trump});
+  void putBet(int roundNumber, int betsNumber,
+      {CardType trump, String testValue});
 
   Card playCard(int pick, {CardType trump, Card foe});
 
@@ -54,7 +55,7 @@ abstract class Player {
   /* override this in  derivatives
       ask the player who deals to pick the card */
 
-  CardType pickTrumpCard() {
+  CardType pickTrumpCard({String testValue}) {
     CardType trumpType;
     String type;
 
