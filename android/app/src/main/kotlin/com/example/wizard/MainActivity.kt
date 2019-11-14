@@ -1,4 +1,4 @@
-package com.example.wizard2
+package com.example.wizard
 
 import android.os.Bundle
 
