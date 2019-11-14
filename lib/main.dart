@@ -6,6 +6,9 @@ import 'package:wizard2/gamepage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
+
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  //need to pass it to game.dart
+  int playerAmount(int amount ){
+    return amount;}
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -176,53 +183,58 @@ class MyHomePage extends StatelessWidget {
 
   AlertDialog choosePlayerNumberDialog(BuildContext context) {
     return AlertDialog(
+
       title: new Text("How many players"),
-      actions: <Widget>[
-        Column(crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[new FlatButton(
-            child: new Text("3 Players"),
+      content:  Container(height: 300,
+        child: Column( mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[new RaisedButton(
+            child: new Text("3 Players",style: TextStyle(color: Colors.black26),),
             onPressed: () {
+              playerAmount(3);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Gamepage()),
+
+              );
+            },
+          ),
+            new RaisedButton(
+              child: new Text("4 Players",style: TextStyle(color: Colors.black26),),
+              onPressed: () {
+                playerAmount(4);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Gamepage()),
+                );
+              },
+            ),
+            new RaisedButton(
+              child: new Text("5 Players",style: TextStyle(color: Colors.black26),),
+              onPressed: () {
+                playerAmount(5);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Gamepage()),
+                );
+              },
+            ),
+            new RaisedButton(
+              child: new Text("6 Players",style: TextStyle(color: Colors.black26),),
+              onPressed: () {playerAmount(6);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Gamepage()),
               );
-            },
-          ),
-            new FlatButton(
-              child: new Text("4 Players"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Gamepage()),
-                );
               },
             ),
-            new FlatButton(
-              child: new Text("5 Players"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Gamepage()),
-                );
-              },
-            ),
-            new FlatButton(
-              child: new Text("6 Players"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Gamepage()),
-                );
-              },
-            ),
-            new FlatButton(
-              child: new Text("Close"),
+            new RaisedButton(
+              child: new Text("Close",style: TextStyle(color: Colors.black26),),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-            ),],)
-
-      ],
+            ),],),
+      ),
     );
   }
 }
