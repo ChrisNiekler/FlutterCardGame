@@ -9,28 +9,26 @@ class Gamepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: SafeArea(
-          child: Container(
-            child: Column(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Expanded(flex: 2, child: LeftPart()),
-                    Expanded(flex: 5, child: MidPartNew()),
-                    Expanded(flex: 2, child: RightPart()),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    BottomPart(),
-                  ],
-                ),
+                Expanded(flex: 2, child: LeftPart()),
+                Expanded(flex: 5, child: MidPartNew()),
+                Expanded(flex: 2, child: RightPart()),
               ],
             ),
-          ),
-        ));
+            Row(
+              children: <Widget>[
+                Expanded(flex: 2, child: BottomPart()),
+              ],
+            )
+          ],
+        ),
+      ),
+    ));
   }
 }
 
@@ -44,7 +42,12 @@ class LeftPart extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text("Left"),
-          PlayerTemplate(playerName: "Playername",)
+          PlayerTemplate(
+            playerName: "Playername",
+          ),
+          PlayerTemplate(
+            playerName: "Playername",
+          )
         ],
       ),
     );
@@ -65,7 +68,7 @@ class RightPart extends StatelessWidget {
             playerName: "Playername",
           ),
           PlayerTemplate(
-            playerName: "Duc",
+            playerName: "Playername",
           )
         ],
       ),
@@ -148,10 +151,11 @@ class _MidPartNewState extends State<MidPartNew> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Trump$counter',
+                      'Trump',
                       style: TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
-                    CreateCardImage(Offset(100.0, 100.0), '$cardID'), //not working
+                    CreateCardImage(Offset(100.0, 100.0), '$cardID'),
+                    //not working
                     Text("$cardID"),
                     TrickCard('$cardID')
                   ],
@@ -166,8 +170,6 @@ class _MidPartNewState extends State<MidPartNew> {
             },
             onAccept: (data) {
               setState(() {
-                counter = counter + 1;
-
                 cardID = data;
               });
             },
@@ -184,32 +186,18 @@ class BottomPart extends StatelessWidget {
     return Container(
       color: Colors.grey,
       width: MediaQuery.of(context).size.width,
-      height: 159.0,
+      height: 159,
       child: Column(
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CreateCardImage(Offset(100.0, 100.0), '2D'),
               CreateCardImage(Offset(100.0, 100.0), '3D'),
               CreateCardImage(Offset(100.0, 100.0), '5S'),
               CreateCardImage(Offset(100.0, 100.0), 'AH'),
             ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                child: Text("Player 1"),
-              ),
-              RaisedButton(
-                onPressed: null,
-                child: Text("Take bet"),
-              )
-            ],
-          )
+          ),Text("Playername")
         ],
       ),
     );
