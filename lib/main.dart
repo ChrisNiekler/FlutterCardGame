@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wizard2/gamepage.dart';
+import 'package:wizard/gamepage.dart';
 
 void main() => runApp(MyApp());
 
