@@ -192,9 +192,10 @@ class MyHomePage extends StatelessWidget {
             child: new Text("3 Players",style: TextStyle(color: Colors.black26),),
             onPressed: () {
               playerAmount(3);
+              print("Chose 3 Players");
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Gamepage()),
+                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 3,)),
 
               );
             },
@@ -205,7 +206,7 @@ class MyHomePage extends StatelessWidget {
                 playerAmount(4);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage()),
+                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 4,)),
                 );
               },
             ),
@@ -215,7 +216,7 @@ class MyHomePage extends StatelessWidget {
                 playerAmount(5);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage()),
+                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 5,)),
                 );
               },
             ),
@@ -224,7 +225,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {playerAmount(6);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Gamepage()),
+                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 6,)),
               );
               },
             ),

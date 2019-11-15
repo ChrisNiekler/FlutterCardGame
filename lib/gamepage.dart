@@ -4,79 +4,115 @@ import 'package:flutter/rendering.dart';
 import 'package:wizard/round.dart';
 import 'playerTemplateGUI.dart';
 
+
 class Gamepage extends StatelessWidget {
+  int amountPlayers;
+
+  Gamepage({this.amountPlayers});
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         body: SafeArea(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisSize: MainAxisSize.max,
+          child: Container(
+            child: Column(
               children: <Widget>[
-                Expanded(flex: 2, child: LeftPart()),
-                Expanded(flex: 5, child: MidPartNew()),
-                Expanded(flex: 2, child: RightPart()),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: getPlayers(),
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(flex: 2, child: BottomPart()),
+                  ],
+                )
               ],
             ),
-            Row(
-              children: <Widget>[
-                Expanded(flex: 2, child: BottomPart()),
-              ],
-            )
-          ],
-        ),
-      ),
-    ));
-  }
-}
+          ),
+        ));
 
-class LeftPart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  }
+//create the ui
+List <Widget> getPlayers(){
+    List<Widget>playerList =[];
+   /* for(var i=0;i<1;i++){
+      playerList.add(leftPart());
+    }*/
+    
+    /*if(amountPlayers==3)
+     { playerList.add(leftPart());
+    playerList.add(MidPartNew());
+     playerList.add(rightPart());}
+    if(amountPlayers==5)
+      playerList.add(leftPart());*/
+
+    playerList.add(leftPart());
+    playerList.add(MidPartNew());
+    playerList.add(rightPart());
+return playerList;
+}
+//creates amount of players
+List<Widget>getPlayerCards(){
+    List<Widget>playerCards =[];
+    /*for(int i=0;i<round;i++)
+      {
+        playerCards.add(PlayerTemplate(playerName: "Playername"));
+      }*/
+    if(amountPlayers==3)
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+   if(amountPlayers>=4) {
+     playerCards.add(PlayerTemplate(playerName: "Playername"));
+     playerCards.add(PlayerTemplate(playerName: "Playername"));
+   }
+
+
+    return playerCards;
+}
+  List<Widget>getPlayerCardsRight(){
+    List<Widget>playerCards =[];
+    /*for(int i=0;i<round;i++)
+      {
+        playerCards.add(PlayerTemplate(playerName: "Playername"));
+      }*/
+    if(amountPlayers<5)
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+    if(amountPlayers==5) {
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+    }
+
+
+    return playerCards;
+  }
+
+  Widget leftPart() {
     return Container(
       height: 500.0,
       width: 100.0,
       color: Colors.grey,
       child: Column(
-        children: <Widget>[
-          Text("Left"),
-          PlayerTemplate(
-            playerName: "Playername",
-          ),
-          PlayerTemplate(
-            playerName: "Playername",
-          )
-        ],
+        children: getPlayerCards()
       ),
     );
   }
-}
 
-class RightPart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget rightPart() {
     return Container(
       height: 500.0,
       width: 100.0,
       color: Colors.grey,
       child: Column(
-        children: <Widget>[
-          Text("Right"),
-          PlayerTemplate(
-            playerName: "Playername",
-          ),
-          PlayerTemplate(
-            playerName: "Playername",
-          )
-        ],
+        children:getPlayerCardsRight()
       ),
     );
   }
+
+
+
 }
 
-class MidPart extends StatelessWidget {
+
+/*class MidPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,7 +152,7 @@ class MidPart extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class MidPartNew extends StatefulWidget {
   @override
@@ -185,7 +221,10 @@ class BottomPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       height: 159,
       child: Column(
         children: <Widget>[
@@ -197,7 +236,7 @@ class BottomPart extends StatelessWidget {
               CreateCardImage(Offset(100.0, 100.0), '5S'),
               CreateCardImage(Offset(100.0, 100.0), 'AH'),
             ],
-          ),Text("Playername")
+          ), Text("Playername")
         ],
       ),
     );
