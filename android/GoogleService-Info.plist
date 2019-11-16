@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>571798702847-nc5e50jaajm8idmhpf8u7snfromh0u3t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.571798702847-nc5e50jaajm8idmhpf8u7snfromh0u3t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDGbZG_3GxKLtX040DkQNmKgyLiSUkn-Rg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>571798702847</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.wizard</string>
+	<key>PROJECT_ID</key>
+	<string>wizard-b78f9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wizard-b78f9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:571798702847:ios:dcbcb0f33bedb64d621aca</string>
+	<key>DATABASE_URL</key>
+	<string>https://wizard-b78f9.firebaseio.com</string>
+</dict>
+</plist>

@@ -112,29 +112,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
-//  void _showVerifyEmailSentDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content:
-//              new Text("Link to verify account has been sent to your email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                toggleFormMode();
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
-
   Widget _showForm() {
     return new Container(
         padding: EdgeInsets.all(16.0),
