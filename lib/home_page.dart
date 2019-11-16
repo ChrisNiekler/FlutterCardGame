@@ -1,48 +1,34 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:wizard/gamepage.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/0auth/services/authentication.dart';
+import 'package:wizard/oauth/services/authentication.dart';
 
 
 
 class HomePage extends StatefulWidget {
 
-  HomePage({Key key, this.auth, this.userId, this.email, this.logoutCallback})
+  HomePage({Key key, this.auth, this.userId, this.logoutCallback})
       : super(key: key);
 
 
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userId;
-  final String email;
 
   @override
-  State<StatefulWidget> createState() => new _HomePageState(this.email);
+  State<StatefulWidget> createState() => new _HomePageState();
 
 }
 
 
 class _HomePageState extends State<HomePage> {
 
-  _HomePageState(this.email);
-
-  final String email;
-
-  String getUsername(String email) {
-    int end = email.indexOf("@");
-    return email.substring(0, end);
-  }
-
-
   //need to pass it to game.dart
-  int playerAmount(int amount ) {
-    return amount;
-  }
-
+  int playerAmount(int amount ){
+    return amount;}
 
   signOut() async {
     try {
@@ -57,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(email),
+        title: new Text('Wizard Demo'),
         actions: <Widget>[
           new FlatButton(
               child: new Text('Logout',
@@ -228,7 +214,7 @@ class _HomePageState extends State<HomePage> {
               print("Chose 3 Players");
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 3, username: email)),
+                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 3,)),
 
               );
             },
@@ -239,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                 playerAmount(4);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 4, username: email)),
+                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 4,)),
                 );
               },
             ),
@@ -249,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                 playerAmount(5);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 5, username: email)),
+                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 5,)),
                 );
               },
             ),
@@ -258,7 +244,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {playerAmount(6);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 6, username: email)),
+                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 6,)),
               );
               },
             ),
