@@ -5,7 +5,7 @@ import 'dart:io';
 
 class HumanPlayer extends Player {
   @override
-  Card playCard(int pick, {CardType trump, Card foe}) {
+  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}) {
     Card temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;

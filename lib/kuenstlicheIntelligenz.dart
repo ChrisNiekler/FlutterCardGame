@@ -5,8 +5,8 @@ import 'dart:math' show Random;
 
 //todo Tests für KI
 
-class Ki extends Player {
-  Ki(name, id) {
+class KuenstlicheIntelligenz extends Player {
+  KuenstlicheIntelligenz(name, id) {
     this.ai = true;
     this.name = name;
     this.id = id;
@@ -17,7 +17,7 @@ class Ki extends Player {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
-      Card temp = _findBestCard();
+      Card temp = findBestCard();
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
@@ -26,15 +26,15 @@ class Ki extends Player {
       pick = Random().nextInt(playableHandCards.length);
       return handCards.removeAt(pick);
     } else {
-      return _playCardAI(foe, trump);
+      return playCardAI(foe, trump);
     }
   }
 
-  Card _playCardAI(Card foe, CardType trump) {
+  Card playCardAI(Card foe, CardType trump) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo get more intelligent (Wahrscheinlichkeiten, ...)
-    Card bestCard = _findBestCard();
-    Card worstCard = _findWorstCard();
+    Card bestCard = findBestCard();
+    Card worstCard = findWorstCard();
     if (bestCard == bestCard.compare(foe, trump) &&
         tricks < bet &&
         foe.cardType != CardType.WIZARD) {
@@ -84,7 +84,7 @@ class Ki extends Player {
   //todo Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
   //todo an Hand der Wahrscheinlichkeit die dritte bet
 
-  Card _findBestCard() {
+  Card findBestCard() {
     //todo maybe check if there is a check with trump and not trump needed
     Card bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -94,7 +94,7 @@ class Ki extends Player {
     return bestCard;
   }
 
-  Card _findWorstCard() {
+  Card findWorstCard() {
     //todo maybe check if there is a check with trump and not trump needed
     Card worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -102,6 +102,17 @@ class Ki extends Player {
         worstCard = playableHandCards[i];
     }
     return worstCard;
+  }
+
+  int _getWahrscheinlichkeit(int roundNumber, int playerNumber){
+    int x = 0;
+    final int gesamt = 60;
+    int cardsInRound = roundNumber * playerNumber;
+    int ownCards = roundNumber;
+    for(int i = 0; i < handCards.length; i++){
+      //todo wahrscheinlichkeitsrechnung machen
+    }
+    return x;
   }
 
 //todo if wizard is trump (pick trump)
