@@ -24,7 +24,7 @@ class Ai extends Player { //Klasse Ai erbt von Klasse Player//
   }
 
   @override
-  Card playCard(int pick, {CardType trump, Card foe}){
+  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}){
     if (trump == null){
       Card temp = findCard();
       handCards.remove(temp);
