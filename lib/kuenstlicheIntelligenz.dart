@@ -146,7 +146,7 @@ class KuenstlicheIntelligenz extends Player {
 
     for (int i = 0; i < handCards.length; i++) {
       if (handCards[i].cardType == CardType.WIZARD) {
-        check += numberOfPossibleBetterCards;
+        numberOfPossibleBetterCards = 0;
       } else if (handCards[i].cardType == trump) {
         for (int x = 0; x < aiGameDeck.size(); x++) {
           if (handCards[i].cardType == aiGameDeck.aiShowCard(x).cardType &&
@@ -183,6 +183,7 @@ class KuenstlicheIntelligenz extends Player {
     int betterCardsOfOtherType = 0;
     Deck aiGameDeck = new Deck();
     int gesamtAnzahl = aiGameDeck.size();
+    bool enemyWizard = false;
 
     aiGameDeck =
         _removeCardsFromAiDeck(aiGameDeck, alreadyPlayedCards, playedCards);
@@ -205,9 +206,9 @@ class KuenstlicheIntelligenz extends Player {
 
     for (int i = 0; i < playableHandCards.length; i++) {
       if (foe.cardType == CardType.WIZARD)
-        check++;
+        enemyWizard = true;
       else if (playableHandCards[i].cardType == CardType.WIZARD) {
-        check += numberOfPossibleBetterCards;
+        numberOfPossibleBetterCards = 0;
       } else if (playableHandCards[i].cardType == trump) {
         for (int x = 0; x < aiGameDeck.size(); x++) {
           if (playableHandCards[i].cardType ==
@@ -243,7 +244,7 @@ class KuenstlicheIntelligenz extends Player {
         }
       }
       check = numberOfPossibleBetterCards / gesamtAnzahl;
-      if (check <= 0.15) tryWinning = true;
+      if (check <= 0.15 && !enemyWizard) tryWinning = true;
     }
     return tryWinning;
   }
