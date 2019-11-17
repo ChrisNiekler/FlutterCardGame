@@ -5,7 +5,8 @@ import 'dart:io';
 
 class HumanPlayer extends Player {
   @override
-  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}) {
+  Card playCard(int pick,
+      {CardType trump, Card foe, int roundNumber, int playerNumber}) {
     Card temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;
@@ -46,8 +47,12 @@ class HumanPlayer extends Player {
     int check;
     this.printHandCardsToConsole();
     do {
-      print('Put your bet:');
-      inputString = stdin.readLineSync();
+      if (testValue == null) {
+        print('Put your bet:');
+        inputString = stdin.readLineSync();
+      } else {
+        inputString = testValue;
+      }
       if (_isNumeric(inputString)) {
         this.bet = int.parse(inputString);
         check = bet + betsNumber;
@@ -62,7 +67,7 @@ class HumanPlayer extends Player {
       } else {
         print('Please enter a number!');
       }
-    } while (!inputAllowed);
+    } while (!inputAllowed && testValue == null);
     print('$name bet he/she wins $bet tricks!');
   }
 
