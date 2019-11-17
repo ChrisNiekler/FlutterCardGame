@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   _HomePageState(this.email);
 
-  String email;
+  final String email;
 
   String getUsername(String email) {
     int end = email.indexOf("@");
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(getUsername(email)),
+        title: new Text(email),
         actions: <Widget>[
           new FlatButton(
               child: new Text('Logout',
@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
               print("Chose 3 Players");
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 3, username: getUsername(email))),
+                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 3, username: email)),
 
               );
             },
@@ -239,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                 playerAmount(4);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 4, username: getUsername(email))),
+                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 4, username: email)),
                 );
               },
             ),
@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                 playerAmount(5);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 5, username: getUsername(email))),
+                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 5, username: email)),
                 );
               },
             ),
@@ -258,7 +258,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {playerAmount(6);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 6, username: getUsername(email))),
+                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 6, username: email)),
               );
               },
             ),
