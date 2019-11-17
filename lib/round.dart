@@ -94,10 +94,10 @@ class Round {
 
         if (trumpType != null) {
           print('The trump is $temp');
-          playedCards.add((gamer as HumanPlayer).humanPlayCard());
         } else {
           print('There is no trump in this round!');
         }
+        playedCards.add((gamer as HumanPlayer).humanPlayCard());
       } else {
         // the ai will  play a card
         if (playedCards.length == 0) {
