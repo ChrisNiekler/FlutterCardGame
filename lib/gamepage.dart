@@ -7,8 +7,9 @@ import 'playerTemplateGUI.dart';
 
 class Gamepage extends StatelessWidget {
   int amountPlayers;
+  final String username;
 
-  Gamepage({this.amountPlayers});
+  Gamepage({this.amountPlayers, this.username});
 
   @override
   Widget build(BuildContext context) {
