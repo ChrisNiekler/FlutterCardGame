@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wizard/oauth/pages/login_signup_page.dart';
-import 'package:wizard/oauth/services/authentication.dart';
+import 'package:wizard/0auth/pages/login_signup_page.dart';
+import 'package:wizard/0auth/services/authentication.dart';
 import '../../home_page.dart';
 
 
@@ -22,6 +22,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
+  String _email = "";
 
   @override
   void initState() {
@@ -41,6 +42,7 @@ class _RootPageState extends State<RootPage> {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
+        _email = user.email;
       });
     });
     setState(() {
@@ -52,6 +54,7 @@ class _RootPageState extends State<RootPage> {
     setState(() {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
+      _email = "";
     });
   }
 
@@ -80,6 +83,7 @@ class _RootPageState extends State<RootPage> {
         if (_userId.length > 0 && _userId != null) {
           return new HomePage(
             userId: _userId,
+            email: _email,
             auth: widget.auth,
             logoutCallback: logoutCallback,
           );

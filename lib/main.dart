@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'oauth/pages/root_page.dart';
-import 'oauth/services/authentication.dart';
+import '0auth/pages/root_page.dart';
+import '0auth/services/authentication.dart';
 
 void main() => runApp(MyApp());
 

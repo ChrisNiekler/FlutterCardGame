@@ -55,8 +55,12 @@ void main() {
     }
     _round++;
   } while (_round <= _maxRounds);
+
+
   // indicates that the game is over
   print('the end!');
+
+  // TODO : Save result in database
 }
 
 void startGame() {}
