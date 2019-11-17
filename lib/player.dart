@@ -17,7 +17,7 @@ abstract class Player {
   void putBet(int roundNumber, int betsNumber,
       {CardType trump, String testValue});
 
-  Card playCard(int pick, {CardType trump, Card foe});
+  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber});
 
 //  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
   //not necessary anymore
