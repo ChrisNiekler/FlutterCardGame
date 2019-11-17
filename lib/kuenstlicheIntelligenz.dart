@@ -5,6 +5,7 @@ import 'dart:math' show Random;
 import 'package:wizard/deck.dart';
 
 //todo Tests für KI
+//todo anzahl der karten in der runde mit berücksichtigen
 
 class KuenstlicheIntelligenz extends Player {
   KuenstlicheIntelligenz(name, id) {

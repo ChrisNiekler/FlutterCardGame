@@ -256,7 +256,7 @@ class Round {
       // when wizard is trump card then the dealer picks the trump
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');
-      players[trickStarter].pickTrumpCard();
+      trumpType = players[trickStarter].pickTrumpCard();
     }
     print('');
   }
