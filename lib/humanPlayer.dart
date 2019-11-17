@@ -5,7 +5,7 @@ import 'dart:io';
 
 class HumanPlayer extends Player {
   @override
-  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}) {
+  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber, List<Card> alreadyPlayedCards, List<Card> playedCards}) {
     Card temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;
@@ -40,7 +40,7 @@ class HumanPlayer extends Player {
   }
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
+  void putBet(int round, int betsNumber, {CardType trump, String testValue, List<Card> alreadyPlayedCards, List<Card> playedCards}) {
     bool inputAllowed = false;
     String inputString = '';
     int check;

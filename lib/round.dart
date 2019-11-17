@@ -15,6 +15,7 @@ class Round {
   CardType toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
+  List<Card> alreadyPlayedCards = [];
 
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
@@ -158,6 +159,7 @@ class Round {
       print('');
 
       resetAllowedToPlay(gamer);
+      alreadyPlayedCards.addAll(playedCards);
       gamer.playableHandCards = [];
 
       // sleeper --> just for the console game

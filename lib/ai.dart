@@ -24,7 +24,7 @@ class Ai extends Player { //Klasse Ai erbt von Klasse Player//
   }
 
   @override
-  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}){
+  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber, List<Card> alreadyPlayedCards, List<Card> playedCards}){
     if (trump == null){
       Card temp = findCard();
       handCards.remove(temp);
@@ -38,7 +38,7 @@ class Ai extends Player { //Klasse Ai erbt von Klasse Player//
   }
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
+  void putBet(int round, int betsNumber, {CardType trump, String testValue, List<Card> alreadyPlayedCards, List<Card> playedCards}) {
     this.bet = Random().nextInt(handCards.length);
     print('$name bet he/she wins $bet tricks!');
   }

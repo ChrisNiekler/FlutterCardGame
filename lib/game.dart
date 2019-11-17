@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:wizard/humanPlayer.dart';
 import 'package:wizard/ki.dart';
+import 'package:wizard/kuenstlicheIntelligenz.dart';
 import 'package:wizard/round.dart';
 import 'package:wizard/player.dart';
 import 'dart:io';
@@ -34,7 +35,7 @@ void main() {
     if (i == 0)
       players.add(new HumanPlayer(names[i], i));
     else
-      players.add(new Ki(names[i], i));
+      players.add(new KuenstlicheIntelligenz(names[i], i));
   }
 
   trickStarter = _whoStarts(_playerAmount);

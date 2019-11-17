@@ -5,10 +5,18 @@ import 'dart:math';
 class Deck {
   List<Card> deck = [];
   int _topOfDeck = 0;
+  List<Card> aiDeck = [];
 
   /* Returns the card that is on top of the Stack */
   Card takeCard() {
     return deck.removeAt(0);
+  }
+
+  void aiRemoveCard(int number) {
+    aiDeck.removeAt(number);
+  }
+  Card aiShowCard(int number){
+    return aiDeck[number];
   }
 
   /* _createDeck() will create a new deck of cards in increasing order*/
@@ -22,10 +30,13 @@ class Deck {
       for (int j = 0; j < 15; j++) {
         if (j == 0) {
           this.deck.add(new Card(CardType.values[4], j));
+          this.aiDeck.add(new Card(CardType.values[4], j));
         } else if (j == 14) {
           this.deck.add(new Card(CardType.values[5], j));
+          this.aiDeck.add(new Card(CardType.values[5], j));
         } else {
           this.deck.add(new Card(CardType.values[i], j));
+          this.aiDeck.add(new Card(CardType.values[i], j));
         }
       }
     }

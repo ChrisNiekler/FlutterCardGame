@@ -13,7 +13,7 @@ class Ki extends Player {
   }
 
   @override
-  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}) {
+  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber, List<Card> alreadyPlayedCards, List<Card> playedCards}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
@@ -59,11 +59,12 @@ class Ki extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
+  void putBet(int round, int betsNumber, {CardType trump, String testValue, List<Card> alreadyPlayedCards, List<Card> playedCards}) {
     int check;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {
-      if (handCards[i].cardType == trump && handCards[i].value > 8)
+      if(handCards[i].cardType == CardType.WIZARD) bet++;
+      else if (handCards[i].cardType == trump && handCards[i].value > 8)
         bet++;
       else if (handCards[i].value > 11) bet++;
     }

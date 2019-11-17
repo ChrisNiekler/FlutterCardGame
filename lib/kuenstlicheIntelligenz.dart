@@ -2,6 +2,7 @@ import 'package:wizard/player.dart';
 import 'package:wizard/card.dart';
 import 'package:wizard/cardType.dart';
 import 'dart:math' show Random;
+import 'package:wizard/deck.dart';
 
 //todo Tests für KI
 
@@ -13,7 +14,13 @@ class KuenstlicheIntelligenz extends Player {
   }
 
   @override
-  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber}) {
+  Card playCard(int pick,
+      {CardType trump,
+      Card foe,
+      int roundNumber,
+      int playerNumber,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
@@ -26,18 +33,20 @@ class KuenstlicheIntelligenz extends Player {
       pick = Random().nextInt(playableHandCards.length);
       return handCards.removeAt(pick);
     } else {
-      return playCardAI(foe, trump);
+      return playCardAI(foe, trump, roundNumber, playerNumber,
+          alreadyPlayedCards, playedCards);
     }
   }
 
-  Card playCardAI(Card foe, CardType trump) {
-    //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
-    //todo get more intelligent (Wahrscheinlichkeiten, ...)
+  Card playCardAI(Card foe, CardType trump, int roundNumber, int playerNumber,
+      List<Card> alreadyPlayedCards, List<Card> playedCards) {
     Card bestCard = findBestCard();
     Card worstCard = findWorstCard();
     if (bestCard == bestCard.compare(foe, trump) &&
         tricks < bet &&
-        foe.cardType != CardType.WIZARD) {
+        foe.cardType != CardType.WIZARD &&
+        _getWahrscheinlichkeitPlay(
+            foe, trump, alreadyPlayedCards, playedCards)) {
       Card temp = bestCard;
       handCards.remove(bestCard);
       return temp;
@@ -59,14 +68,14 @@ class KuenstlicheIntelligenz extends Player {
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
+  void putBet(int round, int betsNumber,
+      {CardType trump,
+      String testValue,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards}) {
     int check;
-    this.bet = 0;
-    for (int i = 0; i < handCards.length; i++) {
-      if (handCards[i].cardType == trump && handCards[i].value > 8)
-        bet++;
-      else if (handCards[i].value > 11) bet++;
-    }
+    this.bet =
+        _getWahrscheinlichkeitBet(trump, alreadyPlayedCards, playedCards);
     check = bet + betsNumber;
     if (this.lastPlayer && check == round) {
       if (bet == 0)
@@ -104,16 +113,164 @@ class KuenstlicheIntelligenz extends Player {
     return worstCard;
   }
 
-  int _getWahrscheinlichkeit(int roundNumber, int playerNumber){
+  int _getWahrscheinlichkeitBet(
+      CardType trump, List<Card> alreadyPlayedCards, List<Card> playedCards) {
     int x = 0;
-    final int gesamt = 60;
-    int cardsInRound = roundNumber * playerNumber;
-    int ownCards = roundNumber;
-    for(int i = 0; i < handCards.length; i++){
-      //todo wahrscheinlichkeitsrechnung machen
+    double check = 0;
+    int numberOfPossibleBetterCards = 0;
+    int trumpNumber = 0;
+    int wizardNumber = 0;
+    int betterTrumpNumber = 0;
+    int betterCardsOfSameType = 0;
+    Deck aiGameDeck = new Deck();
+    int gesamtAnzahl = aiGameDeck.size();
+
+    aiGameDeck =
+        _removeCardsFromAiDeck(aiGameDeck, alreadyPlayedCards, playedCards);
+
+    for (int i = 0; i < aiGameDeck.size(); i++) {
+      if (aiGameDeck.aiShowCard(i).cardType == CardType.WIZARD)
+        wizardNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.SPADE &&
+          trump == CardType.SPADE)
+        trumpNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.CLUB &&
+          trump == CardType.CLUB)
+        trumpNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.HEART &&
+          trump == CardType.HEART)
+        trumpNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.DIAMOND &&
+          trump == CardType.DIAMOND) trumpNumber++;
+    }
+
+    for (int i = 0; i < handCards.length; i++) {
+      if (handCards[i].cardType == CardType.WIZARD) {
+        check += numberOfPossibleBetterCards;
+      } else if (handCards[i].cardType == trump) {
+        for (int x = 0; x < aiGameDeck.size(); x++) {
+          if (handCards[i].cardType == aiGameDeck.aiShowCard(x).cardType &&
+              handCards[i].value < aiGameDeck.aiShowCard(x).value)
+            betterTrumpNumber++;
+        }
+        numberOfPossibleBetterCards = wizardNumber + betterTrumpNumber;
+      } else if (handCards[i].cardType != trump) {
+        for (int x = 0; x < aiGameDeck.size(); x++) {
+          if (handCards[i].cardType == aiGameDeck.aiShowCard(x).cardType &&
+              handCards[i].value < aiGameDeck.aiShowCard(x).value)
+            betterCardsOfSameType++;
+        }
+        numberOfPossibleBetterCards =
+            trumpNumber + wizardNumber + betterCardsOfSameType;
+      }
+      gesamtAnzahl = aiGameDeck.size();
+      check = numberOfPossibleBetterCards / gesamtAnzahl;
+      if (check <= 0.25) x++;
     }
     return x;
   }
 
+  bool _getWahrscheinlichkeitPlay(Card foe, CardType trump,
+      List<Card> alreadyPlayedCards, List<Card> playedCards) {
+    bool tryWinning = false;
+    int x = 0;
+    double check = 0;
+    int numberOfPossibleBetterCards = 0;
+    int trumpNumber = 0;
+    int wizardNumber = 0;
+    int betterTrumpNumber = 0;
+    int betterCardsOfSameType = 0;
+    int betterCardsOfOtherType = 0;
+    Deck aiGameDeck = new Deck();
+    int gesamtAnzahl = aiGameDeck.size();
+
+    aiGameDeck =
+        _removeCardsFromAiDeck(aiGameDeck, alreadyPlayedCards, playedCards);
+
+    for (int i = 0; i < aiGameDeck.size(); i++) {
+      if (aiGameDeck.aiShowCard(i).cardType == CardType.WIZARD)
+        wizardNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.SPADE &&
+          trump == CardType.SPADE)
+        trumpNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.CLUB &&
+          trump == CardType.CLUB)
+        trumpNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.HEART &&
+          trump == CardType.HEART)
+        trumpNumber++;
+      else if (aiGameDeck.aiShowCard(i).cardType == CardType.DIAMOND &&
+          trump == CardType.DIAMOND) trumpNumber++;
+    }
+
+    for (int i = 0; i < playableHandCards.length; i++) {
+      if (foe.cardType == CardType.WIZARD)
+        check++;
+      else if (playableHandCards[i].cardType == CardType.WIZARD) {
+        check += numberOfPossibleBetterCards;
+      } else if (playableHandCards[i].cardType == trump) {
+        for (int x = 0; x < aiGameDeck.size(); x++) {
+          if (playableHandCards[i].cardType ==
+                  aiGameDeck.aiShowCard(x).cardType &&
+              playableHandCards[i].value < aiGameDeck.aiShowCard(x).value)
+            betterTrumpNumber++;
+        }
+        numberOfPossibleBetterCards = wizardNumber + betterTrumpNumber;
+      } else if (playableHandCards[i].cardType != trump) {
+        for (int x = 0; x < aiGameDeck.size(); x++) {
+          if (playableHandCards[i].cardType ==
+                  aiGameDeck.aiShowCard(x).cardType &&
+              playableHandCards[i].value < aiGameDeck.aiShowCard(x).value)
+            betterCardsOfSameType++;
+        }
+        if (foe == null) {
+          numberOfPossibleBetterCards =
+              trumpNumber + wizardNumber + betterCardsOfSameType;
+        } else {
+          for (int x = 0; x < aiGameDeck.size(); x++) {
+            if (foe.cardType == aiGameDeck.aiShowCard(x).cardType)
+              betterCardsOfOtherType++;
+          }
+          if (foe.cardType == playableHandCards[i].cardType) {
+            numberOfPossibleBetterCards =
+                trumpNumber + wizardNumber + betterCardsOfSameType;
+          } else {
+            numberOfPossibleBetterCards = trumpNumber +
+                wizardNumber +
+                betterCardsOfSameType +
+                betterCardsOfOtherType;
+          }
+        }
+      }
+      check = numberOfPossibleBetterCards / gesamtAnzahl;
+      if (check <= 0.15) tryWinning = true;
+    }
+    return tryWinning;
+  }
+
+  Deck _removeCardsFromAiDeck(
+      Deck aiGameDeck, List<Card> alreadyPlayedCards, List<Card> playedCards) {
+    for (int x = 0; x < aiGameDeck.size(); x++) {
+      if (alreadyPlayedCards != null) {
+        for (int y = 0; y < alreadyPlayedCards.length; y++) {
+          if (alreadyPlayedCards[y] == aiGameDeck.aiShowCard(x))
+            aiGameDeck.aiRemoveCard(x);
+        }
+      }
+      if (playedCards != null) {
+        for (int y = 0; y < playedCards.length; y++) {
+          if (playedCards[y] == aiGameDeck.aiShowCard(x))
+            aiGameDeck.aiRemoveCard(x);
+        }
+      }
+      if (handCards != null) {
+        for (int y = 0; y < handCards.length; y++) {
+          if (handCards[y] == aiGameDeck.aiShowCard(x))
+            aiGameDeck.aiRemoveCard(x);
+        }
+      }
+    }
+    return aiGameDeck;
+  }
 //todo if wizard is trump (pick trump)
 }
