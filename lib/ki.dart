@@ -60,7 +60,7 @@ class Ki extends Player {
 
   @override
   void putBet(int round, int betsNumber, {CardType trump, String testValue, List<Card> alreadyPlayedCards, List<Card> playedCards}) {
-    int check;
+    int check = 0;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {
       if(handCards[i].cardType == CardType.WIZARD) bet++;

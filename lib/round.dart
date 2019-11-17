@@ -31,6 +31,7 @@ class Round {
     // after the distribution the card on top will determine the new trump
     determineTrump();
 
+    determineLastPlayer();
     // put bets
     tricking();
     print('');
@@ -266,8 +267,8 @@ class Round {
     int p = trickStarter;
     for (int i = 0, n = players.length; i < n; i++) {
       players[p % n].putBet(roundNumber, betsNumber, trump: trumpType);
-      p++;
       betsNumber += players[p % n].bet;
+      p++;
     }
   }
 

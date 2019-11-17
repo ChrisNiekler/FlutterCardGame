@@ -74,7 +74,7 @@ class KuenstlicheIntelligenz extends Player {
       String testValue,
       List<Card> alreadyPlayedCards,
       List<Card> playedCards}) {
-    int check;
+    int check = 0;
     this.bet =
         _getWahrscheinlichkeitBet(trump, alreadyPlayedCards, playedCards);
     check = bet + betsNumber;
