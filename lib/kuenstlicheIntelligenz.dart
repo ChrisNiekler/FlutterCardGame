@@ -5,7 +5,6 @@ import 'dart:math' show Random;
 import 'package:wizard/deck.dart';
 
 //todo Tests für KI
-//todo anzahl der karten in der runde mit berücksichtigen
 
 class KuenstlicheIntelligenz extends Player {
   KuenstlicheIntelligenz(name, id) {
@@ -74,7 +73,7 @@ class KuenstlicheIntelligenz extends Player {
       String testValue,
       List<Card> alreadyPlayedCards,
       List<Card> playedCards}) {
-    int check = 0;
+    int check;
     this.bet =
         _getWahrscheinlichkeitBet(trump, alreadyPlayedCards, playedCards);
     check = bet + betsNumber;
@@ -166,7 +165,7 @@ class KuenstlicheIntelligenz extends Player {
       }
       gesamtAnzahl = aiGameDeck.size();
       check = numberOfPossibleBetterCards / gesamtAnzahl;
-      if (check <= 0.20) x++;
+      if (check <= 0.25) x++;
     }
     return x;
   }
