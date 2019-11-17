@@ -166,7 +166,7 @@ class KuenstlicheIntelligenz extends Player {
       }
       gesamtAnzahl = aiGameDeck.size();
       check = numberOfPossibleBetterCards / gesamtAnzahl;
-      if (check <= 0.25) x++;
+      if (check <= 0.20) x++;
     }
     return x;
   }
