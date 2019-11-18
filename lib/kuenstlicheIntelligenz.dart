@@ -14,6 +14,8 @@ class KuenstlicheIntelligenz extends Player {
     this.id = id;
   }
 
+  Deck aiGameDeck = new Deck();
+
   @override
   Card playCard(int pick,
       {CardType trump,
@@ -123,7 +125,6 @@ class KuenstlicheIntelligenz extends Player {
     int wizardNumber = 0;
     int betterTrumpNumber = 0;
     int betterCardsOfSameType = 0;
-    Deck aiGameDeck = new Deck();
     int gesamtAnzahl = aiGameDeck.size();
 
     aiGameDeck =
@@ -182,7 +183,6 @@ class KuenstlicheIntelligenz extends Player {
     int betterTrumpNumber = 0;
     int betterCardsOfSameType = 0;
     int betterCardsOfOtherType = 0;
-    Deck aiGameDeck = new Deck();
     int gesamtAnzahl = aiGameDeck.size();
     bool enemyWizard = false;
 
