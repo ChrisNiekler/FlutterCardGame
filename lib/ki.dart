@@ -17,11 +17,11 @@ class Ki extends Player {
     //todo improve this
     CardType trumpType;
     String type;
-    int counterWiz,
-        counterHeart,
-        counterClub,
-        counterSpade,
-        counterDiamond,
+    int counterWiz = 0,
+        counterHeart = 0,
+        counterClub = 0,
+        counterSpade = 0,
+        counterDiamond = 0,
         counterJes = 0;
 
     if (handCards.length != null) {
@@ -38,16 +38,7 @@ class Ki extends Player {
           counterDiamond++;
         else if (handCards[i].cardType == CardType.SPADE) counterSpade++;
       }
-      if (counterJes > counterSpade &&
-          counterJes > counterDiamond &&
-          counterJes > counterClub &&
-          counterJes > counterHeart &&
-          counterJes > counterWiz) {
-        trumpType = CardType.values[Random().nextInt(4)];
-        type = trumpType
-            .toString()
-            .substring(trumpType.toString().indexOf('.') + 1);
-      } else if (counterHeart > counterClub &&
+      if (counterHeart > counterClub &&
           counterHeart > counterSpade &&
           counterHeart > counterDiamond) {
         trumpType = CardType.HEART;
@@ -64,11 +55,16 @@ class Ki extends Player {
         type = trumpType
             .toString()
             .substring(trumpType.toString().indexOf('.') + 1);
-      } else if (true) {
+      } else if (counterDiamond != 0) {
         trumpType = CardType.DIAMOND;
         type =
             trumpType.toString().substring(
                 trumpType.toString().indexOf('.') + 1);
+      } else if (counterWiz != 0 || counterJes != 0) {
+        trumpType = CardType.values[Random().nextInt(4)];
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
       }
     }
     print('$name picked $type');
@@ -86,7 +82,7 @@ class Ki extends Player {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
-      Card temp = _findBestCard();
+      Card temp = _findBestCard(trump);
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
@@ -102,8 +98,8 @@ class Ki extends Player {
   Card _playCardAI(Card foe, CardType trump) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo DONE get more intelligent (Wahrscheinlichkeiten, ...)
-    Card bestCard = _findBestCard();
-    Card worstCard = _findWorstCard();
+    Card bestCard = _findBestCard(trump);
+    Card worstCard = _findWorstCard(trump);
     if (bestCard == bestCard.compare(foe, trump) &&
         tricks < bet &&
         foe.cardType != CardType.WIZARD) {
@@ -159,21 +155,21 @@ class Ki extends Player {
   //todo DONE Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
   //todo DONE an Hand der Wahrscheinlichkeit die dritte bet
 
-  Card _findBestCard() {
+  Card _findBestCard(trump) {
     //todo maybe check if there is a check with trump and not trump needed
     Card bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (bestCard.value < playableHandCards[i].value)
+      if (playableHandCards[i] == playableHandCards[i].compare(bestCard, trump))
         bestCard = playableHandCards[i];
     }
     return bestCard;
   }
 
-  Card _findWorstCard() {
+  Card _findWorstCard(trump) {
     //todo maybe check if there is a check with trump and not trump needed
     Card worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (worstCard.value > playableHandCards[i].value)
+      if (playableHandCards[i] != playableHandCards[i].compare(worstCard, trump))
         worstCard = playableHandCards[i];
     }
     return worstCard;
