@@ -28,7 +28,7 @@ class HumanPlayer extends Player {
       }
       input = input.toLowerCase();
     } while ((!types.contains(input)) && testValue == null);
-    print('$name pickt $input');
+    print('$name picked $input');
 
     return CardType.values[types.indexOf(input)];
   }
