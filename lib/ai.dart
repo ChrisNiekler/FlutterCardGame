@@ -12,6 +12,18 @@ class Ai extends Player { //Klasse Ai erbt von Klasse Player//
     this.ai = true; //ai auf true setzen//
   }
 
+  @override
+  CardType pickTrumpCard({String testValue}) {
+    CardType trumpType;
+    String type;
+
+    trumpType = CardType.values[Random().nextInt(4)];
+    type =
+        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
+    print('$name pickt $type (yet random)');
+    return trumpType;
+  }
+
   Card playCardAI(Card foe, CardType Trump){
     int pick = Random().nextInt(playableHandCards.length);
     return handCards.removeAt(pick);

@@ -17,6 +17,69 @@ class KuenstlicheIntelligenz extends Player {
   Deck aiGameDeck = new Deck();
 
   @override
+  CardType pickTrumpCard({String testValue}) {
+    //todo improve this
+    CardType trumpType;
+    String type;
+    int counterWiz,
+        counterHeart,
+        counterClub,
+        counterSpade,
+        counterDiamond,
+        counterJes = 0;
+
+    if (handCards.length != null) {
+      for (int i = 0; i < handCards.length; i++) {
+        if (handCards[i].cardType == CardType.JESTER)
+          counterJes++;
+        else if (handCards[i].cardType == CardType.WIZARD)
+          counterWiz++;
+        else if (handCards[i].cardType == CardType.HEART)
+          counterHeart++;
+        else if (handCards[i].cardType == CardType.CLUB)
+          counterClub++;
+        else if (handCards[i].cardType == CardType.DIAMOND)
+          counterDiamond++;
+        else if (handCards[i].cardType == CardType.SPADE) counterSpade++;
+      }
+      if (counterJes > counterSpade &&
+          counterJes > counterDiamond &&
+          counterJes > counterClub &&
+          counterJes > counterHeart &&
+          counterJes > counterWiz) {
+        trumpType = CardType.values[Random().nextInt(4)];
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
+      } else if (counterHeart > counterClub &&
+          counterHeart > counterSpade &&
+          counterHeart > counterDiamond) {
+        trumpType = CardType.HEART;
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
+      } else if (counterClub > counterSpade && counterClub > counterDiamond) {
+        trumpType = CardType.CLUB;
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
+      } else if (counterSpade > counterDiamond) {
+        trumpType = CardType.SPADE;
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
+      } else if (true) {
+        trumpType = CardType.DIAMOND;
+        type =
+            trumpType.toString().substring(
+                trumpType.toString().indexOf('.') + 1);
+      }
+    }
+    print('$name picked $type');
+    return trumpType;
+  }
+
+  @override
   Card playCard(int pick,
       {CardType trump,
       Card foe,
@@ -65,9 +128,9 @@ class KuenstlicheIntelligenz extends Player {
   //todo DONE zweite KI mit erster (oder random) legbarer Karte
   //todo DONE dritte KI mit bester legbarer Karte
 
-  //todo Wahrscheinlichkeitsberechnung für Gewinn des Stichs
-  //todo vierte KI beste legbare Kartodote, wenn Wahrscheinlichkeit für Stich größer 0,75
-  //todo fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
+  //todo DONE Wahrscheinlichkeitsberechnung für Gewinn des Stichs
+  //todo DONE vierte KI beste legbare Kartodote, wenn Wahrscheinlichkeit für Stich größer 0,75
+  //todo DONE fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
   //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
 
   @override
@@ -93,8 +156,8 @@ class KuenstlicheIntelligenz extends Player {
   //todo DONE erste bet erstmal immer 1
   //todo DONE zweite bet alle Karten größer gleich 10 ist Anzahl der bet -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
 
-  //todo Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
-  //todo an Hand der Wahrscheinlichkeit die dritte bet
+  //todo DONE Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
+  //todo DONE an Hand der Wahrscheinlichkeit die dritte bet
 
   Card findBestCard() {
     //todo maybe check if there is a check with trump and not trump needed
@@ -274,5 +337,4 @@ class KuenstlicheIntelligenz extends Player {
     }
     return aiGameDeck;
   }
-//todo if wizard is trump (pick trump)
 }

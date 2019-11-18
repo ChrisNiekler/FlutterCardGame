@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:test/test.dart';
+import 'package:wizard/card.dart';
 import 'package:wizard/cardType.dart';
 import 'package:wizard/humanPlayer.dart';
+import 'package:wizard/ki.dart';
 
 var log = [];
 
@@ -79,13 +81,82 @@ void main() {
     }); // end HumanPlayer
 
     group('KI:', () {
-      test('Something', () {
-        fail('not yet implemented');
-      });
-      test('Something esle', () {
-        fail('not yet implemented');
-      });
-    }); // end group2
+      Ki ai = new Ki('ai_dummy', 0);    //ai zum testen
+      group('PickTrumpCard:', (){
+        test('test it', () {
+          fail('not yet implemented');
+        });
+      });//end PickTrumpCard
+      group('PlayCard:', (){
+        test('Something esle', () {
+          fail('not yet implemented');
+        });
+      });//end PlayCard
+      group('PlayCardAi:', (){
+
+      }); //end PlayCardAi //worthless because its private
+      group('PutBet', (){
+        test('should do it', () {
+          ai.lastPlayer = false;
+          List<Card> handCards = [Card(CardType.HEART, 13), Card(CardType.HEART, 10), Card(CardType.JESTER, 0)];
+          ai.putBet(3, 1, trump: CardType.HEART, alreadyPlayedCards: [], playedCards: []);
+          expect(ai.bet, 1);
+          //todo improve (not ready yet)
+        });
+      }); //end PutBet
+    }); // end KI
+    group('KuenstlicheIntelligenz:', () {
+      group('PickTrumpCard:', (){
+        test('test it', () {
+          fail('not yet implemented');
+        });
+      });//end PickTrumpCard
+      group('PlayCard:', (){
+
+      });//end PlayCard
+      group('PlayCardAI:', (){
+
+      }); //end PlayCardAi //worthless because its private
+      group('PutBet:', (){
+
+      }); //end PutBet
+      group('FindBestCard:', (){
+
+      }); //end FindBestCard
+      group('FindWorstCard:', (){
+
+      }); //end FindWorstCard
+      //todo kein plan ob private klassen testbar sind
+///
+      ///
+      ///
+      group('GetWahrscheinlichkeitBet:', (){
+
+      }); //end GetWahrscheinlichkeitBet
+      group('GetWahrscheinlichkeitPlay:', (){
+
+      }); //end GetWahrscheinlichkeitPlay
+      group('RemoveCardsFromAiDeck:', (){
+
+      }); //end RemoveCardsFromAiDeck
+    }); //end KuenstlicheIntelligenz
+    group('Ai:', () {
+      group('PickTrumpCard:', (){
+        //todo not implemented in class Ai
+      });//end PickTrumpCard
+      group('PlayCard:', (){
+
+      });//end PlayCard
+      group('PlayCardAI:', (){
+
+      }); //end PlayCardAi
+      group('PutBet:', (){
+
+      }); //end PutBet
+      group('FindCard:', (){
+
+      }); //end FindCard
+    }); //end Ai
   }); // end of ALL
 }
 

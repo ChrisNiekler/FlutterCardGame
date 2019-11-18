@@ -55,16 +55,17 @@ abstract class Player {
   /* override this in  derivatives
       ask the player who deals to pick the card */
 
-  CardType pickTrumpCard({String testValue}) {
-    CardType trumpType;
-    String type;
-
-    trumpType = CardType.values[Random().nextInt(4)];
-    type =
-        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
-    print('$name pickt $type (yet random)');
-    return trumpType;
-  }
+  CardType pickTrumpCard({String testValue});
+//  {
+//    CardType trumpType;
+//    String type;
+//
+//    trumpType = CardType.values[Random().nextInt(4)];
+//    type =
+//        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
+//    print('$name pickt $type (yet random)');
+//    return trumpType;
+//  }
 
   void printPoints() {
     print('$name has $points points.');
