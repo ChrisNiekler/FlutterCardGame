@@ -13,12 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        title: 'Wizard Demo',
-        debugShowCheckedModeBanner: false,
-        theme: new ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: new RootPage(auth: new Auth()),);
+      title: 'Wizard',
+      debugShowCheckedModeBanner: false,
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: new RootPage(auth: new Auth()),
+    );
   }
 }
 
@@ -62,9 +63,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(backgroundColor: Colors.transparent,elevation: 0.0,
+      appBar: new AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
         actions: <Widget>[
-
           new FlatButton(
               child: new Text('Logout',
                   style: new TextStyle(fontSize: 17.0, color: Colors.grey)),
@@ -219,7 +221,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 
   AlertDialog choosePlayerNumberDialog(BuildContext context) {
     return AlertDialog(
