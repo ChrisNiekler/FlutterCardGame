@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:wizard/round.dart';
 import 'playerTemplateGUI.dart';
 
-
 class Gamepage extends StatelessWidget {
   int amountPlayers;
   final String username;
@@ -15,31 +14,31 @@ class Gamepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: SafeArea(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: getPlayers(),
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(flex: 2, child: BottomPart()),
-                  ],
-                )
-              ],
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: getPlayers(),
             ),
-          ),
-        ));
-
+            Row(
+              children: <Widget>[
+                Expanded(flex: 2, child: BottomPart()),
+              ],
+            )
+          ],
+        ),
+      ),
+    ));
   }
+
 //create the ui
-List <Widget> getPlayers(){
-    List<Widget>playerList =[];
-   /* for(var i=0;i<1;i++){
+  List<Widget> getPlayers() {
+    List<Widget> playerList = [];
+    /* for(var i=0;i<1;i++){
       playerList.add(leftPart());
     }*/
-    
+
     /*if(amountPlayers==3)
      { playerList.add(leftPart());
     playerList.add(MidPartNew());
@@ -50,38 +49,38 @@ List <Widget> getPlayers(){
     playerList.add(leftPart());
     playerList.add(MidPartNew());
     playerList.add(rightPart());
-return playerList;
-}
+    return playerList;
+  }
+
 //creates amount of players
-List<Widget>getPlayerCards(){
-    List<Widget>playerCards =[];
+  List<Widget> getPlayerCards() {
+    List<Widget> playerCards = [];
     /*for(int i=0;i<round;i++)
       {
         playerCards.add(PlayerTemplate(playerName: "Playername"));
       }*/
-    if(amountPlayers==3)
+    if (amountPlayers == 3)
       playerCards.add(PlayerTemplate(playerName: "Playername"));
-   if(amountPlayers>=4) {
-     playerCards.add(PlayerTemplate(playerName: "Playername"));
-     playerCards.add(PlayerTemplate(playerName: "Playername"));
-   }
-
-
-    return playerCards;
-}
-  List<Widget>getPlayerCardsRight(){
-    List<Widget>playerCards =[];
-    /*for(int i=0;i<round;i++)
-      {
-        playerCards.add(PlayerTemplate(playerName: "Playername"));
-      }*/
-    if(amountPlayers<5)
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
-    if(amountPlayers==5) {
+    if (amountPlayers >= 4) {
       playerCards.add(PlayerTemplate(playerName: "Playername"));
       playerCards.add(PlayerTemplate(playerName: "Playername"));
     }
 
+    return playerCards;
+  }
+
+  List<Widget> getPlayerCardsRight() {
+    List<Widget> playerCards = [];
+    /*for(int i=0;i<round;i++)
+      {
+        playerCards.add(PlayerTemplate(playerName: "Playername"));
+      }*/
+    if (amountPlayers < 5)
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+    if (amountPlayers == 5) {
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+      playerCards.add(PlayerTemplate(playerName: "Playername"));
+    }
 
     return playerCards;
   }
@@ -91,9 +90,7 @@ List<Widget>getPlayerCards(){
       height: 500.0,
       width: 100.0,
       color: Colors.grey,
-      child: Column(
-        children: getPlayerCards()
-      ),
+      child: Column(children: getPlayerCards()),
     );
   }
 
@@ -102,16 +99,10 @@ List<Widget>getPlayerCards(){
       height: 500.0,
       width: 100.0,
       color: Colors.grey,
-      child: Column(
-        children:getPlayerCardsRight()
-      ),
+      child: Column(children: getPlayerCardsRight()),
     );
   }
-
-
-
 }
-
 
 /*class MidPart extends StatelessWidget {
   @override
@@ -222,22 +213,20 @@ class BottomPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       height: 159,
       child: Column(
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CreateCardImage(Offset(100.0, 100.0), '2D'),
-              CreateCardImage(Offset(100.0, 100.0), '3D'),
-              CreateCardImage(Offset(100.0, 100.0), '5S'),
-              CreateCardImage(Offset(100.0, 100.0), 'AH'),
+              CreateCardImage(Offset(100.0, 100.0), '2diamonds'),
+              CreateCardImage(Offset(100.0, 100.0), '3diamonds'),
+              CreateCardImage(Offset(100.0, 100.0), '5spades'),
+              CreateCardImage(Offset(100.0, 100.0), '1hearts'),
             ],
-          ), Text("Playername")
+          ),
+          Text("Playername")
         ],
       ),
     );
