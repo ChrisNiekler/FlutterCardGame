@@ -99,15 +99,19 @@ void main() {
       });
       test('wizard vs wizard', () {
         CardType trump = CardType.HEART;
-        Card wizardFirst = new Card(CardType.WIZARD, 14);
-        Card wizardSecond = new Card(CardType.WIZARD, 14);
+        Card wizardFirst =
+            new Card(CardType.WIZARD, 14, passiveType: CardType.CLUB);
+        Card wizardSecond =
+            new Card(CardType.WIZARD, 14, passiveType: CardType.HEART);
         expect(wizardSecond.compare(wizardFirst, trump), wizardFirst);
       });
 
       test('jester vs jester', () {
         CardType trump = CardType.HEART;
-        Card jesterFirst = new Card(CardType.JESTER, 0);
-        Card jesterSecond = new Card(CardType.JESTER, 0);
+        Card jesterFirst =
+            new Card(CardType.JESTER, 0, passiveType: CardType.CLUB);
+        Card jesterSecond =
+            new Card(CardType.JESTER, 0, passiveType: CardType.HEART);
         expect(jesterSecond.compare(jesterFirst, trump), jesterFirst);
       });
     }); // end of group Compare
