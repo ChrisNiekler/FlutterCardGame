@@ -19,7 +19,7 @@ class Gamepage extends StatelessWidget {
           children: <Widget>[
             Row(
               mainAxisSize: MainAxisSize.max,
-              children: getPlayers(),
+              children: getTableUI(),
             ),
             Row(
               children: <Widget>[
@@ -33,18 +33,8 @@ class Gamepage extends StatelessWidget {
   }
 
 //create the ui
-  List<Widget> getPlayers() {
+  List<Widget> getTableUI() {
     List<Widget> playerList = [];
-    /* for(var i=0;i<1;i++){
-      playerList.add(leftPart());
-    }*/
-
-    /*if(amountPlayers==3)
-     { playerList.add(leftPart());
-    playerList.add(MidPartNew());
-     playerList.add(rightPart());}
-    if(amountPlayers==5)
-      playerList.add(leftPart());*/
 
     playerList.add(leftPart());
     playerList.add(MidPartNew());
@@ -53,12 +43,9 @@ class Gamepage extends StatelessWidget {
   }
 
 //creates amount of players
-  List<Widget> getPlayerCards() {
+  List<Widget> getPlayerContainerLeft() {
     List<Widget> playerCards = [];
-    /*for(int i=0;i<round;i++)
-      {
-        playerCards.add(PlayerTemplate(playerName: "Playername"));
-      }*/
+
     if (amountPlayers == 3)
       playerCards.add(PlayerTemplate(playerName: "Playername"));
     if (amountPlayers >= 4) {
@@ -69,12 +56,9 @@ class Gamepage extends StatelessWidget {
     return playerCards;
   }
 
-  List<Widget> getPlayerCardsRight() {
+  List<Widget> getPlayerContainerRight() {
     List<Widget> playerCards = [];
-    /*for(int i=0;i<round;i++)
-      {
-        playerCards.add(PlayerTemplate(playerName: "Playername"));
-      }*/
+
     if (amountPlayers < 5)
       playerCards.add(PlayerTemplate(playerName: "Playername"));
     if (amountPlayers == 5) {
@@ -90,7 +74,7 @@ class Gamepage extends StatelessWidget {
       height: 500.0,
       width: 100.0,
       color: Colors.grey,
-      child: Column(children: getPlayerCards()),
+      child: Column(children: getPlayerContainerLeft()),
     );
   }
 
@@ -99,52 +83,10 @@ class Gamepage extends StatelessWidget {
       height: 500.0,
       width: 100.0,
       color: Colors.grey,
-      child: Column(children: getPlayerCardsRight()),
+      child: Column(children: getPlayerContainerRight()),
     );
   }
 }
-
-/*class MidPart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.tightForFinite(
-        height: 500.0,
-        width: 211.4,
-      ),
-      color: Colors.grey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Mid"),
-          DragTarget(
-            builder: (context, List<String> acceptedCards, rejectedCards) {
-              print(acceptedCards);
-              return Container(
-                height: 300.0,
-                width: 200.0,
-                color: Colors.white70,
-                alignment: Alignment.center,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      "Trump",
-                      style: TextStyle(color: Colors.white, fontSize: 22.0),
-                    )
-                  ],
-                ),
-              );
-            },
-            onWillAccept: (data) {
-              return true;
-            },
-            onAccept: (data) {},
-          ),
-        ],
-      ),
-    );
-  }
-}*/
 
 class MidPartNew extends StatefulWidget {
   @override
@@ -182,7 +124,7 @@ class _MidPartNewState extends State<MidPartNew> {
                       'Trump',
                       style: TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
-                    CreateCardImage(Offset(100.0, 100.0), '$cardID'),
+                    cardID == null ? Container() : CreateCardImage('$cardID'),
                     //not working
                     Text("$cardID"),
                     TrickCard('$cardID')
@@ -220,10 +162,10 @@ class BottomPart extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CreateCardImage(Offset(100.0, 100.0), '2diamonds'),
-              CreateCardImage(Offset(100.0, 100.0), '3diamonds'),
-              CreateCardImage(Offset(100.0, 100.0), '5spades'),
-              CreateCardImage(Offset(100.0, 100.0), '1hearts'),
+              CreateCardImage('2diamonds'),
+              CreateCardImage('3diamonds'),
+              CreateCardImage('5spades'),
+              CreateCardImage('1hearts'),
             ],
           ),
           Text("Playername")
@@ -267,26 +209,31 @@ class _TrickCardState extends State<TrickCard> {
 }
 
 class CreateCardImage extends StatefulWidget {
-  final Offset offset;
-  final String cardId;
+  final String cardID;
 
   //CreateCardImage({Key key, this.offset}) : super(key: key);
 
   @override
   _CreateCardImageState createState() => _CreateCardImageState();
 
-  CreateCardImage(this.offset, this.cardId);
+  CreateCardImage(this.cardID);
 }
 
 class _CreateCardImageState extends State<CreateCardImage> {
-  Offset offset = Offset(0.0, 0.0);
   String cardID;
+
+  //
+  void changeCardID(String cardID) {
+    setState(() {
+      cardID = cardID;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    offset = widget.offset;
-    cardID = widget.cardId;
+
+    cardID = widget.cardID;
   }
 
   @override
@@ -313,62 +260,35 @@ class _CreateCardImageState extends State<CreateCardImage> {
       childWhenDragging: Container(),
       data: cardID,
       onDraggableCanceled: (v, o) {
-        setState(() {
-          offset = o;
-        });
+        setState(() {});
       },
     );
   }
 }
 
 class CreateCardImageBack extends StatefulWidget {
-  final Offset offset;
-
   @override
   _CreateCardImageBackState createState() => _CreateCardImageBackState();
 
-  CreateCardImageBack(this.offset);
+  CreateCardImageBack();
 }
 
 class _CreateCardImageBackState extends State<CreateCardImageBack> {
-  Offset offset = Offset(0.0, 0.0);
-
   @override
   void initState() {
     super.initState();
-    offset = widget.offset;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Draggable(
-      child: Container(
-          margin: EdgeInsets.all(10.0),
-          child: RotatedBox(
-            quarterTurns: 5,
-            child: Image.asset(
-              "images/cards/blue_back.png",
-              width: 25.0,
-            ),
-          )),
-      feedback: Container(
+    return Container(
         margin: EdgeInsets.all(10.0),
-        width: 25.0,
         child: RotatedBox(
           quarterTurns: 5,
           child: Image.asset(
             "images/cards/blue_back.png",
-            height: 80.0,
-            width: 50.0,
+            width: 25.0,
           ),
-        ),
-      ),
-      childWhenDragging: Container(),
-      onDraggableCanceled: (v, o) {
-        setState(() {
-          offset = o;
-        });
-      },
-    );
+        ));
   }
 }
