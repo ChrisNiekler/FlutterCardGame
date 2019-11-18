@@ -33,11 +33,13 @@ class Deck {
         if (j == 0) {
           // if the value of the card is 0 then
           // the card type is Jester
-          this.deck.add(new Card(CardType.values[4], j));
+          this.deck.add(
+              new Card(CardType.values[4], j, passiveType: CardType.values[i]));
         } else if (j == 14) {
           // if the value of the card is 14 then
           // the card type is Wizard
-          this.deck.add(new Card(CardType.values[5], j));
+          this.deck.add(
+              new Card(CardType.values[5], j, passiveType: CardType.values[i]));
         } else {
           // the card type varies between the common types
           this.deck.add(new Card(CardType.values[i], j));

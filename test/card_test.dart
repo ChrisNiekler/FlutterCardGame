@@ -44,15 +44,16 @@ void main() {
       group('toString test', () {
         test('Club 8', () {
           Card card = new Card(CardType.CLUB, 8);
-          expect(card.toString(), 'CLUB8');
+          expect(card.toString(), '8clubs');
         });
         test('WIZARD', () {
-          Card card = new Card(CardType.WIZARD, 14);
-          expect(card.toString(), 'WIZARD14');
+          Card card =
+              new Card(CardType.WIZARD, 14, passiveType: CardType.HEART);
+          expect(card.toString(), '14hearts');
         });
         test('JESTER', () {
-          Card card = new Card(CardType.JESTER, 0);
-          expect(card.toString(), 'JESTER0');
+          Card card = new Card(CardType.JESTER, 0, passiveType: CardType.CLUB);
+          expect(card.toString(), '0clubs');
         });
       });
     }); // end of group Card

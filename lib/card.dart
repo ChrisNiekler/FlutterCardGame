@@ -2,6 +2,7 @@ import 'package:wizard/cardType.dart';
 
 class Card {
   CardType cardType;
+  CardType passiveType;
   int value;
   String card;
   bool allowedToPlay = false;
@@ -11,7 +12,7 @@ class Card {
     return CardTypeHelper.getValue(cardType);
   }
 
-  Card(this.cardType, this.value) {
+  Card(this.cardType, this.value, {this.passiveType}) {
     String icon = '';
     this.card = this.typeToString();
 
@@ -50,6 +51,12 @@ class Card {
 
   @override
   String toString() {
-    return CardTypeHelper.getValue(cardType) + '$value';
+    /*this will return a string that is equal to the images, wizards will return
+    i.e. 14spades, jesters will return i.e. 0hearts*/
+    if (passiveType == null) {
+      return ('$value' + CardTypeHelper.getValue(cardType) + 's').toLowerCase();
+    } else
+      return ('$value' + CardTypeHelper.getValue(passiveType) + 's')
+          .toLowerCase();
   }
 }
