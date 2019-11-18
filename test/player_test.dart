@@ -81,81 +81,63 @@ void main() {
     }); // end HumanPlayer
 
     group('KI:', () {
-      Ki ai = new Ki('ai_dummy', 0);    //ai zum testen
-      group('PickTrumpCard:', (){
+      Ki ai = new Ki('ai_dummy', 0); //ai zum testen
+      /*group('PickTrumpCard:', (){
         test('test it', () {
           fail('not yet implemented');
         });
-      });//end PickTrumpCard
-      group('PlayCard:', (){
+      });//end PickTrumpCard*/
+      /*group('PlayCard:', (){
         test('Something esle', () {
           fail('not yet implemented');
         });
-      });//end PlayCard
-      group('PlayCardAi:', (){
-
-      }); //end PlayCardAi //worthless because its private
-      group('PutBet', (){
+      });//end PlayCard*/
+      group('PlayCardAi:',
+          () {}); //end PlayCardAi //worthless because its private
+      group('PutBet', () {
         test('should do it', () {
           ai.lastPlayer = false;
-          List<Card> handCards = [Card(CardType.HEART, 13), Card(CardType.HEART, 10), Card(CardType.JESTER, 0)];
-          ai.putBet(3, 1, trump: CardType.HEART, alreadyPlayedCards: [], playedCards: []);
+          List<Card> handCards = [
+            Card(CardType.HEART, 13),
+            Card(CardType.HEART, 10),
+            Card(CardType.JESTER, 0)
+          ];
+          ai.putBet(3, 1,
+              trump: CardType.HEART, alreadyPlayedCards: [], playedCards: []);
           expect(ai.bet, 1);
           //todo improve (not ready yet)
         });
       }); //end PutBet
     }); // end KI
     group('KuenstlicheIntelligenz:', () {
-      group('PickTrumpCard:', (){
+      group('PickTrumpCard:', () {
         test('test it', () {
           fail('not yet implemented');
         });
-      });//end PickTrumpCard
-      group('PlayCard:', (){
-
-      });//end PlayCard
-      group('PlayCardAI:', (){
-
-      }); //end PlayCardAi //worthless because its private
-      group('PutBet:', (){
-
-      }); //end PutBet
-      group('FindBestCard:', (){
-
-      }); //end FindBestCard
-      group('FindWorstCard:', (){
-
-      }); //end FindWorstCard
+      }); //end PickTrumpCard
+      group('PlayCard:', () {}); //end PlayCard
+      group('PlayCardAI:',
+          () {}); //end PlayCardAi //worthless because its private
+      group('PutBet:', () {}); //end PutBet
+      group('FindBestCard:', () {}); //end FindBestCard
+      group('FindWorstCard:', () {}); //end FindWorstCard
       //todo kein plan ob private klassen testbar sind
-///
       ///
       ///
-      group('GetWahrscheinlichkeitBet:', (){
-
-      }); //end GetWahrscheinlichkeitBet
-      group('GetWahrscheinlichkeitPlay:', (){
-
-      }); //end GetWahrscheinlichkeitPlay
-      group('RemoveCardsFromAiDeck:', (){
-
-      }); //end RemoveCardsFromAiDeck
+      ///
+      group('GetWahrscheinlichkeitBet:', () {}); //end GetWahrscheinlichkeitBet
+      group(
+          'GetWahrscheinlichkeitPlay:', () {}); //end GetWahrscheinlichkeitPlay
+      group('RemoveCardsFromAiDeck:', () {}); //end RemoveCardsFromAiDeck
     }); //end KuenstlicheIntelligenz
     group('Ai:', () {
-      group('PickTrumpCard:', (){
+      group('PickTrumpCard:', () {
         //todo not implemented in class Ai
-      });//end PickTrumpCard
-      group('PlayCard:', (){
-
-      });//end PlayCard
-      group('PlayCardAI:', (){
-
-      }); //end PlayCardAi
-      group('PutBet:', (){
-
-      }); //end PutBet
-      group('FindCard:', (){
-
-      }); //end FindCard
+      }); //end PickTrumpCard
+      group('PlayCard:', () {}); //end PlayCard
+      group('PlayCardAI:', () {}); //end PlayCardAi
+      group('PutBet:', () {}); //end PutBet
+      group('FindCard:', () {}); //end FindCard
     }); //end Ai
   }); // end of ALL
 }
