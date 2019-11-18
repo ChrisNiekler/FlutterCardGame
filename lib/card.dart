@@ -47,4 +47,9 @@ class Card {
     else
       return foe;
   }
+
+  @override
+  String toString() {
+    return CardTypeHelper.getValue(cardType) + '$value';
+  }
 }

@@ -41,6 +41,20 @@ void main() {
         expect(card.typeToString(), 'CLUB');
         expect(card.value, 8);
       });
+      group('toString test', () {
+        test('Club 8', () {
+          Card card = new Card(CardType.CLUB, 8);
+          expect(card.toString(), 'CLUB8');
+        });
+        test('WIZARD', () {
+          Card card = new Card(CardType.WIZARD, 14);
+          expect(card.toString(), 'WIZARD14');
+        });
+        test('JESTER', () {
+          Card card = new Card(CardType.JESTER, 0);
+          expect(card.toString(), 'JESTER0');
+        });
+      });
     }); // end of group Card
 
     group('Compare', () {
