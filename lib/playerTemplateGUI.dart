@@ -14,17 +14,23 @@ class PlayerTemplate extends StatelessWidget {
         height: 500.0,
         width: 100.0,
         color: Colors.grey,
-        child: Column(children: cardsPerRound()),
+        child: Column(children: cardsPerRoundFoe()),
       ),
     );
   }
 
-  int round = 2;
+  int round = 4;
 
-  List<CreateCardImageBack> cardsPerRound() {
+  List<CreateCardImageBack> cardsPerRoundFoe() {
     List<CreateCardImageBack> cardList = [];
     for (int i = 0; i < round; i++)
-      cardList.add(CreateCardImageBack(Offset(100.0, 100.0)));
+      cardList.add(CreateCardImageBack());
+    return cardList;
+  }
+  List<CreateCardImage> cardsPerRoundPlayer(String cardID) {
+    List<CreateCardImage> cardList = [];
+    for (int i = 0; i < round; i++)
+      cardList.add(CreateCardImage(cardID));
     return cardList;
   }
 }
