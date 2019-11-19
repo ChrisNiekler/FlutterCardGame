@@ -100,6 +100,7 @@ class _MidPartNewState extends State<MidPartNew> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       constraints: BoxConstraints.tightForFinite(
         height: 500.0,
@@ -124,18 +125,17 @@ class _MidPartNewState extends State<MidPartNew> {
                       'Trump',
                       style: TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
-                    cardID == null ? Container() : CreateCardImage('$cardID'),
+                    //cardID == null ? Container() : CreateCardImage('$cardID'),
+                    cardID == null ? Container() :Container(width:40.0,height:80.0,child: Image.asset("images/cards/$cardID.png"),)
                     //not working
-                    Text("$cardID"),
-                    TrickCard('$cardID')
+                    //Text("$cardID"),
+                    //TrickCard('$cardID')
                   ],
                 ),
               );
             },
             onWillAccept: (data) {
-              if (data == null)
-                return false;
-              else
+
                 return true;
             },
             onAccept: (data) {
@@ -222,7 +222,7 @@ class CreateCardImage extends StatefulWidget {
 class _CreateCardImageState extends State<CreateCardImage> {
   String cardID;
 
-  //
+
   void changeCardID(String cardID) {
     setState(() {
       cardID = cardID;
@@ -238,6 +238,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Draggable(
       child: Container(
           alignment: Alignment.center,
