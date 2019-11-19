@@ -10,11 +10,18 @@ class PlayerTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 4,
-      child: Container(
-        height: 500.0,
-        width: 100.0,
-        color: Colors.grey,
-        child: Column(children: cardsPerRoundFoe()),
+      child: Row(
+        children: <Widget>[Container(
+          height: 500.0,
+          width: 100.0,
+          color: Colors.grey,
+          child: Row(
+            children: <Widget>[
+              Column(mainAxisAlignment: MainAxisAlignment.center,children: cardsPerRoundFoe()),
+
+            ],
+          ),
+        ),Container(width: 60.0,height:40.0,child: Image.asset("images/cards/1hearts.png"),)]
       ),
     );
   }
