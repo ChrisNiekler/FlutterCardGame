@@ -84,8 +84,8 @@ void main() {
 
     group('KI:', () {
       group('PickTrumpCard:', (){
-        Ki ai = new Ki('ki_dummy', 0);    //ai zum testen
         test('club', () {
+          Ki ai = new Ki('ki_dummy', 0);
           List<Card> deckList = [new Card(CardType.CLUB, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -93,6 +93,7 @@ void main() {
           expect(ai.pickTrumpCard(), CardType.CLUB);
         });
         test('spade', () {
+          Ki ai = new Ki('ki_dummy', 0);
           List<Card> deckList = [new Card(CardType.SPADE, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.SPADE, 7), new Card(CardType.DIAMOND, 4)];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -100,20 +101,21 @@ void main() {
           expect(ai.pickTrumpCard(), CardType.SPADE);
         });
         test('diamond', () {
+          Ki ai = new Ki('ki_dummy', 0);
           List<Card> deckList = [new Card(CardType.DIAMOND, 4), new Card(CardType.JESTER, 0), new Card(CardType.DIAMOND, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
           Deck deck = new Deck();
           deck.deck = deckList;
           ai.addCard(deck);
           expect(ai.pickTrumpCard(), CardType.DIAMOND);
         });
-        //todo look whats wrong with heart test
-//        test('heart', () {
-//          List<Card> deckList = [new Card(CardType.HEART, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
-//          Deck deck = new Deck();
-//          deck.deck = deckList;
-//          ai.addCard(deck);
-//          expect(ai.pickTrumpCard(), CardType.HEART);
-//        });
+        test('heart', () {
+          Ki ai = new Ki('ki_dummy', 0);
+          List<Card> deckList = [new Card(CardType.HEART, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
+          Deck deck = new Deck();
+          deck.deck = deckList;
+          ai.addCard(deck);
+          expect(ai.pickTrumpCard(), CardType.HEART);
+        });
 
         //todo need to test random bei only wiz or jes
       });//end PickTrumpCard
@@ -140,8 +142,8 @@ void main() {
     }); // end KI
     group('KuenstlicheIntelligenz:', () {
       group('PickTrumpCard:', (){
-        KuenstlicheIntelligenz ai = new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
         test('club', () {
+          KuenstlicheIntelligenz ai = new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
           List<Card> deckList = [new Card(CardType.CLUB, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -149,6 +151,7 @@ void main() {
           expect(ai.pickTrumpCard(), CardType.CLUB);
         });
         test('spade', () {
+          KuenstlicheIntelligenz ai = new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
           List<Card> deckList = [new Card(CardType.SPADE, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.SPADE, 7), new Card(CardType.DIAMOND, 4)];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -156,20 +159,21 @@ void main() {
           expect(ai.pickTrumpCard(), CardType.SPADE);
         });
         test('diamond', () {
+          KuenstlicheIntelligenz ai = new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
           List<Card> deckList = [new Card(CardType.DIAMOND, 4), new Card(CardType.JESTER, 0), new Card(CardType.DIAMOND, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
           Deck deck = new Deck();
           deck.deck = deckList;
           ai.addCard(deck);
           expect(ai.pickTrumpCard(), CardType.DIAMOND);
         });
-        //todo look whats wrong with heart test
-//        test('heart', () {
-//          List<Card> deckList = [new Card(CardType.HEART, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
-//          Deck deck = new Deck();
-//          deck.deck = deckList;
-//          ai.addCard(deck);
-//          expect(ai.pickTrumpCard(), CardType.HEART);
-//        });
+        test('heart', () {
+          KuenstlicheIntelligenz ai = new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
+          List<Card> deckList = [new Card(CardType.HEART, 4), new Card(CardType.JESTER, 0), new Card(CardType.HEART, 5), new Card(CardType.CLUB, 7), new Card(CardType.DIAMOND, 4)];
+          Deck deck = new Deck();
+          deck.deck = deckList;
+          ai.addCard(deck);
+          expect(ai.pickTrumpCard(), CardType.HEART);
+        });
 
         //todo need to test random bei only wiz or jes
 //        test('nonsense', () {
