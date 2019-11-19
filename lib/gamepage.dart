@@ -125,7 +125,7 @@ class _MidPartNewState extends State<MidPartNew> {
             builder: (context, List<String> acceptedCards, rejectedCards) {
               print(acceptedCards);
               return Container(
-                height: 200.0,
+                height: 150.0,
                 width: 100.0,
                 color: Colors.white70,
                 alignment: Alignment.center,
