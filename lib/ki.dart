@@ -91,16 +91,16 @@ class Ki extends Player {
       pick = Random().nextInt(playableHandCards.length);
       return handCards.removeAt(pick);
     } else {
-      return _playCardAI(foe, trump);
+      return _playCardAI(foe, trump, highestCard);
     }
   }
 
-  Card _playCardAI(Card foe, CardType trump) {
+  Card _playCardAI(Card foe, CardType trump, Card highestCard) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo DONE get more intelligent (Wahrscheinlichkeiten, ...)
     Card bestCard = _findBestCard(trump);
     Card worstCard = _findWorstCard(trump);
-    if (bestCard == bestCard.compare(foe, trump) &&
+    if (bestCard == bestCard.compare(highestCard, trump) &&
         tricks < bet &&
         foe.cardType != CardType.WIZARD) {
       Card temp = bestCard;
@@ -165,6 +165,8 @@ class Ki extends Player {
     return bestCard;
   }
 
+  //todo hier FEHLER da die schlechteste Karte die letzte karte auf der hand ist
+  //ein gutes find worst card machen, dass wirklich die schlechteste handkarte weggibt
   Card _findWorstCard(trump) {
     //todo maybe check if there is a check with trump and not trump needed
     Card worstCard = this.playableHandCards[0];
