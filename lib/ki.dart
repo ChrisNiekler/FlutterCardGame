@@ -78,7 +78,7 @@ class Ki extends Player {
       int roundNumber,
       int playerNumber,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards}) {
+      List<Card> playedCards, Card highestCard}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
@@ -128,7 +128,7 @@ class Ki extends Player {
       {CardType trump,
       String testValue,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards}) {
+      List<Card> playedCards, int playerNumber}) {
     int check = 0;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {

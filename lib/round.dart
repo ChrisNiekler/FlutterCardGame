@@ -48,6 +48,7 @@ class Round {
     players.forEach(
       (element) {
         element.tricks = 0;
+        element.lastPlayer = false;
       },
     );
     sleep(const Duration(seconds: 3));
@@ -78,6 +79,7 @@ class Round {
     String temp = '';
     Card highestPlayedCard;
     Player trickWinner;
+    int playerNumber = players.length;
 
     Player gamer;
     for (int i = 0, n = players.length; i < n; i++) {
@@ -110,7 +112,7 @@ class Round {
           );
         } else {
           playedCards
-              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
+              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0], highestCard: highestPlayedCard));
         }
       }
 
@@ -265,8 +267,9 @@ class Round {
   void tricking() {
     int betsNumber = 0;
     int p = trickStarter;
+    int playerNumber = players.length;
     for (int i = 0, n = players.length; i < n; i++) {
-      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType);
+      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType, playerNumber: playerNumber);
       betsNumber += players[p % n].bet;
       p++;
     }
