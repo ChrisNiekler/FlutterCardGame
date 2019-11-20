@@ -1,29 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:wizard/round.dart';
 import 'playerTemplateGUI.dart';
 
 class Gamepage extends StatelessWidget {
   int amountPlayers;
   final String username;
+  double widthDevice;
+  double heightDevice;
+
 
   Gamepage({this.amountPlayers, this.username});
 
   @override
   Widget build(BuildContext context) {
+    widthDevice = MediaQuery.of(context).size.width;
+    heightDevice = MediaQuery.of(context).size.height * 7 / 10;
     return new Scaffold(
         body: SafeArea(
       child: Container(
         child: Column(
           children: <Widget>[
             Row(
-              mainAxisSize: MainAxisSize.max,
+              //mainAxisSize: MainAxisSize.max,
               children: getTableUI(),
             ),
             Row(
               children: <Widget>[
-                Expanded(flex: 2, child: BottomPart()),
+                BottomPart(),
               ],
             )
           ],
@@ -69,10 +73,19 @@ class Gamepage extends StatelessWidget {
     return playerCards;
   }
 
+  Widget playedTrickCard() {
+    return Container(
+      width: 80.0,
+      height: 40.0,
+      decoration: BoxDecoration(color: Colors.blueGrey),
+      child: Text("TrickCard"),
+    );
+  }
+
   Widget leftPart() {
     return Container(
-      height: 500.0,
-      width: 100.0,
+      height: heightDevice,
+      width: widthDevice * 2 / 5,
       color: Colors.grey,
       child: Column(children: getPlayerContainerLeft()),
     );
@@ -80,8 +93,8 @@ class Gamepage extends StatelessWidget {
 
   Widget rightPart() {
     return Container(
-      height: 500.0,
-      width: 100.0,
+      height: heightDevice,
+      width: widthDevice * 2 / 5,
       color: Colors.grey,
       child: Column(children: getPlayerContainerRight()),
     );
@@ -94,49 +107,51 @@ class MidPartNew extends StatefulWidget {
 }
 
 class _MidPartNewState extends State<MidPartNew> {
-  int counter = 0;
   String cardID;
-  Round round;
+  String cardTrump;
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       constraints: BoxConstraints.tightForFinite(
-        height: 500.0,
-        width: 211.4,
+        height: MediaQuery.of(context).size.height * 7 / 10,
+        width: MediaQuery.of(context).size.width * 1 / 5,
       ),
       color: Colors.grey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Mid"),
           DragTarget(
             builder: (context, List<String> acceptedCards, rejectedCards) {
               print(acceptedCards);
               return Container(
-                height: 300.0,
-                width: 200.0,
+                height: 150.0,
+                width: 100.0,
                 color: Colors.white70,
                 alignment: Alignment.center,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       'Trump',
                       style: TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
                     //cardID == null ? Container() : CreateCardImage('$cardID'),
-                    cardID == null ? Container() :Container(width:40.0,height:80.0,child: Image.asset("images/cards/$cardID.png"),)
-                    //not working
+                    cardID == null
+                        ? Container()
+                        : Container(
+                            width: 40.0,
+                            height: 80.0,
+                            child: Image.asset("images/cards/$cardID.png"),
+                          )
+
                     //Text("$cardID"),
-                    //TrickCard('$cardID')
                   ],
                 ),
               );
             },
             onWillAccept: (data) {
-
-                return true;
+              return true;
             },
             onAccept: (data) {
               setState(() {
@@ -156,7 +171,7 @@ class BottomPart extends StatelessWidget {
     return Container(
       color: Colors.grey,
       width: MediaQuery.of(context).size.width,
-      height: 159,
+      height: MediaQuery.of(context).size.height * 3/10 -25.0,
       child: Column(
         children: <Widget>[
           Row(
@@ -222,7 +237,6 @@ class CreateCardImage extends StatefulWidget {
 class _CreateCardImageState extends State<CreateCardImage> {
   String cardID;
 
-
   void changeCardID(String cardID) {
     setState(() {
       cardID = cardID;
@@ -238,7 +252,6 @@ class _CreateCardImageState extends State<CreateCardImage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Draggable(
       child: Container(
           alignment: Alignment.center,
