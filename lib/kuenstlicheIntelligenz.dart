@@ -5,9 +5,9 @@ import 'dart:math' show Random;
 import 'package:wizard/deck.dart';
 
 //todo Tests für KuenstlicheIntelligenz
+
 //todo anzahl der karten in der runde mit berücksichtigen
 
-//todo fehler bei pickTrumpCard beheben in Ki und hier
 //todo fehler wenn wizard gespielt ist dass ki obwohl andere karten vorhanden immernoch wizard spielt
 
 class KuenstlicheIntelligenz extends Player {
@@ -64,9 +64,9 @@ class KuenstlicheIntelligenz extends Player {
             .substring(trumpType.toString().indexOf('.') + 1);
       } else if (counterDiamond != 0) {
         trumpType = CardType.DIAMOND;
-        type =
-            trumpType.toString().substring(
-                trumpType.toString().indexOf('.') + 1);
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
       } else if (counterWiz != 0 || counterJes != 0) {
         trumpType = CardType.values[Random().nextInt(4)];
         type = trumpType
@@ -85,7 +85,7 @@ class KuenstlicheIntelligenz extends Player {
       int roundNumber,
       int playerNumber,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards}) {
+      List<Card> playedCards, Card highestCard}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
@@ -99,15 +99,15 @@ class KuenstlicheIntelligenz extends Player {
       return handCards.removeAt(pick);
     } else {
       return playCardAI(foe, trump, roundNumber, playerNumber,
-          alreadyPlayedCards, playedCards);
+          alreadyPlayedCards, playedCards, highestCard);
     }
   }
 
   Card playCardAI(Card foe, CardType trump, int roundNumber, int playerNumber,
-      List<Card> alreadyPlayedCards, List<Card> playedCards) {
+      List<Card> alreadyPlayedCards, List<Card> playedCards, Card highestCard) {
     Card bestCard = findBestCard(trump);
     Card worstCard = findWorstCard(trump);
-    if (bestCard == bestCard.compare(foe, trump) &&
+    if (bestCard == bestCard.compare(highestCard, trump) &&
         tricks < bet &&
         foe.cardType != CardType.WIZARD &&
         _getWahrscheinlichkeitPlay(
@@ -127,10 +127,10 @@ class KuenstlicheIntelligenz extends Player {
       {CardType trump,
       String testValue,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards}) {
+      List<Card> playedCards, int playerNumber}) {
     int check = 0;
     this.bet =
-        _getWahrscheinlichkeitBet(trump, alreadyPlayedCards, playedCards);
+        _getWahrscheinlichkeitBet(round, trump, alreadyPlayedCards, playedCards, playerNumber);
     check = bet + betsNumber;
     if (this.lastPlayer && check == round) {
       if (bet == 0)
@@ -155,14 +155,15 @@ class KuenstlicheIntelligenz extends Player {
     //todo maybe check if there is a check with trump and not trump needed
     Card worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (playableHandCards[i] != playableHandCards[i].compare(worstCard, trump))
+      if (playableHandCards[i] !=
+          playableHandCards[i].compare(worstCard, trump))
         worstCard = playableHandCards[i];
     }
     return worstCard;
   }
 
-  int _getWahrscheinlichkeitBet(
-      CardType trump, List<Card> alreadyPlayedCards, List<Card> playedCards) {
+  int _getWahrscheinlichkeitBet(int roundNumber,
+      CardType trump, List<Card> alreadyPlayedCards, List<Card> playedCards, playerNumber) {
     int x = 0;
     double check = 0;
     int numberOfPossibleBetterCards = 0;
@@ -213,7 +214,17 @@ class KuenstlicheIntelligenz extends Player {
       gesamtAnzahl = aiGameDeck.size();
       check = numberOfPossibleBetterCards / gesamtAnzahl;
       if (check <= 0.20) x++;
+
     }
+    //todo try if it works somehow else
+//    int lengthOfAIDeck = aiGameDeck.size() - (playerNumber * roundNumber);
+//    int cardsOnEnemyHands = roundNumber * (playerNumber - 1);
+//    int help2 = lengthOfAIDeck - numberOfPossibleBetterCards;
+//    double help =
+//        (_binominalkoeffizient(numberOfPossibleBetterCards, 0) *
+//        _binominalkoeffizient(help2, cardsOnEnemyHands)) /
+//        _binominalkoeffizient(lengthOfAIDeck, cardsOnEnemyHands);
+//    x = (help * roundNumber).toInt();
     return x;
   }
 
@@ -318,5 +329,26 @@ class KuenstlicheIntelligenz extends Player {
       }
     }
     return aiGameDeck;
+  }
+
+  double _binominalkoeffizient (int n, int k) {
+    double s = 0;
+    if (k < n) {
+      s = _fakultaet(n) / _fakultaet(n-k);
+    }
+    return s;
+  }
+
+  double _fakultaet (int x) {
+    double s = 0;
+    if (x > 0 && x != 1)
+    {
+      s = 1;
+      do {
+        s = s * x;
+        x--;
+      } while (x > 1);
+      return s;
+    }
   }
 }
