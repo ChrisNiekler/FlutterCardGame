@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:wizard/cardDropField.dart';
 import 'playerTemplateGUI.dart';
 
 class Gamepage extends StatelessWidget {
@@ -166,6 +167,7 @@ class _MidPartNewState extends State<MidPartNew> {
 }
 
 class BottomPart extends StatelessWidget {
+  final String cardID="";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -173,7 +175,7 @@ class BottomPart extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 3/10 -25.0,
       child: Column(
-        children: <Widget>[
+        children: <Widget>[CardDropField(cardID),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
