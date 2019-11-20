@@ -57,9 +57,9 @@ class Ki extends Player {
             .substring(trumpType.toString().indexOf('.') + 1);
       } else if (counterDiamond != 0) {
         trumpType = CardType.DIAMOND;
-        type =
-            trumpType.toString().substring(
-                trumpType.toString().indexOf('.') + 1);
+        type = trumpType
+            .toString()
+            .substring(trumpType.toString().indexOf('.') + 1);
       } else if (counterWiz != 0 || counterJes != 0) {
         trumpType = CardType.values[Random().nextInt(4)];
         type = trumpType
@@ -78,7 +78,8 @@ class Ki extends Player {
       int roundNumber,
       int playerNumber,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards, Card highestCard}) {
+      List<Card> playedCards,
+      Card highestCard}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
@@ -128,7 +129,8 @@ class Ki extends Player {
       {CardType trump,
       String testValue,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards, int playerNumber}) {
+      List<Card> playedCards,
+      int playerNumber}) {
     int check = 0;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {
@@ -156,7 +158,6 @@ class Ki extends Player {
   //todo DONE an Hand der Wahrscheinlichkeit die dritte bet
 
   Card _findBestCard(trump) {
-    //todo maybe check if there is a check with trump and not trump needed
     Card bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (playableHandCards[i] == playableHandCards[i].compare(bestCard, trump))
@@ -165,13 +166,16 @@ class Ki extends Player {
     return bestCard;
   }
 
-  //todo hier FEHLER da die schlechteste Karte die letzte karte auf der hand ist
-  //ein gutes find worst card machen, dass wirklich die schlechteste handkarte weggibt
-  Card _findWorstCard(trump) {
-    //todo maybe check if there is a check with trump and not trump needed
+  Card _findWorstCard(CardType trump) {
     Card worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (playableHandCards[i] != playableHandCards[i].compare(worstCard, trump))
+      if (worstCard.cardType == trump &&
+              playableHandCards[i].cardType != trump ||
+          worstCard.cardType == CardType.WIZARD &&
+              playableHandCards[i].cardType != CardType.WIZARD ||
+          trump != playableHandCards[i].cardType &&
+              worstCard.value > playableHandCards[i].value ||
+          playableHandCards[i].cardType == CardType.JESTER)
         worstCard = playableHandCards[i];
     }
     return worstCard;

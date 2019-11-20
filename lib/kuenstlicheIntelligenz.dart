@@ -85,7 +85,8 @@ class KuenstlicheIntelligenz extends Player {
       int roundNumber,
       int playerNumber,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards, Card highestCard}) {
+      List<Card> playedCards,
+      Card highestCard}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
@@ -127,10 +128,11 @@ class KuenstlicheIntelligenz extends Player {
       {CardType trump,
       String testValue,
       List<Card> alreadyPlayedCards,
-      List<Card> playedCards, int playerNumber}) {
+      List<Card> playedCards,
+      int playerNumber}) {
     int check = 0;
-    this.bet =
-        _getWahrscheinlichkeitBet(round, trump, alreadyPlayedCards, playedCards, playerNumber);
+    this.bet = _getWahrscheinlichkeitBet(
+        round, trump, alreadyPlayedCards, playedCards, playerNumber);
     check = bet + betsNumber;
     if (this.lastPlayer && check == round) {
       if (bet == 0)
@@ -142,7 +144,6 @@ class KuenstlicheIntelligenz extends Player {
   }
 
   Card findBestCard(CardType trump) {
-    //todo maybe check if there is a check with trump and not trump needed
     Card bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (playableHandCards[i] == playableHandCards[i].compare(bestCard, trump))
@@ -152,18 +153,22 @@ class KuenstlicheIntelligenz extends Player {
   }
 
   Card findWorstCard(CardType trump) {
-    //todo maybe check if there is a check with trump and not trump needed
     Card worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
-      if (playableHandCards[i] !=
-          playableHandCards[i].compare(worstCard, trump))
+      if (worstCard.cardType == trump &&
+              playableHandCards[i].cardType != trump ||
+          worstCard.cardType == CardType.WIZARD &&
+              playableHandCards[i].cardType != CardType.WIZARD ||
+          trump != playableHandCards[i].cardType &&
+              worstCard.value > playableHandCards[i].value ||
+          playableHandCards[i].cardType == CardType.JESTER)
         worstCard = playableHandCards[i];
     }
     return worstCard;
   }
 
-  int _getWahrscheinlichkeitBet(int roundNumber,
-      CardType trump, List<Card> alreadyPlayedCards, List<Card> playedCards, playerNumber) {
+  int _getWahrscheinlichkeitBet(int roundNumber, CardType trump,
+      List<Card> alreadyPlayedCards, List<Card> playedCards, playerNumber) {
     int x = 0;
     double check = 0;
     int numberOfPossibleBetterCards = 0;
@@ -214,7 +219,6 @@ class KuenstlicheIntelligenz extends Player {
       gesamtAnzahl = aiGameDeck.size();
       check = numberOfPossibleBetterCards / gesamtAnzahl;
       if (check <= 0.20) x++;
-
     }
     //todo try if it works somehow else
 //    int lengthOfAIDeck = aiGameDeck.size() - (playerNumber * roundNumber);
@@ -331,18 +335,17 @@ class KuenstlicheIntelligenz extends Player {
     return aiGameDeck;
   }
 
-  double _binominalkoeffizient (int n, int k) {
+  double _binominalkoeffizient(int n, int k) {
     double s = 0;
     if (k < n) {
-      s = _fakultaet(n) / _fakultaet(n-k);
+      s = _fakultaet(n) / _fakultaet(n - k);
     }
     return s;
   }
 
-  double _fakultaet (int x) {
+  double _fakultaet(int x) {
     double s = 0;
-    if (x > 0 && x != 1)
-    {
+    if (x > 0 && x != 1) {
       s = 1;
       do {
         s = s * x;
