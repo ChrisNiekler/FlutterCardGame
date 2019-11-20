@@ -98,12 +98,12 @@ class KuenstlicheIntelligenz extends Player {
       pick = Random().nextInt(playableHandCards.length);
       return handCards.removeAt(pick);
     } else {
-      return playCardAI(foe, trump, roundNumber, playerNumber,
+      return _playCardAI(foe, trump, roundNumber, playerNumber,
           alreadyPlayedCards, playedCards, highestCard);
     }
   }
 
-  Card playCardAI(Card foe, CardType trump, int roundNumber, int playerNumber,
+  Card _playCardAI(Card foe, CardType trump, int roundNumber, int playerNumber,
       List<Card> alreadyPlayedCards, List<Card> playedCards, Card highestCard) {
     Card bestCard = findBestCard(trump);
     Card worstCard = findWorstCard(trump);
