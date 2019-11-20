@@ -52,10 +52,10 @@ class Gamepage extends StatelessWidget {
     List<Widget> playerCards = [];
 
     if (amountPlayers == 3)
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
+      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: true,));
     if (amountPlayers >= 4) {
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
+      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: true,));
+      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: true,));
     }
 
     return playerCards;
@@ -65,10 +65,10 @@ class Gamepage extends StatelessWidget {
     List<Widget> playerCards = [];
 
     if (amountPlayers < 5)
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
+      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: false,));
     if (amountPlayers == 5) {
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
-      playerCards.add(PlayerTemplate(playerName: "Playername"));
+      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: false,));
+      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: false,));
     }
 
     return playerCards;
