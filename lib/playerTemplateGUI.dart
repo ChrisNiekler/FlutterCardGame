@@ -3,31 +3,53 @@ import 'gamepage.dart';
 
 class PlayerTemplate extends StatelessWidget {
   final String playerName;
+  final bool isLeft;
 
-  PlayerTemplate({this.playerName});
+  PlayerTemplate({this.playerName, this.isLeft});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 4,
-      child: Row(children: <Widget>[
-        Container(
-          color: Colors.grey,
-          child: Row(
-            children: <Widget>[
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: cardsPerRoundFoe()),
-            ],
-          ),
-        ),
-        Container(
-          width: 60.0,
-          height: 40.0,
-          child: RotatedBox(
-              quarterTurns: 5, child: Image.asset("images/cards/1hearts.png")),
-        )
-      ]),
+      child: isLeft
+          ? Row(children: <Widget>[
+              Container(
+                color: Colors.grey,
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: cardsPerRoundFoe()),
+                  ],
+                ),
+              ),
+              Container(
+                width: 60.0,
+                height: 40.0,
+                child: RotatedBox(
+                    quarterTurns: 5,
+                    child: Image.asset("images/cards/1hearts.png")),
+              )
+            ])
+          : Row(children: <Widget>[
+              Container(//alignment: Alignment.centerRight,
+                color: Colors.grey,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: 60.0,
+                      height: 40.0,
+                      child: RotatedBox(
+                          quarterTurns: 5,
+                          child: Image.asset("images/cards/1hearts.png")),
+                    ),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: cardsPerRoundFoe()),
+                  ],
+                ),
+              ),
+            ]),
     );
   }
 
