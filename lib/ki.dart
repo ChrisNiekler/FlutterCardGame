@@ -87,10 +87,10 @@ class Ki extends Player {
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
-      //todo if no card is played yet (improve this)
-      //2. here it is chosen between all playable handcards
-      pick = Random().nextInt(playableHandCards.length);
-      return handCards.removeAt(pick);
+      Card temp = findBestCardWithoutFoe(
+          trump, roundNumber, playerNumber, alreadyPlayedCards);
+      handCards.remove(temp);
+      return temp;
     } else {
       return _playCardAI(foe, trump, highestCard);
     }
@@ -180,5 +180,14 @@ class Ki extends Player {
         worstCard = playableHandCards[i];
     }
     return worstCard;
+  }
+  Card findBestCardWithoutFoe(CardType trump, int roundNumber, int playerNumber,
+      List<Card> alreadyPlayedCards) {
+    Card temp = playableHandCards[0];
+    for (int i = 1; i < playableHandCards.length; i++) {
+      if (temp.cardType != trump && playableHandCards[i].cardType == trump ||
+          temp.value < playableHandCards[i].value) temp = playableHandCards[i];
+    }
+    return temp;
   }
 }
