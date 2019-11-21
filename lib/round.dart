@@ -16,6 +16,7 @@ class Round {
   List<Player> players;
   List<Card> playedCards = [];
   List<Card> alreadyPlayedCards = [];
+  bool firstPlayer;
 
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
@@ -32,6 +33,8 @@ class Round {
     determineTrump();
 
     determineLastPlayer();
+    determineFirstPlayer();
+
     // put bets
     tricking();
     print('');
@@ -49,6 +52,7 @@ class Round {
       (element) {
         element.tricks = 0;
         element.lastPlayer = false;
+        element.firstPlayer = false;
       },
     );
     sleep(const Duration(seconds: 3));
@@ -269,7 +273,7 @@ class Round {
     int p = trickStarter;
     int playerNumber = players.length;
     for (int i = 0, n = players.length; i < n; i++) {
-      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType, playerNumber: playerNumber);
+      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType, playerNumber: playerNumber, firstPlayer: firstPlayer);
       betsNumber += players[p % n].bet;
       p++;
     }
@@ -280,6 +284,12 @@ class Round {
       players.last.lastPlayer = true;
     else
       players[trickStarter - 1].lastPlayer = true;
+  }
+
+  void determineFirstPlayer () {
+    for(int i = 0; i < players.length; i++){
+      if(players[i].id == trickStarter) players[i].firstPlayer = true;
+    }
   }
 
   void roundEvaluation() {
