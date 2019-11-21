@@ -13,11 +13,24 @@ abstract class Player {
   int points = 0;
   bool ai;
   bool lastPlayer = false;
+  bool firstPlayer = false;
 
   void putBet(int roundNumber, int betsNumber,
-      {CardType trump, String testValue, List<Card> alreadyPlayedCards, List<Card> playedCards, int playerNumber});
+      {CardType trump,
+      String testValue,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      int playerNumber,
+      bool firstPlayer});
 
-  Card playCard(int pick, {CardType trump, Card foe, int roundNumber, int playerNumber, List<Card> alreadyPlayedCards, List<Card> playedCards, Card highestCard});
+  Card playCard(int pick,
+      {CardType trump,
+      Card foe,
+      int roundNumber,
+      int playerNumber,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      Card highestCard});
 
 //  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
   //not necessary anymore
@@ -56,6 +69,7 @@ abstract class Player {
       ask the player who deals to pick the card */
 
   CardType pickTrumpCard({String testValue});
+
 //  {
 //    CardType trumpType;
 //    String type;

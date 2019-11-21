@@ -130,7 +130,8 @@ class Ki extends Player {
       String testValue,
       List<Card> alreadyPlayedCards,
       List<Card> playedCards,
-      int playerNumber}) {
+      int playerNumber,
+      bool firstPlayer}) {
     int check = 0;
     this.bet = 0;
     for (int i = 0; i < handCards.length; i++) {

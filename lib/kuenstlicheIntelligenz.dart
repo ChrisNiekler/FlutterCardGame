@@ -129,10 +129,10 @@ class KuenstlicheIntelligenz extends Player {
       String testValue,
       List<Card> alreadyPlayedCards,
       List<Card> playedCards,
-      int playerNumber}) {
+      int playerNumber, bool firstPlayer}) {
     int check = 0;
     this.bet = _getWahrscheinlichkeitBet(
-        round, trump, alreadyPlayedCards, playedCards, playerNumber);
+        round, trump, alreadyPlayedCards, playedCards, playerNumber, firstPlayer);
     check = bet + betsNumber;
     if (this.lastPlayer && check == round) {
       if (bet == 0)
@@ -168,7 +168,7 @@ class KuenstlicheIntelligenz extends Player {
   }
 
   int _getWahrscheinlichkeitBet(int roundNumber, CardType trump,
-      List<Card> alreadyPlayedCards, List<Card> playedCards, playerNumber) {
+      List<Card> alreadyPlayedCards, List<Card> playedCards, int playerNumber, bool firstPlayer) {
     int x = 0;
     double check = 0;
     int numberOfPossibleBetterCards = 0;
@@ -176,6 +176,7 @@ class KuenstlicheIntelligenz extends Player {
     int wizardNumber = 0;
     int betterTrumpNumber = 0;
     int betterCardsOfSameType = 0;
+    int betterCards = 0;
     int gesamtAnzahl = aiGameDeck.size();
 
     aiGameDeck =
@@ -200,6 +201,10 @@ class KuenstlicheIntelligenz extends Player {
     for (int i = 0; i < handCards.length; i++) {
       if (handCards[i].cardType == CardType.WIZARD) {
         numberOfPossibleBetterCards = 0;
+      } else if (trump == null) {
+        if(handCards[i].value < 11 && !firstPlayer || handCards[i].value < 8 && firstPlayer)
+          betterCards++;
+        numberOfPossibleBetterCards = wizardNumber + betterCards;
       } else if (handCards[i].cardType == trump) {
         for (int x = 0; x < aiGameDeck.size(); x++) {
           if (handCards[i].cardType == aiGameDeck.aiShowCard(x).cardType &&
@@ -218,9 +223,9 @@ class KuenstlicheIntelligenz extends Player {
       }
       gesamtAnzahl = aiGameDeck.size();
       check = numberOfPossibleBetterCards / gesamtAnzahl;
-      if (check <= 0.20) x++;
+      if (check <= 0.19) x++;
     }
-    //todo try if it works somehow else
+    //todo try if it works somehow else ....maybe not worth it
 //    int lengthOfAIDeck = aiGameDeck.size() - (playerNumber * roundNumber);
 //    int cardsOnEnemyHands = roundNumber * (playerNumber - 1);
 //    int help2 = lengthOfAIDeck - numberOfPossibleBetterCards;
