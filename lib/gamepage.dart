@@ -42,12 +42,12 @@ class Gamepage extends StatelessWidget {
     List<Widget> playerList = [];
 
     playerList.add(leftPart());
-    playerList.add(MidPartNew());
+    playerList.add(MidPart());
     playerList.add(rightPart());
     return playerList;
   }
 
-//creates amount of players
+//creates 1 or 2 players on the left table
   List<Widget> getPlayerContainerLeft() {
     List<Widget> playerCards = [];
 
@@ -60,7 +60,7 @@ class Gamepage extends StatelessWidget {
 
     return playerCards;
   }
-
+//creates 1 or 2 player on the right
   List<Widget> getPlayerContainerRight() {
     List<Widget> playerCards = [];
 
@@ -73,7 +73,7 @@ class Gamepage extends StatelessWidget {
 
     return playerCards;
   }
-
+// holding trump card if apps works properly
   Widget playedTrickCard() {
     return Container(
       width: 80.0,
@@ -82,7 +82,7 @@ class Gamepage extends StatelessWidget {
       child: Text("TrickCard"),
     );
   }
-
+// Widget that takes the list of container from getPlayerContainerLeft
   Widget leftPart() {
     return Container(
       height: heightDevice,
@@ -91,7 +91,7 @@ class Gamepage extends StatelessWidget {
       child: Column(children: getPlayerContainerLeft()),
     );
   }
-
+// Widget that takes the list of container from getPlayerContainerRight
   Widget rightPart() {
     return Container(
       height: heightDevice,
@@ -101,13 +101,13 @@ class Gamepage extends StatelessWidget {
     );
   }
 }
-
-class MidPartNew extends StatefulWidget {
+//for the trump, still need to extend this for the 6th player
+class MidPart extends StatefulWidget {
   @override
-  _MidPartNewState createState() => _MidPartNewState();
+  _MidPartState createState() => _MidPartState();
 }
 
-class _MidPartNewState extends State<MidPartNew> {
+class _MidPartState extends State<MidPart> {
   String cardID;
   String cardTrump;
 
@@ -165,7 +165,7 @@ class _MidPartNewState extends State<MidPartNew> {
     );
   }
 }
-
+//this is for the user able to see his cards and play from here
 class BottomPart extends StatelessWidget {
   final String cardID="";
   @override
@@ -191,7 +191,7 @@ class BottomPart extends StatelessWidget {
     );
   }
 }
-
+//should get trickcard
 class TrickCard extends StatefulWidget {
   final String cardID;
 
@@ -224,7 +224,7 @@ class _TrickCardState extends State<TrickCard> {
         ));
   }
 }
-
+//creates a face up card
 class CreateCardImage extends StatefulWidget {
   final String cardID;
 
@@ -281,7 +281,7 @@ class _CreateCardImageState extends State<CreateCardImage> {
     );
   }
 }
-
+//creates face down card
 class CreateCardImageBack extends StatefulWidget {
   @override
   _CreateCardImageBackState createState() => _CreateCardImageBackState();
