@@ -8,8 +8,6 @@ import 'package:wizard/deck.dart';
 
 //todo anzahl der karten in der runde mit berücksichtigen
 
-//todo fehler wenn wizard gespielt ist dass ki obwohl andere karten vorhanden immernoch wizard spielt
-
 class KuenstlicheIntelligenz extends Player {
   KuenstlicheIntelligenz(name, id) {
     this.ai = true;
@@ -94,10 +92,10 @@ class KuenstlicheIntelligenz extends Player {
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
-      //todo if no card is played yet (improve this)
-      //2. here it is chosen between all playable handcards
-      pick = Random().nextInt(playableHandCards.length);
-      return handCards.removeAt(pick);
+      Card temp = findBestCardWithoutFoe(
+          trump, roundNumber, playerNumber, alreadyPlayedCards);
+      handCards.remove(temp);
+      return temp;
     } else {
       return _playCardAI(foe, trump, roundNumber, playerNumber,
           alreadyPlayedCards, playedCards, highestCard);
@@ -129,10 +127,11 @@ class KuenstlicheIntelligenz extends Player {
       String testValue,
       List<Card> alreadyPlayedCards,
       List<Card> playedCards,
-      int playerNumber, bool firstPlayer}) {
+      int playerNumber,
+      bool firstPlayer}) {
     int check = 0;
-    this.bet = _getWahrscheinlichkeitBet(
-        round, trump, alreadyPlayedCards, playedCards, playerNumber, firstPlayer);
+    this.bet = _getWahrscheinlichkeitBet(round, trump, alreadyPlayedCards,
+        playedCards, playerNumber, firstPlayer);
     check = bet + betsNumber;
     if (this.lastPlayer && check == round) {
       if (bet == 0)
@@ -167,8 +166,13 @@ class KuenstlicheIntelligenz extends Player {
     return worstCard;
   }
 
-  int _getWahrscheinlichkeitBet(int roundNumber, CardType trump,
-      List<Card> alreadyPlayedCards, List<Card> playedCards, int playerNumber, bool firstPlayer) {
+  int _getWahrscheinlichkeitBet(
+      int roundNumber,
+      CardType trump,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      int playerNumber,
+      bool firstPlayer) {
     int x = 0;
     double check = 0;
     int numberOfPossibleBetterCards = 0;
@@ -202,8 +206,8 @@ class KuenstlicheIntelligenz extends Player {
       if (handCards[i].cardType == CardType.WIZARD) {
         numberOfPossibleBetterCards = 0;
       } else if (trump == null) {
-        if(handCards[i].value < 11 && !firstPlayer || handCards[i].value < 8 && firstPlayer)
-          betterCards++;
+        if (handCards[i].value < 11 && !firstPlayer ||
+            handCards[i].value < 8 && firstPlayer) betterCards++;
         numberOfPossibleBetterCards = wizardNumber + betterCards;
       } else if (handCards[i].cardType == trump) {
         for (int x = 0; x < aiGameDeck.size(); x++) {
@@ -358,5 +362,15 @@ class KuenstlicheIntelligenz extends Player {
       } while (x > 1);
       return s;
     }
+  }
+
+  Card findBestCardWithoutFoe(CardType trump, int roundNumber, int playerNumber,
+      List<Card> alreadyPlayedCards) {
+    Card temp = playableHandCards[0];
+    for (int i = 1; i < playableHandCards.length; i++) {
+      if (temp.cardType != trump && playableHandCards[i].cardType == trump ||
+          temp.value < playableHandCards[i].value) temp = playableHandCards[i];
+    }
+    return temp;
   }
 }
