@@ -1,19 +1,33 @@
-import 'package:wizard/card.dart' as gamecard;
-
-import 'card.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class PlayingCard extends StatefulWidget {
-  @override
-  _PlayingCardState createState() {
-    _PlayingCardState();
-  }
-}
+class PlayingCard extends StatelessWidget {
+  final String cardID;
 
-class _PlayingCardState extends State<PlayingCard> {
+  PlayingCard(this.cardID);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Draggable(
+      child: Container(
+          alignment: Alignment.center,
+          height: 80.0,
+          width: 50.0,
+          child: Image.asset(
+            "images/cards/$cardID.png",
+            height: 80.0,
+            width: 50.0,
+          )),
+      feedback: Container(
+          alignment: Alignment.center,
+          height: 80.0,
+          width: 50.0,
+          child: Image.asset(
+            "images/cards/$cardID.png",
+            height: 80.0,
+            width: 50.0,
+          )),
+      childWhenDragging: Container(),
+      data: cardID,
+    );
   }
 }
