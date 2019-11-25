@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:wizard/cardDropField.dart';
+import 'package:wizard/playing_card.dart';
 import 'playerTemplateGUI.dart';
 
 class Gamepage extends StatelessWidget {
@@ -9,7 +10,6 @@ class Gamepage extends StatelessWidget {
   final String username;
   double widthDevice;
   double heightDevice;
-
 
   Gamepage({this.amountPlayers, this.username});
 
@@ -52,27 +52,47 @@ class Gamepage extends StatelessWidget {
     List<Widget> playerCards = [];
 
     if (amountPlayers == 3)
-      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: true,));
+      playerCards.add(PlayerTemplate(
+        playerName: "Playername",
+        isLeft: true,
+      ));
     if (amountPlayers >= 4) {
-      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: true,));
-      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: true,));
+      playerCards.add(PlayerTemplate(
+        playerName: "Playername",
+        isLeft: true,
+      ));
+      playerCards.add(PlayerTemplate(
+        playerName: "Playername",
+        isLeft: true,
+      ));
     }
 
     return playerCards;
   }
+
 //creates 1 or 2 player on the right
   List<Widget> getPlayerContainerRight() {
     List<Widget> playerCards = [];
 
     if (amountPlayers < 5)
-      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: false,));
+      playerCards.add(PlayerTemplate(
+        playerName: "Playername",
+        isLeft: false,
+      ));
     if (amountPlayers == 5) {
-      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: false,));
-      playerCards.add(PlayerTemplate(playerName: "Playername",isLeft: false,));
+      playerCards.add(PlayerTemplate(
+        playerName: "Playername",
+        isLeft: false,
+      ));
+      playerCards.add(PlayerTemplate(
+        playerName: "Playername",
+        isLeft: false,
+      ));
     }
 
     return playerCards;
   }
+
 // holding trump card if apps works properly
   Widget playedTrickCard() {
     return Container(
@@ -82,6 +102,7 @@ class Gamepage extends StatelessWidget {
       child: Text("TrickCard"),
     );
   }
+
 // Widget that takes the list of container from getPlayerContainerLeft
   Widget leftPart() {
     return Container(
@@ -91,6 +112,7 @@ class Gamepage extends StatelessWidget {
       child: Column(children: getPlayerContainerLeft()),
     );
   }
+
 // Widget that takes the list of container from getPlayerContainerRight
   Widget rightPart() {
     return Container(
@@ -101,6 +123,7 @@ class Gamepage extends StatelessWidget {
     );
   }
 }
+
 //for the trump, still need to extend this for the 6th player
 class MidPart extends StatefulWidget {
   @override
@@ -165,32 +188,34 @@ class _MidPartState extends State<MidPart> {
     );
   }
 }
+
 //this is for the user able to see his cards and play from here
 class BottomPart extends StatelessWidget {
-  final String cardID="";
+  final String cardID = "";
+  List<PlayingCard> cardList = [
+    PlayingCard('2diamonds'),
+    PlayingCard('3diamonds'),
+    PlayingCard('5spades'),
+    PlayingCard('10hearts'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey,
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 3/10 -25.0,
+      height: MediaQuery.of(context).size.height * 3 / 10 - 25.0,
       child: Column(
-        children: <Widget>[CardDropField(cardID),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CreateCardImage('2diamonds'),
-              CreateCardImage('3diamonds'),
-              CreateCardImage('5spades'),
-              CreateCardImage('1hearts'),
-            ],
-          ),
+        children: <Widget>[
+          CardDropField(cardID),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: cardList),
           Text("Playername")
         ],
       ),
     );
   }
 }
+
 //should get trickcard
 class TrickCard extends StatefulWidget {
   final String cardID;
@@ -225,62 +250,7 @@ class _TrickCardState extends State<TrickCard> {
   }
 }
 //creates a face up card
-class CreateCardImage extends StatefulWidget {
-  final String cardID;
 
-  //CreateCardImage({Key key, this.offset}) : super(key: key);
-
-  @override
-  _CreateCardImageState createState() => _CreateCardImageState();
-
-  CreateCardImage(this.cardID);
-}
-
-class _CreateCardImageState extends State<CreateCardImage> {
-  String cardID;
-
-  void changeCardID(String cardID) {
-    setState(() {
-      cardID = cardID;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    cardID = widget.cardID;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Draggable(
-      child: Container(
-          alignment: Alignment.center,
-          height: 80.0,
-          width: 50.0,
-          child: Image.asset(
-            "images/cards/$cardID.png",
-            height: 80.0,
-            width: 50.0,
-          )),
-      feedback: Container(
-          alignment: Alignment.center,
-          height: 80.0,
-          width: 50.0,
-          child: Image.asset(
-            "images/cards/$cardID.png",
-            height: 80.0,
-            width: 50.0,
-          )),
-      childWhenDragging: Container(),
-      data: cardID,
-      onDraggableCanceled: (v, o) {
-        setState(() {});
-      },
-    );
-  }
-}
 //creates face down card
 class CreateCardImageBack extends StatefulWidget {
   @override
