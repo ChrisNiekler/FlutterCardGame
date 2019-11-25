@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wizard/playerTemplateGUI.dart';
 
 class CardDropField extends StatefulWidget {
   final String cardID;
@@ -12,6 +13,7 @@ class CardDropField extends StatefulWidget {
 class _CardDropField extends State<CardDropField> {
   String cardID;
   String cardTrump;
+  PlayerTemplate player;
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +31,15 @@ class _CardDropField extends State<CardDropField> {
                     height: 80.0,
                     width: 50.0,
                     child: Image.asset("images/cards/$cardID.png"),
-                  )
-
-            //Text("$cardID"),
-
-            );
+                  ));
       },
       onWillAccept: (data) {
         return true;
       },
       onAccept: (data) {
-        setState(() {
+        setState(() {player.removePlayedCard(cardID);
           cardID = data;
+
         });
       },
     );
