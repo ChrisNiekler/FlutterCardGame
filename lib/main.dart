@@ -284,6 +284,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () {
                 playerAmount(6);
+                print("6");
                 Navigator.push(
                   context,
                   MaterialPageRoute(

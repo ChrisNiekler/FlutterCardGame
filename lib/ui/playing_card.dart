@@ -14,17 +14,17 @@ class PlayingCard extends StatelessWidget {
     return Draggable(
       child: Container(
           alignment: Alignment.center,
-          height: 80.0,
-          width: 50.0,
+          height: 60.0,
+          width: 45.0,
           child: Image.asset(
             "images/cards/$cardID.png",
-            height: 80.0,
+            height: 70.0,
             width: 50.0,
           )),
       feedback: Container(
           alignment: Alignment.center,
-          height: 80.0,
-          width: 50.0,
+          height: 60.0,
+          width: 45.0,
           child: Image.asset(
             "images/cards/$cardID.png",
             height: 80.0,

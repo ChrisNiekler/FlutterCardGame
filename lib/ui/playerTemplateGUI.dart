@@ -4,7 +4,8 @@ import 'package:wizard/ui/playing_card.dart';
 import 'package:wizard/ui/gamepage.dart';
 
 class PlayerTemplate extends StatefulWidget {
-  PlayerTemplate({this.playerName, this.isLeft});
+  final Function removeCardCallback;
+  PlayerTemplate({this.playerName, this.isLeft,this.removeCardCallback});
 
   String playerName;
   bool isLeft;
@@ -18,11 +19,10 @@ class PlayerTemplate extends StatefulWidget {
   }
 
   List<PlayingCard> cardsPerRoundPlayer() {
-    List<String> cardID = ["1hearts","2diamonds","5clubs"];
+    List<String> cardID = ["1hearts", "2diamonds", "5clubs"];
 
     List<PlayingCard> cardList = [];
-    for (int i = 0; i < round; i++)
-      cardList.add(PlayingCard(cardID[i]));
+    for (int i = 0; i < round; i++) cardList.add(PlayingCard(cardID[i]));
     return cardList;
   }
 
@@ -51,7 +51,7 @@ class _PlayerTemplateState extends State<PlayerTemplate> {
                     ],
                   ),
                   Container(
-                    width: 60.0,
+                    width: 50.0,
                     height: 40.0,
                     child: RotatedBox(
                         quarterTurns: 5,
@@ -64,7 +64,7 @@ class _PlayerTemplateState extends State<PlayerTemplate> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Container(
-                        width: 60.0,
+                        width: 50.0,
                         height: 40.0,
                         child: RotatedBox(
                             quarterTurns: 5,

@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:wizard/ui/trump_MidTable.dart';
 import 'package:wizard/ui/playerTemplateGUI.dart';
 import 'package:wizard/ui/player_BottomTable.dart';
+import 'package:wizard/ui/player_TopTable.dart';
 
 class Gamepage extends StatelessWidget {
   Gamepage({this.amountPlayers, this.username});
@@ -16,20 +17,30 @@ class Gamepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     widthDevice = MediaQuery.of(context).size.width;
-    heightDevice = MediaQuery.of(context).size.height * 7 / 10;
-    return new Scaffold(
+    heightDevice = MediaQuery.of(context).size.height * 6 / 10;
+    return new Scaffold(backgroundColor: Colors.grey,
         body: SafeArea(
       child: Container(
         child: Column(
           children: <Widget>[
-            Row(
-              //mainAxisSize: MainAxisSize.max,
-              children: getTableUI(),
+            amountPlayers == 6
+                ? Expanded(flex:2 ,child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[TopPart()],
+                  ))
+                : Container(),
+            Expanded(flex: 6,
+              child: Row(
+                //mainAxisSize: MainAxisSize.max,
+                children: getTableUI(),
+              ),
             ),
-            Row(
-              children: <Widget>[
-                BottomPart(),
-              ],
+            Expanded(flex: 2,
+              child: Row(
+                children: <Widget>[
+                  BottomPart(),
+                ],
+              ),
             )
           ],
         ),
@@ -79,7 +90,7 @@ class Gamepage extends StatelessWidget {
         playerName: "Playername",
         isLeft: false,
       ));
-    if (amountPlayers == 5) {
+    if (amountPlayers >= 5) {
       playerCards.add(PlayerTemplate(
         playerName: "Playername",
         isLeft: false,
@@ -106,7 +117,7 @@ class Gamepage extends StatelessWidget {
 // Widget that takes the list of container from getPlayerContainerLeft
   Widget leftPart() {
     return Container(
-      height: heightDevice,
+    //  height: heightDevice,
       width: widthDevice * 2 / 5,
       color: Colors.grey,
       child: Column(children: getPlayerContainerLeft()),
@@ -116,7 +127,7 @@ class Gamepage extends StatelessWidget {
 // Widget that takes the list of container from getPlayerContainerRight
   Widget rightPart() {
     return Container(
-      height: heightDevice,
+     // height: heightDevice,
       width: widthDevice * 2 / 5,
       color: Colors.grey,
       child: Column(children: getPlayerContainerRight()),
@@ -181,7 +192,7 @@ class _CreateCardImageBackState extends State<CreateCardImageBack> {
           quarterTurns: 5,
           child: Image.asset(
             "images/cards/blue_back.png",
-            width: 25.0,
+            width: 15.0,
           ),
         ));
   }

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wizard/round.dart';
+
 //for the trump, still need to extend this for the 6th player
 class MidPart extends StatefulWidget {
+  final Card trump;
+
+  MidPart({this.trump});
+
   @override
   _MidPartState createState() => _MidPartState();
 }
@@ -8,17 +14,18 @@ class MidPart extends StatefulWidget {
 class _MidPartState extends State<MidPart> {
   String cardID;
   String cardTrump;
+  Round round;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints.tightForFinite(
-        height: MediaQuery.of(context).size.height * 7 / 10,
+      //  height: MediaQuery.of(context).size.height * 6 / 10,
         width: MediaQuery.of(context).size.width * 1 / 5,
       ),
       color: Colors.grey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.center,
+
         children: <Widget>[
           DragTarget(
             builder: (context, List<String> acceptedCards, rejectedCards) {
@@ -39,12 +46,10 @@ class _MidPartState extends State<MidPart> {
                     cardID == null
                         ? Container()
                         : Container(
-                      width: 40.0,
-                      height: 80.0,
-                      child: Image.asset("images/cards/$cardID.png"),
-                    )
-
-                    //Text("$cardID"),
+                            width: 40.0,
+                            height: 80.0,
+                            child: Image.asset("images/cards/$cardID.png"),
+                          )
                   ],
                 ),
               );
@@ -58,8 +63,22 @@ class _MidPartState extends State<MidPart> {
               });
             },
           ),
+         /* Column(mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              CardDropField(cardID),
+            ],
+          )*/
         ],
       ),
     );
   }
 }
+//for trump from round class
+/*                    round.trumpCard.toString() == null
+                        ? Container()
+                        : Container(
+                            width: 40.0,
+                            height: 80.0,
+                            child: Image.asset("images/cards/${round.trumpCard.toString()}.png"),
+                          )
+*/
