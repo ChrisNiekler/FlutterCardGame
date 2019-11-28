@@ -59,12 +59,8 @@ class HumanPlayer extends Player {
     int check;
     this.printHandCardsToConsole();
     do {
-      if (testValue == null) {
-        print('Put your bet:');
-        inputString = stdin.readLineSync();
-      } else {
-        inputString = testValue;
-      }
+      print('Put your bet:');
+      inputString = stdin.readLineSync();
       if (_isNumeric(inputString)) {
         this.bet = int.parse(inputString);
         check = bet + betsNumber;
@@ -79,7 +75,7 @@ class HumanPlayer extends Player {
       } else {
         print('Please enter a number!');
       }
-    } while (!inputAllowed && testValue == null);
+    } while (!inputAllowed);
     print('$name bet he/she wins $bet tricks!');
   }
 
