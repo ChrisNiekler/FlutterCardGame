@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '0auth/pages/root_page.dart';
 import '0auth/services/authentication.dart';
-import 'package:wizard/gamepage.dart';
+import 'package:wizard/ui/gamepage.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/0auth/services/authentication.dart';

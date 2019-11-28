@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:wizard/playing_card.dart';
-import 'gamepage.dart';
+import 'package:wizard/ui/playing_card.dart';
+import 'package:wizard/ui/gamepage.dart';
 
 class PlayerTemplate extends StatefulWidget {
-  final String playerName;
-  final bool isLeft;
-
   PlayerTemplate({this.playerName, this.isLeft});
 
-  int round = 2;
+  String playerName;
+  bool isLeft;
+
+  int round = 3;
 
   List<CreateCardImageBack> cardsPerRoundFoe() {
     List<CreateCardImageBack> cardList = [];
@@ -18,13 +18,11 @@ class PlayerTemplate extends StatefulWidget {
   }
 
   List<PlayingCard> cardsPerRoundPlayer() {
-    List<String> cardID = [];
-    cardID[0] = "1hearts";
-    cardID[1] = "2diamonds";
-    cardID[2] = "5clubs";
-    cardID[3] = "10spades";
+    List<String> cardID = ["1hearts","2diamonds","5clubs"];
+
     List<PlayingCard> cardList = [];
-    for (int i = 0; i < round; i++) cardList.add(PlayingCard(cardID[i]));
+    for (int i = 0; i < round; i++)
+      cardList.add(PlayingCard(cardID[i]));
     return cardList;
   }
 
