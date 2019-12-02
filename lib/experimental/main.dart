@@ -40,6 +40,10 @@ class _GamePageState extends State<GamePage> {
     logic.Card(CardType.HEART, 6),
     logic.Card(CardType.HEART, 7),
     logic.Card(CardType.HEART, 8),
+    logic.Card(CardType.HEART, 9),
+    logic.Card(CardType.HEART, 10),
+    logic.Card(CardType.HEART, 11),
+    logic.Card(CardType.HEART, 13),
     logic.Card(CardType.HEART, 14)
   ];
   @override
@@ -215,20 +219,34 @@ class _GamePageState extends State<GamePage> {
   }
 
   Widget playersCardsView(List<Widget> playersCards) {
+    List<Widget> listA = [];
+    List<Widget> listB = [];
+    if (playersCards.length > 10) {
+      for (int i = 0; i < 10; i++) {
+        listA.add(playersCards[i]);
+      }
+      for (int i = 10, j = playersCards.length; i < j; i++) {
+        listB.add(playersCards[i]);
+      }
+    } else {
+      listA = playersCards;
+    }
     return Container(
       color: Colors.red,
       child: Column(
         children: <Widget>[
           Expanded(
             child: Row(
-              children: playersCards,
+              children: listA,
             ),
           ),
-          Expanded(
-            child: Row(
-              children: playersCards,
-            ),
-          ),
+          playersCards.length > 10
+              ? Expanded(
+                  child: Row(
+                    children: listB,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

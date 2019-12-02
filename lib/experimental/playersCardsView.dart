@@ -11,11 +11,6 @@ Widget playersCardsView(List<Widget> playersCards) {
             children: playersCards,
           ),
         ),
-        Expanded(
-          child: Row(
-            children: playersCards,
-          ),
-        ),
       ],
     ),
   );
