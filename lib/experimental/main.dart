@@ -34,6 +34,7 @@ class _GamePageState extends State<GamePage> {
   Deck deck;
   logic.Card trumpCard;
   int roundNumber = 1;
+  int maxRound = 10;
   bool newRound = false;
   @override
   void initState() {
@@ -291,8 +292,9 @@ class _GamePageState extends State<GamePage> {
         onPressed: () {
           print(tcard.toString());
           setState(() {
-            if (players[5].handCards.length == 1) {
-              print("Your mom was here");
+            // FIX: condition
+            if (players[5].handCards.length == 1 && roundNumber < maxRound) {
+              print("Next round will be initialized");
               newRound = true;
               roundNumber++;
               deck = new Deck();
