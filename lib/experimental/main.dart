@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:wizard/experimental/backend/playersUI.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/ui/playing_card.dart';
 import 'package:wizard/logic/card.dart' as logic;
+import 'backend/backendInit.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +30,8 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
+  //static PlayersUI players;
+  //Backend backend = new Backend(players.players);
   List<Widget> playersCards = [];
   List<PlayingCard> playCard = [];
   logic.Card tableCard;

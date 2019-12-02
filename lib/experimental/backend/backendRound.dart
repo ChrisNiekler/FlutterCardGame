@@ -8,6 +8,7 @@ class Round {
   Card trumpCard;
   CardType trumpType;
   int roundNumber;
+  int trickNumber = 1;
   int maxRounds;
   int trickStarter;
   bool wizardIsPlayed = false;
@@ -22,25 +23,73 @@ class Round {
 
   Round(this.roundNumber, this.maxRounds, this.trickStarter, this.players);
 
-  void playRound() {
-    // involve the dealer??
-    // distributes the cards evenly throughout the players
+  // distributes the cards
+  // depending on how many players and which round
+  void cardDistribution() {
+    int lng = players.length;
+    for (int i = 0; i < roundNumber; i++) {
+      for (int j = 0; j < lng; j++) {
+        players[j].handCards.add(gameDeck.takeCard());
+      }
+    }
+  }
 
-    cardDistribution();
-
-    // after the distribution the card on top will determine the new trump
-    determineTrump();
-
-    determineLastPlayer();
-    determineFirstPlayer();
-
-    // put bets
-    tricking();
+  void determineTrump() {
+    this.trumpCard = gameDeck.takeCard();
+    CardType type = trumpCard.cardType;
+    String cardName = trumpCard.card;
+    String temp;
     print('');
 
+    // print the current trump card
+    if (!(type == CardType.JESTER || type == CardType.WIZARD)) {
+      temp = trumpCard.typeToString();
+      print('The open card is $cardName, therefore the trump is $temp');
+      trumpType = type;
+    } else if (type == CardType.JESTER) {
+      // when jester is trump card there is no trump
+      print(
+          'The open card is $cardName, therefore there is no trump for this round.');
+      trumpType = null;
+    } else if (type == CardType.WIZARD) {
+      // when wizard is trump card then the dealer picks the trump
+      print(
+          'The open card is $cardName, therefore the dealer picks the trump.');
+      trumpType = players[trickStarter].pickTrumpCard();
+    }
+    print('');
+  }
+
+  void determineLastPlayer() {
+    if (trickStarter == 0)
+      players.last.lastPlayer = true;
+    else
+      players[trickStarter - 1].lastPlayer = true;
+  }
+
+  void determineFirstPlayer() {
+    for (int i = 0; i < players.length; i++) {
+      if (players[i].id == trickStarter) players[i].firstPlayer = true;
+    }
+  }
+
+  void tricking() {
+    int betsNumber = 0;
+    int p = trickStarter;
+    int playerNumber = players.length;
+    for (int i = 0, n = players.length; i < n; i++) {
+      players[p % n].putBet(roundNumber, betsNumber,
+          trump: trumpType,
+          playerNumber: playerNumber,
+          firstPlayer: firstPlayer);
+      betsNumber += players[p % n].bet;
+      p++;
+    }
+  }
+
+  void playRound() {
     //play tricks
-    for (int i = 1; i <= roundNumber; i++) {
-      print('----------- Trick $i -----------');
+    if (trickNumber < roundNumber) {
       playTrick();
       wizardIsPlayed = false;
     }
@@ -56,20 +105,8 @@ class Round {
     );
   }
 
-  // distributes the cards
-  // depending on how many players and which round
-  void cardDistribution() {
-    int lng = players.length;
-    for (int i = 0; i < roundNumber; i++) {
-      for (int j = 0; j < lng; j++) {
-        players[j].handCards.add(gameDeck.takeCard());
-      }
-    }
-  }
-
   void playTrick() {
     playCards();
-    print('-------------------------------');
     toServe = null;
     playedCards = [];
   }
@@ -240,59 +277,6 @@ class Round {
       },
     );
     return hand;
-  }
-
-  void determineTrump() {
-    this.trumpCard = gameDeck.takeCard();
-    CardType type = trumpCard.cardType;
-    String cardName = trumpCard.card;
-    String temp;
-    print('');
-
-    // print the current trump card
-    if (!(type == CardType.JESTER || type == CardType.WIZARD)) {
-      temp = trumpCard.typeToString();
-      print('The open card is $cardName, therefore the trump is $temp');
-      trumpType = type;
-    } else if (type == CardType.JESTER) {
-      // when jester is trump card there is no trump
-      print(
-          'The open card is $cardName, therefore there is no trump for this round.');
-      trumpType = null;
-    } else if (type == CardType.WIZARD) {
-      // when wizard is trump card then the dealer picks the trump
-      print(
-          'The open card is $cardName, therefore the dealer picks the trump.');
-      trumpType = players[trickStarter].pickTrumpCard();
-    }
-    print('');
-  }
-
-  void tricking() {
-    int betsNumber = 0;
-    int p = trickStarter;
-    int playerNumber = players.length;
-    for (int i = 0, n = players.length; i < n; i++) {
-      players[p % n].putBet(roundNumber, betsNumber,
-          trump: trumpType,
-          playerNumber: playerNumber,
-          firstPlayer: firstPlayer);
-      betsNumber += players[p % n].bet;
-      p++;
-    }
-  }
-
-  void determineLastPlayer() {
-    if (trickStarter == 0)
-      players.last.lastPlayer = true;
-    else
-      players[trickStarter - 1].lastPlayer = true;
-  }
-
-  void determineFirstPlayer() {
-    for (int i = 0; i < players.length; i++) {
-      if (players[i].id == trickStarter) players[i].firstPlayer = true;
-    }
   }
 
   void roundEvaluation() {
