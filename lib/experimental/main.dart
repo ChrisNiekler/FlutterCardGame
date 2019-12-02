@@ -53,7 +53,7 @@ class _GamePageState extends State<GamePage> {
                           ),
                           Expanded(
                             child: Container(
-                              color: Colors.yellow.shade900,
+                              color: Colors.orange,
                             ),
                           ),
                         ],
@@ -71,7 +71,7 @@ class _GamePageState extends State<GamePage> {
                                   children: <Widget>[
                                     Expanded(
                                       child: Container(
-                                        color: Colors.teal,
+                                        color: Colors.yellow.shade600,
                                         child: Center(
                                           child: PlayingCard("3hearts"),
                                         ),
@@ -79,7 +79,7 @@ class _GamePageState extends State<GamePage> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        color: Colors.orange,
+                                        color: Colors.orange.shade900,
                                         child: Center(
                                           child: PlayingCard("2hearts"),
                                         ),
@@ -96,7 +96,7 @@ class _GamePageState extends State<GamePage> {
                                   children: <Widget>[
                                     Expanded(
                                       child: Container(
-                                        color: Colors.white,
+                                        color: Colors.green.shade900,
                                         child: Center(
                                           child: PlayingCard("7hearts"),
                                         ),
@@ -104,7 +104,7 @@ class _GamePageState extends State<GamePage> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        color: Colors.blue,
+                                        color: Colors.black,
                                         child: Center(
                                           child: PlayingCard("1hearts"),
                                         ),
@@ -112,7 +112,7 @@ class _GamePageState extends State<GamePage> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        color: Colors.black,
+                                        color: Colors.red.shade900,
                                         child: Center(
                                           child: PlayingCard("6hearts"),
                                         ),
@@ -129,7 +129,7 @@ class _GamePageState extends State<GamePage> {
                                   children: <Widget>[
                                     Expanded(
                                       child: Container(
-                                        color: Colors.teal,
+                                        color: Colors.grey.shade700,
                                         child: Center(
                                           child: PlayingCard("14hearts"),
                                         ),
@@ -137,7 +137,7 @@ class _GamePageState extends State<GamePage> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        color: Colors.orange,
+                                        color: Colors.teal.shade900,
                                         child: Center(
                                           child: PlayingCard("0hearts"),
                                         ),
@@ -164,7 +164,7 @@ class _GamePageState extends State<GamePage> {
                             ),
                             Expanded(
                               child: Container(
-                                color: Colors.blueGrey,
+                                color: Colors.teal,
                               ),
                             ),
                           ],
