@@ -32,38 +32,20 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<Player> players;
   Deck deck;
+  logic.Card trumpCard;
+  int roundNumber = 9;
   @override
   void initState() {
     super.initState();
     players = createPlayers();
     deck = new Deck();
     cardDistribution();
+    trumpCard = deck.takeCard();
   }
 
   List<Widget> displayedCards = [];
   logic.Card tableCard;
-//  List<logic.Card> cList = [
-//    logic.Card(CardType.HEART, 0),
-//    logic.Card(CardType.HEART, 1),
-//    logic.Card(CardType.HEART, 2),
-//    logic.Card(CardType.HEART, 3),
-//    logic.Card(CardType.HEART, 4),
-//    logic.Card(CardType.HEART, 5),
-//    logic.Card(CardType.HEART, 6),
-//    logic.Card(CardType.HEART, 7),
-//    logic.Card(CardType.HEART, 8),
-//    logic.Card(CardType.HEART, 9),
-//    logic.Card(CardType.HEART, 10),
-//    logic.Card(CardType.HEART, 11),
-//    logic.Card(CardType.HEART, 12),
-//    logic.Card(CardType.HEART, 13),
-//    logic.Card(CardType.HEART, 14),
-//    logic.Card(CardType.CLUB, 0),
-//    logic.Card(CardType.CLUB, 1),
-//    logic.Card(CardType.CLUB, 2),
-//    logic.Card(CardType.CLUB, 3),
-//    logic.Card(CardType.CLUB, 4)
-//  ];
+
   @override
   Widget build(BuildContext context) {
     displayedCards = [];
@@ -167,8 +149,8 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.black,
                                         child: Center(
-                                            child: (tableCard != null)
-                                                ? playedCard(tableCard)
+                                            child: (trumpCard != null)
+                                                ? playedCard(trumpCard)
                                                 : Container()),
                                       ),
                                     ),
@@ -319,7 +301,6 @@ class _GamePageState extends State<GamePage> {
   }
 
   void cardDistribution() {
-    int roundNumber = 10;
     int lng = players.length;
     for (int i = 0; i < roundNumber; i++) {
       for (int j = 0; j < lng; j++) {

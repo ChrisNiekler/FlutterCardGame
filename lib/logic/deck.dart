@@ -7,11 +7,10 @@ import 'dart:math';
 
 class Deck {
   List<Card> deck = [];
-  int _topOfDeck = 0;
 
   /* Returns the card that is on top of the Stack */
   Card takeCard() {
-    return deck.removeAt(0);
+    return deck.removeLast();
   }
 
   void aiRemoveCard(int number) {
