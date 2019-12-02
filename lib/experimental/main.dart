@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/backend/playersUI.dart';
-import 'package:wizard/logic/cardType.dart';
-import 'package:wizard/ui/playing_card.dart';
+import 'package:wizard/logic/deck.dart';
+import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
-import 'backend/backendInit.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,46 +27,47 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  //static PlayersUI players;
-  //Backend backend = new Backend(players.players);
-  List<Widget> playersCards = [];
-  List<PlayingCard> playCard = [];
+  List<Player> players;
+  Deck deck;
+  @override
+  void initState() {
+    super.initState();
+    players = createPlayers();
+    deck = new Deck();
+    cardDistribution();
+  }
+
+  List<Widget> displayedCards = [];
   logic.Card tableCard;
-  List<logic.Card> cList = [
-    logic.Card(CardType.HEART, 0),
-    logic.Card(CardType.HEART, 1),
-    logic.Card(CardType.HEART, 2),
-    logic.Card(CardType.HEART, 3),
-    logic.Card(CardType.HEART, 4),
-    logic.Card(CardType.HEART, 5),
-    logic.Card(CardType.HEART, 6),
-    logic.Card(CardType.HEART, 7),
-    logic.Card(CardType.HEART, 8),
-    logic.Card(CardType.HEART, 9),
-    logic.Card(CardType.HEART, 10),
-    logic.Card(CardType.HEART, 11),
-    logic.Card(CardType.HEART, 12),
-    logic.Card(CardType.HEART, 13),
-    logic.Card(CardType.HEART, 14),
-    logic.Card(CardType.CLUB, 0),
-    logic.Card(CardType.CLUB, 1),
-    logic.Card(CardType.CLUB, 2),
-    logic.Card(CardType.CLUB, 3),
-    logic.Card(CardType.CLUB, 4)
-  ];
+//  List<logic.Card> cList = [
+//    logic.Card(CardType.HEART, 0),
+//    logic.Card(CardType.HEART, 1),
+//    logic.Card(CardType.HEART, 2),
+//    logic.Card(CardType.HEART, 3),
+//    logic.Card(CardType.HEART, 4),
+//    logic.Card(CardType.HEART, 5),
+//    logic.Card(CardType.HEART, 6),
+//    logic.Card(CardType.HEART, 7),
+//    logic.Card(CardType.HEART, 8),
+//    logic.Card(CardType.HEART, 9),
+//    logic.Card(CardType.HEART, 10),
+//    logic.Card(CardType.HEART, 11),
+//    logic.Card(CardType.HEART, 12),
+//    logic.Card(CardType.HEART, 13),
+//    logic.Card(CardType.HEART, 14),
+//    logic.Card(CardType.CLUB, 0),
+//    logic.Card(CardType.CLUB, 1),
+//    logic.Card(CardType.CLUB, 2),
+//    logic.Card(CardType.CLUB, 3),
+//    logic.Card(CardType.CLUB, 4)
+//  ];
   @override
   Widget build(BuildContext context) {
-    playersCards = [];
-    cList.forEach((element) {
-      playersCards.add(showingCard(element));
+    displayedCards = [];
+    players[0].handCards.forEach((element) {
+      displayedCards.add(showingCard(element));
     });
-//    hand.forEach(
-//          (crd) {
-//        crd.allowedToPlay = true;
-//        n++;
-//      },
-//    );
-    playCard = [PlayingCard("8hearts")];
+
     return SafeArea(
       child: Container(
         child: Column(
@@ -230,7 +228,7 @@ class _GamePageState extends State<GamePage> {
             ),
             Expanded(
               flex: 15,
-              child: playersCardsView(playersCards),
+              child: playersCardsView(displayedCards),
             )
           ],
         ),
@@ -238,18 +236,18 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget playersCardsView(List<Widget> playersCards) {
+  Widget playersCardsView(List<Widget> tempCards) {
     List<Widget> listA = [];
     List<Widget> listB = [];
-    if (playersCards.length > 10) {
+    if (tempCards.length > 10) {
       for (int i = 0; i < 10; i++) {
-        listA.add(playersCards[i]);
+        listA.add(tempCards[i]);
       }
-      for (int i = 10, j = playersCards.length; i < j; i++) {
-        listB.add(playersCards[i]);
+      for (int i = 10, j = tempCards.length; i < j; i++) {
+        listB.add(tempCards[i]);
       }
     } else {
-      listA = playersCards;
+      listA = tempCards;
     }
     return Container(
       color: Colors.red,
@@ -260,7 +258,7 @@ class _GamePageState extends State<GamePage> {
               children: listA,
             ),
           ),
-          playersCards.length > 10
+          tempCards.length > 10
               ? Expanded(
                   child: Row(
                     children: listB,
@@ -280,7 +278,7 @@ class _GamePageState extends State<GamePage> {
           print(tcard.toString());
           setState(() {
             tableCard = tcard;
-            cList.remove(tcard);
+            players[0].handCards.remove(tcard);
           });
         },
         child: tcard.playerCardsWidget(),
@@ -293,5 +291,15 @@ class _GamePageState extends State<GamePage> {
       padding: const EdgeInsets.all(8.0),
       child: tCard.playerCardsWidget(),
     );
+  }
+
+  void cardDistribution() {
+    int roundNumber = 20;
+    int lng = players.length;
+    for (int i = 0; i < roundNumber; i++) {
+      for (int j = 0; j < lng; j++) {
+        players[j].handCards.add(deck.takeCard());
+      }
+    }
   }
 }
