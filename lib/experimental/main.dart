@@ -131,7 +131,7 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.teal,
                                         child: Center(
-                                          child: PlayingCard("4hearts"),
+                                          child: PlayingCard("14hearts"),
                                         ),
                                       ),
                                     ),
@@ -139,7 +139,7 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.orange,
                                         child: Center(
-                                          child: PlayingCard("5hearts"),
+                                          child: PlayingCard("0hearts"),
                                         ),
                                       ),
                                     ),
