@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:wizard/logic/cardType.dart';
 
 class Card {
@@ -58,5 +60,11 @@ class Card {
     } else
       return ('$value' + CardTypeHelper.getValue(passiveType) + 's')
           .toLowerCase();
+  }
+
+  Widget playerCardsWidget() {
+    return Container(
+      child: Image.asset("images/cards/${toString()}.png"),
+    );
   }
 }

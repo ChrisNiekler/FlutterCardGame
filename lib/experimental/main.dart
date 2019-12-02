@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/ui/playing_card.dart';
+import 'package:wizard/logic/card.dart' as logic;
 
 void main() => runApp(MyApp());
 
@@ -24,8 +26,23 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
+  List<Widget> playersCards = [];
+  List<PlayingCard> playCard = [];
   @override
   Widget build(BuildContext context) {
+    playersCards = [
+      showingCard(logic.Card(CardType.HEART, 0)),
+      showingCard(logic.Card(CardType.HEART, 1)),
+      showingCard(logic.Card(CardType.HEART, 2)),
+      showingCard(logic.Card(CardType.HEART, 3)),
+      showingCard(logic.Card(CardType.HEART, 4)),
+      showingCard(logic.Card(CardType.HEART, 5)),
+      showingCard(logic.Card(CardType.HEART, 6)),
+      showingCard(logic.Card(CardType.HEART, 7)),
+      showingCard(logic.Card(CardType.HEART, 8)),
+      showingCard(logic.Card(CardType.HEART, 14)),
+    ];
+    playCard = [PlayingCard("8hearts")];
     return SafeArea(
       child: Container(
         child: Column(
@@ -177,12 +194,44 @@ class _GamePageState extends State<GamePage> {
             ),
             Expanded(
               flex: 15,
-              child: Container(
-                color: Colors.red,
-              ),
-            ),
+              child: playersCardsView(playersCards),
+            )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget playersCardsView(List<Widget> playersCards) {
+    return Container(
+      color: Colors.red,
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              children: playersCards,
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: playersCards,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget showingCard(logic.Card tcard) {
+    return Expanded(
+      child: FlatButton(
+        padding: EdgeInsets.all(0.0),
+        onPressed: () {
+          print(tcard.toString());
+          setState(() {
+            playersCards.remove(this);
+          });
+        },
+        child: tcard.playerCardsWidget(),
       ),
     );
   }
