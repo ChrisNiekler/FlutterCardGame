@@ -317,7 +317,7 @@ class _GamePageState extends State<GamePage> {
     List<Widget> cardListA = [];
     List<Widget> cardListB = [];
     for (int i = 0; i < amountOfCards; i++) {
-      if (i < 10) {
+      if (i < amountOfCards / 2) {
         cardListA.add(
           Expanded(
             child: Container(
@@ -361,7 +361,7 @@ class _GamePageState extends State<GamePage> {
     List<Widget> cardListA = [];
     List<Widget> cardListB = [];
     for (int i = 0; i < amountOfCards; i++) {
-      if (i < 10) {
+      if (i < amountOfCards / 2) {
         cardListA.add(
           Expanded(
             child: Container(
