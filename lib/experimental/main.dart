@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/backend/playersUI.dart';
+import 'package:wizard/logic/artificial_intelligence/ai.dart';
+import 'package:wizard/logic/artificial_intelligence/ki.dart';
+import 'package:wizard/logic/artificial_intelligence/kuenstlicheIntelligenz.dart';
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
@@ -76,7 +79,7 @@ class _GamePageState extends State<GamePage> {
               flex: 10,
               child: Container(
                 color: Colors.green,
-                child: upsideDownCardsUpSide(displayedCards.length, "red"),
+                child: upsideDownCardsTop(displayedCards.length, "red"),
               ),
             ),
             Expanded(
@@ -121,7 +124,9 @@ class _GamePageState extends State<GamePage> {
                                         color: Colors.yellow.shade600,
                                         child: Center(
                                           child: (tableCard != null)
-                                              ? playedCard(tableCard)
+                                              ? playedCard((players[2] as Ai)
+                                                  .handCards
+                                                  .removeLast())
                                               : Container(),
                                         ),
                                       ),
@@ -131,7 +136,10 @@ class _GamePageState extends State<GamePage> {
                                         color: Colors.orange.shade900,
                                         child: Center(
                                             child: (tableCard != null)
-                                                ? playedCard(tableCard)
+                                                ? playedCard((players[1]
+                                                        as KuenstlicheIntelligenz)
+                                                    .handCards
+                                                    .removeLast())
                                                 : Container()),
                                       ),
                                     ),
@@ -149,7 +157,9 @@ class _GamePageState extends State<GamePage> {
                                         color: Colors.green.shade900,
                                         child: Center(
                                             child: (tableCard != null)
-                                                ? playedCard(tableCard)
+                                                ? playedCard((players[3] as Ki)
+                                                    .handCards
+                                                    .removeLast())
                                                 : Container()),
                                       ),
                                     ),
@@ -186,7 +196,10 @@ class _GamePageState extends State<GamePage> {
                                         color: Colors.grey.shade700,
                                         child: Center(
                                             child: (tableCard != null)
-                                                ? playedCard(tableCard)
+                                                ? playedCard((players[4]
+                                                        as KuenstlicheIntelligenz)
+                                                    .handCards
+                                                    .removeLast())
                                                 : Container()),
                                       ),
                                     ),
@@ -195,7 +208,9 @@ class _GamePageState extends State<GamePage> {
                                         color: Colors.teal.shade900,
                                         child: Center(
                                             child: (tableCard != null)
-                                                ? playedCard(tableCard)
+                                                ? playedCard((players[5] as Ai)
+                                                    .handCards
+                                                    .removeLast())
                                                 : Container()),
                                       ),
                                     ),
@@ -304,7 +319,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   void cardDistribution() {
-    int roundNumber = 20;
+    int roundNumber = 10;
     int lng = players.length;
     for (int i = 0; i < roundNumber; i++) {
       for (int j = 0; j < lng; j++) {
@@ -317,7 +332,7 @@ class _GamePageState extends State<GamePage> {
     List<Widget> cardListA = [];
     List<Widget> cardListB = [];
     for (int i = 0; i < amountOfCards; i++) {
-      if (i < amountOfCards / 2) {
+      if (i < amountOfCards / 2 || amountOfCards < 11) {
         cardListA.add(
           Expanded(
             child: Container(
@@ -357,11 +372,11 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget upsideDownCardsUpSide(int amountOfCards, String color) {
+  Widget upsideDownCardsTop(int amountOfCards, String color) {
     List<Widget> cardListA = [];
     List<Widget> cardListB = [];
     for (int i = 0; i < amountOfCards; i++) {
-      if (i < amountOfCards / 2) {
+      if (i < amountOfCards / 2 || amountOfCards < 11) {
         cardListA.add(
           Expanded(
             child: Container(
