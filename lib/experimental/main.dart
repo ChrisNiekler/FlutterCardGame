@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/logic/cardType.dart';
@@ -28,20 +30,30 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<Widget> playersCards = [];
   List<PlayingCard> playCard = [];
+  List<logic.Card> cList = [
+    logic.Card(CardType.HEART, 0),
+    logic.Card(CardType.HEART, 1),
+    logic.Card(CardType.HEART, 2),
+    logic.Card(CardType.HEART, 3),
+    logic.Card(CardType.HEART, 4),
+    logic.Card(CardType.HEART, 5),
+    logic.Card(CardType.HEART, 6),
+    logic.Card(CardType.HEART, 7),
+    logic.Card(CardType.HEART, 8),
+    logic.Card(CardType.HEART, 14)
+  ];
   @override
   Widget build(BuildContext context) {
-    playersCards = [
-      showingCard(logic.Card(CardType.HEART, 0)),
-      showingCard(logic.Card(CardType.HEART, 1)),
-      showingCard(logic.Card(CardType.HEART, 2)),
-      showingCard(logic.Card(CardType.HEART, 3)),
-      showingCard(logic.Card(CardType.HEART, 4)),
-      showingCard(logic.Card(CardType.HEART, 5)),
-      showingCard(logic.Card(CardType.HEART, 6)),
-      showingCard(logic.Card(CardType.HEART, 7)),
-      showingCard(logic.Card(CardType.HEART, 8)),
-      showingCard(logic.Card(CardType.HEART, 14)),
-    ];
+    playersCards = [];
+    cList.forEach((element) {
+      playersCards.add(showingCard(element));
+    });
+//    hand.forEach(
+//          (crd) {
+//        crd.allowedToPlay = true;
+//        n++;
+//      },
+//    );
     playCard = [PlayingCard("8hearts")];
     return SafeArea(
       child: Container(
@@ -221,6 +233,7 @@ class _GamePageState extends State<GamePage> {
       ),
     );
   }
+
   Widget showingCard(logic.Card tcard) {
     return Expanded(
       child: FlatButton(
@@ -228,7 +241,7 @@ class _GamePageState extends State<GamePage> {
         onPressed: () {
           print(tcard.toString());
           setState(() {
-            playersCards.remove(this);
+            cList.remove(tcard);
           });
         },
         child: tcard.playerCardsWidget(),
