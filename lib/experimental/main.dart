@@ -33,7 +33,8 @@ class _GamePageState extends State<GamePage> {
   List<Player> players;
   Deck deck;
   logic.Card trumpCard;
-  int roundNumber = 9;
+  int roundNumber = 1;
+  bool newRound = false;
   @override
   void initState() {
     super.initState();
@@ -52,6 +53,12 @@ class _GamePageState extends State<GamePage> {
     players[0].handCards.forEach((element) {
       displayedCards.add(showingCard(element));
     });
+    if (newRound) {
+      setState(() {
+        print(roundNumber);
+        print(deck.size());
+      });
+    }
 
     return SafeArea(
       child: Container(
@@ -284,6 +291,20 @@ class _GamePageState extends State<GamePage> {
         onPressed: () {
           print(tcard.toString());
           setState(() {
+            if (players[5].handCards.length == 1) {
+              print("Your mom was here");
+              newRound = true;
+              roundNumber++;
+              deck = new Deck();
+              cardDistribution();
+              if (deck.size() != 0) {
+                trumpCard = deck.takeCard();
+              } else {
+                trumpCard = null;
+              }
+            } else {
+              newRound = false;
+            }
             tableCard = tcard;
             players[0].handCards.remove(tcard);
           });
