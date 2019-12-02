@@ -1,5 +1,5 @@
-import 'package:wizard/card.dart';
-import 'package:wizard/player.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/player.dart';
 import 'cardType.dart';
 import 'dart:io';
 
@@ -59,8 +59,12 @@ class HumanPlayer extends Player {
     int check;
     this.printHandCardsToConsole();
     do {
-      print('Put your bet:');
-      inputString = stdin.readLineSync();
+      if (testValue != null) {
+        inputString = testValue;
+      } else {
+        print('Put your bet:');
+        inputString = stdin.readLineSync();
+      }
       if (_isNumeric(inputString)) {
         this.bet = int.parse(inputString);
         check = bet + betsNumber;
@@ -75,7 +79,7 @@ class HumanPlayer extends Player {
       } else {
         print('Please enter a number!');
       }
-    } while (!inputAllowed);
+    } while (!inputAllowed && testValue == null);
     print('$name bet he/she wins $bet tricks!');
   }
 

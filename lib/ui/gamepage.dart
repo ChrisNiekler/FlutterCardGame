@@ -5,6 +5,7 @@ import 'package:wizard/ui/trump_MidTable.dart';
 import 'package:wizard/ui/playerTemplateGUI.dart';
 import 'package:wizard/ui/player_BottomTable.dart';
 import 'package:wizard/ui/player_TopTable.dart';
+import 'package:wizard/logic/artificial_intelligence/ai.dart';
 
 class Gamepage extends StatelessWidget {
   Gamepage({this.amountPlayers, this.username});
@@ -18,34 +19,39 @@ class Gamepage extends StatelessWidget {
   Widget build(BuildContext context) {
     widthDevice = MediaQuery.of(context).size.width;
     heightDevice = MediaQuery.of(context).size.height * 6 / 10;
-    return new Scaffold(backgroundColor: Colors.grey,
+    return new Scaffold(
+        backgroundColor: Colors.grey,
         body: SafeArea(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            amountPlayers == 6
-                ? Expanded(flex:2 ,child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[TopPart()],
-                  ))
-                : Container(),
-            Expanded(flex: 6,
-              child: Row(
-                //mainAxisSize: MainAxisSize.max,
-                children: getTableUI(),
-              ),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                amountPlayers == 6
+                    ? Expanded(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[TopPart()],
+                        ))
+                    : Container(),
+                Expanded(
+                  flex: 6,
+                  child: Row(
+                    //mainAxisSize: MainAxisSize.max,
+                    children: getTableUI(),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: <Widget>[
+                      BottomPart(),
+                    ],
+                  ),
+                )
+              ],
             ),
-            Expanded(flex: 2,
-              child: Row(
-                children: <Widget>[
-                  BottomPart(),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
 //create the ui
@@ -64,7 +70,7 @@ class Gamepage extends StatelessWidget {
 
     if (amountPlayers == 3)
       playerCards.add(PlayerTemplate(
-        playerName: "Playername",
+        playerName: "Dos",
         isLeft: true,
       ));
     if (amountPlayers >= 4) {
@@ -117,7 +123,7 @@ class Gamepage extends StatelessWidget {
 // Widget that takes the list of container from getPlayerContainerLeft
   Widget leftPart() {
     return Container(
-    //  height: heightDevice,
+      //  height: heightDevice,
       width: widthDevice * 2 / 5,
       color: Colors.grey,
       child: Column(children: getPlayerContainerLeft()),
@@ -127,7 +133,7 @@ class Gamepage extends StatelessWidget {
 // Widget that takes the list of container from getPlayerContainerRight
   Widget rightPart() {
     return Container(
-     // height: heightDevice,
+      // height: heightDevice,
       width: widthDevice * 2 / 5,
       color: Colors.grey,
       child: Column(children: getPlayerContainerRight()),

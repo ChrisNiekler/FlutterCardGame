@@ -1,8 +1,8 @@
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
-import 'package:wizard/player.dart';
-import 'humanPlayer.dart';
-import 'package:wizard/deck.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
+import 'package:wizard/logic/player.dart';
+import '../logic/humanPlayer.dart';
+import 'package:wizard/logic/deck.dart';
 import 'dart:io';
 
 class Round {
@@ -115,8 +115,10 @@ class Round {
             ),
           );
         } else {
-          playedCards
-              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0], highestCard: highestPlayedCard));
+          playedCards.add(gamer.playCard(1,
+              trump: trumpType,
+              foe: playedCards[0],
+              highestCard: highestPlayedCard));
         }
       }
 
@@ -273,7 +275,10 @@ class Round {
     int p = trickStarter;
     int playerNumber = players.length;
     for (int i = 0, n = players.length; i < n; i++) {
-      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType, playerNumber: playerNumber, firstPlayer: firstPlayer);
+      players[p % n].putBet(roundNumber, betsNumber,
+          trump: trumpType,
+          playerNumber: playerNumber,
+          firstPlayer: firstPlayer);
       betsNumber += players[p % n].bet;
       p++;
     }
@@ -286,9 +291,9 @@ class Round {
       players[trickStarter - 1].lastPlayer = true;
   }
 
-  void determineFirstPlayer () {
-    for(int i = 0; i < players.length; i++){
-      if(players[i].id == trickStarter) players[i].firstPlayer = true;
+  void determineFirstPlayer() {
+    for (int i = 0; i < players.length; i++) {
+      if (players[i].id == trickStarter) players[i].firstPlayer = true;
     }
   }
 

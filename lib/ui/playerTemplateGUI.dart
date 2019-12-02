@@ -5,7 +5,8 @@ import 'package:wizard/ui/gamepage.dart';
 
 class PlayerTemplate extends StatefulWidget {
   final Function removeCardCallback;
-  PlayerTemplate({this.playerName, this.isLeft,this.removeCardCallback});
+  List<String> cardID = [];
+  PlayerTemplate({this.playerName, this.isLeft, this.removeCardCallback});
 
   String playerName;
   bool isLeft;
@@ -19,7 +20,7 @@ class PlayerTemplate extends StatefulWidget {
   }
 
   List<PlayingCard> cardsPerRoundPlayer() {
-    List<String> cardID = ["1hearts", "2diamonds", "5clubs"];
+    cardID = ["1hearts", "2diamonds", "5clubs"];
 
     List<PlayingCard> cardList = [];
     for (int i = 0; i < round; i++) cardList.add(PlayingCard(cardID[i]));
@@ -27,7 +28,7 @@ class PlayerTemplate extends StatefulWidget {
   }
 
   void removePlayedCard(String card) {
-    cardsPerRoundPlayer().remove(card);
+    cardID.remove(card);
   }
 
   @override

@@ -1,8 +1,8 @@
-import 'package:wizard/player.dart';
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
+import 'package:wizard/logic/player.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
 import 'dart:math' show Random;
-import 'package:wizard/deck.dart';
+import 'package:wizard/logic/deck.dart';
 
 //todo Tests für KuenstlicheIntelligenz
 

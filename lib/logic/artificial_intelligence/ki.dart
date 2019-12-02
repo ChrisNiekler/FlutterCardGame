@@ -1,6 +1,6 @@
-import 'package:wizard/player.dart';
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
+import 'package:wizard/logic/player.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
 import 'dart:math' show Random;
 
 //todo Tests für KI
@@ -181,6 +181,7 @@ class Ki extends Player {
     }
     return worstCard;
   }
+
   Card findBestCardWithoutFoe(CardType trump, int roundNumber, int playerNumber,
       List<Card> alreadyPlayedCards) {
     Card temp = playableHandCards[0];

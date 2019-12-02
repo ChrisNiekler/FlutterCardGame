@@ -1,5 +1,5 @@
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
 import 'dart:math';
 /* A new instance of Deck will automatically create a Deck of 60 Cards
    which are already shuffeld twice.

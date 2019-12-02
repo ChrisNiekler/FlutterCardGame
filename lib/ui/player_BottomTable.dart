@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wizard/ui/cardDropField.dart';
 import 'package:wizard/ui/playing_card.dart';
 import 'package:wizard/ui/playerTemplateGUI.dart';
+import 'package:wizard/logic/humanPlayer.dart';
 
 //this is for the user able to see his cards and play from here
 class BottomPart extends StatelessWidget {
@@ -27,7 +28,7 @@ class BottomPart extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          CardDropField(cardID),
+          CardDropField(cardID, player),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: player.cardsPerRoundPlayer()),

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:test/test.dart';
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
-import 'package:wizard/deck.dart';
-import 'package:wizard/humanPlayer.dart';
-import 'package:wizard/ki.dart';
-import 'package:wizard/kuenstlicheIntelligenz.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
+import 'package:wizard/logic/deck.dart';
+import 'package:wizard/logic/humanPlayer.dart';
+import 'package:wizard/logic/artificial_intelligence/ki.dart';
+import 'package:wizard/logic/artificial_intelligence/kuenstlicheIntelligenz.dart';
 
 var log = [];
 
@@ -287,23 +287,23 @@ void main() {
           expect(
               ai
                   .playCard(1,
-                  trump: CardType.HEART,
-                  foe: new Card(CardType.HEART, 12),
-                  roundNumber: 5,
-                  playerNumber: 3,
-                  playedCards: playedCards,
-                  highestCard: new Card(CardType.HEART, 12))
+                      trump: CardType.HEART,
+                      foe: new Card(CardType.HEART, 12),
+                      roundNumber: 5,
+                      playerNumber: 3,
+                      playedCards: playedCards,
+                      highestCard: new Card(CardType.HEART, 12))
                   .cardType,
               CardType.HEART);
           expect(
               ai
                   .playCard(1,
-                  trump: CardType.HEART,
-                  foe: new Card(CardType.HEART, 12),
-                  roundNumber: 5,
-                  playerNumber: 3,
-                  playedCards: playedCards,
-                  highestCard: new Card(CardType.HEART, 12))
+                      trump: CardType.HEART,
+                      foe: new Card(CardType.HEART, 12),
+                      roundNumber: 5,
+                      playerNumber: 3,
+                      playedCards: playedCards,
+                      highestCard: new Card(CardType.HEART, 12))
                   .value,
               2);
         });

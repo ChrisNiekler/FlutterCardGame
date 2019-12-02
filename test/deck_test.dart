@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
-import 'package:wizard/deck.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
+import 'package:wizard/logic/deck.dart';
 
 void main() {
   group('ALL:', () {

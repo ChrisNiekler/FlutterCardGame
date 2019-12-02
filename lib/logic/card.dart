@@ -1,4 +1,4 @@
-import 'package:wizard/cardType.dart';
+import 'package:wizard/logic/cardType.dart';
 
 class Card {
   CardType cardType;

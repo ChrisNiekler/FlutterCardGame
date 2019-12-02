@@ -1,6 +1,6 @@
-import 'package:wizard/player.dart';
-import 'package:wizard/card.dart';
-import 'cardType.dart';
+import 'package:wizard/logic/player.dart';
+import 'package:wizard/logic/card.dart';
+import '../cardType.dart';
 import 'dart:math' show Random;
 
 //todo Tests für AI

@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:wizard/card.dart';
-import 'package:wizard/cardType.dart';
+import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/cardType.dart';
 
 void main() {
   group('Card:', () {

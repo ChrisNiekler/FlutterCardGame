@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wizard/round.dart';
+import 'package:wizard/consoleGame/round.dart';
 
 //for the trump, still need to extend this for the 6th player
 class MidPart extends StatefulWidget {
@@ -20,12 +20,13 @@ class _MidPartState extends State<MidPart> {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints.tightForFinite(
-      //  height: MediaQuery.of(context).size.height * 6 / 10,
+        //  height: MediaQuery.of(context).size.height * 6 / 10,
         width: MediaQuery.of(context).size.width * 1 / 5,
       ),
       color: Colors.grey,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.center,
-
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           DragTarget(
             builder: (context, List<String> acceptedCards, rejectedCards) {
@@ -63,7 +64,7 @@ class _MidPartState extends State<MidPart> {
               });
             },
           ),
-         /* Column(mainAxisAlignment: MainAxisAlignment.end,
+          /* Column(mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               CardDropField(cardID),
             ],

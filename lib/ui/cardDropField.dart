@@ -3,17 +3,17 @@ import 'package:wizard/ui/playerTemplateGUI.dart';
 
 class CardDropField extends StatefulWidget {
   final String cardID;
+  final PlayerTemplate player;
 
   @override
   _CardDropField createState() => _CardDropField();
 
-  CardDropField(this.cardID);
+  CardDropField(this.cardID, this.player);
 }
 
 class _CardDropField extends State<CardDropField> {
   String cardID;
   String cardTrump;
-  PlayerTemplate player;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,7 @@ class _CardDropField extends State<CardDropField> {
       onAccept: (data) {
         cardID = data;
         setState(() {
-          player.removePlayedCard(cardID);
-
+          widget.player.removePlayedCard(cardID);
         });
       },
     );
