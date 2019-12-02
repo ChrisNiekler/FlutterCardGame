@@ -30,6 +30,7 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<Widget> playersCards = [];
   List<PlayingCard> playCard = [];
+  logic.Card tableCard;
   List<logic.Card> cList = [
     logic.Card(CardType.HEART, 0),
     logic.Card(CardType.HEART, 1),
@@ -43,8 +44,14 @@ class _GamePageState extends State<GamePage> {
     logic.Card(CardType.HEART, 9),
     logic.Card(CardType.HEART, 10),
     logic.Card(CardType.HEART, 11),
+    logic.Card(CardType.HEART, 12),
     logic.Card(CardType.HEART, 13),
-    logic.Card(CardType.HEART, 14)
+    logic.Card(CardType.HEART, 14),
+    logic.Card(CardType.CLUB, 0),
+    logic.Card(CardType.CLUB, 1),
+    logic.Card(CardType.CLUB, 2),
+    logic.Card(CardType.CLUB, 3),
+    logic.Card(CardType.CLUB, 4)
   ];
   @override
   Widget build(BuildContext context) {
@@ -147,7 +154,9 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.red.shade900,
                                         child: Center(
-                                          child: PlayingCard("6hearts"),
+                                          child: (tableCard != null)
+                                              ? playedCard(tableCard)
+                                              : Container(),
                                         ),
                                       ),
                                     ),
@@ -259,11 +268,19 @@ class _GamePageState extends State<GamePage> {
         onPressed: () {
           print(tcard.toString());
           setState(() {
+            tableCard = tcard;
             cList.remove(tcard);
           });
         },
         child: tcard.playerCardsWidget(),
       ),
+    );
+  }
+
+  Widget playedCard(logic.Card tCard) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: tCard.playerCardsWidget(),
     );
   }
 }
