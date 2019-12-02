@@ -36,6 +36,13 @@ class _GamePageState extends State<GamePage> {
   int roundNumber = 1;
   int maxRound = 10;
   bool newRound = false;
+  bool userPlayedCard = false;
+  logic.Card playerOneField;
+  logic.Card playerTwoField;
+  logic.Card playerThreeField;
+  logic.Card playerFourField;
+  logic.Card playerFiveField;
+  logic.Card playerSixField;
   @override
   void initState() {
     super.initState();
@@ -54,6 +61,16 @@ class _GamePageState extends State<GamePage> {
     players[0].handCards.forEach((element) {
       displayedCards.add(showingCard(element));
     });
+    if (userPlayedCard) {
+      playerTwoField =
+          (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+      playerThreeField = (players[2] as Ai).handCards.removeLast();
+      playerFourField = (players[3] as Ki).handCards.removeLast();
+      playerFiveField =
+          (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
+      playerSixField = (players[5] as Ai).handCards.removeLast();
+      userPlayedCard = false;
+    }
     if (newRound) {
       setState(() {
         print(roundNumber);
@@ -113,10 +130,8 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.yellow.shade600,
                                         child: Center(
-                                          child: (tableCard != null)
-                                              ? playedCard((players[2] as Ai)
-                                                  .handCards
-                                                  .removeLast())
+                                          child: (playerThreeField != null)
+                                              ? playedCard(playerThreeField)
                                               : Container(),
                                         ),
                                       ),
@@ -125,11 +140,8 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.orange.shade900,
                                         child: Center(
-                                            child: (tableCard != null)
-                                                ? playedCard((players[1]
-                                                        as KuenstlicheIntelligenz)
-                                                    .handCards
-                                                    .removeLast())
+                                            child: (playerTwoField != null)
+                                                ? playedCard(playerTwoField)
                                                 : Container()),
                                       ),
                                     ),
@@ -146,10 +158,8 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.green.shade900,
                                         child: Center(
-                                            child: (tableCard != null)
-                                                ? playedCard((players[3] as Ki)
-                                                    .handCards
-                                                    .removeLast())
+                                            child: (playerFourField != null)
+                                                ? playedCard(playerFourField)
                                                 : Container()),
                                       ),
                                     ),
@@ -185,11 +195,8 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.grey.shade700,
                                         child: Center(
-                                            child: (tableCard != null)
-                                                ? playedCard((players[4]
-                                                        as KuenstlicheIntelligenz)
-                                                    .handCards
-                                                    .removeLast())
+                                            child: (playerFiveField != null)
+                                                ? playedCard(playerFiveField)
                                                 : Container()),
                                       ),
                                     ),
@@ -197,10 +204,8 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.teal.shade900,
                                         child: Center(
-                                            child: (tableCard != null)
-                                                ? playedCard((players[5] as Ai)
-                                                    .handCards
-                                                    .removeLast())
+                                            child: (playerSixField != null)
+                                                ? playedCard(playerSixField)
                                                 : Container()),
                                       ),
                                     ),
@@ -307,6 +312,7 @@ class _GamePageState extends State<GamePage> {
             } else {
               newRound = false;
             }
+            userPlayedCard = true;
             tableCard = tcard;
             players[0].handCards.remove(tcard);
           });
