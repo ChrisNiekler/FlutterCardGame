@@ -248,12 +248,13 @@ class _GamePageState extends State<GamePage> {
   Widget playersCardsView(List<Widget> tempCards) {
     List<Widget> listA = [];
     List<Widget> listB = [];
+    int k = 0;
     if (tempCards.length > 10) {
-      for (int i = 0; i < 10; i++) {
-        listA.add(tempCards[i]);
+      for (; k < tempCards.length / 2; k++) {
+        listA.add(tempCards[k]);
       }
-      for (int i = 10, j = tempCards.length; i < j; i++) {
-        listB.add(tempCards[i]);
+      for (int j = tempCards.length; k < j; k++) {
+        listB.add(tempCards[k]);
       }
     } else {
       listA = tempCards;
