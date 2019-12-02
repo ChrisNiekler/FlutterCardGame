@@ -113,7 +113,9 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.yellow.shade600,
                                         child: Center(
-                                          child: PlayingCard("3hearts"),
+                                          child: (tableCard != null)
+                                              ? playedCard(tableCard)
+                                              : Container(),
                                         ),
                                       ),
                                     ),
@@ -121,8 +123,9 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.orange.shade900,
                                         child: Center(
-                                          child: PlayingCard("2hearts"),
-                                        ),
+                                            child: (tableCard != null)
+                                                ? playedCard(tableCard)
+                                                : Container()),
                                       ),
                                     ),
                                   ],
@@ -138,16 +141,18 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.green.shade900,
                                         child: Center(
-                                          child: PlayingCard("7hearts"),
-                                        ),
+                                            child: (tableCard != null)
+                                                ? playedCard(tableCard)
+                                                : Container()),
                                       ),
                                     ),
                                     Expanded(
                                       child: Container(
                                         color: Colors.black,
                                         child: Center(
-                                          child: PlayingCard("1hearts"),
-                                        ),
+                                            child: (tableCard != null)
+                                                ? playedCard(tableCard)
+                                                : Container()),
                                       ),
                                     ),
                                     Expanded(
@@ -173,16 +178,18 @@ class _GamePageState extends State<GamePage> {
                                       child: Container(
                                         color: Colors.grey.shade700,
                                         child: Center(
-                                          child: PlayingCard("14hearts"),
-                                        ),
+                                            child: (tableCard != null)
+                                                ? playedCard(tableCard)
+                                                : Container()),
                                       ),
                                     ),
                                     Expanded(
                                       child: Container(
                                         color: Colors.teal.shade900,
                                         child: Center(
-                                          child: PlayingCard("0hearts"),
-                                        ),
+                                            child: (tableCard != null)
+                                                ? playedCard(tableCard)
+                                                : Container()),
                                       ),
                                     ),
                                   ],
