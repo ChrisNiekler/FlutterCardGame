@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     return email.substring(0, end);
   }
 
-  //need to pass it to game.dart
+  //need to pass it to backendInit.dart
   int playerAmount(int amount) {
     return amount;
   }
