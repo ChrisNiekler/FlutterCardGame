@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         title: 'Wizard',
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
         ),
         home: GamePage());
   }
@@ -85,6 +85,7 @@ class _GamePageState extends State<GamePage> {
 
     return SafeArea(
       child: Container(
+        color: Colors.green.shade700,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -97,7 +98,6 @@ class _GamePageState extends State<GamePage> {
             Expanded(
               flex: 60,
               child: Container(
-                color: Colors.blue,
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -112,7 +112,6 @@ class _GamePageState extends State<GamePage> {
                     Expanded(
                       flex: 30,
                       child: Container(
-                        color: Colors.purple,
                         // cards on the table first column
                         child: Row(
                           children: <Widget>[
@@ -120,10 +119,8 @@ class _GamePageState extends State<GamePage> {
                               child: Container(
                                 child: Column(
                                   children: <Widget>[
-                                    cardOnTable(
-                                        Colors.yellow, playerThreeField),
-                                    cardOnTable(
-                                        Colors.orange.shade900, playerTwoField),
+                                    cardOnTable(playerThreeField),
+                                    cardOnTable(playerTwoField),
                                   ],
                                 ),
                               ),
@@ -131,13 +128,13 @@ class _GamePageState extends State<GamePage> {
                             // cards on table second column
                             Expanded(
                               child: Container(
-                                color: Colors.tealAccent,
                                 child: Column(
                                   children: <Widget>[
-                                    cardOnTable(
-                                        Colors.green.shade900, playerFourField),
-                                    cardOnTable(Colors.black, trumpCard),
-                                    cardOnTable(Colors.red.shade900, tableCard),
+                                    cardOnTable(playerFourField),
+                                    Container(
+                                      child: cardOnTable(trumpCard),
+                                    ),
+                                    cardOnTable(tableCard),
                                   ],
                                 ),
                               ),
@@ -145,13 +142,10 @@ class _GamePageState extends State<GamePage> {
                             // cards on table third column
                             Expanded(
                               child: Container(
-                                color: Colors.teal.shade400,
                                 child: Column(
                                   children: <Widget>[
-                                    cardOnTable(
-                                        Colors.grey.shade700, playerFiveField),
-                                    cardOnTable(
-                                        Colors.teal.shade900, playerSixField),
+                                    cardOnTable(playerFiveField),
+                                    cardOnTable(playerSixField),
                                   ],
                                 ),
                               ),
@@ -163,7 +157,6 @@ class _GamePageState extends State<GamePage> {
                     Expanded(
                       flex: 10,
                       child: Container(
-                        color: Colors.pink,
                         child: Column(
                           children: <Widget>[
                             enemyCards(displayedCards.length, "blue", true),
