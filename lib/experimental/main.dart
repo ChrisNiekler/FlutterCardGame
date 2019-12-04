@@ -7,6 +7,7 @@ import 'package:wizard/logic/artificial_intelligence/kuenstlicheIntelligenz.dart
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
+import 'showingCardWidget.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,7 +60,7 @@ class _GamePageState extends State<GamePage> {
   Widget build(BuildContext context) {
     displayedCards = [];
     players[0].handCards.forEach((element) {
-      displayedCards.add(showingCard(element));
+      displayedCards.add(showingCardOld(element));
     });
     if (userPlayedCard) {
       playerTwoField =
@@ -294,7 +295,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget showingCard(logic.Card tcard) {
+  Widget showingCardOld(logic.Card tcard) {
     return Expanded(
       child: FlatButton(
         padding: EdgeInsets.all(0.0),
@@ -425,36 +426,34 @@ class _GamePageState extends State<GamePage> {
   }
 
   Widget scoreboard() {
-    return Scaffold(appBar: new AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      actions: <Widget>[
-        new RaisedButton(
-            child: new Text('Scoreboard',
-                style: new TextStyle(fontSize: 17.0, color: Colors.grey)
-            ),
-            onPressed:() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => scoretable()),
-              );
-            })
-      ],
-    ),
+    return Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        actions: <Widget>[
+          new RaisedButton(
+              child: new Text('Scoreboard',
+                  style: new TextStyle(fontSize: 17.0, color: Colors.grey)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => scoretable()),
+                );
+              })
+        ],
+      ),
     );
   }
 
   Widget scoretable() {
-    return AlertDialog(content:
-    Column(
-      children: <Widget>[
-        Container(
-          child: Text("hallo"),
-        ),
-
-      ],
-    ),
+    return AlertDialog(
+      content: Column(
+        children: <Widget>[
+          Container(
+            child: Text("hallo"),
+          ),
+        ],
+      ),
     );
   }
-
 }
