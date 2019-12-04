@@ -89,7 +89,8 @@ class _GamePageState extends State<GamePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(20.0),
         child: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green.shade700,
+          elevation: 0.0,
           actions: <Widget>[
             FlatButton(
               child: Text("Scoreboard"),
