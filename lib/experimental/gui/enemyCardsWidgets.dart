@@ -82,3 +82,19 @@ Widget upsideDownCardsTop(int amountOfCards, String color) {
     ],
   );
 }
+
+Widget enemyCards(int amountOfCards, String color, bool sides) {
+  if (sides) {
+    return Expanded(
+      child: Container(
+        color: Colors.lightGreen,
+        child: upsideDownCardsSides(amountOfCards, color),
+      ),
+    );
+  } else {
+    return Container(
+      color: Colors.lightGreen,
+      child: upsideDownCardsTop(amountOfCards, color),
+    );
+  }
+}

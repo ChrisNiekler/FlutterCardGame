@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/experimental/backend/enemyCardsWidgets.dart';
-import 'package:wizard/experimental/backend/guiWidgets.dart';
+import 'package:wizard/experimental/gui/enemyCardsWidgets.dart';
+import 'package:wizard/experimental/gui/cardsOnTable.dart';
 import 'package:wizard/experimental/backend/playersUI.dart';
 import 'package:wizard/logic/artificial_intelligence/ai.dart';
 import 'package:wizard/logic/artificial_intelligence/ki.dart';
@@ -10,7 +10,7 @@ import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
 import 'showingCardWidget.dart';
-import 'backend/usersViewWidget.dart';
+import 'gui/usersViewWidget.dart';
 
 void main() => runApp(MyApp());
 
@@ -92,12 +92,8 @@ class _GamePageState extends State<GamePage> {
               child: scoreboard(),
             ),
             Expanded(
-              flex: 10,
-              child: Container(
-                color: Colors.green,
-                child: upsideDownCardsTop(displayedCards.length, "red"),
-              ),
-            ),
+                flex: 10,
+                child: enemyCards(displayedCards.length, "red", false)),
             Expanded(
               flex: 60,
               child: Container(
@@ -108,20 +104,8 @@ class _GamePageState extends State<GamePage> {
                       flex: 10,
                       child: Column(
                         children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              color: Colors.yellow,
-                              child: upsideDownCardsSides(
-                                  displayedCards.length, "gray"),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.orange,
-                              child: upsideDownCardsSides(
-                                  displayedCards.length, "green"),
-                            ),
-                          ),
+                          enemyCards(displayedCards.length, "gray", true),
+                          enemyCards(displayedCards.length, "green", true),
                         ],
                       ),
                     ),
@@ -129,6 +113,7 @@ class _GamePageState extends State<GamePage> {
                       flex: 30,
                       child: Container(
                         color: Colors.purple,
+                        // cards on the table first column
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -143,6 +128,7 @@ class _GamePageState extends State<GamePage> {
                                 ),
                               ),
                             ),
+                            // cards on table second column
                             Expanded(
                               child: Container(
                                 color: Colors.tealAccent,
@@ -156,6 +142,7 @@ class _GamePageState extends State<GamePage> {
                                 ),
                               ),
                             ),
+                            // cards on table third column
                             Expanded(
                               child: Container(
                                 color: Colors.teal.shade400,
@@ -179,20 +166,8 @@ class _GamePageState extends State<GamePage> {
                         color: Colors.pink,
                         child: Column(
                           children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                color: Colors.grey,
-                                child: upsideDownCardsSides(
-                                    displayedCards.length, "blue"),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                color: Colors.teal,
-                                child: upsideDownCardsSides(
-                                    displayedCards.length, "purple"),
-                              ),
-                            ),
+                            enemyCards(displayedCards.length, "blue", true),
+                            enemyCards(displayedCards.length, "purple", true),
                           ],
                         ),
                       ),
