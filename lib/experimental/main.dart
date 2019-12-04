@@ -83,6 +83,10 @@ class _GamePageState extends State<GamePage> {
         child: Column(
           children: <Widget>[
             Expanded(
+              flex: 3,
+              child: scoreboard(),
+            ),
+            Expanded(
               flex: 10,
               child: Container(
                 color: Colors.green,
@@ -419,4 +423,38 @@ class _GamePageState extends State<GamePage> {
       ],
     );
   }
+
+  Widget scoreboard() {
+    return Scaffold(appBar: new AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      actions: <Widget>[
+        new RaisedButton(
+            child: new Text('Scoreboard',
+                style: new TextStyle(fontSize: 17.0, color: Colors.grey)
+            ),
+            onPressed:() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => scoretable()),
+              );
+            })
+      ],
+    ),
+    );
+  }
+
+  Widget scoretable() {
+    return AlertDialog(content:
+    Column(
+      children: <Widget>[
+        Container(
+          child: Text("hallo"),
+        ),
+
+      ],
+    ),
+    );
+  }
+
 }
