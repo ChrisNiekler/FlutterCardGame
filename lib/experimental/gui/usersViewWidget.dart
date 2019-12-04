@@ -15,7 +15,7 @@ Widget playersCardsView(List<Widget> tempCards) {
     listA = tempCards;
   }
   return Container(
-    color: Colors.red,
+    color: Colors.green.shade700,
     child: Column(
       children: <Widget>[
         Expanded(

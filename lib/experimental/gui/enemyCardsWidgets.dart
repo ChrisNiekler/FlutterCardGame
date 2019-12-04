@@ -87,13 +87,13 @@ Widget enemyCards(int amountOfCards, String color, bool sides) {
   if (sides) {
     return Expanded(
       child: Container(
-        color: Colors.lightGreen,
+        color: Colors.green.shade700,
         child: upsideDownCardsSides(amountOfCards, color),
       ),
     );
   } else {
     return Container(
-      color: Colors.lightGreen,
+      color: Colors.green.shade700,
       child: upsideDownCardsTop(amountOfCards, color),
     );
   }
