@@ -11,7 +11,6 @@ import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
 import 'showingCardWidget.dart';
 import 'gui/usersViewWidget.dart';
-import 'scoreboard.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         title: 'Wizard',
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
         ),
         home: GamePage());
   }
@@ -49,7 +48,6 @@ class _GamePageState extends State<GamePage> {
   logic.Card playerFourField;
   logic.Card playerFiveField;
   logic.Card playerSixField;
-
   @override
   void initState() {
     super.initState();
@@ -86,122 +84,96 @@ class _GamePageState extends State<GamePage> {
     }
 
     return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(20.0),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Scoreboard"),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      // return object of type Dialog
-                      return scoretable(context);
-                    },
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                  flex: 10,
-                  child: enemyCards(displayedCards.length, "red", false)),
-              Expanded(
-                flex: 60,
-                child: Container(
-                  color: Colors.blue,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 10,
-                        child: Column(
+      child: Container(
+        color: Colors.green.shade700,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: scoreboard(),
+            ),
+            Expanded(
+                flex: 10,
+                child: enemyCards(displayedCards.length, "red", false)),
+            Expanded(
+              flex: 60,
+              child: Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 10,
+                      child: Column(
+                        children: <Widget>[
+                          enemyCards(displayedCards.length, "gray", true),
+                          enemyCards(displayedCards.length, "green", true),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 30,
+                      child: Container(
+                        // cards on the table first column
+                        child: Row(
                           children: <Widget>[
-                            enemyCards(displayedCards.length, "gray", true),
-                            enemyCards(displayedCards.length, "green", true),
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    cardOnTable(playerThreeField),
+                                    cardOnTable(playerTwoField),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // cards on table second column
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    cardOnTable(playerFourField),
+                                    Container(
+                                      child: cardOnTable(trumpCard),
+                                    ),
+                                    cardOnTable(tableCard),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // cards on table third column
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    cardOnTable(playerFiveField),
+                                    cardOnTable(playerSixField),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                      Expanded(
-                        flex: 30,
-                        child: Container(
-                          color: Colors.purple,
-                          // cards on the table first column
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  child: Column(
-                                    children: <Widget>[
-                                      cardOnTable(
-                                          Colors.yellow, playerThreeField),
-                                      cardOnTable(Colors.orange.shade900,
-                                          playerTwoField),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // cards on table second column
-                              Expanded(
-                                child: Container(
-                                  color: Colors.tealAccent,
-                                  child: Column(
-                                    children: <Widget>[
-                                      cardOnTable(Colors.green.shade900,
-                                          playerFourField),
-                                      cardOnTable(Colors.black, trumpCard),
-                                      cardOnTable(
-                                          Colors.red.shade900, tableCard),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // cards on table third column
-                              Expanded(
-                                child: Container(
-                                  color: Colors.teal.shade400,
-                                  child: Column(
-                                    children: <Widget>[
-                                      cardOnTable(Colors.grey.shade700,
-                                          playerFiveField),
-                                      cardOnTable(
-                                          Colors.teal.shade900, playerSixField),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            enemyCards(displayedCards.length, "blue", true),
+                            enemyCards(displayedCards.length, "purple", true),
+                          ],
                         ),
                       ),
-                      Expanded(
-                        flex: 10,
-                        child: Container(
-                          color: Colors.pink,
-                          child: Column(
-                            children: <Widget>[
-                              enemyCards(displayedCards.length, "blue", true),
-                              enemyCards(displayedCards.length, "purple", true),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Expanded(
-                flex: 15,
-                child: playersCardsView(displayedCards),
-              )
-            ],
-          ),
+            ),
+            Expanded(
+              flex: 15,
+              child: playersCardsView(displayedCards),
+            )
+          ],
         ),
       ),
     );
@@ -255,4 +227,35 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
+  Widget scoreboard() {
+    return Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        actions: <Widget>[
+          new RaisedButton(
+              child: new Text('Scoreboard',
+                  style: new TextStyle(fontSize: 17.0, color: Colors.grey)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => scoretable()),
+                );
+              })
+        ],
+      ),
+    );
+  }
+
+  Widget scoretable() {
+    return AlertDialog(
+      content: Column(
+        children: <Widget>[
+          Container(
+            child: Text("hallo"),
+          ),
+        ],
+      ),
+    );
+  }
 }
