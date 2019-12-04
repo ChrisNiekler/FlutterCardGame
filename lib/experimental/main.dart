@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/backend/enemyCardsWidgets.dart';
+import 'package:wizard/experimental/backend/guiWidgets.dart';
 import 'package:wizard/experimental/backend/playersUI.dart';
 import 'package:wizard/logic/artificial_intelligence/ai.dart';
 import 'package:wizard/logic/artificial_intelligence/ki.dart';
@@ -34,6 +35,7 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   List<Player> players;
+  List<logic.Card> playedCards;
   Deck deck;
   logic.Card trumpCard;
   int roundNumber = 1;
@@ -46,7 +48,6 @@ class _GamePageState extends State<GamePage> {
   logic.Card playerFourField;
   logic.Card playerFiveField;
   logic.Card playerSixField;
-  Widget user;
   @override
   void initState() {
     super.initState();
@@ -77,8 +78,8 @@ class _GamePageState extends State<GamePage> {
     }
     if (newRound) {
       setState(() {
-        print(roundNumber);
-        print(deck.size());
+        print("Round number: $roundNumber");
+        print("Deck size: ${deck.size()}");
       });
     }
 
@@ -134,25 +135,10 @@ class _GamePageState extends State<GamePage> {
                               child: Container(
                                 child: Column(
                                   children: <Widget>[
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.yellow.shade600,
-                                        child: Center(
-                                          child: (playerThreeField != null)
-                                              ? playedCard(playerThreeField)
-                                              : Container(),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.orange.shade900,
-                                        child: Center(
-                                            child: (playerTwoField != null)
-                                                ? playedCard(playerTwoField)
-                                                : Container()),
-                                      ),
-                                    ),
+                                    cardOnTable(
+                                        Colors.yellow, playerThreeField),
+                                    cardOnTable(
+                                        Colors.orange.shade900, playerTwoField),
                                   ],
                                 ),
                               ),
@@ -162,34 +148,10 @@ class _GamePageState extends State<GamePage> {
                                 color: Colors.tealAccent,
                                 child: Column(
                                   children: <Widget>[
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.green.shade900,
-                                        child: Center(
-                                            child: (playerFourField != null)
-                                                ? playedCard(playerFourField)
-                                                : Container()),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.black,
-                                        child: Center(
-                                            child: (trumpCard != null)
-                                                ? playedCard(trumpCard)
-                                                : Container()),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.red.shade900,
-                                        child: Center(
-                                          child: (tableCard != null)
-                                              ? playedCard(tableCard)
-                                              : Container(),
-                                        ),
-                                      ),
-                                    ),
+                                    cardOnTable(
+                                        Colors.green.shade900, playerFourField),
+                                    cardOnTable(Colors.black, trumpCard),
+                                    cardOnTable(Colors.red.shade900, tableCard),
                                   ],
                                 ),
                               ),
@@ -199,24 +161,10 @@ class _GamePageState extends State<GamePage> {
                                 color: Colors.teal.shade400,
                                 child: Column(
                                   children: <Widget>[
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.grey.shade700,
-                                        child: Center(
-                                            child: (playerFiveField != null)
-                                                ? playedCard(playerFiveField)
-                                                : Container()),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        color: Colors.teal.shade900,
-                                        child: Center(
-                                            child: (playerSixField != null)
-                                                ? playedCard(playerSixField)
-                                                : Container()),
-                                      ),
-                                    ),
+                                    cardOnTable(
+                                        Colors.grey.shade700, playerFiveField),
+                                    cardOnTable(
+                                        Colors.teal.shade900, playerSixField),
                                   ],
                                 ),
                               ),
