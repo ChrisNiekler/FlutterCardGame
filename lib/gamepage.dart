@@ -15,8 +15,10 @@ import 'experimental/scoreboard.dart';
 
 class GamePage extends StatefulWidget {
   GamePage({this.amountPlayers, this.username});
+
   final int amountPlayers;
   final String username;
+
   @override
   _GamePageState createState() => _GamePageState();
 }
@@ -76,7 +78,8 @@ class _GamePageState extends State<GamePage> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(20.0),
-          child: AppBar(automaticallyImplyLeading: false,
+          child: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.green.shade700,
             elevation: 0.0,
             actions: <Widget>[
@@ -201,11 +204,7 @@ class _GamePageState extends State<GamePage> {
               roundNumber++;
               deck = new Deck();
               cardDistribution();
-              if (deck.size() != 0) {
-                trumpCard = deck.takeCard();
-              } else {
-                trumpCard = null;
-              }
+              pickTrump();
             } else {
               newRound = false;
             }
@@ -232,6 +231,14 @@ class _GamePageState extends State<GamePage> {
       for (int j = 0; j < lng; j++) {
         players[j].handCards.add(deck.takeCard());
       }
+    }
+  }
+
+  void pickTrump() {
+    if (deck.size() != 0) {
+      trumpCard = deck.takeCard();
+    } else {
+      trumpCard = null;
     }
   }
 }
