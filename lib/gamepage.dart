@@ -15,8 +15,10 @@ import 'experimental/scoreboard.dart';
 
 class GamePage extends StatefulWidget {
   GamePage({this.amountPlayers, this.username});
+
   final int amountPlayers;
   final String username;
+
   @override
   _GamePageState createState() => _GamePageState();
 }
@@ -76,7 +78,8 @@ class _GamePageState extends State<GamePage> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(20.0),
-          child: AppBar(automaticallyImplyLeading: false,
+          child: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.green.shade700,
             elevation: 0.0,
             actions: <Widget>[
@@ -138,9 +141,7 @@ class _GamePageState extends State<GamePage> {
                                   child: Column(
                                     children: <Widget>[
                                       cardOnTable(playerFourField),
-                                      Container(
-                                        child: cardOnTable(trumpCard),
-                                      ),
+                                      cardOnTable(trumpCard, trumpCard: true),
                                       cardOnTable(tableCard),
                                     ],
                                   ),
