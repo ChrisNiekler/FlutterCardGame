@@ -202,11 +202,7 @@ class _GamePageState extends State<GamePage> {
               roundNumber++;
               deck = new Deck();
               cardDistribution();
-              if (deck.size() != 0) {
-                trumpCard = deck.takeCard();
-              } else {
-                trumpCard = null;
-              }
+              pickTrump();
             } else {
               newRound = false;
             }
@@ -233,6 +229,14 @@ class _GamePageState extends State<GamePage> {
       for (int j = 0; j < lng; j++) {
         players[j].handCards.add(deck.takeCard());
       }
+    }
+  }
+
+  void pickTrump() {
+    if (deck.size() != 0) {
+      trumpCard = deck.takeCard();
+    } else {
+      trumpCard = null;
     }
   }
 }
