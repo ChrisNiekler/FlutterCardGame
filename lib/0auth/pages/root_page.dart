@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wizard/0auth/pages/login_signup_page.dart';
 import 'package:wizard/0auth/services/authentication.dart';
-import '../../main.dart';
+import 'package:wizard/homepage.dart';
 
 
 enum AuthStatus {

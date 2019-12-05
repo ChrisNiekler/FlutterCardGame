@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:wizard/ui/playing_card.dart';
-import 'package:wizard/ui/gamepage.dart';
+import 'package:wizard/ui/gamepageOld.dart';
 
 class PlayerTemplate extends StatefulWidget {
   final Function removeCardCallback;

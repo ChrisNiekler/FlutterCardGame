@@ -6,6 +6,7 @@ import 'package:wizard/ui/playerTemplateGUI.dart';
 import 'package:wizard/ui/player_BottomTable.dart';
 import 'package:wizard/ui/player_TopTable.dart';
 import 'package:wizard/logic/artificial_intelligence/ai.dart';
+import 'package:wizard/logic/deck.dart';
 
 class Gamepage extends StatelessWidget {
   Gamepage({this.amountPlayers, this.username});
@@ -14,7 +15,7 @@ class Gamepage extends StatelessWidget {
   final String username;
   double widthDevice;
   double heightDevice;
-
+  Deck deck;
   @override
   Widget build(BuildContext context) {
     widthDevice = MediaQuery.of(context).size.width;
