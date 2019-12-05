@@ -2,6 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 AlertDialog scoretable(BuildContext context) {
+  int betsUno = 0;
   return AlertDialog(
     contentPadding: const EdgeInsets.fromLTRB(0, 2, 0, 1),
     contentTextStyle: TextStyle(height: 2, color: Colors.black),
@@ -62,7 +63,7 @@ AlertDialog scoretable(BuildContext context) {
               //1
               Text("1"),
               Text("Uno"),
-              Text(""),
+              Text('$betsUno'),
               Text("Dos"),
               Text(""),
               Text("Tres"),

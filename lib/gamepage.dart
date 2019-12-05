@@ -12,6 +12,7 @@ import 'package:wizard/logic/card.dart' as logic;
 import 'experimental/showingCardWidget.dart';
 import 'experimental/gui/usersViewWidget.dart';
 import 'experimental/scoreboard.dart';
+import 'experimental/gui/putBetDialog.dart';
 
 class GamePage extends StatefulWidget {
   GamePage({this.amountPlayers, this.username});
@@ -46,13 +47,7 @@ class _GamePageState extends State<GamePage> {
     deck = new Deck();
     cardDistribution();
     trumpCard = deck.takeCard();
-    putBet(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => putBet(context),
-      );
-    });
+    _putBetHelper();
   }
 
   List<Widget> displayedCards = [];
@@ -210,7 +205,7 @@ class _GamePageState extends State<GamePage> {
               deck = new Deck();
               cardDistribution();
               pickTrump();
-              putBet(context);
+              _putBetHelper();
             } else {
               newRound = false;
             }
@@ -247,32 +242,12 @@ class _GamePageState extends State<GamePage> {
       trumpCard = null;
     }
   }
-
-  Widget putBet(BuildContext context) {
-//  bool userPutBet = false;
-    //if (!userPutBet){
-    return AlertDialog(
-      title: Text("Put your bet for this round"),
-      content: TextField(
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Enter the number of bets for this round',
-        ),
-        onChanged: (text) {
-          print(text);
-        },
-      ),
-      actions: <Widget>[
-        RaisedButton(
-            child: Text(
-              "OK",
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            })
-      ],
-    );
-//  userPutBet = true;
+  _putBetHelper() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => putBet(context),
+      );
+    });
   }
 }
