@@ -46,6 +46,13 @@ class _GamePageState extends State<GamePage> {
     deck = new Deck();
     cardDistribution();
     trumpCard = deck.takeCard();
+    putBet(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => putBet(context),
+      );
+    });
   }
 
   List<Widget> displayedCards = [];
@@ -203,6 +210,7 @@ class _GamePageState extends State<GamePage> {
               deck = new Deck();
               cardDistribution();
               pickTrump();
+              putBet(context);
             } else {
               newRound = false;
             }
@@ -238,5 +246,33 @@ class _GamePageState extends State<GamePage> {
     } else {
       trumpCard = null;
     }
+  }
+
+  Widget putBet(BuildContext context) {
+//  bool userPutBet = false;
+    //if (!userPutBet){
+    return AlertDialog(
+      title: Text("Put your bet for this round"),
+      content: TextField(
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Enter the number of bets for this round',
+        ),
+        onChanged: (text) {
+          print(text);
+        },
+      ),
+      actions: <Widget>[
+        RaisedButton(
+            child: Text(
+              "OK",
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            })
+      ],
+    );
+//  userPutBet = true;
   }
 }
