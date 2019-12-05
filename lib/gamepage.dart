@@ -76,7 +76,7 @@ class _GamePageState extends State<GamePage> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(20.0),
-          child: AppBar(
+          child: AppBar(automaticallyImplyLeading: false,
             backgroundColor: Colors.green.shade700,
             elevation: 0.0,
             actions: <Widget>[
