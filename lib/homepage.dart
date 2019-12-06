@@ -133,8 +133,10 @@ class _HomePageState extends State<HomePage> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => GamePage(amountPlayers: 1,username: email)));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GamePage(
+                                    amountPlayers: 6, username: email)));
                       },
                       child: new Container(
                           alignment: Alignment.center,
@@ -216,8 +218,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.black26),
               ),
               onPressed: () {
-                playerAmount(3);
-                print("Chose 3 Players");
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -232,7 +232,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.black26),
               ),
               onPressed: () {
-                playerAmount(4);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -247,7 +246,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.black26),
               ),
               onPressed: () {
-                playerAmount(5);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -262,7 +260,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.black26),
               ),
               onPressed: () {
-                playerAmount(6);
                 print("6");
                 Navigator.push(
                   context,

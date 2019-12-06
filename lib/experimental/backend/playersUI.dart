@@ -7,8 +7,8 @@ import 'package:wizard/logic/player.dart';
 
 class PlayersUI {}
 
-List<Player> createPlayers() {
-  int _playerAmount = 6;
+List<Player> createPlayers(int _playerAmount) {
+ // int _playerAmount = 6;
   List<String> names = ['Uno', 'Dos', 'Tres', 'Quadro', 'Sinco', 'Seis'];
   List<Player> players = [];
   for (int i = 0; i < _playerAmount; i++) {

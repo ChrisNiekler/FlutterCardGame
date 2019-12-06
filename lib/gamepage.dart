@@ -43,11 +43,12 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
-    players = createPlayers();
+    players = createPlayers(widget.amountPlayers);
     deck = new Deck();
     cardDistribution();
     trumpCard = deck.takeCard();
     _putBetHelper();
+    print('We have ${players.length} players');
   }
 
   List<Widget> displayedCards = [];
@@ -60,14 +61,35 @@ class _GamePageState extends State<GamePage> {
       displayedCards.add(showingCardOld(element));
     });
     if (userPlayedCard) {
-      playerTwoField =
-          (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+//      for(int i=1;i<players.length;i++){
+//        playerTwoField   = (players[i] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerThreeField = (players[i] as Ai).handCards.removeLast();
+//        playerFourField  = (players[i] as Ki).handCards.removeLast();
+//        playerFiveField  = (players[i] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerSixField   = (players[i] as Ai).handCards.removeLast();
+//         userPlayedCard   = false;}
+    if(widget.amountPlayers==3){
+      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+      playerFiveField  = (players[2] as Ai).handCards.removeLast();}
+
+    else if(widget.amountPlayers==4){
+      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+      playerFiveField  = (players[2] as Ai).handCards.removeLast();
+      playerFourField  = (players[3] as Ki).handCards.removeLast();}
+
+    else if(widget.amountPlayers==5){
+      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+      playerFiveField  = (players[2] as Ai).handCards.removeLast();
+      playerFourField  = (players[3] as Ki).handCards.removeLast();
+      playerThreeField = (players[4] as KuenstlicheIntelligenz).handCards.removeLast();}
+
+else{
+      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
       playerThreeField = (players[2] as Ai).handCards.removeLast();
-      playerFourField = (players[3] as Ki).handCards.removeLast();
-      playerFiveField =
-          (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-      playerSixField = (players[5] as Ai).handCards.removeLast();
-      userPlayedCard = false;
+      playerFourField  = (players[3] as Ki).handCards.removeLast();
+      playerFiveField  = (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
+      playerSixField   = (players[5] as Ai).handCards.removeLast();}
+      userPlayedCard   = false;
     }
     if (newRound) {
       setState(() {
@@ -104,9 +126,9 @@ class _GamePageState extends State<GamePage> {
           color: Colors.green.shade700,
           child: Column(
             children: <Widget>[
-              Expanded(
+              widget.amountPlayers > 3 ? Expanded(
                   flex: 10,
-                  child: enemyCards(displayedCards.length, "red", false)),
+                  child:  enemyCards(displayedCards.length, "red", false)): Container(),
               Expanded(
                 flex: 60,
                 child: Container(
@@ -116,8 +138,8 @@ class _GamePageState extends State<GamePage> {
                         flex: 10,
                         child: Column(
                           children: <Widget>[
-                            enemyCards(displayedCards.length, "gray", true),
-                            enemyCards(displayedCards.length, "green", true),
+                            widget.amountPlayers >= 5? enemyCards(displayedCards.length, "gray", true): Container(),
+                            widget.amountPlayers >= 3? enemyCards(displayedCards.length, "green", true): Container(),
                           ],
                         ),
                       ),
@@ -131,8 +153,8 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      cardOnTable(playerThreeField),
-                                      cardOnTable(playerTwoField),
+                                     widget.amountPlayers >= 5? cardOnTable(playerThreeField) : Container(),
+                                     widget.amountPlayers >=3? cardOnTable(playerTwoField): Container(),
                                     ],
                                   ),
                                 ),
@@ -142,7 +164,7 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      cardOnTable(playerFourField),
+                                     widget.amountPlayers > 3 ? cardOnTable(playerFourField):Container(),
                                       cardOnTable(trumpCard, trumpCard: true),
                                       cardOnTable(tableCard),
                                     ],
@@ -154,8 +176,8 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      cardOnTable(playerFiveField),
-                                      cardOnTable(playerSixField),
+                                     widget.amountPlayers >= 3 ? cardOnTable(playerFiveField) : Container(),
+                                      widget.amountPlayers > 5 ? cardOnTable(playerSixField): Container(),
                                     ],
                                   ),
                                 ),
@@ -169,8 +191,8 @@ class _GamePageState extends State<GamePage> {
                         child: Container(
                           child: Column(
                             children: <Widget>[
-                              enemyCards(displayedCards.length, "blue", true),
-                              enemyCards(displayedCards.length, "purple", true),
+                              widget.amountPlayers >= 3 ? enemyCards(displayedCards.length, "blue", true) : Container(),
+                              widget.amountPlayers >  5 ? enemyCards(displayedCards.length, "purple", true) : Container(),
                             ],
                           ),
                         ),
@@ -198,7 +220,7 @@ class _GamePageState extends State<GamePage> {
           print(tcard.toString());
           setState(() {
             // FIX: condition
-            if (players[5].handCards.length == 1 && roundNumber < maxRound) {
+            if (players[players.length-1].handCards.length == 1 && roundNumber < maxRound) {
               print("Next round will be initialized");
               newRound = true;
               roundNumber++;
