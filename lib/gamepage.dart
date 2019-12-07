@@ -30,7 +30,7 @@ class _GamePageState extends State<GamePage> {
   Deck deck;
   logic.Card trumpCard;
   int roundNumber = 1;
-  int maxRound = 10;
+  double maxRound;
   bool newRound = false;
   bool userPlayedCard = false;
   logic.Card playerOneField;
@@ -49,6 +49,7 @@ class _GamePageState extends State<GamePage> {
     trumpCard = deck.takeCard();
     _putBetHelper();
     print('We have ${players.length} players');
+    maxRound = 60 / widget.amountPlayers;
   }
 
   List<Widget> displayedCards = [];
@@ -61,35 +62,32 @@ class _GamePageState extends State<GamePage> {
       displayedCards.add(showingCardOld(element));
     });
     if (userPlayedCard) {
-//      for(int i=1;i<players.length;i++){
-//        playerTwoField   = (players[i] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerThreeField = (players[i] as Ai).handCards.removeLast();
-//        playerFourField  = (players[i] as Ki).handCards.removeLast();
-//        playerFiveField  = (players[i] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerSixField   = (players[i] as Ai).handCards.removeLast();
-//         userPlayedCard   = false;}
-    if(widget.amountPlayers==3){
-      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-      playerFiveField  = (players[2] as Ai).handCards.removeLast();}
-
-    else if(widget.amountPlayers==4){
-      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-      playerFiveField  = (players[2] as Ai).handCards.removeLast();
-      playerFourField  = (players[3] as Ki).handCards.removeLast();}
-
-    else if(widget.amountPlayers==5){
-      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-      playerFiveField  = (players[2] as Ai).handCards.removeLast();
-      playerFourField  = (players[3] as Ki).handCards.removeLast();
-      playerThreeField = (players[4] as KuenstlicheIntelligenz).handCards.removeLast();}
-
-else{
-      playerTwoField   = (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-      playerThreeField = (players[2] as Ai).handCards.removeLast();
-      playerFourField  = (players[3] as Ki).handCards.removeLast();
-      playerFiveField  = (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-      playerSixField   = (players[5] as Ai).handCards.removeLast();}
-      userPlayedCard   = false;
+      if (widget.amountPlayers == 3) {
+        playerTwoField =
+            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+        playerFiveField = (players[2] as Ai).handCards.removeLast();
+      } else if (widget.amountPlayers == 4) {
+        playerTwoField =
+            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+        playerFiveField = (players[2] as Ai).handCards.removeLast();
+        playerFourField = (players[3] as Ki).handCards.removeLast();
+      } else if (widget.amountPlayers == 5) {
+        playerTwoField =
+            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+        playerFiveField = (players[2] as Ai).handCards.removeLast();
+        playerFourField = (players[3] as Ki).handCards.removeLast();
+        playerThreeField =
+            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
+      } else {
+        playerTwoField =
+            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+        playerThreeField = (players[2] as Ai).handCards.removeLast();
+        playerFourField = (players[3] as Ki).handCards.removeLast();
+        playerFiveField =
+            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
+        playerSixField = (players[5] as Ai).handCards.removeLast();
+      }
+      userPlayedCard = false;
     }
     if (newRound) {
       setState(() {
@@ -126,9 +124,11 @@ else{
           color: Colors.green.shade700,
           child: Column(
             children: <Widget>[
-              widget.amountPlayers > 3 ? Expanded(
-                  flex: 10,
-                  child:  enemyCards(displayedCards.length, "red", false)): Container(),
+              widget.amountPlayers > 3
+                  ? Expanded(
+                      flex: 10,
+                      child: enemyCards(displayedCards.length, "red", false))
+                  : Container(),
               Expanded(
                 flex: 60,
                 child: Container(
@@ -138,8 +138,14 @@ else{
                         flex: 10,
                         child: Column(
                           children: <Widget>[
-                            widget.amountPlayers >= 5? enemyCards(displayedCards.length, "gray", true): Container(),
-                            widget.amountPlayers >= 3? enemyCards(displayedCards.length, "green", true): Container(),
+                            widget.amountPlayers >= 5
+                                ? enemyCards(
+                                    displayedCards.length, "gray", true)
+                                : Container(),
+                            widget.amountPlayers >= 3
+                                ? enemyCards(
+                                    displayedCards.length, "green", true)
+                                : Container(),
                           ],
                         ),
                       ),
@@ -153,8 +159,12 @@ else{
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                     widget.amountPlayers >= 5? cardOnTable(playerThreeField) : Container(),
-                                     widget.amountPlayers >=3? cardOnTable(playerTwoField): Container(),
+                                      widget.amountPlayers >= 5
+                                          ? cardOnTable(playerThreeField)
+                                          : Container(),
+                                      widget.amountPlayers >= 3
+                                          ? cardOnTable(playerTwoField)
+                                          : Container(),
                                     ],
                                   ),
                                 ),
@@ -164,7 +174,9 @@ else{
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                     widget.amountPlayers > 3 ? cardOnTable(playerFourField):Container(),
+                                      widget.amountPlayers > 3
+                                          ? cardOnTable(playerFourField)
+                                          : Container(),
                                       cardOnTable(trumpCard, trumpCard: true),
                                       cardOnTable(tableCard),
                                     ],
@@ -176,8 +188,12 @@ else{
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                     widget.amountPlayers >= 3 ? cardOnTable(playerFiveField) : Container(),
-                                      widget.amountPlayers > 5 ? cardOnTable(playerSixField): Container(),
+                                      widget.amountPlayers >= 3
+                                          ? cardOnTable(playerFiveField)
+                                          : Container(),
+                                      widget.amountPlayers > 5
+                                          ? cardOnTable(playerSixField)
+                                          : Container(),
                                     ],
                                   ),
                                 ),
@@ -191,8 +207,14 @@ else{
                         child: Container(
                           child: Column(
                             children: <Widget>[
-                              widget.amountPlayers >= 3 ? enemyCards(displayedCards.length, "blue", true) : Container(),
-                              widget.amountPlayers >  5 ? enemyCards(displayedCards.length, "purple", true) : Container(),
+                              widget.amountPlayers >= 3
+                                  ? enemyCards(
+                                      displayedCards.length, "blue", true)
+                                  : Container(),
+                              widget.amountPlayers > 5
+                                  ? enemyCards(
+                                      displayedCards.length, "purple", true)
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -220,7 +242,8 @@ else{
           print(tcard.toString());
           setState(() {
             // FIX: condition
-            if (players[players.length-1].handCards.length == 1 && roundNumber < maxRound) {
+            if (players[players.length - 1].handCards.length == 1 &&
+                roundNumber < maxRound) {
               print("Next round will be initialized");
               newRound = true;
               roundNumber++;
@@ -264,6 +287,7 @@ else{
       trumpCard = null;
     }
   }
+
   _putBetHelper() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog<String>(
