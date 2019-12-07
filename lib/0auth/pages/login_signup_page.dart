@@ -99,7 +99,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             _showForm(),
             _showCircularProgress(),
           ],
-        ));
+        ),
+    );
   }
 
   Widget _showCircularProgress() { // our circular progress bar.

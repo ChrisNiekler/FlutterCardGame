@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:wizard/0auth/services/authentication.dart';
 import 'package:wizard/gamepage.dart';
+import 'package:wizard/ui/ranking_page.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.email, this.logoutCallback})
@@ -160,13 +162,19 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
                     child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScoreList()));
+                      },
                       child: new Container(
                           alignment: Alignment.center,
                           height: 60.0,
                           decoration: new BoxDecoration(
                               color: Colors.blueGrey,
                               borderRadius: new BorderRadius.circular(9.0)),
-                          child: new Text("Settings",
+                          child: new Text("Ranking",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.white))),
                     ),
