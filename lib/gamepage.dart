@@ -30,7 +30,7 @@ class _GamePageState extends State<GamePage> {
   Deck deck;
   logic.Card trumpCard;
   int roundNumber = 1;
-  double maxRound;
+  int maxRound;
   bool newRound = false;
   bool userPlayedCard = false;
   logic.Card playerOneField;
@@ -49,7 +49,7 @@ class _GamePageState extends State<GamePage> {
     trumpCard = deck.takeCard();
     _putBetHelper();
     print('We have ${players.length} players');
-    maxRound = 60 / widget.amountPlayers;
+    maxRound = (60 / widget.amountPlayers).round().toInt();
   }
 
   List<Widget> displayedCards = [];
