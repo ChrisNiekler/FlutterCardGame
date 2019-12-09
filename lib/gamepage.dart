@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/gui/enemyCardsWidgets.dart';
 import 'package:wizard/experimental/gui/cardsOnTable.dart';
-import 'package:wizard/experimental/backend/playersUI.dart';
-import 'package:wizard/logic/artificial_intelligence/ai.dart';
-import 'package:wizard/logic/artificial_intelligence/ki.dart';
-import 'package:wizard/logic/artificial_intelligence/kuenstlicheIntelligenz.dart';
-import 'package:wizard/logic/deck.dart';
-import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
 import 'package:wizard/logic/wizard.dart';
-import 'experimental/showingCardWidget.dart';
 import 'experimental/gui/usersViewWidget.dart';
 import 'experimental/scoreboard.dart';
 import 'experimental/gui/putBetDialog.dart';
@@ -40,6 +33,7 @@ class _GamePageState extends State<GamePage> {
   int size;
 
   List<logic.Card> tableCards = [];
+  List<logic.Card> _emptyTable;
 
   @override
   void initState() {
@@ -48,6 +42,7 @@ class _GamePageState extends State<GamePage> {
     wizard = Wizard(playerAmount: widget.amountPlayers);
     trumpCard = wizard.takeTrumpCard();
     tableCards = new List(widget.amountPlayers);
+    _emptyTable = tableCards;
     _putBetHelper();
     print('We have ${widget.amountPlayers} players');
     wizard.cardDistribution();
@@ -219,7 +214,11 @@ class _GamePageState extends State<GamePage> {
             print("Next round will be initialized");
             newRound = true;
             wizard.nextRound();
-            trumpCard = wizard.takeTrumpCard();
+            setState(() {
+              tableCards = new List(widget.amountPlayers);
+              trumpCard = wizard.takeTrumpCard();
+            });
+
             _putBetHelper();
           } else {
             newRound = false;
