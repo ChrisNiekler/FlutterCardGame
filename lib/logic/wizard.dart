@@ -5,6 +5,7 @@ import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/logic/wizardTrick.dart';
+import 'dart:math';
 
 const List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
 
@@ -12,7 +13,7 @@ class Wizard {
   // VARIABLES
   // cards
   logic.Card trumpCard;
-  Deck deck = Deck();
+  Deck _deck = Deck();
   CardType trumpType;
   CardType toServe;
   List<logic.Card> playedCards = [];
@@ -20,8 +21,9 @@ class Wizard {
 
   // players
   int trickStarter = 0;
-  int firstPlayer = 0;
+  int roundStarter = 0;
   int lastPlayer;
+  int currentPlayer;
 
   // round information
   List<Player> players;
@@ -36,11 +38,14 @@ class Wizard {
     players = createPlayers(playerAmount);
     lastRound = numberRounds[playerAmount];
     lastPlayer = playerAmount - 1;
+    roundStarter = _whoStarts(playerAmount);
+    roundStarter = 0; // for testing reasons
+    currentPlayer = roundStarter;
   }
   // returns the TrumpCard
   logic.Card takeTrumpCard() {
-    if (deck.isNotEmpty()) {
-      trumpCard = deck.takeCard();
+    if (_deck.isNotEmpty()) {
+      trumpCard = _deck.takeCard();
       trumpType = trumpCard.cardType;
     }
     return trumpCard;
@@ -51,16 +56,16 @@ class Wizard {
     int lng = players.length;
     for (int i = 0; i < roundNumber; i++) {
       for (int j = 0; j < lng; j++) {
-        players[j].handCards.add(deck.takeCard());
+        players[j].handCards.add(_deck.takeCard());
       }
     }
   }
 
   // the user plays a card
-  bool userPlayCard({@required logic.Card choosenCard}) {
-    playedCards.add(choosenCard);
+  bool userPlayCard({@required logic.Card chosenCard}) {
+    playedCards.add(chosenCard);
     afterFirstPlayer();
-    return players[0].handCards.remove(choosenCard);
+    return players[0].handCards.remove(chosenCard);
   }
 
   // after the first player played we need to determine what card
@@ -99,7 +104,8 @@ class Wizard {
     roundNumber++;
     playedCards = [];
     print('new deck is created');
-    deck = new Deck();
+    _deck = new Deck();
+    _nextRoundStarter();
     cardDistribution();
     print('cards are distributed');
   }
@@ -115,4 +121,15 @@ class Wizard {
   }
 
   void endOfGame() {}
+  void _nextRoundStarter() {
+    if (roundStarter + 1 < playerAmount) {
+      roundStarter++;
+    } else {
+      roundStarter = 0;
+    }
+  }
+}
+
+int _whoStarts(int players) {
+  return Random().nextInt(players);
 }
