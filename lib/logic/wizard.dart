@@ -39,7 +39,7 @@ class Wizard {
     lastRound = numberRounds[playerAmount];
     lastPlayer = playerAmount - 1;
     roundStarter = _whoStarts(playerAmount);
-    roundStarter = 0; // for testing reasons
+    roundStarter = 0; //for testing reasons TODO delete this line
     currentPlayer = roundStarter;
   }
   // returns the TrumpCard
