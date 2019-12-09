@@ -226,7 +226,7 @@ class _GamePageState extends State<GamePage> {
           }
 
           setState(() {
-            wizard.userPlayCard(choosenCard: tCard);
+            wizard.userPlayCard(chosenCard: tCard);
             wizard.playersPlay();
             // returns card from backend
             tableCards = new List(widget.amountPlayers);
