@@ -45,3 +45,27 @@ List<logic.Card> setAllowedToPlay(
   print('cards are successfully marked as playable or not');
   return hand;
 }
+
+CardType determineToServe(
+    {@required CardType toServe, @required List<logic.Card> playedCards}) {
+  String temp;
+  // what to serve
+  if (toServe == null) {
+// todo put in method
+    toServe = playedCards[playedCards.length - 1].cardType;
+    temp = CardTypeHelper.getValue(toServe);
+
+    if (toServe == CardType.WIZARD) {
+      print('WIZARD was played, everybody else can play any card.');
+      toServe = CardType.WIZARD;
+    } else if (toServe == CardType.JESTER) {
+      print('JESTER was played as first card.');
+      print('The next card will determine the played color');
+      toServe = null;
+    } else {
+      print('$temp has to be served!');
+    }
+    return toServe;
+  }
+  return null;
+}

@@ -15,7 +15,7 @@ class Wizard {
   Deck deck = Deck();
   CardType trumpType;
   bool wizardIsPlayed = false;
-  int trickStarter;
+  int trickStarter = 0;
   CardType toServe;
   List<logic.Card> playedCards = [];
   List<logic.Card> alreadyPlayedCards = [];
@@ -50,7 +50,12 @@ class Wizard {
 
   bool userPlayCard({@required logic.Card choosenCard}) {
     playedCards.add(choosenCard);
+    afterFirstPlayer();
     return players[0].handCards.remove(choosenCard);
+  }
+
+  void afterFirstPlayer() {
+    determineToServe(toServe: toServe, playedCards: playedCards);
   }
 
   logic.Card getPlayerCard({@required int playerID}) {
@@ -59,6 +64,8 @@ class Wizard {
 
   playersPlay() {
     for (int i = 1; i < playerAmount; i++) {
+      setAllowedToPlay(
+          player: players[i], wizardIsPlayed: wizardIsPlayed, toServe: toServe);
       playedCards.add(players[i].handCards.removeLast());
     }
   }
@@ -88,10 +95,11 @@ class Wizard {
   void nextTrick() {
     print('nextTrick() was called');
     playedCards = [];
-    players.forEach(
-      (pElement) => setAllowedToPlay(
-          player: pElement, toServe: toServe, wizardIsPlayed: wizardIsPlayed),
-    );
+
+    setAllowedToPlay(
+        player: players[trickStarter],
+        toServe: toServe,
+        wizardIsPlayed: wizardIsPlayed);
   }
 
   void endOfGame() {}
