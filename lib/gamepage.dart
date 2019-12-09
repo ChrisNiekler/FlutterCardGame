@@ -249,8 +249,9 @@ class _GamePageState extends State<GamePage> {
   _putBetHelper() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog<String>(
+        barrierDismissible: false,
         context: context,
-        builder: (BuildContext context) => putBet(context),
+        builder: (BuildContext context) => putBet(context, trumpCard),
       );
     });
   }
