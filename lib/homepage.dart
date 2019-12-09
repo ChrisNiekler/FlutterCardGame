@@ -63,22 +63,19 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.center,
               children: <Widget>[
                 new Container(
-                  height: 70.0,
-                  width: 70.0,
+                  height: 220.0,
+                  width: 220.0,
                   decoration: new BoxDecoration(
-                      borderRadius: new BorderRadius.circular(10.0),
-                      color: Colors.grey),
+                      borderRadius: new BorderRadius.circular(20.0),
+                      color: Color(0xFFB4202A)),
                 ),
                 new Container(
-                  height: 60.0,
-                  width: 60.0,
+                  height: 200.0,
+                  width: 200.0,
                   decoration: new BoxDecoration(
                       borderRadius: new BorderRadius.circular(10.0),
-                      color: Colors.green),
-                  child: new Icon(
-                    Icons.gamepad,
-                    color: Colors.white,
-                  ),
+                      ),
+                  child: new Image.asset("images/logo/wizard-icon.png")
                 )
               ],
             ),
