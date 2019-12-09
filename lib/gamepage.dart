@@ -38,12 +38,7 @@ class _GamePageState extends State<GamePage> {
   bool newRound = false;
   bool userPlayedCard = false;
   int size;
-//  logic.Card usersCardField;
-//  logic.Card playerTwoField;
-//  logic.Card playerThreeField;
-//  logic.Card playerFourField;
-//  logic.Card playerFiveField;
-//  logic.Card playerSixField;
+
   List<logic.Card> tableCards = [];
 
   @override
@@ -65,41 +60,6 @@ class _GamePageState extends State<GamePage> {
     displayedCards = [];
     wizard.nextTrick();
     _buildUserCards();
-
-//    if (userPlayedCard) {
-//      if (widget.amountPlayers == 3) {
-//        playerTwoField =
-//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerFiveField = (players[2] as Ai).handCards.removeLast();
-//      } else if (widget.amountPlayers == 4) {
-//        playerTwoField =
-//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerFiveField = (players[2] as Ai).handCards.removeLast();
-//        playerFourField = (players[3] as Ki).handCards.removeLast();
-//      } else if (widget.amountPlayers == 5) {
-//        playerTwoField =
-//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerFiveField = (players[2] as Ai).handCards.removeLast();
-//        playerFourField = (players[3] as Ki).handCards.removeLast();
-//        playerThreeField =
-//            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-//      } else {
-//        playerTwoField =
-//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerThreeField = (players[2] as Ai).handCards.removeLast();
-//        playerFourField = (players[3] as Ki).handCards.removeLast();
-//        playerFiveField =
-//            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-//        playerSixField = (players[5] as Ai).handCards.removeLast();
-//      }
-//      userPlayedCard = false;
-//    }
-//    if (newRound) {
-//      setState(() {
-//        print("Round number: $roundNumber");
-//        print("Deck size: ${deck.size()}");
-//      });
-//    }
 
     return SafeArea(
       child: Scaffold(
@@ -256,7 +216,6 @@ class _GamePageState extends State<GamePage> {
         onPressed: () {
           print(tCard.toString());
           if (wizard.checkEndOfRound()) {
-            print('Test');
             print("Next round will be initialized");
             newRound = true;
             wizard.nextRound();
