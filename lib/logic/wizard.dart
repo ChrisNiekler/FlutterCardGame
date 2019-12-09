@@ -10,15 +10,22 @@ const List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
 
 class Wizard {
   // VARIABLES
+  // cards
   logic.Card trumpCard;
-  List<Player> players;
   Deck deck = Deck();
   CardType trumpType;
-  bool wizardIsPlayed = false;
-  int trickStarter = 0;
   CardType toServe;
   List<logic.Card> playedCards = [];
   List<logic.Card> alreadyPlayedCards = [];
+
+  // players
+  int trickStarter = 0;
+  int firstPlayer = 0;
+  int lastPlayer;
+
+  // round information
+  List<Player> players;
+  bool wizardIsPlayed = false;
   int roundNumber = 1;
   int lastRound;
   final int playerAmount;
@@ -28,6 +35,7 @@ class Wizard {
   Wizard({this.playerAmount}) {
     players = createPlayers(playerAmount);
     lastRound = numberRounds[playerAmount];
+    lastPlayer = playerAmount - 1;
   }
   // returns the TrumpCard
   logic.Card takeTrumpCard() {
@@ -47,17 +55,19 @@ class Wizard {
       }
     }
   }
-
+  // the user plays a card
   bool userPlayCard({@required logic.Card choosenCard}) {
     playedCards.add(choosenCard);
     afterFirstPlayer();
     return players[0].handCards.remove(choosenCard);
   }
-
+  // after the first player played we need to determine what card
+  // has to be served
   void afterFirstPlayer() {
     determineToServe(toServe: toServe, playedCards: playedCards);
   }
 
+  // todo needs to be changed once the first player is not 0
   logic.Card getPlayerCard({@required int playerID}) {
     return playedCards[playerID];
   }
