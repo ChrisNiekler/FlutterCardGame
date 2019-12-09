@@ -1,19 +1,21 @@
-import 'package:wizard/logic/card.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:wizard/logic/card.dart' as logic;
 import 'package:wizard/logic/player.dart';
 import 'cardType.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 class HumanPlayer extends Player {
   @override
-  Card playCard(int pick,
+  logic.Card playCard(int pick,
       {CardType trump,
-      Card foe,
+      logic.Card foe,
       int roundNumber,
       int playerNumber,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
-      Card highestCard}) {
-    Card temp = this.handCards[pick];
+      List<logic.Card> alreadyPlayedCards,
+      List<logic.Card> playedCards,
+      logic.Card highestCard}) {
+    logic.Card temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;
   }
@@ -50,8 +52,8 @@ class HumanPlayer extends Player {
   void putBet(int round, int betsNumber,
       {CardType trump,
       String testValue,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
+      List<logic.Card> alreadyPlayedCards,
+      List<logic.Card> playedCards,
       int playerNumber,
       bool firstPlayer}) {
     bool inputAllowed = false;
@@ -65,7 +67,7 @@ class HumanPlayer extends Player {
         print('Put your bet:');
         inputString = stdin.readLineSync();
       }
-      if (_isNumeric(inputString)) {
+      if (true) {
         this.bet = int.parse(inputString);
         check = bet + betsNumber;
         if (this.lastPlayer && round == check) {
@@ -83,34 +85,15 @@ class HumanPlayer extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
-  Card humanPlayCard({String testValue}) {
-    bool inputAllowed = false;
-    String input = '';
-    int size = this.handCards.length;
-    int cardNr = -1;
+  logic.Card humanPlayCard({@required logic.Card playedCard}) {
+    int index = handCards.indexOf(playedCard);
+    logic.Card temp = handCards.elementAt(index);
+    print('temp= $temp');
+    handCards.removeAt(index);
+    if (!handCards.contains(temp)) {
+      print('$temp successfully removed');
+    }
 
-    this.printHandCardsToConsole();
-    do {
-      print('Please pick one of your $size cards (by index) to play: ');
-      input = stdin.readLineSync();
-      if (_isNumeric(input)) {
-        cardNr = int.parse(input);
-      }
-      if (cardNr >= 0 && cardNr < size) {
-        if (this.handCards[cardNr].allowedToPlay) {
-          inputAllowed = true;
-        } else {
-          print('Please pick another card!');
-        }
-      }
-    } while (!inputAllowed);
-    return this.playCard(cardNr);
+    return temp;
   }
-}
-
-bool _isNumeric(String str) {
-  if (str == null) {
-    return false;
-  }
-  return int.tryParse(str) != null;
 }

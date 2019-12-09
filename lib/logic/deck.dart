@@ -13,6 +13,10 @@ class Deck {
     return deck.removeLast();
   }
 
+  bool isNotEmpty() {
+    return deck.isNotEmpty;
+  }
+
   void aiRemoveCard(int number) {
     deck.removeAt(number);
   }

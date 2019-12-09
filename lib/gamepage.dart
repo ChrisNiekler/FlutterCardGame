@@ -9,10 +9,18 @@ import 'package:wizard/logic/artificial_intelligence/kuenstlicheIntelligenz.dart
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/wizard.dart';
 import 'experimental/showingCardWidget.dart';
 import 'experimental/gui/usersViewWidget.dart';
 import 'experimental/scoreboard.dart';
 import 'experimental/gui/putBetDialog.dart';
+
+const user = 0;
+const two = 1;
+const three = 2;
+const four = 3;
+const five = 4;
+const six = 5;
 
 class GamePage extends StatefulWidget {
   GamePage({this.amountPlayers, this.username});
@@ -25,76 +33,71 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  List<Player> players;
-  List<logic.Card> playedCards;
-  Deck deck;
+  Wizard wizard;
   logic.Card trumpCard;
-  int roundNumber = 1;
-  int maxRound;
   bool newRound = false;
   bool userPlayedCard = false;
-  logic.Card playerOneField;
-  logic.Card playerTwoField;
-  logic.Card playerThreeField;
-  logic.Card playerFourField;
-  logic.Card playerFiveField;
-  logic.Card playerSixField;
+//  logic.Card usersCardField;
+//  logic.Card playerTwoField;
+//  logic.Card playerThreeField;
+//  logic.Card playerFourField;
+//  logic.Card playerFiveField;
+//  logic.Card playerSixField;
+  List<logic.Card> tableCards = [];
 
   @override
   void initState() {
     super.initState();
-    players = createPlayers(widget.amountPlayers);
-    deck = new Deck();
-    cardDistribution();
-    trumpCard = deck.takeCard();
+    wizard = Wizard(playerAmount: widget.amountPlayers);
+    trumpCard = wizard.takeTrumpCard();
+    tableCards = new List(widget.amountPlayers);
     _putBetHelper();
-    print('We have ${players.length} players');
-    maxRound = (60 / widget.amountPlayers).round().toInt();
+    print('We have ${widget.amountPlayers} players');
+    wizard.cardDistribution();
   }
 
   List<Widget> displayedCards = [];
-  logic.Card tableCard;
 
   @override
   Widget build(BuildContext context) {
     displayedCards = [];
-    players[0].handCards.forEach((element) {
-      displayedCards.add(showingCardOld(element));
-    });
-    if (userPlayedCard) {
-      if (widget.amountPlayers == 3) {
-        playerTwoField =
-            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-        playerFiveField = (players[2] as Ai).handCards.removeLast();
-      } else if (widget.amountPlayers == 4) {
-        playerTwoField =
-            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-        playerFiveField = (players[2] as Ai).handCards.removeLast();
-        playerFourField = (players[3] as Ki).handCards.removeLast();
-      } else if (widget.amountPlayers == 5) {
-        playerTwoField =
-            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-        playerFiveField = (players[2] as Ai).handCards.removeLast();
-        playerFourField = (players[3] as Ki).handCards.removeLast();
-        playerThreeField =
-            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-      } else {
-        playerTwoField =
-            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-        playerThreeField = (players[2] as Ai).handCards.removeLast();
-        playerFourField = (players[3] as Ki).handCards.removeLast();
-        playerFiveField =
-            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-        playerSixField = (players[5] as Ai).handCards.removeLast();
-      }
-      userPlayedCard = false;
-    }
-    if (newRound) {
-      setState(() {
-        print("Round number: $roundNumber");
-        print("Deck size: ${deck.size()}");
-      });
-    }
+    wizard.nextTrick();
+    _buildUserCards();
+
+//    if (userPlayedCard) {
+//      if (widget.amountPlayers == 3) {
+//        playerTwoField =
+//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerFiveField = (players[2] as Ai).handCards.removeLast();
+//      } else if (widget.amountPlayers == 4) {
+//        playerTwoField =
+//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerFiveField = (players[2] as Ai).handCards.removeLast();
+//        playerFourField = (players[3] as Ki).handCards.removeLast();
+//      } else if (widget.amountPlayers == 5) {
+//        playerTwoField =
+//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerFiveField = (players[2] as Ai).handCards.removeLast();
+//        playerFourField = (players[3] as Ki).handCards.removeLast();
+//        playerThreeField =
+//            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
+//      } else {
+//        playerTwoField =
+//            (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerThreeField = (players[2] as Ai).handCards.removeLast();
+//        playerFourField = (players[3] as Ki).handCards.removeLast();
+//        playerFiveField =
+//            (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
+//        playerSixField = (players[5] as Ai).handCards.removeLast();
+//      }
+//      userPlayedCard = false;
+//    }
+//    if (newRound) {
+//      setState(() {
+//        print("Round number: $roundNumber");
+//        print("Deck size: ${deck.size()}");
+//      });
+//    }
 
     return SafeArea(
       child: Scaffold(
@@ -159,11 +162,12 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      widget.amountPlayers >= 5
-                                          ? cardOnTable(playerThreeField)
+                                      // left cards on table
+                                      widget.amountPlayers >= 3
+                                          ? cardOnTable(tableCards[three])
                                           : Container(),
                                       widget.amountPlayers >= 3
-                                          ? cardOnTable(playerTwoField)
+                                          ? cardOnTable(tableCards[two])
                                           : Container(),
                                     ],
                                   ),
@@ -174,11 +178,11 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      widget.amountPlayers > 3
-                                          ? cardOnTable(playerFourField)
+                                      widget.amountPlayers >= 4
+                                          ? cardOnTable(tableCards[four])
                                           : Container(),
                                       cardOnTable(trumpCard, trumpCard: true),
-                                      cardOnTable(tableCard),
+                                      cardOnTable(tableCards[user]),
                                     ],
                                   ),
                                 ),
@@ -188,11 +192,11 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      widget.amountPlayers >= 3
-                                          ? cardOnTable(playerFiveField)
+                                      widget.amountPlayers >= 5
+                                          ? cardOnTable(tableCards[five])
                                           : Container(),
-                                      widget.amountPlayers > 5
-                                          ? cardOnTable(playerSixField)
+                                      widget.amountPlayers == 6
+                                          ? cardOnTable(tableCards[six])
                                           : Container(),
                                     ],
                                   ),
@@ -234,32 +238,33 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget showingCardOld(logic.Card tcard) {
+  Widget showingCardOld(logic.Card tCard) {
     return Expanded(
       child: FlatButton(
         padding: EdgeInsets.all(0.0),
         onPressed: () {
-          print(tcard.toString());
+          print(tCard.toString());
+          if (wizard.checkEndOfRound()) {
+            print('Test');
+            print("Next round will be initialized");
+            newRound = true;
+            wizard.nextRound();
+            trumpCard = wizard.takeTrumpCard();
+            _putBetHelper();
+          } else {
+            newRound = false;
+          }
+
           setState(() {
-            // FIX: condition
-            if (players[players.length - 1].handCards.length == 1 &&
-                roundNumber < maxRound) {
-              print("Next round will be initialized");
-              newRound = true;
-              roundNumber++;
-              deck = new Deck();
-              cardDistribution();
-              pickTrump();
-              _putBetHelper();
-            } else {
-              newRound = false;
-            }
-            userPlayedCard = true;
-            tableCard = tcard;
-            players[0].handCards.remove(tcard);
+            wizard.userPlayCard(choosenCard: tCard);
+            wizard.playersPlay();
+            // returns card from backend
+            tableCards = new List(widget.amountPlayers);
+            tableCards = wizard.playedCards;
+            _buildUserCards();
           });
         },
-        child: tcard.playerCardsWidget(),
+        child: tCard.playerCardsWidget(),
       ),
     );
   }
@@ -271,29 +276,18 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  void cardDistribution() {
-    int lng = players.length;
-    for (int i = 0; i < roundNumber; i++) {
-      for (int j = 0; j < lng; j++) {
-        players[j].handCards.add(deck.takeCard());
-      }
-    }
-  }
-
-  void pickTrump() {
-    if (deck.size() != 0) {
-      trumpCard = deck.takeCard();
-    } else {
-      trumpCard = null;
-    }
-  }
-
   _putBetHelper() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog<String>(
         context: context,
         builder: (BuildContext context) => putBet(context),
       );
+    });
+  }
+
+  _buildUserCards() {
+    wizard.players[0].handCards.forEach((element) {
+      displayedCards.add(showingCardOld(element));
     });
   }
 }
