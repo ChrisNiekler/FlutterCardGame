@@ -37,6 +37,7 @@ class _GamePageState extends State<GamePage> {
   logic.Card trumpCard;
   bool newRound = false;
   bool userPlayedCard = false;
+  int size;
 //  logic.Card usersCardField;
 //  logic.Card playerTwoField;
 //  logic.Card playerThreeField;
@@ -48,6 +49,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
+    size = widget.amountPlayers;
     wizard = Wizard(playerAmount: widget.amountPlayers);
     trumpCard = wizard.takeTrumpCard();
     tableCards = new List(widget.amountPlayers);
@@ -127,7 +129,7 @@ class _GamePageState extends State<GamePage> {
           color: Colors.green.shade700,
           child: Column(
             children: <Widget>[
-              widget.amountPlayers > 3
+              size == 4 || size == 6
                   ? Expanded(
                       flex: 10,
                       child: enemyCards(displayedCards.length, "red", false))
@@ -163,12 +165,11 @@ class _GamePageState extends State<GamePage> {
                                   child: Column(
                                     children: <Widget>[
                                       // left cards on table
-                                      widget.amountPlayers >= 3
+                                      size >= 5
                                           ? cardOnTable(tableCards[three])
                                           : Container(),
-                                      widget.amountPlayers >= 3
-                                          ? cardOnTable(tableCards[two])
-                                          : Container(),
+
+                                      cardOnTable(tableCards[two]),
                                     ],
                                   ),
                                 ),
@@ -178,8 +179,11 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      widget.amountPlayers >= 4
+                                      size == 6
                                           ? cardOnTable(tableCards[four])
+                                          : Container(),
+                                      size == 4
+                                          ? cardOnTable(tableCards[two])
                                           : Container(),
                                       cardOnTable(trumpCard, trumpCard: true),
                                       cardOnTable(tableCards[user]),
@@ -191,11 +195,18 @@ class _GamePageState extends State<GamePage> {
                               Expanded(
                                 child: Container(
                                   child: Column(
+                                    // right side of table cards
                                     children: <Widget>[
-                                      widget.amountPlayers >= 5
+                                      size == 3
+                                          ? cardOnTable(tableCards[three])
+                                          : Container(),
+                                      size == 4 || size == 5
+                                          ? cardOnTable(tableCards[four])
+                                          : Container(),
+                                      size >= 5
                                           ? cardOnTable(tableCards[five])
                                           : Container(),
-                                      widget.amountPlayers == 6
+                                      size == 6
                                           ? cardOnTable(tableCards[six])
                                           : Container(),
                                     ],
@@ -215,7 +226,7 @@ class _GamePageState extends State<GamePage> {
                                   ? enemyCards(
                                       displayedCards.length, "blue", true)
                                   : Container(),
-                              widget.amountPlayers > 5
+                              widget.amountPlayers >= 5
                                   ? enemyCards(
                                       displayedCards.length, "purple", true)
                                   : Container(),

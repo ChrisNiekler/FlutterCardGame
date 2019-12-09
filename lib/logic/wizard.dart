@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/backend/playersUI.dart';
 import 'package:wizard/logic/card.dart' as logic;
-import 'package:wizard/logic/humanPlayer.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/cardType.dart';
