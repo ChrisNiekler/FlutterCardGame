@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/gui/enemyCardsWidgets.dart';
 import 'package:wizard/experimental/gui/cardsOnTable.dart';
-import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/wizard.dart';
 import 'experimental/gui/usersViewWidget.dart';
 import 'experimental/scoreboard.dart';
@@ -27,24 +27,24 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   Wizard wizard;
-  logic.Card trumpCard;
+  GameCard trumpCard;
   bool newRound = false;
   bool userPlayedCard = false;
   int size;
 
-  List<logic.Card> tableCards = [];
-  List<logic.Card> _emptyTable;
+  List<GameCard> tableCards = [];
+  List<GameCard> _emptyTable;
 
   @override
   void initState() {
     super.initState();
     size = widget.amountPlayers;
-    wizard = Wizard(playerAmount: widget.amountPlayers);
+    wizard = Wizard(playerAmount: size);
     trumpCard = wizard.takeTrumpCard();
-    tableCards = new List(widget.amountPlayers);
+    tableCards = new List(size);
     _emptyTable = tableCards;
     _putBetHelper();
-    print('We have ${widget.amountPlayers} players');
+    print('We have ${size} players');
     wizard.cardDistribution();
   }
 
@@ -98,11 +98,11 @@ class _GamePageState extends State<GamePage> {
                         flex: 10,
                         child: Column(
                           children: <Widget>[
-                            widget.amountPlayers >= 5
+                            size >= 5
                                 ? enemyCards(
                                     displayedCards.length, "gray", true)
                                 : Container(),
-                            widget.amountPlayers >= 3
+                            size >= 3
                                 ? enemyCards(
                                     displayedCards.length, "green", true)
                                 : Container(),
@@ -177,11 +177,11 @@ class _GamePageState extends State<GamePage> {
                         child: Container(
                           child: Column(
                             children: <Widget>[
-                              widget.amountPlayers >= 3
+                              size >= 3
                                   ? enemyCards(
                                       displayedCards.length, "blue", true)
                                   : Container(),
-                              widget.amountPlayers >= 5
+                              size >= 5
                                   ? enemyCards(
                                       displayedCards.length, "purple", true)
                                   : Container(),
@@ -204,7 +204,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget showingCardOld(logic.Card tCard) {
+  Widget showingCardOld(GameCard tCard) {
     return Expanded(
       child: FlatButton(
         padding: EdgeInsets.all(0.0),
@@ -215,7 +215,7 @@ class _GamePageState extends State<GamePage> {
             newRound = true;
             wizard.nextRound();
             setState(() {
-              tableCards = new List(widget.amountPlayers);
+              tableCards = new List(size);
               trumpCard = wizard.takeTrumpCard();
             });
 
@@ -228,7 +228,7 @@ class _GamePageState extends State<GamePage> {
             wizard.userPlayCard(chosenCard: tCard);
             wizard.playersPlay();
             // returns card from backend
-            tableCards = new List(widget.amountPlayers);
+            tableCards = new List(size);
             tableCards = wizard.playedCards;
             _buildUserCards();
           });
@@ -238,7 +238,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget playedCard(logic.Card tCard) {
+  Widget playedCard(GameCard tCard) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: tCard.playerCardsWidget(),

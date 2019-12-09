@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/player.dart';
 import 'cardType.dart';
 import 'dart:io';
@@ -7,21 +7,21 @@ import 'package:flutter/material.dart';
 
 class HumanPlayer extends Player {
   @override
-  Future<logic.Card> playCardFuture() {
+  Future<logic.GameCard> playCardFuture() {
     // TODO: implement playCardFuture
     return null;
   }
 
   @override
-  logic.Card playCard(int pick,
+  logic.GameCard playCard(int pick,
       {CardType trump,
-      logic.Card foe,
+      logic.GameCard foe,
       int roundNumber,
       int playerNumber,
-      List<logic.Card> alreadyPlayedCards,
-      List<logic.Card> playedCards,
-      logic.Card highestCard}) {
-    logic.Card temp = this.handCards[pick];
+      List<logic.GameCard> alreadyPlayedCards,
+      List<logic.GameCard> playedCards,
+      logic.GameCard highestCard}) {
+    logic.GameCard temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;
   }
@@ -58,8 +58,8 @@ class HumanPlayer extends Player {
   void putBet(int round, int betsNumber,
       {CardType trump,
       String testValue,
-      List<logic.Card> alreadyPlayedCards,
-      List<logic.Card> playedCards,
+      List<logic.GameCard> alreadyPlayedCards,
+      List<logic.GameCard> playedCards,
       int playerNumber,
       bool firstPlayer}) {
     bool inputAllowed = false;
@@ -91,9 +91,9 @@ class HumanPlayer extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
-  logic.Card humanPlayCard({@required logic.Card playedCard}) {
+  logic.GameCard humanPlayCard({@required logic.GameCard playedCard}) {
     int index = handCards.indexOf(playedCard);
-    logic.Card temp = handCards.elementAt(index);
+    logic.GameCard temp = handCards.elementAt(index);
     print('temp= $temp');
     handCards.removeAt(index);
     if (!handCards.contains(temp)) {

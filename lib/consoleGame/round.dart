@@ -1,4 +1,4 @@
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/logic/player.dart';
 import '../logic/humanPlayer.dart';
@@ -6,7 +6,7 @@ import 'package:wizard/logic/deck.dart';
 import 'dart:io';
 
 class Round {
-  Card trumpCard;
+  GameCard trumpCard;
   CardType trumpType;
   int roundNumber;
   int maxRounds;
@@ -14,8 +14,8 @@ class Round {
   bool wizardIsPlayed = false;
   CardType toServe; // the type of card that has to be served
   List<Player> players;
-  List<Card> playedCards = [];
-  List<Card> alreadyPlayedCards = [];
+  List<GameCard> playedCards = [];
+  List<GameCard> alreadyPlayedCards = [];
   bool firstPlayer;
 
   // creates a brand new Deck that gets shuffled twice
@@ -81,7 +81,7 @@ class Round {
   void playCards() {
     String name = '';
     String temp = '';
-    Card highestPlayedCard;
+    GameCard highestPlayedCard;
     Player trickWinner;
     int playerNumber = players.length;
 
@@ -194,10 +194,10 @@ class Round {
    JESTERS and WIZARDS can be played even if the player
    has a card of a servable color*/
 
-  List<Card> setAllowedToPlay(Player player) {
+  List<GameCard> setAllowedToPlay(Player player) {
     int n = 0;
     // if the toServe Value is NULL there is no card played yet
-    List<Card> hand = player.handCards;
+    List<GameCard> hand = player.handCards;
     if (toServe == null) {
       hand.forEach(
         (crd) {
@@ -234,8 +234,8 @@ class Round {
     return hand;
   }
 
-  List<Card> resetAllowedToPlay(Player player) {
-    List<Card> hand = player.handCards;
+  List<GameCard> resetAllowedToPlay(Player player) {
+    List<GameCard> hand = player.handCards;
     hand.forEach(
       (crd) {
         crd.allowedToPlay = false;

@@ -1,13 +1,13 @@
 import 'dart:math';
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/logic/deck.dart';
 
 abstract class Player {
   String name;
   int id;
-  List<Card> handCards = [];
-  List<Card> playableHandCards = [];
+  List<GameCard> handCards = [];
+  List<GameCard> playableHandCards = [];
   int bet = 0;
   int tricks = 0;
   int points = 0;
@@ -15,23 +15,23 @@ abstract class Player {
   bool lastPlayer = false;
   bool firstPlayer = false;
 
-  Future<Card> playCardFuture();
+  Future<GameCard> playCardFuture();
   void putBet(int roundNumber, int betsNumber,
       {CardType trump,
       String testValue,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
       int playerNumber,
       bool firstPlayer});
 
-  Card playCard(int pick,
+  GameCard playCard(int pick,
       {CardType trump,
-      Card foe,
+      GameCard foe,
       int roundNumber,
       int playerNumber,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
-      Card highestCard});
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
+      GameCard highestCard});
 
 //  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
   //not necessary anymore

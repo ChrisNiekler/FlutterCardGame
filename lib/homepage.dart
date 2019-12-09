@@ -4,7 +4,6 @@ import 'package:wizard/0auth/services/authentication.dart';
 import 'package:wizard/gamepage.dart';
 import 'package:wizard/ui/ranking_page.dart';
 
-
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.email, this.logoutCallback})
       : super(key: key);
@@ -59,7 +58,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Hero(tag:"hero",
+            Hero(
+              tag: "hero",
               child: new Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
@@ -71,13 +71,12 @@ class _HomePageState extends State<HomePage> {
                         color: Color(0xFFB4202A)),
                   ),
                   new Container(
-                    height: 200.0,
-                    width: 200.0,
-                    decoration: new BoxDecoration(
+                      height: 200.0,
+                      width: 200.0,
+                      decoration: new BoxDecoration(
                         borderRadius: new BorderRadius.circular(10.0),
-                        ),
-                    child: new Image.asset("images/logo/wizard-icon.png")
-                  )
+                      ),
+                      child: new Image.asset("images/logo/wizard-icon.png"))
                 ],
               ),
             ),

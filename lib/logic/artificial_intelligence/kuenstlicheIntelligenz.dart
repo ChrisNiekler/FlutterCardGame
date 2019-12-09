@@ -1,5 +1,5 @@
 import 'package:wizard/logic/player.dart';
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'dart:math' show Random;
 import 'package:wizard/logic/deck.dart';
@@ -77,22 +77,22 @@ class KuenstlicheIntelligenz extends Player {
   }
 
   @override
-  Card playCard(int pick,
+  GameCard playCard(int pick,
       {CardType trump,
-      Card foe,
+      GameCard foe,
       int roundNumber,
       int playerNumber,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
-      Card highestCard}) {
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
+      GameCard highestCard}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
-      Card temp = findBestCard(trump);
+      GameCard temp = findBestCard(trump);
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
-      Card temp = findBestCardWithoutFoe(
+      GameCard temp = findBestCardWithoutFoe(
           trump, roundNumber, playerNumber, alreadyPlayedCards);
       handCards.remove(temp);
       return temp;
@@ -102,20 +102,26 @@ class KuenstlicheIntelligenz extends Player {
     }
   }
 
-  Card _playCardAI(Card foe, CardType trump, int roundNumber, int playerNumber,
-      List<Card> alreadyPlayedCards, List<Card> playedCards, Card highestCard) {
-    Card bestCard = findBestCard(trump);
-    Card worstCard = findWorstCard(trump);
+  GameCard _playCardAI(
+      GameCard foe,
+      CardType trump,
+      int roundNumber,
+      int playerNumber,
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
+      GameCard highestCard) {
+    GameCard bestCard = findBestCard(trump);
+    GameCard worstCard = findWorstCard(trump);
     if (bestCard == bestCard.compare(highestCard, trump) &&
         tricks < bet &&
         foe.cardType != CardType.WIZARD &&
         _getWahrscheinlichkeitPlay(
             foe, trump, alreadyPlayedCards, playedCards)) {
-      Card temp = bestCard;
+      GameCard temp = bestCard;
       handCards.remove(bestCard);
       return temp;
     } else {
-      Card temp = worstCard;
+      GameCard temp = worstCard;
       handCards.remove(worstCard);
       return temp;
     }
@@ -125,8 +131,8 @@ class KuenstlicheIntelligenz extends Player {
   void putBet(int round, int betsNumber,
       {CardType trump,
       String testValue,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
       int playerNumber,
       bool firstPlayer}) {
     int check = 0;
@@ -142,8 +148,8 @@ class KuenstlicheIntelligenz extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
-  Card findBestCard(CardType trump) {
-    Card bestCard = this.playableHandCards[0];
+  GameCard findBestCard(CardType trump) {
+    GameCard bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (playableHandCards[i] == playableHandCards[i].compare(bestCard, trump))
         bestCard = playableHandCards[i];
@@ -151,8 +157,8 @@ class KuenstlicheIntelligenz extends Player {
     return bestCard;
   }
 
-  Card findWorstCard(CardType trump) {
-    Card worstCard = this.playableHandCards[0];
+  GameCard findWorstCard(CardType trump) {
+    GameCard worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (worstCard.cardType == trump &&
               playableHandCards[i].cardType != trump ||
@@ -169,8 +175,8 @@ class KuenstlicheIntelligenz extends Player {
   int _getWahrscheinlichkeitBet(
       int roundNumber,
       CardType trump,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
       int playerNumber,
       bool firstPlayer) {
     int x = 0;
@@ -241,8 +247,8 @@ class KuenstlicheIntelligenz extends Player {
     return x;
   }
 
-  bool _getWahrscheinlichkeitPlay(Card foe, CardType trump,
-      List<Card> alreadyPlayedCards, List<Card> playedCards) {
+  bool _getWahrscheinlichkeitPlay(GameCard foe, CardType trump,
+      List<GameCard> alreadyPlayedCards, List<GameCard> playedCards) {
     bool tryWinning = false;
     int x = 0;
     double check = 0;
@@ -319,8 +325,8 @@ class KuenstlicheIntelligenz extends Player {
     return tryWinning;
   }
 
-  Deck _removeCardsFromAiDeck(
-      Deck aiGameDeck, List<Card> alreadyPlayedCards, List<Card> playedCards) {
+  Deck _removeCardsFromAiDeck(Deck aiGameDeck,
+      List<GameCard> alreadyPlayedCards, List<GameCard> playedCards) {
     for (int x = 0; x < aiGameDeck.size(); x++) {
       if (alreadyPlayedCards != null) {
         for (int y = 0; y < alreadyPlayedCards.length; y++) {
@@ -364,9 +370,9 @@ class KuenstlicheIntelligenz extends Player {
     }
   }
 
-  Card findBestCardWithoutFoe(CardType trump, int roundNumber, int playerNumber,
-      List<Card> alreadyPlayedCards) {
-    Card temp = playableHandCards[0];
+  GameCard findBestCardWithoutFoe(CardType trump, int roundNumber,
+      int playerNumber, List<GameCard> alreadyPlayedCards) {
+    GameCard temp = playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (temp.cardType != trump && playableHandCards[i].cardType == trump ||
           temp.value < playableHandCards[i].value) temp = playableHandCards[i];
@@ -375,7 +381,7 @@ class KuenstlicheIntelligenz extends Player {
   }
 
   @override
-  Future<Card> playCardFuture() {
+  Future<GameCard> playCardFuture() {
     // TODO: implement playCardFuture
     return null;
   }

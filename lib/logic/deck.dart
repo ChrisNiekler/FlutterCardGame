@@ -1,4 +1,4 @@
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'dart:math';
 /* A new instance of Deck will automatically create a Deck of 60 Cards
@@ -6,10 +6,10 @@ import 'dart:math';
  */
 
 class Deck {
-  List<Card> deck = [];
+  List<GameCard> deck = [];
 
   /* Returns the card that is on top of the Stack */
-  Card takeCard() {
+  GameCard takeCard() {
     return deck.removeLast();
   }
 
@@ -21,7 +21,7 @@ class Deck {
     deck.removeAt(number);
   }
 
-  Card aiShowCard(int number) {
+  GameCard aiShowCard(int number) {
     return deck[number];
   }
 
@@ -36,16 +36,16 @@ class Deck {
         if (j == 0) {
           // if the value of the card is 0 then
           // the card type is Jester
-          this.deck.add(
-              new Card(CardType.values[4], j, passiveType: CardType.values[i]));
+          this.deck.add(new GameCard(CardType.values[4], j,
+              passiveType: CardType.values[i]));
         } else if (j == 14) {
           // if the value of the card is 14 then
           // the card type is Wizard
-          this.deck.add(
-              new Card(CardType.values[5], j, passiveType: CardType.values[i]));
+          this.deck.add(new GameCard(CardType.values[5], j,
+              passiveType: CardType.values[i]));
         } else {
           // the card type varies between the common types
-          this.deck.add(new Card(CardType.values[i], j));
+          this.deck.add(new GameCard(CardType.values[i], j));
         }
       }
     }
@@ -60,7 +60,7 @@ class Deck {
 
   /*Implementation of the Knuth Shuffle Algorithm*/
   void _knuthShuffle() {
-    Card temp;
+    GameCard temp;
     int random;
     for (int i = this.deck.length; i > 0; i--) {
       // generate a random number between 0 and i => [0,i)

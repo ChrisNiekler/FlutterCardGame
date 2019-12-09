@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:test/test.dart';
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/humanPlayer.dart';
@@ -86,12 +86,12 @@ void main() {
       group('PickTrumpCard:', () {
         test('club', () {
           Ki ai = new Ki('ki_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.CLUB, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 5),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.CLUB, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 5),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -102,12 +102,12 @@ void main() {
         });
         test('spade', () {
           Ki ai = new Ki('ki_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.SPADE, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 5),
-            new Card(CardType.SPADE, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.SPADE, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 5),
+            new GameCard(CardType.SPADE, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -118,12 +118,12 @@ void main() {
         });
         test('diamond', () {
           Ki ai = new Ki('ki_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.DIAMOND, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.DIAMOND, 5),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.DIAMOND, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.DIAMOND, 5),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -134,12 +134,12 @@ void main() {
         });
         test('heart', () {
           Ki ai = new Ki('ki_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.HEART, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 5),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.HEART, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 5),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -154,12 +154,12 @@ void main() {
       group('PlayCard:', () {
         test('play better Card with trumpType', () {
           Ki ai = new Ki('ai_dummy', 0); //ai zum testen
-          List<Card> deckList = [
-            new Card(CardType.HEART, 2),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 10),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.HEART, 2),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 10),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           for (int i = 0; i < deckList.length; i++) {
             if (CardType.HEART == deckList[i].cardType)
@@ -171,9 +171,9 @@ void main() {
             ai.addCard(deck);
           }
           ai.creatingPlayableHandCardsList();
-          List<Card> playedCards = [
-            new Card(CardType.HEART, 6),
-            new Card(CardType.CLUB, 3)
+          List<GameCard> playedCards = [
+            new GameCard(CardType.HEART, 6),
+            new GameCard(CardType.CLUB, 3)
           ];
           ai.tricks = 0;
           ai.bet = 2;
@@ -188,33 +188,33 @@ void main() {
               ai
                   .playCard(1,
                       trump: CardType.HEART,
-                      foe: new Card(CardType.HEART, 6),
+                      foe: new GameCard(CardType.HEART, 6),
                       roundNumber: 5,
                       playerNumber: 3,
                       playedCards: playedCards,
-                      highestCard: new Card(CardType.HEART, 6))
+                      highestCard: new GameCard(CardType.HEART, 6))
                   .cardType,
               CardType.HEART);
           expect(
               ai
                   .playCard(1,
                       trump: CardType.HEART,
-                      foe: new Card(CardType.HEART, 6),
+                      foe: new GameCard(CardType.HEART, 6),
                       roundNumber: 5,
                       playerNumber: 3,
                       playedCards: playedCards,
-                      highestCard: new Card(CardType.HEART, 6))
+                      highestCard: new GameCard(CardType.HEART, 6))
                   .value,
               10);
         });
         test('worseCard play jester', () {
           Ki ai = new Ki('ai_dummy', 0); //ai zum testen
-          List<Card> deckList = [
-            new Card(CardType.HEART, 2),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 10),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.HEART, 2),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 10),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           for (int i = 0; i < deckList.length; i++) {
             if (CardType.HEART == deckList[i].cardType ||
@@ -228,9 +228,9 @@ void main() {
             ai.addCard(deck);
           }
           ai.creatingPlayableHandCardsList();
-          List<Card> playedCards = [
-            new Card(CardType.HEART, 12),
-            new Card(CardType.CLUB, 3)
+          List<GameCard> playedCards = [
+            new GameCard(CardType.HEART, 12),
+            new GameCard(CardType.CLUB, 3)
           ];
           ai.tricks = 0;
           ai.bet = 2;
@@ -238,33 +238,33 @@ void main() {
               ai
                   .playCard(1,
                       trump: CardType.HEART,
-                      foe: new Card(CardType.HEART, 12),
+                      foe: new GameCard(CardType.HEART, 12),
                       roundNumber: 5,
                       playerNumber: 3,
                       playedCards: playedCards,
-                      highestCard: new Card(CardType.HEART, 12))
+                      highestCard: new GameCard(CardType.HEART, 12))
                   .cardType,
               CardType.JESTER);
           expect(
               ai
                   .playCard(1,
                       trump: CardType.HEART,
-                      foe: new Card(CardType.HEART, 12),
+                      foe: new GameCard(CardType.HEART, 12),
                       roundNumber: 5,
                       playerNumber: 3,
                       playedCards: playedCards,
-                      highestCard: new Card(CardType.HEART, 12))
+                      highestCard: new GameCard(CardType.HEART, 12))
                   .value,
               0);
         });
         test('play worseCard with trumpType', () {
           Ki ai = new Ki('ai_dummy', 0); //ai zum testen
-          List<Card> deckList = [
-            new Card(CardType.HEART, 2),
-            new Card(CardType.SPADE, 8),
-            new Card(CardType.HEART, 10),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.HEART, 2),
+            new GameCard(CardType.SPADE, 8),
+            new GameCard(CardType.HEART, 10),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           for (int i = 0; i < deckList.length; i++) {
             if (CardType.HEART == deckList[i].cardType ||
@@ -278,9 +278,9 @@ void main() {
             ai.addCard(deck);
           }
           ai.creatingPlayableHandCardsList();
-          List<Card> playedCards = [
-            new Card(CardType.HEART, 12),
-            new Card(CardType.CLUB, 3)
+          List<GameCard> playedCards = [
+            new GameCard(CardType.HEART, 12),
+            new GameCard(CardType.CLUB, 3)
           ];
           ai.tricks = 0;
           ai.bet = 2;
@@ -288,22 +288,22 @@ void main() {
               ai
                   .playCard(1,
                       trump: CardType.HEART,
-                      foe: new Card(CardType.HEART, 12),
+                      foe: new GameCard(CardType.HEART, 12),
                       roundNumber: 5,
                       playerNumber: 3,
                       playedCards: playedCards,
-                      highestCard: new Card(CardType.HEART, 12))
+                      highestCard: new GameCard(CardType.HEART, 12))
                   .cardType,
               CardType.HEART);
           expect(
               ai
                   .playCard(1,
                       trump: CardType.HEART,
-                      foe: new Card(CardType.HEART, 12),
+                      foe: new GameCard(CardType.HEART, 12),
                       roundNumber: 5,
                       playerNumber: 3,
                       playedCards: playedCards,
-                      highestCard: new Card(CardType.HEART, 12))
+                      highestCard: new GameCard(CardType.HEART, 12))
                   .value,
               2);
         });
@@ -377,12 +377,12 @@ void main() {
         test('club', () {
           KuenstlicheIntelligenz ai =
               new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.CLUB, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 5),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.CLUB, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 5),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -394,12 +394,12 @@ void main() {
         test('spade', () {
           KuenstlicheIntelligenz ai =
               new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.SPADE, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 5),
-            new Card(CardType.SPADE, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.SPADE, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 5),
+            new GameCard(CardType.SPADE, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -411,12 +411,12 @@ void main() {
         test('diamond', () {
           KuenstlicheIntelligenz ai =
               new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.DIAMOND, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.DIAMOND, 5),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.DIAMOND, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.DIAMOND, 5),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;
@@ -428,12 +428,12 @@ void main() {
         test('heart', () {
           KuenstlicheIntelligenz ai =
               new KuenstlicheIntelligenz('kuenstlicheIntelligenz_dummy', 0);
-          List<Card> deckList = [
-            new Card(CardType.HEART, 4),
-            new Card(CardType.JESTER, 0),
-            new Card(CardType.HEART, 5),
-            new Card(CardType.CLUB, 7),
-            new Card(CardType.DIAMOND, 4)
+          List<GameCard> deckList = [
+            new GameCard(CardType.HEART, 4),
+            new GameCard(CardType.JESTER, 0),
+            new GameCard(CardType.HEART, 5),
+            new GameCard(CardType.CLUB, 7),
+            new GameCard(CardType.DIAMOND, 4)
           ];
           Deck deck = new Deck();
           deck.deck = deckList;

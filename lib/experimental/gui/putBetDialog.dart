@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/gamepage.dart';
 import 'package:wizard/experimental/gui/cardsOnTable.dart';
-import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/gamecard.dart' as logic;
 
 //Todo maybe this class is helpful
 //class PutBetDialog extends StatefulWidget {
@@ -97,7 +97,7 @@ import 'package:wizard/logic/card.dart' as logic;
 //  userPutBet = true;
 //}
 
-Widget putBet(BuildContext context, logic.Card trumpCard) {
+Widget putBet(BuildContext context, logic.GameCard trumpCard) {
   int bet;
   bool userPutBet = false;
   if (!userPutBet) {

@@ -1,5 +1,5 @@
 import 'package:wizard/logic/player.dart';
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'dart:math' show Random;
 
@@ -72,22 +72,22 @@ class Ki extends Player {
   }
 
   @override
-  Card playCard(int pick,
+  GameCard playCard(int pick,
       {CardType trump,
-      Card foe,
+      GameCard foe,
       int roundNumber,
       int playerNumber,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
-      Card highestCard}) {
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
+      GameCard highestCard}) {
     //1. here it is chosen between all handcards
     if (trump == null) {
       //todo improve (when there is no trump)
-      Card temp = _findBestCard(trump);
+      GameCard temp = _findBestCard(trump);
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
-      Card temp = findBestCardWithoutFoe(
+      GameCard temp = findBestCardWithoutFoe(
           trump, roundNumber, playerNumber, alreadyPlayedCards);
       handCards.remove(temp);
       return temp;
@@ -96,19 +96,19 @@ class Ki extends Player {
     }
   }
 
-  Card _playCardAI(Card foe, CardType trump, Card highestCard) {
+  GameCard _playCardAI(GameCard foe, CardType trump, GameCard highestCard) {
     //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
     //todo DONE get more intelligent (Wahrscheinlichkeiten, ...)
-    Card bestCard = _findBestCard(trump);
-    Card worstCard = _findWorstCard(trump);
+    GameCard bestCard = _findBestCard(trump);
+    GameCard worstCard = _findWorstCard(trump);
     if (bestCard == bestCard.compare(highestCard, trump) &&
         tricks < bet &&
         foe.cardType != CardType.WIZARD) {
-      Card temp = bestCard;
+      GameCard temp = bestCard;
       handCards.remove(bestCard);
       return temp;
     } else {
-      Card temp = worstCard;
+      GameCard temp = worstCard;
       handCards.remove(worstCard);
       return temp;
     }
@@ -128,8 +128,8 @@ class Ki extends Player {
   void putBet(int round, int betsNumber,
       {CardType trump,
       String testValue,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
+      List<GameCard> alreadyPlayedCards,
+      List<GameCard> playedCards,
       int playerNumber,
       bool firstPlayer}) {
     int check = 0;
@@ -158,8 +158,8 @@ class Ki extends Player {
   //todo DONE Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
   //todo DONE an Hand der Wahrscheinlichkeit die dritte bet
 
-  Card _findBestCard(trump) {
-    Card bestCard = this.playableHandCards[0];
+  GameCard _findBestCard(trump) {
+    GameCard bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (playableHandCards[i] == playableHandCards[i].compare(bestCard, trump))
         bestCard = playableHandCards[i];
@@ -167,8 +167,8 @@ class Ki extends Player {
     return bestCard;
   }
 
-  Card _findWorstCard(CardType trump) {
-    Card worstCard = this.playableHandCards[0];
+  GameCard _findWorstCard(CardType trump) {
+    GameCard worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (worstCard.cardType == trump &&
               playableHandCards[i].cardType != trump ||
@@ -182,9 +182,9 @@ class Ki extends Player {
     return worstCard;
   }
 
-  Card findBestCardWithoutFoe(CardType trump, int roundNumber, int playerNumber,
-      List<Card> alreadyPlayedCards) {
-    Card temp = playableHandCards[0];
+  GameCard findBestCardWithoutFoe(CardType trump, int roundNumber,
+      int playerNumber, List<GameCard> alreadyPlayedCards) {
+    GameCard temp = playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
       if (temp.cardType != trump && playableHandCards[i].cardType == trump ||
           temp.value < playableHandCards[i].value) temp = playableHandCards[i];
@@ -193,7 +193,7 @@ class Ki extends Player {
   }
 
   @override
-  Future<Card> playCardFuture() {
+  Future<GameCard> playCardFuture() {
     // TODO: implement playCardFuture
     return null;
   }

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/cardType.dart';
 
-List<logic.Card> setAllowedToPlay(
+List<logic.GameCard> setAllowedToPlay(
     {@required Player player,
     @required bool wizardIsPlayed,
     @required CardType toServe}) {
   int n = 0;
   // if the toServe Value is NULL there is no card played yet
-  List<logic.Card> hand = player.handCards;
+  List<logic.GameCard> hand = player.handCards;
   if (toServe == null) {
     hand.forEach(
       (crd) {
@@ -47,7 +47,7 @@ List<logic.Card> setAllowedToPlay(
 }
 
 CardType determineToServe(
-    {@required CardType toServe, @required List<logic.Card> playedCards}) {
+    {@required CardType toServe, @required List<logic.GameCard> playedCards}) {
   String temp;
   // what to serve
   if (toServe == null) {

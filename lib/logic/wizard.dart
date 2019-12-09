@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/experimental/backend/playersUI.dart';
-import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/cardType.dart';
@@ -12,12 +12,12 @@ const List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
 class Wizard {
   // VARIABLES
   // cards
-  logic.Card trumpCard;
+  GameCard trumpCard;
   Deck _deck = Deck();
   CardType trumpType;
   CardType toServe;
-  List<logic.Card> playedCards = [];
-  List<logic.Card> alreadyPlayedCards = [];
+  List<GameCard> playedCards = [];
+  List<GameCard> alreadyPlayedCards = [];
 
   // players
   int trickStarter = 0;
@@ -43,7 +43,7 @@ class Wizard {
     currentPlayer = roundStarter;
   }
   // returns the TrumpCard
-  logic.Card takeTrumpCard() {
+  GameCard takeTrumpCard() {
     if (_deck.isNotEmpty()) {
       trumpCard = _deck.takeCard();
       trumpType = trumpCard.cardType;
@@ -62,7 +62,7 @@ class Wizard {
   }
 
   // the user plays a card
-  bool userPlayCard({@required logic.Card chosenCard}) {
+  bool userPlayCard({@required GameCard chosenCard}) {
     playedCards.add(chosenCard);
     afterFirstPlayer();
     return players[0].handCards.remove(chosenCard);
@@ -75,7 +75,7 @@ class Wizard {
   }
 
   // todo needs to be changed once the first player is not 0
-  logic.Card getPlayerCard({@required int playerID}) {
+  GameCard getPlayerCard({@required int playerID}) {
     return playedCards[playerID];
   }
 

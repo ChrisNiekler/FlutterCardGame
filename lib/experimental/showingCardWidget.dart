@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wizard/logic/card.dart' as logic;
+import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/player.dart';
 
@@ -8,13 +8,13 @@ import 'package:wizard/logic/player.dart';
 class showingCard extends StatefulWidget {
   showingCard(this.tcard, this.roundNumber, this.maxRound, this.players,
       this.deck, this.trumpCard);
-  logic.Card tcard;
+  logic.GameCard tcard;
   int roundNumber;
   int maxRound;
   List<Player> players;
   Deck deck;
-  logic.Card trumpCard;
-  logic.Card tableCard;
+  logic.GameCard trumpCard;
+  logic.GameCard tableCard;
 
   @override
   _showingCardState createState() => _showingCardState();

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wizard/logic/cardType.dart';
 
-class Card {
+class GameCard {
   CardType cardType;
   CardType passiveType;
   int value;
@@ -14,7 +14,7 @@ class Card {
     return CardTypeHelper.getValue(cardType);
   }
 
-  Card(this.cardType, this.value, {this.passiveType}) {
+  GameCard(this.cardType, this.value, {this.passiveType}) {
     String icon = '';
     this.card = this.typeToString();
 
@@ -36,7 +36,7 @@ class Card {
       this.card += value.toString();
     }
   }
-  Card compare(Card foe, CardType trump) {
+  GameCard compare(GameCard foe, CardType trump) {
     if (foe.value == 14)
       return foe;
     else if (this.value == 14)
