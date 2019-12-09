@@ -150,16 +150,35 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   }
 
   Widget showLogo() { // to show logo
-    return new Hero(
+  /*  return new Hero(
       tag: 'hero',
       child: Padding(
         padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 48.0,
-          child: Image.asset('images/logo/flutter-icon.png'), // put the right name for logo file here
+          child: Image.asset('images/logo/wizard-icon.png'), // put the right name for logo file here
         ),
       ),
+    );*/return new Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        new Container(
+          height: 150.0,
+          width: 150.0,
+          decoration: new BoxDecoration(
+              borderRadius: new BorderRadius.circular(20.0),
+              color: Color(0xFFB4202A)),
+        ),
+        new Container(
+            height: 120.0,
+            width: 120.0,
+            decoration: new BoxDecoration(
+              borderRadius: new BorderRadius.circular(10.0),
+            ),
+            child: new Image.asset("images/logo/wizard-icon.png")
+        )
+      ],
     );
   }
 

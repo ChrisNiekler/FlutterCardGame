@@ -59,25 +59,27 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                new Container(
-                  height: 220.0,
-                  width: 220.0,
-                  decoration: new BoxDecoration(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      color: Color(0xFFB4202A)),
-                ),
-                new Container(
-                  height: 200.0,
-                  width: 200.0,
-                  decoration: new BoxDecoration(
-                      borderRadius: new BorderRadius.circular(10.0),
-                      ),
-                  child: new Image.asset("images/logo/wizard-icon.png")
-                )
-              ],
+            Hero(tag:"hero",
+              child: new Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  new Container(
+                    height: 220.0,
+                    width: 220.0,
+                    decoration: new BoxDecoration(
+                        borderRadius: new BorderRadius.circular(20.0),
+                        color: Color(0xFFB4202A)),
+                  ),
+                  new Container(
+                    height: 200.0,
+                    width: 200.0,
+                    decoration: new BoxDecoration(
+                        borderRadius: new BorderRadius.circular(10.0),
+                        ),
+                    child: new Image.asset("images/logo/wizard-icon.png")
+                  )
+                ],
+              ),
             ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
