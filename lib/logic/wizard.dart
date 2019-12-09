@@ -4,11 +4,12 @@ import 'package:wizard/logic/card.dart' as logic;
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/cardType.dart';
+import 'package:wizard/logic/wizardTrick.dart';
 
 const List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
 
 class Wizard {
-  // VARIABLEN
+  // VARIABLES
   logic.Card trumpCard;
   List<Player> players;
   Deck deck = Deck();
@@ -87,32 +88,11 @@ class Wizard {
   void nextTrick() {
     print('nextTrick() was called');
     playedCards = [];
+    players.forEach(
+      (pElement) => setAllowedToPlay(
+          player: pElement, toServe: toServe, wizardIsPlayed: wizardIsPlayed),
+    );
   }
 
   void endOfGame() {}
-//  void determineTrump() {
-//    this.trumpCard = deck.takeCard();
-//    CardType type = trumpCard.cardType;
-//    String cardName = trumpCard.card;
-//    String temp;
-//    print('');
-//
-//    // print the current trump card
-//    if (!(type == CardType.JESTER || type == CardType.WIZARD)) {
-//      temp = trumpCard.typeToString();
-//      print('The open card is $cardName, therefore the trump is $temp');
-//      trumpType = type;
-//    } else if (type == CardType.JESTER) {
-//      // when jester is trump card there is no trump
-//      print(
-//          'The open card is $cardName, therefore there is no trump for this round.');
-//      trumpType = null;
-//    } else if (type == CardType.WIZARD) {
-//      // when wizard is trump card then the dealer picks the trump
-//      print(
-//          'The open card is $cardName, therefore the dealer picks the trump.');
-//      trumpType = players[trickStarter].pickTrumpCard();
-//    }
-//    print('');
-//  }
 }
