@@ -55,12 +55,14 @@ class Wizard {
       }
     }
   }
+
   // the user plays a card
   bool userPlayCard({@required logic.Card choosenCard}) {
     playedCards.add(choosenCard);
     afterFirstPlayer();
     return players[0].handCards.remove(choosenCard);
   }
+
   // after the first player played we need to determine what card
   // has to be served
   void afterFirstPlayer() {
