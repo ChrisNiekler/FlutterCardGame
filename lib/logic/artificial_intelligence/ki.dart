@@ -191,4 +191,10 @@ class Ki extends Player {
     }
     return temp;
   }
+
+  @override
+  Future<Card> playCardFuture() {
+    // TODO: implement playCardFuture
+    return null;
+  }
 }

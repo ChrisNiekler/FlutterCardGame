@@ -1,5 +1,5 @@
 import 'package:wizard/logic/player.dart';
-import 'package:wizard/logic/card.dart';
+import 'package:wizard/logic/card.dart' as logic;
 import '../cardType.dart';
 import 'dart:math' show Random;
 
@@ -25,28 +25,28 @@ class Ai extends Player {
     return trumpType;
   }
 
-  Card playCardAI(Card foe, CardType Trump) {
+  logic.Card playCardAI(logic.Card foe, CardType Trump) {
     int pick = Random().nextInt(playableHandCards.length);
     return handCards.removeAt(pick);
   }
 
-  Card findCard() {
+  logic.Card findCard() {
     int temp = Random().nextInt(playableHandCards.length);
-    Card findCard = playableHandCards[temp];
+    logic.Card findCard = playableHandCards[temp];
     return findCard;
   }
 
   @override
-  Card playCard(int pick,
+  logic.Card playCard(int pick,
       {CardType trump,
-      Card foe,
+      logic.Card foe,
       int roundNumber,
       int playerNumber,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
-      Card highestCard}) {
+      List<logic.Card> alreadyPlayedCards,
+      List<logic.Card> playedCards,
+      logic.Card highestCard}) {
     if (trump == null) {
-      Card temp = findCard();
+      logic.Card temp = findCard();
       handCards.remove(temp);
       return temp;
     } else if (foe == null) {
@@ -61,11 +61,17 @@ class Ai extends Player {
   void putBet(int round, int betsNumber,
       {CardType trump,
       String testValue,
-      List<Card> alreadyPlayedCards,
-      List<Card> playedCards,
+      List<logic.Card> alreadyPlayedCards,
+      List<logic.Card> playedCards,
       int playerNumber,
       bool firstPlayer}) {
     this.bet = Random().nextInt(handCards.length);
     print('$name bet he/she wins $bet tricks!');
+  }
+
+  @override
+  Future<logic.Card> playCardFuture() {
+    // TODO: implement playCardFuture
+    return null;
   }
 }

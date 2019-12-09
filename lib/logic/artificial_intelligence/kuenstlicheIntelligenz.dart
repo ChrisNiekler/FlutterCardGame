@@ -373,4 +373,10 @@ class KuenstlicheIntelligenz extends Player {
     }
     return temp;
   }
+
+  @override
+  Future<Card> playCardFuture() {
+    // TODO: implement playCardFuture
+    return null;
+  }
 }

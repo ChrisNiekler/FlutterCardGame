@@ -7,6 +7,12 @@ import 'package:flutter/material.dart';
 
 class HumanPlayer extends Player {
   @override
+  Future<logic.Card> playCardFuture() {
+    // TODO: implement playCardFuture
+    return null;
+  }
+
+  @override
   logic.Card playCard(int pick,
       {CardType trump,
       logic.Card foe,
