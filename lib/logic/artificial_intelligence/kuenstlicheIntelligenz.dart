@@ -89,12 +89,12 @@ class KuenstlicheIntelligenz extends Player {
     if (trump == null) {
       //todo improve (when there is no trump)
       GameCard temp = findBestCard(trump);
-      handCards.remove(temp);
+//      handCards.remove(temp);
       return temp;
     } else if (foe == null) {
       GameCard temp = findBestCardWithoutFoe(
           trump, roundNumber, playerNumber, alreadyPlayedCards);
-      handCards.remove(temp);
+//      handCards.remove(temp);
       return temp;
     } else {
       return _playCardAI(foe, trump, roundNumber, playerNumber,
@@ -118,11 +118,11 @@ class KuenstlicheIntelligenz extends Player {
         _getWahrscheinlichkeitPlay(
             foe, trump, alreadyPlayedCards, playedCards)) {
       GameCard temp = bestCard;
-      handCards.remove(bestCard);
+//      handCards.remove(bestCard);
       return temp;
     } else {
       GameCard temp = worstCard;
-      handCards.remove(worstCard);
+//      handCards.remove(worstCard);
       return temp;
     }
   }

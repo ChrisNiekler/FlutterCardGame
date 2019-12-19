@@ -33,10 +33,6 @@ abstract class Player {
       List<GameCard> playedCards,
       GameCard highestCard});
 
-//  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
-  //not necessary anymore
-//  Card playCardAI(Card foe, Card trump);
-
   void addCard(Deck deck) {
     handCards.add(deck.takeCard());
   }

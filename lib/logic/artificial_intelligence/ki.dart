@@ -84,12 +84,12 @@ class Ki extends Player {
     if (trump == null) {
       //todo improve (when there is no trump)
       GameCard temp = _findBestCard(trump);
-      handCards.remove(temp);
+//      handCards.remove(temp);
       return temp;
     } else if (foe == null) {
       GameCard temp = findBestCardWithoutFoe(
           trump, roundNumber, playerNumber, alreadyPlayedCards);
-      handCards.remove(temp);
+//      handCards.remove(temp);
       return temp;
     } else {
       return _playCardAI(foe, trump, highestCard);
@@ -105,11 +105,11 @@ class Ki extends Player {
         tricks < bet &&
         foe.cardType != CardType.WIZARD) {
       GameCard temp = bestCard;
-      handCards.remove(bestCard);
+//      handCards.remove(bestCard);
       return temp;
     } else {
       GameCard temp = worstCard;
-      handCards.remove(worstCard);
+//      handCards.remove(worstCard);
       return temp;
     }
   }

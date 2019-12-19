@@ -195,7 +195,9 @@ class _GamePageState extends State<GamePage> {
               ),
               Expanded(
                 flex: 15,
-                child: playersCardsView(displayedCards),
+                child: wizard.players[0].handCards.length < 1
+                    ? _nextRoundHelperWidget()
+                    : playersCardsView(displayedCards),
               )
             ],
           ),
@@ -210,19 +212,19 @@ class _GamePageState extends State<GamePage> {
         padding: EdgeInsets.all(0.0),
         onPressed: () {
           print(tCard.toString());
-          if (wizard.checkEndOfRound()) {
-            print("Next round will be initialized");
-            newRound = true;
-            wizard.nextRound();
-            setState(() {
-              tableCards = new List(size);
-              trumpCard = wizard.takeTrumpCard();
-            });
-
-            _putBetHelper();
-          } else {
-            newRound = false;
-          }
+//          if (wizard.checkEndOfRound()) {
+////            print("Next round will be initialized");
+////            newRound = true;
+//////            wizard.nextRound();
+//////            setState(() {
+//////              tableCards = new List(size);
+//////              trumpCard = wizard.takeTrumpCard();
+//////            });
+//////
+//////            _putBetHelper();
+////          } else {
+////            newRound = false;
+////          }
 
           setState(() {
             wizard.userPlayCard(chosenCard: tCard);
@@ -235,6 +237,24 @@ class _GamePageState extends State<GamePage> {
         },
         child: tCard.playerCardsWidget(),
       ),
+    );
+  }
+
+  Widget _nextRoundHelperWidget() {
+    print('ich hiab funktiriondret');
+    return FlatButton(
+      padding: EdgeInsets.all(8.0),
+      child: Text('Start next Round!'),
+      onPressed: () {
+        print("Next round will be initialized");
+        newRound = true;
+        wizard.nextRound();
+        setState(() {
+          tableCards = new List(size);
+          trumpCard = wizard.takeTrumpCard();
+        });
+        _putBetHelper();
+      },
     );
   }
 

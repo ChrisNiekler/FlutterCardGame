@@ -27,7 +27,8 @@ class Ai extends Player {
 
   logic.GameCard playCardAI(logic.GameCard foe, CardType Trump) {
     int pick = Random().nextInt(playableHandCards.length);
-    return handCards.removeAt(pick);
+    return handCards[pick];
+//    return handCards.removeAt(pick);
   }
 
   logic.GameCard findCard() {
@@ -47,11 +48,12 @@ class Ai extends Player {
       logic.GameCard highestCard}) {
     if (trump == null) {
       logic.GameCard temp = findCard();
-      handCards.remove(temp);
+//      handCards.remove(temp);
       return temp;
     } else if (foe == null) {
       pick = Random().nextInt(playableHandCards.length);
-      return handCards.removeAt(pick);
+      return handCards[pick];
+//      return handCards.removeAt(pick);
     } else {
       return playCardAI(foe, trump);
     }

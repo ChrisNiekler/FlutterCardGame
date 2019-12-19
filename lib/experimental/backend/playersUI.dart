@@ -22,7 +22,8 @@ List<Player> createPlayers(int playerAmount) {
       players.add(new Ki(names[i], i));
     else if (i == 4)
       players.add(new KuenstlicheIntelligenz(names[i], i));
-    else if (i == 5) players.add(new Ai(names[i], i));
+    else if (i == 5)
+      players.add(new Ai(names[i], i));
   }
   return players;
 }
