@@ -24,18 +24,21 @@ class Wizard {
   GameCard highestCard;
 
   // players
-  int trickStarter = 0;
-  int roundStarter = 0;
+  int trickStarter;
+  int roundStarter;
   int lastPlayer;
   int currentPlayer;
+  bool firstPlayer;
 
   // round information
   List<Player> players;
+  int playersBet;
   bool wizardIsPlayed = false;
   int roundNumber = 1;
   int lastRound;
   final int playerAmount;
   bool roundEnd = false;
+  int betsNumber;
 
   // CONSTRUCTOR
   Wizard({this.playerAmount}) {
@@ -43,8 +46,10 @@ class Wizard {
     lastRound = numberRounds[playerAmount];
     lastPlayer = playerAmount - 1;
     roundStarter = _whoStarts(playerAmount);
-    roundStarter = 0; //for testing reasons TODO delete this line
-    currentPlayer = roundStarter;
+//    roundStarter = 0; //for testing reasons TODO delete this line
+    trickStarter = roundStarter;
+//    currentPlayer = roundStarter;
+    currentPlayer = trickStarter;
   }
 
   // returns the TrumpCard
@@ -209,6 +214,11 @@ class Wizard {
   void endOfGame() {}
 
   void _nextRoundStarter() {
+//    if (trickStarter + 1 < playerAmount) {
+//      trickStarter++;
+//    } else {
+//      trickStarter = 0;
+//    }
     if (roundStarter + 1 < playerAmount) {
       roundStarter++;
     } else {
@@ -226,6 +236,27 @@ class Wizard {
   void _playTheCardAiHelper(int i) {
     indexOfTakenCard = _findIndexHelper(aiTookThisCard, players[i].handCards);
     playedCards.add(players[i].handCards.removeAt(indexOfTakenCard));
+  }
+
+  void determineLastPlayer() {
+    if (trickStarter == 0)
+      players.last.lastPlayer = true;
+    else
+      players[trickStarter - 1].lastPlayer = true;
+  }
+
+  void determineFirstPlayer() {
+    for (int i = 0; i < players.length; i++) {
+      if (players[i].id == trickStarter) players[i].firstPlayer = true;
+    }
+  }
+
+  void putInTheRightBetInList(int playerByIndex, int betNumber) {
+    players[playerByIndex].betsList.add(betNumber);
+  }
+
+  int getBetFromList(int playerByIndex, int roundNumber) {
+    return players[playerByIndex].betsList[roundNumber - 1];
   }
 }
 

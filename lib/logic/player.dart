@@ -8,7 +8,8 @@ abstract class Player {
   int id;
   List<GameCard> handCards = [];
   List<GameCard> playableHandCards = [];
-  int bet = 0;
+  int bet;
+  List<int> betsList = [];
   int tricks = 0;
   int points = 0;
   bool ai;

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/logic/player.dart';
-import 'package:wizard/gamepage.dart';
 import 'package:wizard/experimental/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart' as logic;
+import 'package:wizard/logic/wizard.dart';
 
 //Todo maybe this class is helpful
 //class PutBetDialog extends StatefulWidget {
@@ -97,10 +96,14 @@ import 'package:wizard/logic/gamecard.dart' as logic;
 //  userPutBet = true;
 //}
 
-Widget putBet(BuildContext context, logic.GameCard trumpCard) {
-  int bet;
-  bool userPutBet = false;
-  if (!userPutBet) {
+class PutBetDialog extends StatelessWidget {
+  PutBetDialog(this.trumpCard, this.wizard);
+
+  logic.GameCard trumpCard;
+  Wizard wizard;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 100.0),
       child: SimpleDialog(
@@ -108,7 +111,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
         contentPadding: const EdgeInsets.fromLTRB(35, 35, 35, 35),
         title: Row(
           children: <Widget>[
-            Text("Put your bet for this round"),
+            Text("Put your bet for this round.\nCurrent: ${wizard.betsNumber} bet(s)"),
             Container(child: cardOnTable(trumpCard, trumpCard: true)),
           ],
         ),
@@ -124,6 +127,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('0'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 0);
                       Navigator.pop(context);
                       //hier hat player 0 gewettet
                     },
@@ -133,6 +137,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('1'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 1);
                       Navigator.pop(context);
                       //hier hat player 1 gewettet
                     },
@@ -142,6 +147,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('2'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 2);
                       Navigator.pop(context);
                       //hier hat player 2 gewettet
                     },
@@ -151,6 +157,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('3'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 3);
                       Navigator.pop(context);
                       //hier hat player 3 gewettet
                     },
@@ -160,6 +167,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('4'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 4);
                       Navigator.pop(context);
                       //hier hat player 4 gewettet
                     },
@@ -169,6 +177,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('5'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 5);
                       Navigator.pop(context);
                       //hier hat player 5 gewettet
                     },
@@ -178,6 +187,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('6'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 6);
                       Navigator.pop(context);
                       //hier hat player 6 gewettet
                     },
@@ -187,6 +197,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('7'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 7);
                       Navigator.pop(context);
                       //hier hat player 7 gewettet
                     },
@@ -196,6 +207,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('8'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 8);
                       Navigator.pop(context);
                       //hier hat player 8 gewettet
                     },
@@ -205,6 +217,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('9'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 9);
                       Navigator.pop(context);
                       //hier hat player 9 gewettet
                     },
@@ -214,6 +227,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('10'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 10);
                       Navigator.pop(context);
                       //hier hat player 10 gewettet
                     },
@@ -223,6 +237,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('11'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 11);
                       Navigator.pop(context);
                       //hier hat player 11 gewettet
                     },
@@ -232,6 +247,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('12'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 12);
                       Navigator.pop(context);
                       //hier hat player 12 gewettet
                     },
@@ -241,6 +257,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('13'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 13);
                       Navigator.pop(context);
                       //hier hat player 13 gewettet
                     },
@@ -250,6 +267,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('14'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 14);
                       Navigator.pop(context);
                       //hier hat player 14 gewettet
                     },
@@ -259,6 +277,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('15'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 15);
                       Navigator.pop(context);
                       //hier hat player 15 gewettet
                     },
@@ -268,6 +287,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('16'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 16);
                       Navigator.pop(context);
                       //hier hat player 16 gewettet
                     },
@@ -277,6 +297,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('17'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 17);
                       Navigator.pop(context);
                       //hier hat player 17 gewettet
                     },
@@ -286,6 +307,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('18'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 18);
                       Navigator.pop(context);
                       //hier hat player 18 gewettet
                     },
@@ -295,6 +317,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('19'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 19);
                       Navigator.pop(context);
                       //hier hat player 19 gewettet
                     },
@@ -304,6 +327,7 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
                   child: RaisedButton(
                     child: Text('20'),
                     onPressed: () {
+                      wizard.putInTheRightBetInList(0, 20);
                       Navigator.pop(context);
                       //hier hat player 20 gewettet
                     },
@@ -316,15 +340,4 @@ Widget putBet(BuildContext context, logic.GameCard trumpCard) {
       ),
     );
   }
-//  else if (userPutBet) {
-//    playerTwoField =
-//        (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-//    playerThreeField = (players[2] as Ai).handCards.removeLast();
-//    playerFourField = (players[3] as Ki).handCards.removeLast();
-//    playerFiveField =
-//        (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-//    playerSixField = (players[5] as Ai).handCards.removeLast();
-//    userPutBet = false;
-//  }
-  userPutBet = true;
 }

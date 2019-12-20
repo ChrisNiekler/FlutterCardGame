@@ -43,9 +43,11 @@ class _GamePageState extends State<GamePage> {
     trumpCard = wizard.takeTrumpCard();
     tableCards = new List(size);
     _emptyTable = tableCards;
-    _putBetHelper();
-    print('We have ${size} players');
+    print('We have $size players');
     wizard.cardDistribution();
+    wizard.determineLastPlayer();
+    wizard.determineFirstPlayer();
+    _helperBet();
   }
 
   List<Widget> displayedCards = [];
@@ -72,7 +74,7 @@ class _GamePageState extends State<GamePage> {
                     context: context,
                     builder: (BuildContext context) {
                       // return object of type Dialog
-                      return scoretable(context);
+                      return Scoreboard(wizard);
                     },
                   );
                 },
@@ -195,7 +197,7 @@ class _GamePageState extends State<GamePage> {
               ),
               Expanded(
                 flex: 15,
-                child: wizard.players[0].handCards.length < 1
+                child: _noHandCardsAnyMore()
                     ? _nextRoundHelperWidget()
                     : playersCardsView(displayedCards),
               )
@@ -253,7 +255,7 @@ class _GamePageState extends State<GamePage> {
           tableCards = new List(size);
           trumpCard = wizard.takeTrumpCard();
         });
-        _putBetHelper();
+        _helperBet();
       },
     );
   }
@@ -270,14 +272,63 @@ class _GamePageState extends State<GamePage> {
       await showDialog<String>(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext context) => putBet(context, trumpCard),
+        builder: (BuildContext context) =>
+            PutBetDialog(trumpCard, wizard),
+//            putBet(context, trumpCard, wizard.roundNumber),
       );
+      wizard.betsNumber += wizard.getBetFromList(0, wizard.roundNumber);
     });
   }
+
+  _helperBet() {
+    int bet;
+    wizard.betsNumber = 0;
+    int p = wizard.roundStarter;
+    int playerNumber = wizard.players.length;
+    for (int i = 0, n = wizard.players.length; i < n; i++) {
+      if (!wizard.players[p % n].ai) {
+        _putBetHelper();
+      } else {
+        wizard.players[p % n].putBet(wizard.roundNumber, wizard.betsNumber,
+            trump: wizard.trumpType,
+            playerNumber: playerNumber,
+            firstPlayer: wizard.firstPlayer);
+        bet = wizard.players[p % n].bet;
+        wizard.betsNumber += bet;
+        wizard.putInTheRightBetInList(p % n, bet);
+      }
+      p++;
+    }
+  }
+
+//  _helperPlay() {
+//    int p = wizard.trickStarter;
+//    int playerNumber = wizard.players.length;
+//    for (int i = 0, n = playerNumber; i < n; i++) {
+//      if (!wizard.players[p % n].ai) {
+////        todo what to show if human
+//      } else {
+////        todo what to do if ai
+//      }
+//      p++;
+//    }
+//  }
 
   _buildUserCards() {
     wizard.players[0].handCards.forEach((element) {
       displayedCards.add(showingCardOld(element));
     });
+  }
+
+  void putInTheRightBetInList(
+      int roundNumber, int playerByIndex, int betNumber) {
+    wizard.players[playerByIndex].betsList[roundNumber] = betNumber;
+  }
+
+  _noHandCardsAnyMore() {
+    for (int i = 0; i < wizard.playerAmount; i++){
+      if(wizard.players[i].handCards.length > 0) return false;
+    }
+    return true;
   }
 }
