@@ -18,6 +18,8 @@ class _ScoreListState extends State<ScoreList> {
   Widget build(BuildContext context) {
 
     final score = Provider.of<List<Score>>(context);
+    Comparator<Score> scoreComparator = (a, b) => b.score_number.compareTo(a.score_number);
+    score.sort(scoreComparator);
 
     return ListView.builder(
       itemCount: score.length,
