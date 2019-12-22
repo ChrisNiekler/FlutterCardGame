@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wizard/0auth/models/score.dart';
+import 'package:wizard/shared/theme.dart' as Theme;
 
 class ScoreList extends StatefulWidget {
 
@@ -34,10 +35,22 @@ class ScoreTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(8.0),
+      decoration: new BoxDecoration(
+        gradient: new LinearGradient(
+            colors: [Colors.green, Colors.black],
+            begin: const FractionalOffset(0.0, 0.0),
+            end: const FractionalOffset(1.0, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp
+        ),
+      ),
       child: Card(
-        color: Colors.lightBlue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50)
+        ),
+        color: Colors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

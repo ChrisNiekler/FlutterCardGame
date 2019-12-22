@@ -1,8 +1,4 @@
 import 'dart:math';
-import 'package:wizard/logic/artificial_intelligence/ai.dart';
-import 'package:wizard/logic/humanPlayer.dart';
-import 'package:wizard/logic/artificial_intelligence/ki.dart';
-import 'package:wizard/logic/artificial_intelligence/kuenstlicheIntelligenz.dart';
 import 'package:wizard/consoleGame/round.dart';
 import 'package:wizard/logic/player.dart';
 

@@ -17,10 +17,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider<List<Score>>.value(
         value: DatabaseService().score,
       child: new MaterialApp(
-          title: 'Wizard',
           debugShowCheckedModeBanner: false,
           theme: new ThemeData(
-            primarySwatch: Colors.green,
+            primarySwatch: Colors.lightGreen,
           ),
           home: new RootPage(auth: new Auth())),
     );

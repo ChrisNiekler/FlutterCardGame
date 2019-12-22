@@ -36,19 +36,30 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   void validateAndSubmit() async {
     setState(() {
       _errorMessage = "";
-      _isLoading = true;
     });
     if (validateAndSave()) {
+      _isLoading = true;
       String userId = "";
       try {
         if (_isLoginForm) {
           userId = await widget.auth.signIn(_email, _password);
-          print('Signed in: $userId');
+
+          if(userId != null) {
+            print('Signed in: $userId');
+          } else {
+            _errorMessage = "Invalid Username or password";
+          }
+
         } else {
           userId = await widget.auth.signUp(_email, _password);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
-          print('Signed up user: $userId');
+          if(userId != null) {
+            print('Signed up user: $userId');
+          } else {
+            _errorMessage = "Email already exists";
+          }
+
         }
         setState(() {
           _isLoading = false;
