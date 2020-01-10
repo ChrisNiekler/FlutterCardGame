@@ -32,7 +32,8 @@ class _GamePageState extends State<GamePage> {
   bool userPlayedCard = false;
   int size;
 
-  List<GameCard> tableCards = [];
+  // outsorced tableCards to -> wizard.dart
+  //List<GameCard> tableCards = [];
   List<GameCard> _emptyTable;
 
   @override
@@ -41,8 +42,9 @@ class _GamePageState extends State<GamePage> {
     size = widget.amountPlayers;
     wizard = Wizard(playerAmount: size);
     trumpCard = wizard.takeTrumpCard();
-    tableCards = new List(size);
-    _emptyTable = tableCards;
+    //tableCards = new List(size);
+    //_emptyTable = tableCards;
+    _emptyTable = new List(size);
     print('We have $size players');
     wizard.cardDistribution();
     wizard.determineLastPlayer();
@@ -124,10 +126,11 @@ class _GamePageState extends State<GamePage> {
                                     children: <Widget>[
                                       // left cards on table
                                       size >= 5
-                                          ? cardOnTable(tableCards[three])
+                                          ? cardOnTable(
+                                              wizard.tableCards[three])
                                           : Container(),
 
-                                      cardOnTable(tableCards[two]),
+                                      cardOnTable(wizard.tableCards[two]),
                                     ],
                                   ),
                                 ),
@@ -138,13 +141,13 @@ class _GamePageState extends State<GamePage> {
                                   child: Column(
                                     children: <Widget>[
                                       size == 6
-                                          ? cardOnTable(tableCards[four])
+                                          ? cardOnTable(wizard.tableCards[four])
                                           : Container(),
                                       size == 4
-                                          ? cardOnTable(tableCards[two])
+                                          ? cardOnTable(wizard.tableCards[two])
                                           : Container(),
                                       cardOnTable(trumpCard, trumpCard: true),
-                                      cardOnTable(tableCards[user]),
+                                      cardOnTable(wizard.tableCards[user]),
                                     ],
                                   ),
                                 ),
@@ -156,16 +159,17 @@ class _GamePageState extends State<GamePage> {
                                     // right side of table cards
                                     children: <Widget>[
                                       size == 3
-                                          ? cardOnTable(tableCards[three])
+                                          ? cardOnTable(
+                                              wizard.tableCards[three])
                                           : Container(),
                                       size == 4 || size == 5
-                                          ? cardOnTable(tableCards[four])
+                                          ? cardOnTable(wizard.tableCards[four])
                                           : Container(),
                                       size >= 5
-                                          ? cardOnTable(tableCards[five])
+                                          ? cardOnTable(wizard.tableCards[five])
                                           : Container(),
                                       size == 6
-                                          ? cardOnTable(tableCards[six])
+                                          ? cardOnTable(wizard.tableCards[six])
                                           : Container(),
                                     ],
                                   ),
@@ -233,8 +237,8 @@ class _GamePageState extends State<GamePage> {
             wizard.userPlayCard(chosenCard: tCard);
             wizard.playersPlay();
             // returns card from backend
-            tableCards = new List(size);
-            tableCards = wizard.playedCards;
+            wizard.tableCards = new List(size);
+            wizard.tableCards = wizard.playedCards;
             _buildUserCards();
           });
         },
@@ -253,7 +257,7 @@ class _GamePageState extends State<GamePage> {
         newRound = true;
         wizard.nextRound();
         setState(() {
-          tableCards = new List(size);
+          wizard.tableCards = new List(size);
           trumpCard = wizard.takeTrumpCard();
         });
         _helperBet();
@@ -273,8 +277,7 @@ class _GamePageState extends State<GamePage> {
       await showDialog<String>(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext context) =>
-            PutBetDialog(trumpCard, wizard),
+        builder: (BuildContext context) => PutBetDialog(trumpCard, wizard),
 //            putBet(context, trumpCard, wizard.roundNumber),
       );
       wizard.betsNumber += wizard.getBetFromList(0, wizard.roundNumber);
@@ -327,8 +330,8 @@ class _GamePageState extends State<GamePage> {
   }
 
   _noHandCardsAnyMore() {
-    for (int i = 0; i < wizard.playerAmount; i++){
-      if(wizard.players[i].handCards.length > 0) return false;
+    for (int i = 0; i < wizard.playerAmount; i++) {
+      if (wizard.players[i].handCards.length > 0) return false;
     }
     return true;
   }

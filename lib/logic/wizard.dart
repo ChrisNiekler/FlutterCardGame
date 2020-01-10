@@ -32,6 +32,7 @@ class Wizard {
 
   // round information
   List<Player> players;
+  List<GameCard> tableCards;
   int playersBet;
   bool wizardIsPlayed = false;
   int roundNumber = 1;
@@ -46,6 +47,7 @@ class Wizard {
     lastRound = numberRounds[playerAmount];
     lastPlayer = playerAmount - 1;
     roundStarter = _whoStarts(playerAmount);
+    tableCards = new List(this.playerAmount);
 //    roundStarter = 0; //for testing reasons TODO delete this line
     trickStarter = roundStarter;
 //    currentPlayer = roundStarter;
@@ -258,7 +260,8 @@ class Wizard {
   int getBetFromList(int playerByIndex, int roundNumber) {
     return players[playerByIndex].betsList[roundNumber - 1];
   }
-  void startGame(){}
+
+  void startGame() {}
 }
 
 int _whoStarts(int players) {
