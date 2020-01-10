@@ -258,6 +258,7 @@ class Wizard {
   int getBetFromList(int playerByIndex, int roundNumber) {
     return players[playerByIndex].betsList[roundNumber - 1];
   }
+  void startGame(){}
 }
 
 int _whoStarts(int players) {

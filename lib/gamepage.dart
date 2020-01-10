@@ -47,6 +47,7 @@ class _GamePageState extends State<GamePage> {
     wizard.cardDistribution();
     wizard.determineLastPlayer();
     wizard.determineFirstPlayer();
+    wizard.startGame();
     _helperBet();
   }
 
