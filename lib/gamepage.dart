@@ -8,6 +8,7 @@ import 'experimental/gui/usersViewWidget.dart';
 import 'experimental/scoreboard.dart';
 import 'experimental/gui/putBetDialog.dart';
 
+// some constants to make the code easier to read
 const user = 0;
 const two = 1;
 const three = 2;
@@ -15,6 +16,9 @@ const four = 3;
 const five = 4;
 const six = 5;
 
+/*
+  This is the GamePage, the screen where the game will take place.
+ */
 class GamePage extends StatefulWidget {
   GamePage({this.amountPlayers, this.username});
 
@@ -32,8 +36,6 @@ class _GamePageState extends State<GamePage> {
   bool userPlayedCard = false;
   int size;
 
-  // outsorced tableCards to -> wizard.dart
-  //List<GameCard> tableCards = [];
   List<GameCard> _emptyTable;
 
   @override
@@ -213,7 +215,12 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Widget showingCardOld(GameCard tCard) {
+  /*
+  This Widget displays one of the cards of the user.
+  It is supposed to be stacked in a list to display the whole list,
+  which equals the hand cards of the user
+   */
+  Widget userCard(GameCard tCard) {
     return Expanded(
       child: FlatButton(
         padding: EdgeInsets.all(0.0),
@@ -247,6 +254,9 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  /*
+  TODO add some description
+   */
   Widget _nextRoundHelperWidget() {
     print('ich hiab funktiriondret');
     return FlatButton(
@@ -265,6 +275,9 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  /*
+  TODO add some description
+   */
   Widget playedCard(GameCard tCard) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -272,6 +285,9 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  /*
+  TODO add some description
+   */
   _putBetHelper() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog<String>(
@@ -284,6 +300,9 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  /*
+  TODO add some description
+   */
   _helperBet() {
     int bet;
     wizard.betsNumber = 0;
@@ -318,17 +337,26 @@ class _GamePageState extends State<GamePage> {
 //    }
 //  }
 
+  /*
+  TODO add some description
+   */
   _buildUserCards() {
     wizard.players[0].handCards.forEach((element) {
-      displayedCards.add(showingCardOld(element));
+      displayedCards.add(userCard(element));
     });
   }
 
+  /*
+  TODO add some description
+   */
   void putInTheRightBetInList(
       int roundNumber, int playerByIndex, int betNumber) {
     wizard.players[playerByIndex].betsList[roundNumber] = betNumber;
   }
 
+  /*
+  TODO add some description
+   */
   _noHandCardsAnyMore() {
     for (int i = 0; i < wizard.playerAmount; i++) {
       if (wizard.players[i].handCards.length > 0) return false;

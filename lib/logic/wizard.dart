@@ -9,6 +9,10 @@ import 'dart:math';
 
 const List<int> numberRounds = [0, 0, 0, 20, 15, 12, 10];
 
+/*
+  This is the logic of the game,
+  here is where everything of the backend happens
+ */
 class Wizard {
   // VARIABLES
   // cards
@@ -48,13 +52,15 @@ class Wizard {
     lastPlayer = playerAmount - 1;
     roundStarter = _whoStarts(playerAmount);
     tableCards = new List(this.playerAmount);
-//    roundStarter = 0; //for testing reasons TODO delete this line
+    roundStarter = 0; //for testing reasons TODO delete this line
     trickStarter = roundStarter;
 //    currentPlayer = roundStarter;
     currentPlayer = trickStarter;
   }
 
-  // returns the TrumpCard
+  /*
+  Returns the TrumpCard
+   */
   GameCard takeTrumpCard() {
     if (_deck.isNotEmpty()) {
       trumpCard = _deck.takeCard();
@@ -63,7 +69,9 @@ class Wizard {
     return trumpCard;
   }
 
-  // distributes the card amongst the players
+  /*
+  Distributes the card amongst the players
+   */
   void cardDistribution() {
     int lng = players.length;
     for (int i = 0; i < roundNumber; i++) {
@@ -91,11 +99,16 @@ class Wizard {
     return playedCards[playerID];
   }
 
+  /*
+  TODO add some description
+   */
   playersPlay() {
     Player trickWinner;
     Player gamer;
-
-    for (int i = 1; i < playerAmount; i++) {
+    int i;
+    do {
+      i = currentPlayer;
+      //for (int i = 1; i < playerAmount; i++) {
       gamer = players[i];
       // check if the card is higher then what is played yet
       if (playedCards.length > 1) {
@@ -169,9 +182,13 @@ class Wizard {
 
       //this was needed before
 //      playedCards.add(players[i].handCards.removeLast());
-    }
+      _nextPlayer();
+    } while (currentPlayer != 0);
   }
 
+  /*
+  TODO add some description
+   */
   bool checkEndOfRound() {
     if (players.last.handCards.length == 0) {
       if (roundNumber < lastRound) {
@@ -183,6 +200,9 @@ class Wizard {
     return false;
   }
 
+  /*
+  TODO add some description
+   */
   void nextRound() {
     print('nextRound() was called');
     print('Round $roundNumber');
@@ -199,6 +219,9 @@ class Wizard {
     print('cards are distributed');
   }
 
+  /*
+  TODO add some description
+   */
   void nextTrick() {
     print('nextTrick() was called');
     playedCards = [];
@@ -213,8 +236,17 @@ class Wizard {
         wizardIsPlayed: wizardIsPlayed);
   }
 
+  /*
+  TODO  implement if we actually need it
+  TODO add some description
+   */
   void endOfGame() {}
 
+  /*
+  This method returns the next roundStarter, which is always the player
+  next to the last roundStarter. If the last player played (e.g. playerid=5 for
+  a five player game) then the roundStarter is set back to 0 (the first player).
+   */
   void _nextRoundStarter() {
 //    if (trickStarter + 1 < playerAmount) {
 //      trickStarter++;
@@ -228,6 +260,9 @@ class Wizard {
     }
   }
 
+  /*
+  TODO add some description
+   */
   int _findIndexHelper(GameCard helperCard, List<GameCard> handCards) {
     int amountOfHandcards = handCards.length;
     for (int i = 0; i < amountOfHandcards; i++) {
@@ -235,35 +270,65 @@ class Wizard {
     }
   }
 
+  /*
+  TODO add some description
+   */
   void _playTheCardAiHelper(int i) {
     indexOfTakenCard = _findIndexHelper(aiTookThisCard, players[i].handCards);
     playedCards.add(players[i].handCards.removeAt(indexOfTakenCard));
   }
 
+  /*
+  TODO add some description
+   */
   void determineLastPlayer() {
     if (trickStarter == 0)
       players.last.lastPlayer = true;
     else
       players[trickStarter - 1].lastPlayer = true;
   }
-
+/*
+  TODO add some description
+   */
   void determineFirstPlayer() {
     for (int i = 0; i < players.length; i++) {
       if (players[i].id == trickStarter) players[i].firstPlayer = true;
     }
   }
-
+/*
+  TODO add some description
+   */
   void putInTheRightBetInList(int playerByIndex, int betNumber) {
     players[playerByIndex].betsList.add(betNumber);
   }
-
+/*
+  TODO add some description
+   */
   int getBetFromList(int playerByIndex, int roundNumber) {
     return players[playerByIndex].betsList[roundNumber - 1];
   }
-
+/*
+  TODO add some description
+   */
+  void _nextPlayer() {
+    if (currentPlayer == lastPlayer) {
+      return;
+    }
+    if (currentPlayer + 1 > playerAmount) {
+      currentPlayer = 0;
+    } else {
+      currentPlayer++;
+    }
+  }
+/*
+  TODO add some description
+  TODO implement if needed
+   */
   void startGame() {}
 }
-
+/*
+  TODO add some description
+   */
 int _whoStarts(int players) {
   return Random().nextInt(players);
 }

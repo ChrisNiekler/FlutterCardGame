@@ -2,6 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wizard/logic/gamecard.dart' as logic;
 
+// These are some Widgets to display cards on  the screen
+
+/* This Widget takes a GameCard of a player field and displays the
+    given card  on the screen.
+    Respectively you can display the trump card by giving the
+    optional parameter trumpCard: true
+
+ */
 Widget cardOnTable(logic.GameCard playerField, {bool trumpCard}) {
   if (trumpCard == true) {
     return Expanded(
