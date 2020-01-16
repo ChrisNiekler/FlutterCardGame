@@ -241,12 +241,21 @@ class _GamePageState extends State<GamePage> {
 ////          }
 
           setState(() {
+            //TODO everything in here has to go into the wizard class
             wizard.userPlayCard(chosenCard: tCard);
             wizard.playersPlay();
             // returns card from backend
             wizard.tableCards = new List(size);
             wizard.tableCards = wizard.playedCards;
+            //TODO this has to be somewhere else
             _buildUserCards();
+            /*
+            //FIXME create an userCard parameter in wizard.dart
+                This button should just update this parameter
+                The parameter should be null until a card is choosen
+                and use some kind of listener.
+             */
+            wizard.usersChoosenCard = tCard;
           });
         },
         child: tCard.playerCardsWidget(),

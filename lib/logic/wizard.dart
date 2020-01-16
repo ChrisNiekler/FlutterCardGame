@@ -22,6 +22,7 @@ class Wizard {
   CardType toServe;
   List<GameCard> playedCards = [];
   List<GameCard> alreadyPlayedCards = [];
+  GameCard usersChoosenCard;
   GameCard aiTookThisCard;
   int indexOfTakenCard;
   GameCard foe;
@@ -322,6 +323,7 @@ class Wizard {
   void _nextPlayer() {
     if (currentPlayer == lastPlayer) {
       trickNotOver = false;
+      usersChoosenCard = null;
     }
     if (currentPlayer + 1 == playerAmount) {
       currentPlayer = 0;
