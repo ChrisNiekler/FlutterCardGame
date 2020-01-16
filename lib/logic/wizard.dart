@@ -33,6 +33,7 @@ class Wizard {
   int lastPlayer;
   int currentPlayer;
   bool firstPlayer;
+  bool trickNotOver = true;
 
   // round information
   List<Player> players;
@@ -127,6 +128,7 @@ class Wizard {
       setAllowedToPlay(
           player: players[i], wizardIsPlayed: wizardIsPlayed, toServe: toServe);
       gamer.creatingPlayableHandCardsList();
+      //TODO DRY?
       if (i == 1) {
         print('i am KuenstlicheIntelligenz');
         aiTookThisCard = players[i].playCard(0,
@@ -183,7 +185,9 @@ class Wizard {
       //this was needed before
 //      playedCards.add(players[i].handCards.removeLast());
       _nextPlayer();
-    } while (currentPlayer != 0);
+    } while (trickNotOver);
+    trickNotOver = true;
+    trickWinner = players[0];
   }
 
   /*
@@ -287,6 +291,7 @@ class Wizard {
     else
       players[trickStarter - 1].lastPlayer = true;
   }
+
 /*
   TODO add some description
    */
@@ -295,37 +300,43 @@ class Wizard {
       if (players[i].id == trickStarter) players[i].firstPlayer = true;
     }
   }
+
 /*
   TODO add some description
    */
   void putInTheRightBetInList(int playerByIndex, int betNumber) {
     players[playerByIndex].betsList.add(betNumber);
   }
+
 /*
   TODO add some description
    */
   int getBetFromList(int playerByIndex, int roundNumber) {
     return players[playerByIndex].betsList[roundNumber - 1];
   }
+
 /*
-  TODO add some description
+  This method changes the value of the currentPlayer until the currentPlayer is
+  the last player then it will change the value of trickNotOver to false;
    */
   void _nextPlayer() {
     if (currentPlayer == lastPlayer) {
-      return;
+      trickNotOver = false;
     }
-    if (currentPlayer + 1 > playerAmount) {
+    if (currentPlayer + 1 == playerAmount) {
       currentPlayer = 0;
     } else {
       currentPlayer++;
     }
   }
+
 /*
   TODO add some description
   TODO implement if needed
    */
   void startGame() {}
 }
+
 /*
   TODO add some description
    */
