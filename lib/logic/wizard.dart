@@ -185,6 +185,8 @@ class Wizard {
 
       //this was needed before
 //      playedCards.add(players[i].handCards.removeLast());
+      if(currentPlayer == lastPlayer)
+        players[trickWinner.id].tricks ++;
       _nextPlayer();
     } while (trickNotOver);
     trickNotOver = true;
@@ -333,6 +335,25 @@ class Wizard {
     return players[playerByIndex].pointsList[roundNumber - 1];
   }
 
+  void givePoints () {
+    int betPredicted;
+    int actualTricks;
+    int pointsForThisRound = 0;
+    for (int i = 0; i < playerAmount; i++) {
+      pointsForThisRound = 0;
+      betPredicted = getBetFromList(i, roundNumber);
+      actualTricks = players[i].tricks;
+      if(betPredicted == actualTricks) {
+        pointsForThisRound += 20; // for being right
+        pointsForThisRound += (10 * actualTricks); // 10 for each trick
+      } else {
+        // subtract 10 points times the distance between bet and tricks
+        pointsForThisRound -= 10 * (actualTricks - betPredicted).abs();
+      }
+      putInTheRightPointsInList(i, pointsForThisRound);
+    }
+  }
+
 /*
   This method changes the value of the currentPlayer until the currentPlayer is
   the last player then it will change the value of trickNotOver to false;
@@ -341,6 +362,10 @@ class Wizard {
     if (currentPlayer == lastPlayer) {
       trickNotOver = false;
       usersChoosenCard = null;
+      givePoints();
+      players.forEach((gamer){
+        gamer.tricks = 0;
+      });
     }
     if (currentPlayer + 1 == playerAmount) {
       currentPlayer = 0;
