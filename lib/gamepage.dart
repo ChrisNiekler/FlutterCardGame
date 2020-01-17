@@ -226,20 +226,6 @@ class _GamePageState extends State<GamePage> {
         padding: EdgeInsets.all(0.0),
         onPressed: () {
           print(tCard.toString());
-//          if (wizard.checkEndOfRound()) {
-////            print("Next round will be initialized");
-////            newRound = true;
-//////            wizard.nextRound();
-//////            setState(() {
-//////              tableCards = new List(size);
-//////              trumpCard = wizard.takeTrumpCard();
-//////            });
-//////
-//////            _putBetHelper();
-////          } else {
-////            newRound = false;
-////          }
-
           setState(() {
             //TODO everything in here has to go into the wizard class
             wizard.userPlayCard(chosenCard: tCard);
@@ -287,16 +273,6 @@ class _GamePageState extends State<GamePage> {
   /*
   TODO add some description
    */
-  Widget playedCard(GameCard tCard) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: tCard.playerCardsWidget(),
-    );
-  }
-
-  /*
-  TODO add some description
-   */
   _putBetHelper() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog<String>(
@@ -335,19 +311,6 @@ class _GamePageState extends State<GamePage> {
       p++;
     }
   }
-
-//  _helperPlay() {
-//    int p = wizard.trickStarter;
-//    int playerNumber = wizard.players.length;
-//    for (int i = 0, n = playerNumber; i < n; i++) {
-//      if (!wizard.players[p % n].ai) {
-////        todo what to show if human
-//      } else {
-////        todo what to do if ai
-//      }
-//      p++;
-//    }
-//  }
 
   /*
   TODO add some description
