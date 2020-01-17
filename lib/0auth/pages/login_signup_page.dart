@@ -57,7 +57,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           if(userId != null) {
             print('Signed up user: $userId');
           } else {
-            _errorMessage = "Email already exists";
+            _errorMessage = "Email already exists or invalid password";
           }
 
         }
