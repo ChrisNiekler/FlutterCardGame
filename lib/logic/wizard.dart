@@ -316,6 +316,23 @@ class Wizard {
     return players[playerByIndex].betsList[roundNumber - 1];
   }
 
+  void putInTheRightPointsInList(int playerByIndex, int newPoints) {
+    int oldPoints;
+    int inputPoints;
+    if(roundNumber > 1) {
+      oldPoints = getPointsFromList(playerByIndex, roundNumber - 1);
+      inputPoints = oldPoints + newPoints;
+    }
+    else {
+      inputPoints = newPoints;
+    }
+    players[playerByIndex].pointsList.add(inputPoints);
+  }
+
+  int getPointsFromList (int playerByIndex, int roundNumber) {
+    return players[playerByIndex].pointsList[roundNumber - 1];
+  }
+
 /*
   This method changes the value of the currentPlayer until the currentPlayer is
   the last player then it will change the value of trickNotOver to false;
