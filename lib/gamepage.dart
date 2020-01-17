@@ -63,8 +63,10 @@ class _GamePageState extends State<GamePage> {
     wizard.nextTrick();
     _buildUserCards();
 
+    // the playground that is shown on the screen
     return SafeArea(
       child: Scaffold(
+        // the appbar with the Button to show the Scoreboard
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(20.0),
           child: AppBar(
@@ -87,10 +89,17 @@ class _GamePageState extends State<GamePage> {
             ],
           ),
         ),
+        // The body of the screen which contains the playground
         body: Container(
           color: Colors.green.shade700,
           child: Column(
             children: <Widget>[
+              /*
+              Depending of the size of the game, which is the amount of players
+              who are playing, we build different Widgets.
+              The one below determines if we show upside down cards on the top
+              of the screen. Which is the  case for the size 4 and 6 players.
+               */
               size == 4 || size == 6
                   ? Expanded(
                       flex: 10,
@@ -105,10 +114,12 @@ class _GamePageState extends State<GamePage> {
                         flex: 10,
                         child: Column(
                           children: <Widget>[
+                            // If we have 5 or more players, show gray cards
                             size >= 5
                                 ? enemyCards(
                                     displayedCards.length, "gray", true)
                                 : Container(),
+                            // If we have 3 or more cards, show green cards
                             size >= 3
                                 ? enemyCards(
                                     displayedCards.length, "green", true)
@@ -126,12 +137,19 @@ class _GamePageState extends State<GamePage> {
                                 child: Container(
                                   child: Column(
                                     children: <Widget>[
-                                      // left cards on table
+                                      // left cards on the table
                                       size >= 5
+                                          /*
+                                      Here we display the card that player
+                                      three played, if we have five or more
+                                      players.
+                                       */
                                           ? cardOnTable(
                                               wizard.tableCards[three])
                                           : Container(),
-
+                                      /*
+                                      Played card of player two
+                                      */
                                       cardOnTable(wizard.tableCards[two]),
                                     ],
                                   ),
@@ -158,7 +176,11 @@ class _GamePageState extends State<GamePage> {
                               Expanded(
                                 child: Container(
                                   child: Column(
-                                    // right side of table cards
+                                    /*
+                                    This is the right side of the table.
+                                    Depending on the size we create different
+                                    widgets here
+                                     */
                                     children: <Widget>[
                                       size == 3
                                           ? cardOnTable(
@@ -313,7 +335,8 @@ class _GamePageState extends State<GamePage> {
   }
 
   /*
-  TODO add some description
+  This method builds the widget that depicts the cards of the
+  user.
    */
   _buildUserCards() {
     wizard.players[0].handCards.forEach((element) {
