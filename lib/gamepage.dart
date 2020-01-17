@@ -319,8 +319,11 @@ class _GamePageState extends State<GamePage> {
     int playerNumber = wizard.players.length;
     for (int i = 0, n = wizard.players.length; i < n; i++) {
       if (!wizard.players[p % n].ai) {
+        print('ich bin auch mal dran');
         _putBetHelper();
       } else {
+//        while (!wizard.players[p % n].firstPlayer &&
+//            wizard.getBetFromList((p - 1) % n, wizard.roundNumber) != null) {}
         wizard.players[p % n].putBet(wizard.roundNumber, wizard.betsNumber,
             trump: wizard.trumpType,
             playerNumber: playerNumber,
