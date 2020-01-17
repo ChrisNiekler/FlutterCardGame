@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wizard/0auth/models/user.dart';
 import 'package:wizard/0auth/services/authentication.dart';
 
 class LoginSignupPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   String _email;
   String _password;
   String _errorMessage;
+  User _newUser;
 
   bool _isLoginForm;
   bool _isLoading;
@@ -51,11 +53,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           }
 
         } else {
-          userId = await widget.auth.signUp(_email, _password);
+          _newUser = await widget.auth.signUp(_email, _password);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
-          if(userId != null) {
-            print('Signed up user: $userId');
+          if(_newUser != null) {
+            print('Signed up user: ' + _newUser.toString());
           } else {
             _errorMessage = "Email already exists or invalid password";
           }
