@@ -4,98 +4,6 @@ import 'package:wizard/experimental/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/wizard.dart';
 
-//Todo maybe this class is helpful
-//class PutBetDialog extends StatefulWidget {
-//  PutBetDialog({this.players, this.roundNumber, this.betsNumber});
-//
-//  List<Player> players;
-//  int roundNumber;
-//  int betsNumber;
-//
-//  @override
-//  _PutBetDialogState createState() => _PutBetDialogState();
-//}
-//
-//class _PutBetDialogState extends State<PutBetDialog> {
-//  int betNumber;
-//  bool userPutBet = false;
-//
-//  void putBet() {
-//    for (int i = 1; i < widget.players.length; i++) {
-//      widget.players[i].putBet(widget.roundNumber, widget.betsNumber);
-//    }
-//  }
-//
-//  @override
-//  AlertDialog build(BuildContext context) {
-//    return AlertDialog(
-//      title: Text("Put your bet for this round"),
-//      content: TextField(
-//        decoration: InputDecoration(
-//          border: InputBorder.none,
-//          hintText: 'Enter the number of bets for this round',
-//        ),
-//        onChanged: (bet) {
-//          print(bet);
-//        },
-//      ),
-//      actions: <Widget>[
-//        RaisedButton(
-//            child: Text(
-//              "OK",
-//              style: TextStyle(color: Colors.white),
-//            ),
-//            onPressed: () {
-//              Navigator.pop(context);
-//            })
-//      ],
-//    );
-//  }
-//}
-
-//TODO find a solution for giving the Data to the scoreboard
-//try showDialog for barrierDismissible: false and giving back the result
-//try a list of which is scrollable (table) to give the user a suggestion which int num he/she should bet
-//Widget putBet(BuildContext context) {
-//  int bet;
-//  bool userPutBet = false;
-//  if (!userPutBet) {
-//    return AlertDialog(
-//          title: Text("Put your bet for this round"),
-//          content: TextField(
-//            decoration: InputDecoration(
-//              border: InputBorder.none,
-//              hintText: 'Enter the number of bets for this round',
-//            ),
-//            onChanged: (bet) {
-//              print(bet);
-//            },
-//          ),
-//          actions: <Widget>[
-//            RaisedButton(
-//                child: Text(
-//                  "OK",
-//                  style: TextStyle(color: Colors.white),
-//                ),
-//                onPressed: () {
-//                  Navigator.pop(context);
-//                })
-//          ],
-//        );
-//  }
-////  else if (userPutBet) {
-////    playerTwoField =
-////        (players[1] as KuenstlicheIntelligenz).handCards.removeLast();
-////    playerThreeField = (players[2] as Ai).handCards.removeLast();
-////    playerFourField = (players[3] as Ki).handCards.removeLast();
-////    playerFiveField =
-////        (players[4] as KuenstlicheIntelligenz).handCards.removeLast();
-////    playerSixField = (players[5] as Ai).handCards.removeLast();
-////    userPutBet = false;
-////  }
-//  userPutBet = true;
-//}
-
 class PutBetDialog extends StatelessWidget {
   PutBetDialog(this.trumpCard, this.wizard);
 
@@ -111,6 +19,7 @@ class PutBetDialog extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(35, 35, 35, 35),
         title: Row(
           children: <Widget>[
+            //TODO fix betsNumber (humanplayer starts betting and sometimes there are already bets)
             Text("Put your bet for this round.\nCurrent: ${wizard.betsNumber} bet(s)"),
             Container(child: cardOnTable(trumpCard, trumpCard: true)),
           ],
@@ -129,6 +38,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 0);
                       Navigator.pop(context);
+                      _helperBet(0);
                       //hier hat player 0 gewettet
                     },
                   ),
@@ -139,6 +49,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 1);
                       Navigator.pop(context);
+                      _helperBet(1);
                       //hier hat player 1 gewettet
                     },
                   ),
@@ -149,6 +60,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 2);
                       Navigator.pop(context);
+                      _helperBet(2);
                       //hier hat player 2 gewettet
                     },
                   ),
@@ -159,6 +71,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 3);
                       Navigator.pop(context);
+                      _helperBet(3);
                       //hier hat player 3 gewettet
                     },
                   ),
@@ -169,6 +82,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 4);
                       Navigator.pop(context);
+                      _helperBet(4);
                       //hier hat player 4 gewettet
                     },
                   ),
@@ -179,6 +93,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 5);
                       Navigator.pop(context);
+                      _helperBet(5);
                       //hier hat player 5 gewettet
                     },
                   ),
@@ -189,6 +104,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 6);
                       Navigator.pop(context);
+                      _helperBet(6);
                       //hier hat player 6 gewettet
                     },
                   ),
@@ -199,6 +115,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 7);
                       Navigator.pop(context);
+                      _helperBet(7);
                       //hier hat player 7 gewettet
                     },
                   ),
@@ -209,6 +126,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 8);
                       Navigator.pop(context);
+                      _helperBet(8);
                       //hier hat player 8 gewettet
                     },
                   ),
@@ -219,6 +137,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 9);
                       Navigator.pop(context);
+                      _helperBet(9);
                       //hier hat player 9 gewettet
                     },
                   ),
@@ -229,6 +148,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 10);
                       Navigator.pop(context);
+                      _helperBet(10);
                       //hier hat player 10 gewettet
                     },
                   ),
@@ -239,6 +159,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 11);
                       Navigator.pop(context);
+                      _helperBet(11);
                       //hier hat player 11 gewettet
                     },
                   ),
@@ -249,6 +170,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 12);
                       Navigator.pop(context);
+                      _helperBet(12);
                       //hier hat player 12 gewettet
                     },
                   ),
@@ -259,6 +181,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 13);
                       Navigator.pop(context);
+                      _helperBet(13);
                       //hier hat player 13 gewettet
                     },
                   ),
@@ -269,6 +192,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 14);
                       Navigator.pop(context);
+                      _helperBet(14);
                       //hier hat player 14 gewettet
                     },
                   ),
@@ -279,6 +203,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 15);
                       Navigator.pop(context);
+                      _helperBet(15);
                       //hier hat player 15 gewettet
                     },
                   ),
@@ -289,6 +214,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 16);
                       Navigator.pop(context);
+                      _helperBet(16);
                       //hier hat player 16 gewettet
                     },
                   ),
@@ -299,6 +225,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 17);
                       Navigator.pop(context);
+                      _helperBet(17);
                       //hier hat player 17 gewettet
                     },
                   ),
@@ -309,6 +236,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 18);
                       Navigator.pop(context);
+                      _helperBet(18);
                       //hier hat player 18 gewettet
                     },
                   ),
@@ -319,6 +247,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 19);
                       Navigator.pop(context);
+                      _helperBet(19);
                       //hier hat player 19 gewettet
                     },
                   ),
@@ -329,6 +258,7 @@ class PutBetDialog extends StatelessWidget {
                     onPressed: () {
                       wizard.putInTheRightBetInList(0, 20);
                       Navigator.pop(context);
+                      _helperBet(20);
                       //hier hat player 20 gewettet
                     },
                   ),
@@ -339,5 +269,25 @@ class PutBetDialog extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /*
+  TODO review this description
+  This methode is an for loop which will run
+   if the player has predicted her/his bet.
+   */
+  _helperBet(int userBet) {
+    int bet;
+    wizard.betsNumber = userBet;
+    int playerNumber = wizard.players.length;
+    for (int i = 1, n = playerNumber; i < n; i++) {
+        wizard.players[i].putBet(wizard.roundNumber, wizard.betsNumber,
+            trump: wizard.trumpType,
+            playerNumber: playerNumber,
+            firstPlayer: wizard.firstPlayer);
+        bet = wizard.players[i].bet;
+        wizard.betsNumber += bet;
+        wizard.putInTheRightBetInList(i, bet);
+    }
   }
 }

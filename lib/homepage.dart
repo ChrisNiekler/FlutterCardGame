@@ -1,8 +1,15 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wizard/0auth/services/authentication.dart';
 import 'package:wizard/gamepage.dart';
 import 'package:wizard/ui/ranking_page.dart';
+
+final Map<int, Widget> difficulties = const <int, Widget>{
+  0: Text('easy'),
+  1: Text('normal'),
+  2: Text('crazy'),
+};
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.email, this.logoutCallback})
@@ -21,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   _HomePageState(this.email);
 
   final String email;
+  int difficulty = 0;
 
   String getUsername(String email) {
     int end = email.indexOf("@");
@@ -227,8 +235,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          GamePage(amountPlayers: 3, username: email)),
+                      builder: (context) => GamePage(
+                          amountPlayers: 3,
+                          username: email,
+                          difficulty: difficulty)),
                 );
               },
             ),
@@ -241,8 +251,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          GamePage(amountPlayers: 4, username: email)),
+                      builder: (context) => GamePage(
+                          amountPlayers: 4,
+                          username: email,
+                          difficulty: difficulty)),
                 );
               },
             ),
@@ -255,8 +267,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          GamePage(amountPlayers: 5, username: email)),
+                      builder: (context) => GamePage(
+                          amountPlayers: 5,
+                          username: email,
+                          difficulty: difficulty)),
                 );
               },
             ),
@@ -270,10 +284,24 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          GamePage(amountPlayers: 6, username: email)),
+                      builder: (context) => GamePage(
+                          amountPlayers: 6,
+                          username: email,
+                          difficulty: difficulty)),
                 );
               },
+            ),
+            new CupertinoSegmentedControl<int>(
+              children: difficulties,
+              onValueChanged: (int val) {
+                setState(() {
+                  difficulty = val;
+                });
+              },
+              borderColor: Colors.black,
+              unselectedColor: Colors.lightBlueAccent,
+              selectedColor: Colors.blueAccent,
+              pressedColor: Colors.grey,
             ),
             new RaisedButton(
               child: new Text(

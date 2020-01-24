@@ -180,7 +180,6 @@ class Round {
       }
     }
 
-    // end of for each
     print('${trickWinner.name} has won the trick!');
     trickStarter = trickWinner.id;
     players[players.indexOf(trickWinner)].tricks++;

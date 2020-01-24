@@ -20,10 +20,11 @@ const six = 5;
   This is the GamePage, the screen where the game will take place.
  */
 class GamePage extends StatefulWidget {
-  GamePage({this.amountPlayers, this.username});
+  GamePage({this.amountPlayers, this.username, this.difficulty});
 
   final int amountPlayers;
   final String username;
+  final int difficulty;
 
   @override
   _GamePageState createState() => _GamePageState();
@@ -35,6 +36,7 @@ class _GamePageState extends State<GamePage> {
   bool newRound = false;
   bool userPlayedCard = false;
   int size;
+  int degreeOfDifficulty;
 
   List<GameCard> _emptyTable;
 
@@ -42,17 +44,20 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     super.initState();
     size = widget.amountPlayers;
-    wizard = Wizard(playerAmount: size);
+    degreeOfDifficulty = widget.difficulty;
+    wizard = Wizard(playerAmount: size, difficulty: degreeOfDifficulty);
     trumpCard = wizard.takeTrumpCard();
     //tableCards = new List(size);
     //_emptyTable = tableCards;
     _emptyTable = new List(size);
     print('We have $size players');
+    print('The difficulty is $degreeOfDifficulty');
     wizard.cardDistribution();
     wizard.determineLastPlayer();
     wizard.determineFirstPlayer();
     wizard.startGame();
-    _helperBet();
+//    _helperBet();
+    _putBetHelper();
   }
 
   List<Widget> displayedCards = [];
@@ -287,7 +292,8 @@ class _GamePageState extends State<GamePage> {
           wizard.tableCards = new List(size);
           trumpCard = wizard.takeTrumpCard();
         });
-        _helperBet();
+//      _helperBet();
+        _putBetHelper();
       },
     );
   }
@@ -310,29 +316,29 @@ class _GamePageState extends State<GamePage> {
   /*
   TODO add some description
    */
-  _helperBet() {
-    int bet;
-    wizard.betsNumber = 0;
-    int p = wizard.roundStarter;
-    int playerNumber = wizard.players.length;
-    for (int i = 0, n = wizard.players.length; i < n; i++) {
-      if (!wizard.players[p % n].ai) {
-        print('ich bin auch mal dran');
-        _putBetHelper();
-      } else {
-//        while (!wizard.players[p % n].firstPlayer &&
-//            wizard.getBetFromList((p - 1) % n, wizard.roundNumber) != null) {}
-        wizard.players[p % n].putBet(wizard.roundNumber, wizard.betsNumber,
-            trump: wizard.trumpType,
-            playerNumber: playerNumber,
-            firstPlayer: wizard.firstPlayer);
-        bet = wizard.players[p % n].bet;
-        wizard.betsNumber += bet;
-        wizard.putInTheRightBetInList(p % n, bet);
-      }
-      p++;
-    }
-  }
+//  helperBet() {
+//    int bet;
+//    wizard.betsNumber = 0;
+//    int p = wizard.roundStarter;
+//    int playerNumber = wizard.players.length;
+//    for (int i = 0, n = wizard.players.length; i < n; i++) {
+//      if (!wizard.players[p % n].ai) {
+//        print('ich bin auch mal dran');
+////        _putBetHelper();
+//      } else {
+////        while (!wizard.players[p % n].firstPlayer &&
+////            wizard.getBetFromList((p - 1) % n, wizard.roundNumber) != null) {}
+//        wizard.players[p % n].putBet(wizard.roundNumber, wizard.betsNumber,
+//            trump: wizard.trumpType,
+//            playerNumber: playerNumber,
+//            firstPlayer: wizard.firstPlayer);
+//        bet = wizard.players[p % n].bet;
+//        wizard.betsNumber += bet;
+//        wizard.putInTheRightBetInList(p % n, bet);
+//      }
+//      p++;
+//    }
+//  }
 
   /*
   This method builds the widget that depicts the cards of the

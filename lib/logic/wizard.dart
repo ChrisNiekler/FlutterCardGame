@@ -45,16 +45,17 @@ class Wizard {
   int lastRound;
   final int playerAmount;
   bool roundEnd = false;
-  int betsNumber;
+  int betsNumber = 0;
+  int difficulty;
 
   // CONSTRUCTOR
-  Wizard({this.playerAmount}) {
-    players = createPlayers(playerAmount);
+  Wizard({this.playerAmount, this.difficulty}) {
+    players = createPlayers(playerAmount, difficulty);
     lastRound = numberRounds[playerAmount];
     lastPlayer = playerAmount - 1;
-    roundStarter = _whoStarts(playerAmount);
+//    roundStarter = _whoStarts(playerAmount);
+    roundStarter = 0;
     tableCards = new List(this.playerAmount);
-    roundStarter = 0; //for testing reasons TODO delete this line
     trickStarter = roundStarter;
 //    currentPlayer = roundStarter;
     currentPlayer = trickStarter;
@@ -87,6 +88,7 @@ class Wizard {
   bool userPlayCard({@required GameCard chosenCard}) {
     playedCards.add(chosenCard);
     afterFirstPlayer();
+    currentPlayer++;
     return players[0].handCards.remove(chosenCard);
   }
 
@@ -112,16 +114,12 @@ class Wizard {
       i = currentPlayer;
       //for (int i = 1; i < playerAmount; i++) {
       gamer = players[i];
-      // check if the card is higher then what is played yet
-      if (playedCards.length > 1) {
-        highestCard = playedCards.last.compare(highestCard, trumpType);
-        if (highestCard == playedCards.last) {
-          trickWinner = gamer;
-          print('${gamer.name} is leading now');
-        }
-      } else if (playedCards.length == 1) {
+      /* The first player (human) is set to the trickWinner,
+      because no one else has played yet.
+      */
+      if (playedCards.length == 1) {
         highestCard = playedCards[0];
-        trickWinner = gamer;
+        trickWinner = players[0];
         print('${trickWinner.name} is leading now');
       }
 
@@ -129,8 +127,9 @@ class Wizard {
       setAllowedToPlay(
           player: players[i], wizardIsPlayed: wizardIsPlayed, toServe: toServe);
       gamer.creatingPlayableHandCardsList();
-      //TODO DRY?
-      if (i == 1) {
+      print('It is the difficulty: $difficulty!');
+//      if (i == 1 || i == 4)
+      if(difficulty == 2){
         print('i am KuenstlicheIntelligenz');
         aiTookThisCard = players[i].playCard(0,
             trump: trumpType,
@@ -141,11 +140,15 @@ class Wizard {
             playedCards: playedCards,
             highestCard: highestCard);
         _playTheCardAiHelper(i);
-      } else if (i == 2) {
+      }
+//      else if (i == 2 || i == 5)
+      else if(difficulty == 0) {
         print('i am Ai');
         aiTookThisCard = players[i].playCard(0, trump: trumpType, foe: foe);
         _playTheCardAiHelper(i);
-      } else if (i == 3) {
+      }
+//      else if (i == 3)
+      else if(difficulty == 1){
         print('i am Ki');
         aiTookThisCard = players[i].playCard(0,
             trump: trumpType,
@@ -154,21 +157,6 @@ class Wizard {
             playerNumber: playerAmount,
             alreadyPlayedCards: alreadyPlayedCards,
             highestCard: highestCard);
-        _playTheCardAiHelper(i);
-      } else if (i == 4) {
-        print('i am KuenstlicheIntelligenz');
-        aiTookThisCard = players[i].playCard(0,
-            trump: trumpType,
-            foe: foe,
-            roundNumber: roundNumber,
-            playerNumber: playerAmount,
-            alreadyPlayedCards: alreadyPlayedCards,
-            playedCards: playedCards,
-            highestCard: highestCard);
-        _playTheCardAiHelper(i);
-      } else if (i == 5) {
-        print('i am Ai');
-        aiTookThisCard = players[i].playCard(0, trump: trumpType, foe: foe);
         _playTheCardAiHelper(i);
       }
 
@@ -185,12 +173,24 @@ class Wizard {
 
       //this was needed before
 //      playedCards.add(players[i].handCards.removeLast());
-      if(currentPlayer == lastPlayer)
-        players[trickWinner.id].tricks ++;
+//      if(currentPlayer == lastPlayer)
+//        players[trickWinner.id].tricks ++;
+
+      // check if the card is higher then what is played yet
+      if (playedCards.length > 1) {
+        highestCard = playedCards.last.compare(highestCard, trumpType);
+        if (highestCard == playedCards.last) {
+          trickWinner = gamer;
+          print('${gamer.name} is leading now');
+        }
+      }
+
       _nextPlayer();
     } while (trickNotOver);
     trickNotOver = true;
-    trickWinner = players[0];
+//    trickWinner = players[0];
+    print('${trickWinner.name} has won the trick!');
+    players[players.indexOf(trickWinner)].tricks++;
   }
 
   /*
@@ -379,11 +379,11 @@ class Wizard {
   TODO implement if needed
    */
   void startGame() {}
-}
 
-/*
+  /*
   TODO add some description
    */
-int _whoStarts(int players) {
-  return Random().nextInt(players);
+  int _whoStarts(int players) {
+    return Random().nextInt(players);
+  }
 }
