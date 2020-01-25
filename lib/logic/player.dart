@@ -18,6 +18,7 @@ abstract class Player {
   bool firstPlayer = false;
 
   Future<GameCard> playCardFuture();
+
   void putBet(int roundNumber, int betsNumber,
       {CardType trump,
       String testValue,

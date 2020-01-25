@@ -401,7 +401,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  /*
+/*
   This method is giving the humanPlayer points in the ranking table
   if she/he has won.
   winner: 100 points

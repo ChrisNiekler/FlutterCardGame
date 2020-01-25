@@ -20,7 +20,8 @@ class PutBetDialog extends StatelessWidget {
         title: Row(
           children: <Widget>[
             //TODO fix betsNumber (humanplayer starts betting and sometimes there are already bets)
-            Text("Put your bet for this round.\nCurrent: ${wizard.betsNumber} bet(s)"),
+            Text(
+                "Put your bet for this round.\nCurrent: ${wizard.betsNumber} bet(s)"),
             Container(child: cardOnTable(trumpCard, trumpCard: true)),
           ],
         ),
@@ -281,13 +282,13 @@ class PutBetDialog extends StatelessWidget {
     wizard.betsNumber = userBet;
     int playerNumber = wizard.players.length;
     for (int i = 1, n = playerNumber; i < n; i++) {
-        wizard.players[i].putBet(wizard.roundNumber, wizard.betsNumber,
-            trump: wizard.trumpType,
-            playerNumber: playerNumber,
-            firstPlayer: wizard.firstPlayer);
-        bet = wizard.players[i].bet;
-        wizard.betsNumber += bet;
-        wizard.putInTheRightBetInList(i, bet);
+      wizard.players[i].putBet(wizard.roundNumber, wizard.betsNumber,
+          trump: wizard.trumpType,
+          playerNumber: playerNumber,
+          firstPlayer: wizard.firstPlayer);
+      bet = wizard.players[i].bet;
+      wizard.betsNumber += bet;
+      wizard.putInTheRightBetInList(i, bet);
     }
   }
 }

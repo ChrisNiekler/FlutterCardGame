@@ -242,9 +242,7 @@ class Wizard {
   TODO add some description
   This is done in gamepage with _nextTrick
    */
-  void endOfGame() {
-
-  }
+  void endOfGame() {}
 
   /*
   This method returns the next roundStarter, which is always the player
