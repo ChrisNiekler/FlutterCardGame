@@ -33,7 +33,6 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-
   _GamePageState(this.userId, this.username);
 
   final String username;
@@ -297,11 +296,9 @@ class _GamePageState extends State<GamePage> {
               print("this is the end");
               if (wizard.roundNumber == wizard.lastRound) {
                 wizard.roundNumber++;
-//                TODO the rankingPoints
-//                _giveRankingPoints();
+                _saveScoreInDatabase();
               }
               _endOfGameShowDialog();
-              _saveScoreInDatabase();
 //        setState(() {
 //          wizard.tableCards = new List(size);
 //          trumpCard = wizard.takeTrumpCard();
@@ -423,8 +420,7 @@ class _GamePageState extends State<GamePage> {
   third: 20 points
   else: 5 points
    */
-//  TODO how to get access / fill in the points in the database ?????
-   _giveRankingPoints() {
+  _giveRankingPoints() {
     List<int> pointsOfTheLastRound = [];
     int helper;
     int humanPoints = wizard.getPointsFromList(0, wizard.lastRound);
@@ -444,10 +440,14 @@ class _GamePageState extends State<GamePage> {
       }
     }
 
-    if (humanPoints == pointsOfTheLastRound.elementAt(0)) humanPoints += 100;
-    else if (humanPoints == pointsOfTheLastRound.elementAt(1)) humanPoints += 50;
-    else if (humanPoints == pointsOfTheLastRound.elementAt(2)) humanPoints += 20;
-    else humanPoints += 5;
+    if (humanPoints == pointsOfTheLastRound.elementAt(0))
+      humanPoints += 100;
+    else if (humanPoints == pointsOfTheLastRound.elementAt(1))
+      humanPoints += 50;
+    else if (humanPoints == pointsOfTheLastRound.elementAt(2))
+      humanPoints += 20;
+    else
+      humanPoints += 5;
 
     return humanPoints;
   }

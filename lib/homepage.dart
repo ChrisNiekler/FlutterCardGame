@@ -12,7 +12,8 @@ final Map<int, Widget> difficulties = const <int, Widget>{
 };
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.auth, this.userId, this.username, this.logoutCallback})
+  HomePage(
+      {Key key, this.auth, this.userId, this.username, this.logoutCallback})
       : super(key: key);
 
   final BaseAuth auth;
@@ -21,7 +22,8 @@ class HomePage extends StatefulWidget {
   final String username;
 
   @override
-  State<StatefulWidget> createState() => new _HomePageState(this.username, this.userId);
+  State<StatefulWidget> createState() =>
+      new _HomePageState(this.username, this.userId);
 }
 
 class _HomePageState extends State<HomePage> {
@@ -257,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) => GamePage(
                           amountPlayers: 4,
                           username: username,
-                          userId: username,
+                          userId: userId,
                           difficulty: difficulty)),
                 );
               },
