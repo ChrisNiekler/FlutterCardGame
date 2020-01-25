@@ -129,7 +129,7 @@ class Wizard {
       gamer.creatingPlayableHandCardsList();
       print('It is the difficulty: $difficulty!');
 //      if (i == 1 || i == 4)
-      if(difficulty == 2){
+      if (difficulty == 2) {
         print('i am KuenstlicheIntelligenz');
         aiTookThisCard = players[i].playCard(0,
             trump: trumpType,
@@ -142,13 +142,13 @@ class Wizard {
         _playTheCardAiHelper(i);
       }
 //      else if (i == 2 || i == 5)
-      else if(difficulty == 0) {
+      else if (difficulty == 0) {
         print('i am Ai');
         aiTookThisCard = players[i].playCard(0, trump: trumpType, foe: foe);
         _playTheCardAiHelper(i);
       }
 //      else if (i == 3)
-      else if(difficulty == 1){
+      else if (difficulty == 1) {
         print('i am Ki');
         aiTookThisCard = players[i].playCard(0,
             trump: trumpType,
@@ -159,22 +159,6 @@ class Wizard {
             highestCard: highestCard);
         _playTheCardAiHelper(i);
       }
-
-      //todo this is needed for dynamic programming
-//      if(players[i].toString() == 'Ki'){
-//        print('i am ki');
-//      }
-//      else if (players[i].toString() == 'KuenstlicheIntelligenz') {
-//        print('i am kuenstliche...');
-//      }
-//      else if (players[i].toString() == 'Ai') {
-//        print('i am ai');
-//      }
-
-      //this was needed before
-//      playedCards.add(players[i].handCards.removeLast());
-//      if(currentPlayer == lastPlayer)
-//        players[trickWinner.id].tricks ++;
 
       // check if the card is higher then what is played yet
       if (playedCards.length > 1) {
@@ -191,6 +175,8 @@ class Wizard {
 //    trickWinner = players[0];
     print('${trickWinner.name} has won the trick!');
     players[players.indexOf(trickWinner)].tricks++;
+
+    checkEndOfRound();
   }
 
   /*
@@ -198,6 +184,14 @@ class Wizard {
    */
   bool checkEndOfRound() {
     if (players.last.handCards.length == 0) {
+      givePoints();
+      players.forEach((gamer) {
+        gamer.tricks = 0;
+        //This is needed if humanPlayer is not the starter.
+//        gamer.lastPlayer = false;
+//        gamer.firstPlayer = false;
+      });
+      betsNumber = 0;
       if (roundNumber < lastRound) {
         return true;
       } else {
@@ -217,7 +211,7 @@ class Wizard {
     playedCards = [];
     print('new deck is created');
     _deck = new Deck();
-    _nextRoundStarter();
+//    _nextRoundStarter(); //this is only needed is humanPlayer is not always the starter
     for (int i = 0; i < playerAmount; i++) {
       players[i].handCards = [];
       players[i].playableHandCards = [];
@@ -246,8 +240,11 @@ class Wizard {
   /*
   TODO  implement if we actually need it
   TODO add some description
+  This is done in gamepage with _nextTrick
    */
-  void endOfGame() {}
+  void endOfGame() {
+
+  }
 
   /*
   This method returns the next roundStarter, which is always the player
@@ -255,11 +252,6 @@ class Wizard {
   a five player game) then the roundStarter is set back to 0 (the first player).
    */
   void _nextRoundStarter() {
-//    if (trickStarter + 1 < playerAmount) {
-//      trickStarter++;
-//    } else {
-//      trickStarter = 0;
-//    }
     if (roundStarter + 1 < playerAmount) {
       roundStarter++;
     } else {
@@ -321,21 +313,20 @@ class Wizard {
   void putInTheRightPointsInList(int playerByIndex, int newPoints) {
     int oldPoints;
     int inputPoints;
-    if(roundNumber > 1) {
+    if (roundNumber > 1) {
       oldPoints = getPointsFromList(playerByIndex, roundNumber - 1);
       inputPoints = oldPoints + newPoints;
-    }
-    else {
+    } else {
       inputPoints = newPoints;
     }
     players[playerByIndex].pointsList.add(inputPoints);
   }
 
-  int getPointsFromList (int playerByIndex, int roundNumber) {
+  int getPointsFromList(int playerByIndex, int roundNumber) {
     return players[playerByIndex].pointsList[roundNumber - 1];
   }
 
-  void givePoints () {
+  void givePoints() {
     int betPredicted;
     int actualTricks;
     int pointsForThisRound = 0;
@@ -343,7 +334,7 @@ class Wizard {
       pointsForThisRound = 0;
       betPredicted = getBetFromList(i, roundNumber);
       actualTricks = players[i].tricks;
-      if(betPredicted == actualTricks) {
+      if (betPredicted == actualTricks) {
         pointsForThisRound += 20; // for being right
         pointsForThisRound += (10 * actualTricks); // 10 for each trick
       } else {
@@ -362,10 +353,6 @@ class Wizard {
     if (currentPlayer == lastPlayer) {
       trickNotOver = false;
       usersChoosenCard = null;
-      givePoints();
-      players.forEach((gamer){
-        gamer.tricks = 0;
-      });
     }
     if (currentPlayer + 1 == playerAmount) {
       currentPlayer = 0;

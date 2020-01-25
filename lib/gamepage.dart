@@ -281,25 +281,45 @@ class _GamePageState extends State<GamePage> {
    */
   Widget _nextRoundHelperWidget() {
     print('ich hiab funktiriondret');
-    return FlatButton(
-      padding: EdgeInsets.all(8.0),
-      child: Text('Start next Round!'),
-      onPressed: () {
-        print("Next round will be initialized");
-        newRound = true;
-        wizard.nextRound();
-        setState(() {
-          wizard.tableCards = new List(size);
-          trumpCard = wizard.takeTrumpCard();
-        });
+    return wizard.roundNumber == wizard.lastRound
+        ? FlatButton(
+            padding: EdgeInsets.all(8.0),
+            child: Text('End of Game! Review Scoreboard'),
+            onPressed: () {
+              print("this is the end");
+              if (wizard.roundNumber == wizard.lastRound) {
+                wizard.roundNumber++;
+//                TODO the rankingPoints
+//                _giveRankingPoints();
+              }
+              _endOfGameShowDialog();
+//        setState(() {
+//          wizard.tableCards = new List(size);
+//          trumpCard = wizard.takeTrumpCard();
+//        });
+            },
+          )
+        : FlatButton(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Start next Round!'),
+            onPressed: () {
+              print("Next round will be initialized");
+              newRound = true;
+              wizard.nextRound();
+              setState(() {
+                wizard.tableCards = new List(size);
+                trumpCard = wizard.takeTrumpCard();
+              });
 //      _helperBet();
-        _putBetHelper();
-      },
-    );
+              _putBetHelper();
+            },
+          );
   }
 
   /*
-  TODO add some description
+  TODO review this description
+  This methode opens the widget every round that the HumanPlayer
+  is able to put her/his bet.
    */
   _putBetHelper() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -309,7 +329,8 @@ class _GamePageState extends State<GamePage> {
         builder: (BuildContext context) => PutBetDialog(trumpCard, wizard),
 //            putBet(context, trumpCard, wizard.roundNumber),
       );
-      wizard.betsNumber += wizard.getBetFromList(0, wizard.roundNumber);
+      //TODO is this line still needed??
+//      wizard.betsNumber += wizard.getBetFromList(0, wizard.roundNumber);
     });
   }
 
@@ -367,4 +388,48 @@ class _GamePageState extends State<GamePage> {
     }
     return true;
   }
+
+  /*
+ This method is opening the Scoreboard.
+  */
+  _endOfGameShowDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Scoreboard(wizard);
+      },
+    );
+  }
+
+  /*
+  This method is giving the humanPlayer points in the ranking table
+  if she/he has won.
+  winner: 100 points
+  second: 50 points
+  third: 20 points
+  else: 5 points
+   */
+//  TODO how to get access / fill in the points in the database ?????
+//  _giveRankingPoints() {
+//    List<int> pointsOfTheLastRound = [];
+//    int helper;
+//    int humanPoints = wizard.getPointsFromList(0, wizard.lastRound);
+//    for (int i = 0; i < wizard.playerAmount; i++) {
+//      pointsOfTheLastRound.add(wizard.getPointsFromList(i, wizard.lastRound));
+//    }
+//    for (int x = pointsOfTheLastRound.length; x > 1; --x) {
+//      for (int y = 0; y < x - 1; ++y) {
+//        if (pointsOfTheLastRound.elementAt(y) <
+//            pointsOfTheLastRound.elementAt(y + 1)) {
+//          helper = pointsOfTheLastRound.elementAt(y);
+//          pointsOfTheLastRound.insert(y, pointsOfTheLastRound.elementAt(y + 1));
+//          pointsOfTheLastRound.insert(y + 1, helper);
+//        }
+//      }
+//    }
+//    if (humanPoints == pointsOfTheLastRound.elementAt(0)) +=100;
+//    else if (humanPoints == pointsOfTheLastRound.elementAt(1)) += 50;
+//    else if (humanPoints == pointsOfTheLastRound.elementAt(2)) += 20;
+//    else += 5;
+//  }
 }
