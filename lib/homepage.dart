@@ -12,22 +12,24 @@ final Map<int, Widget> difficulties = const <int, Widget>{
 };
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.auth, this.userId, this.email, this.logoutCallback})
+  HomePage({Key key, this.auth, this.userId, this.username, this.logoutCallback})
       : super(key: key);
 
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userId;
-  final String email;
+  final String username;
 
   @override
-  State<StatefulWidget> createState() => new _HomePageState(this.email);
+  State<StatefulWidget> createState() => new _HomePageState(this.username, this.userId);
 }
 
 class _HomePageState extends State<HomePage> {
-  _HomePageState(this.email);
+  _HomePageState(this.username, this.userId);
 
-  final String email;
+  final String username;
+  final String userId;
+
   int difficulty = 0;
 
   String getUsername(String email) {
@@ -144,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => GamePage(
-                                    amountPlayers: 6, username: email)));
+                                    amountPlayers: 6, username: username)));
                       },
                       child: new Container(
                           alignment: Alignment.center,
@@ -237,7 +239,8 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                       builder: (context) => GamePage(
                           amountPlayers: 3,
-                          username: email,
+                          username: username,
+                          userId: userId,
                           difficulty: difficulty)),
                 );
               },
@@ -253,7 +256,8 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                       builder: (context) => GamePage(
                           amountPlayers: 4,
-                          username: email,
+                          username: username,
+                          userId: username,
                           difficulty: difficulty)),
                 );
               },
@@ -269,7 +273,8 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                       builder: (context) => GamePage(
                           amountPlayers: 5,
-                          username: email,
+                          username: username,
+                          userId: userId,
                           difficulty: difficulty)),
                 );
               },
@@ -286,7 +291,8 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                       builder: (context) => GamePage(
                           amountPlayers: 6,
-                          username: email,
+                          username: username,
+                          userId: userId,
                           difficulty: difficulty)),
                 );
               },

@@ -22,7 +22,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
-  String _email = "";
+  String _username = "";
 
   @override
   void initState() {
@@ -38,11 +38,18 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
+  String getUsername(String email) {
+    int end = email.indexOf("@");
+    return email.substring(0, end);
+  }
+
   void loginCallback() {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
-        _email = user.email;
+        String username = getUsername(user.email);
+        // TODO : change email to username
+        _username = username;
       });
     });
     setState(() {
@@ -54,7 +61,7 @@ class _RootPageState extends State<RootPage> {
     setState(() {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
-      _email = "";
+      _username = "";
     });
   }
 
@@ -83,7 +90,7 @@ class _RootPageState extends State<RootPage> {
         if (_userId.length > 0 && _userId != null) {
           return new HomePage(
             userId: _userId,
-            email: _email,
+            username: _username,
             auth: widget.auth,
             logoutCallback: logoutCallback,
           );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:wizard/0auth/services/database.dart';
 import 'package:wizard/experimental/gui/enemyCardsWidgets.dart';
 import 'package:wizard/experimental/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart';
@@ -20,17 +21,24 @@ const six = 5;
   This is the GamePage, the screen where the game will take place.
  */
 class GamePage extends StatefulWidget {
-  GamePage({this.amountPlayers, this.username, this.difficulty});
+  GamePage({this.amountPlayers, this.username, this.difficulty, this.userId});
 
   final int amountPlayers;
   final String username;
   final int difficulty;
+  final userId;
 
   @override
-  _GamePageState createState() => _GamePageState();
+  _GamePageState createState() => _GamePageState(userId, username);
 }
 
 class _GamePageState extends State<GamePage> {
+
+  _GamePageState(this.userId, this.username);
+
+  final String username;
+  final userId;
+
   Wizard wizard;
   GameCard trumpCard;
   bool newRound = false;
@@ -293,6 +301,7 @@ class _GamePageState extends State<GamePage> {
 //                _giveRankingPoints();
               }
               _endOfGameShowDialog();
+              _saveScoreInDatabase();
 //        setState(() {
 //          wizard.tableCards = new List(size);
 //          trumpCard = wizard.takeTrumpCard();
@@ -401,6 +410,11 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  _saveScoreInDatabase() async {
+    int userPoints = _giveRankingPoints();
+    await DatabaseService(uid: userId).updateScoreData(username, userPoints);
+  }
+
 /*
   This method is giving the humanPlayer points in the ranking table
   if she/he has won.
@@ -410,26 +424,31 @@ class _GamePageState extends State<GamePage> {
   else: 5 points
    */
 //  TODO how to get access / fill in the points in the database ?????
-//  _giveRankingPoints() {
-//    List<int> pointsOfTheLastRound = [];
-//    int helper;
-//    int humanPoints = wizard.getPointsFromList(0, wizard.lastRound);
-//    for (int i = 0; i < wizard.playerAmount; i++) {
-//      pointsOfTheLastRound.add(wizard.getPointsFromList(i, wizard.lastRound));
-//    }
-//    for (int x = pointsOfTheLastRound.length; x > 1; --x) {
-//      for (int y = 0; y < x - 1; ++y) {
-//        if (pointsOfTheLastRound.elementAt(y) <
-//            pointsOfTheLastRound.elementAt(y + 1)) {
-//          helper = pointsOfTheLastRound.elementAt(y);
-//          pointsOfTheLastRound.insert(y, pointsOfTheLastRound.elementAt(y + 1));
-//          pointsOfTheLastRound.insert(y + 1, helper);
-//        }
-//      }
-//    }
-//    if (humanPoints == pointsOfTheLastRound.elementAt(0)) +=100;
-//    else if (humanPoints == pointsOfTheLastRound.elementAt(1)) += 50;
-//    else if (humanPoints == pointsOfTheLastRound.elementAt(2)) += 20;
-//    else += 5;
-//  }
+   _giveRankingPoints() {
+    List<int> pointsOfTheLastRound = [];
+    int helper;
+    int humanPoints = wizard.getPointsFromList(0, wizard.lastRound);
+
+    for (int i = 0; i < wizard.playerAmount; i++) {
+      pointsOfTheLastRound.add(wizard.getPointsFromList(i, wizard.lastRound));
+    }
+
+    for (int x = pointsOfTheLastRound.length; x > 1; --x) {
+      for (int y = 0; y < x - 1; ++y) {
+        if (pointsOfTheLastRound.elementAt(y) <
+            pointsOfTheLastRound.elementAt(y + 1)) {
+          helper = pointsOfTheLastRound.elementAt(y);
+          pointsOfTheLastRound.insert(y, pointsOfTheLastRound.elementAt(y + 1));
+          pointsOfTheLastRound.insert(y + 1, helper);
+        }
+      }
+    }
+
+    if (humanPoints == pointsOfTheLastRound.elementAt(0)) humanPoints += 100;
+    else if (humanPoints == pointsOfTheLastRound.elementAt(1)) humanPoints += 50;
+    else if (humanPoints == pointsOfTheLastRound.elementAt(2)) humanPoints += 20;
+    else humanPoints += 5;
+
+    return humanPoints;
+  }
 }
