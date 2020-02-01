@@ -32,239 +32,7 @@ class PutBetDialog extends StatelessWidget {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),
-              children: <Widget>[
-                Container(
-                  child: RaisedButton(
-                    child: Text('0'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 0);
-                      Navigator.pop(context);
-                      _helperBet(0);
-                      //hier hat player 0 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('1'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 1);
-                      Navigator.pop(context);
-                      _helperBet(1);
-                      //hier hat player 1 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('2'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 2);
-                      Navigator.pop(context);
-                      _helperBet(2);
-                      //hier hat player 2 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('3'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 3);
-                      Navigator.pop(context);
-                      _helperBet(3);
-                      //hier hat player 3 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('4'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 4);
-                      Navigator.pop(context);
-                      _helperBet(4);
-                      //hier hat player 4 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('5'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 5);
-                      Navigator.pop(context);
-                      _helperBet(5);
-                      //hier hat player 5 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('6'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 6);
-                      Navigator.pop(context);
-                      _helperBet(6);
-                      //hier hat player 6 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('7'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 7);
-                      Navigator.pop(context);
-                      _helperBet(7);
-                      //hier hat player 7 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('8'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 8);
-                      Navigator.pop(context);
-                      _helperBet(8);
-                      //hier hat player 8 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('9'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 9);
-                      Navigator.pop(context);
-                      _helperBet(9);
-                      //hier hat player 9 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('10'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 10);
-                      Navigator.pop(context);
-                      _helperBet(10);
-                      //hier hat player 10 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('11'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 11);
-                      Navigator.pop(context);
-                      _helperBet(11);
-                      //hier hat player 11 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('12'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 12);
-                      Navigator.pop(context);
-                      _helperBet(12);
-                      //hier hat player 12 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('13'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 13);
-                      Navigator.pop(context);
-                      _helperBet(13);
-                      //hier hat player 13 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('14'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 14);
-                      Navigator.pop(context);
-                      _helperBet(14);
-                      //hier hat player 14 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('15'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 15);
-                      Navigator.pop(context);
-                      _helperBet(15);
-                      //hier hat player 15 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('16'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 16);
-                      Navigator.pop(context);
-                      _helperBet(16);
-                      //hier hat player 16 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('17'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 17);
-                      Navigator.pop(context);
-                      _helperBet(17);
-                      //hier hat player 17 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('18'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 18);
-                      Navigator.pop(context);
-                      _helperBet(18);
-                      //hier hat player 18 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('19'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 19);
-                      Navigator.pop(context);
-                      _helperBet(19);
-                      //hier hat player 19 gewettet
-                    },
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text('20'),
-                    onPressed: () {
-                      wizard.putInTheRightBetInList(0, 20);
-                      Navigator.pop(context);
-                      _helperBet(20);
-                      //hier hat player 20 gewettet
-                    },
-                  ),
-                ),
-              ],
+              children: betWidgets(context),
             ),
           ),
         ],
@@ -290,5 +58,22 @@ class PutBetDialog extends StatelessWidget {
       wizard.betsNumber += bet;
       wizard.putInTheRightBetInList(i, bet);
     }
+  }
+
+  List<Widget> betWidgets(BuildContext context) {
+    List<Widget> listWidget = [];
+    for (int i = 0; i <= 20; i++) {
+      listWidget.add(new Container(
+          child: RaisedButton(
+        child: Text('$i'),
+        onPressed: () {
+          wizard.putInTheRightBetInList(0, i);
+          Navigator.pop(context);
+          _helperBet(i);
+          //Player 0 put bet
+        },
+      )));
+    }
+    return listWidget;
   }
 }
