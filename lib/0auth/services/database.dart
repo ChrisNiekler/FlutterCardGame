@@ -18,6 +18,12 @@ class DatabaseService {
     });
   }
 
+  Future updateScoreDataAfterGame(int score_number) async {
+    return await scoreCollection.document(uid).updateData({
+      'score_number': score_number
+    });
+  }
+
   List<Score> scoreListFromFirestore(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Score(

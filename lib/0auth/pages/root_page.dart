@@ -48,7 +48,6 @@ class _RootPageState extends State<RootPage> {
       setState(() {
         _userId = user.uid.toString();
         String username = getUsername(user.email);
-        // TODO : change email to username
         _username = username;
       });
     });

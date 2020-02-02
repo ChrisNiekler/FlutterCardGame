@@ -405,7 +405,7 @@ class _GamePageState extends State<GamePage> {
    */
   _saveScoreInDatabase() async {
     int userPoints = _giveRankingPoints();
-    await DatabaseService(uid: userId).updateScoreData(username, userPoints);
+    await DatabaseService(uid: userId).updateScoreDataAfterGame(userPoints);
   }
 
 /*

@@ -38,11 +38,6 @@ class _HomePageState extends State<HomePage> {
 
   int difficulty = 0;
 
-  String getUsername(String email) {
-    int end = email.indexOf("@");
-    return email.substring(0, end);
-  }
-
   //need to pass it to backendInit.dart
   int playerAmount(int amount) {
     return amount;
