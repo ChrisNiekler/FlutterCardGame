@@ -1,16 +1,23 @@
 import 'package:test/test.dart';
-import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'package:wizard/logic/deck.dart';
 
 void main() {
   group('ALL:', () {
+
+    /*
+    The following test will check if a deck is created.
+     */
     group('New Deck:', () {
       Deck testDeck = new Deck();
       test('Size == 60', () {
         expect(testDeck.size(), 60);
       });
 
+      /*
+      The following group of tests will check if the right amount of card of
+      each type is in the deck after it is created.
+       */
       group('deck contains 4 wizards', () {
         int w = 0;
         int j = 0;
@@ -46,6 +53,11 @@ void main() {
           expect(c, 13);
         });
       });
+
+      /*
+      The following test will check if a card is taken from the deck
+      with the method takeCard().
+       */
       test('draw card', () {
         testDeck.takeCard();
         expect(testDeck.size(), 59);

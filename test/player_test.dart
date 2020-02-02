@@ -11,7 +11,15 @@ var log = [];
 
 void main() {
   group('ALL:', () {
+
+    /*
+    The following tests are for the human player.
+     */
     group('HumanPlayer:', () {
+      /*
+      The following group of tests will check if the trump card is picked
+      correctly when the player enters the type of a card.
+       */
       group('pickTrumpCard:', () {
         HumanPlayer player = new HumanPlayer('testDummy', 0);
         test('club', () {
@@ -34,6 +42,11 @@ void main() {
               throwsA(TypeMatcher<RangeError>()));
         });
       }); // end pickTrumpCard
+
+      /*
+      The following group of tests will check if the method putBet(int round,
+      int betsNumber) for the file humanPlayer.dart works correctly.
+       */
       group('putBet:', () {
         HumanPlayer player = new HumanPlayer('testDummy', 0);
 
@@ -82,6 +95,10 @@ void main() {
       });
     }); // end HumanPlayer
 
+    /*
+    The following group of tests will check if the class Ki with all its
+    methods works correctly.
+     */
     group('KI:', () {
       group('PickTrumpCard:', () {
         test('club', () {
@@ -371,6 +388,12 @@ void main() {
 //        });
       }); //end PutBet
     }); // end KI
+
+    /*
+    The following group of tests should check if the class KuenstlicheIntelligenz
+    with all its methods worked correctly. Theses checks have not been fully
+    implemented yet.
+     */
     group('KuenstlicheIntelligenz:', () {
       //todo maybe test private methods by making them unprivate for tests
       group('PickTrumpCard:', () {
@@ -504,6 +527,11 @@ void main() {
           'GetWahrscheinlichkeitPlay:', () {}); //end GetWahrscheinlichkeitPlay
       group('RemoveCardsFromAiDeck:', () {}); //end RemoveCardsFromAiDeck
     }); //end KuenstlicheIntelligenz
+
+    /*
+    The following group of tests should check if the class Ai works correctly.
+    This is not implemented yet, because the class is just a random Ai.
+     */
     group('Ai:', () {
       group('PickTrumpCard:', () {
         //todo not implemented in class Ai

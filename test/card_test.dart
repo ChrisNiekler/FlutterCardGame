@@ -7,40 +7,66 @@ import 'package:test/test.dart';
 void main() {
   group('ALL:', () {
     group('Card:', () {
+      /*
+      This test will check if a card is created.
+       */
       test('Card is created', () {
         GameCard card = new GameCard(CardType.WIZARD, 14);
         expect(card, isNotNull);
       });
 
+      /*
+      This test will check if a wizard is created correctly.
+       */
       test('Card is Wizard', () {
         GameCard card = new GameCard(CardType.WIZARD, 14);
         expect(card.typeToString(), 'WIZARD');
         expect(card.value, 14);
       });
 
+      /*
+      This test will check if a card from type heart with the value 13 is
+      created correctly.
+       */
       test('Card is Heart', () {
         GameCard card = new GameCard(CardType.HEART, 13);
         expect(card.typeToString(), 'HEART');
         expect(card.value, 13);
       });
 
+      /*
+      This test will check if a card from type diamond with the value 1 is
+      created correctly.
+       */
       test('Card is Diamond', () {
         GameCard card = new GameCard(CardType.DIAMOND, 1);
         expect(card.typeToString(), 'DIAMOND');
         expect(card.value, 1);
       });
 
+      /*
+      This test will check if a jester is created correctly.
+       */
       test('Card is Jester', () {
         GameCard card = new GameCard(CardType.JESTER, 0);
         expect(card.typeToString(), 'JESTER');
         expect(card.value, 0);
       });
 
+      /*
+      This test will check if a card from type club with the value 8 is
+      created correctly.
+       */
       test('Card is Club', () {
         GameCard card = new GameCard(CardType.CLUB, 8);
         expect(card.typeToString(), 'CLUB');
         expect(card.value, 8);
       });
+
+      /*
+      The following three tests will check if the method toString() in
+      the dart file gamecard works correctly.
+       */
       group('toString test', () {
         test('Club 8', () {
           GameCard card = new GameCard(CardType.CLUB, 8);
@@ -59,6 +85,10 @@ void main() {
       });
     }); // end of group Card
 
+    /*
+    The following seven tests will check if the method compare(GameCard foe,
+     CardType trump) from the file gamecard.dart works correctly.
+     */
     group('Compare', () {
       test('noTrump vs noTrump', () {
         // compare same Value noTrump vs trump
