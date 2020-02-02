@@ -5,9 +5,15 @@ import 'dart:math' show Random;
 import 'package:wizard/logic/deck.dart';
 
 //todo Tests für KuenstlicheIntelligenz
+//There has not been done a lot of tests for this ai.
 
-//todo anzahl der karten in der runde mit berücksichtigen
-
+/*
+This class is the smartest ai of all.
+It is playing cards an putting bets with probabilities.
+For example:
+If there is a high probability to win a trick the ai tries to win.
+If there is a high probability to win a lot of tricks it bets a high number.
+ */
 class KuenstlicheIntelligenz extends Player {
   KuenstlicheIntelligenz(name, id) {
     this.ai = true;
@@ -17,9 +23,11 @@ class KuenstlicheIntelligenz extends Player {
 
   Deck aiGameDeck = new Deck();
 
+  /*
+  This method picks a trump card for the ai if there is none.
+   */
   @override
   CardType pickTrumpCard({String testValue}) {
-    //todo improve this
     CardType trumpType;
     String type;
     int counterWiz = 0,
@@ -76,6 +84,10 @@ class KuenstlicheIntelligenz extends Player {
     return trumpType;
   }
 
+  /*
+  This method plays a card if there is no trump in the round or no card played
+  yet. If both of these are not true, the ai will call its method _playCardAi().
+   */
   @override
   GameCard playCard(int pick,
       {CardType trump,
@@ -89,11 +101,13 @@ class KuenstlicheIntelligenz extends Player {
     if (trump == null) {
       //todo improve (when there is no trump)
       GameCard temp = findBestCard(trump);
+      // The next line only needed for the console game.
 //      handCards.remove(temp);
       return temp;
     } else if (foe == null) {
       GameCard temp = findBestCardWithoutFoe(
           trump, roundNumber, playerNumber, alreadyPlayedCards);
+      // The next line only needed for the console game.
 //      handCards.remove(temp);
       return temp;
     } else {
@@ -102,6 +116,10 @@ class KuenstlicheIntelligenz extends Player {
     }
   }
 
+  /*
+  This is the special play card for the ai when an other player has
+  played a card and a trump is set for the round.
+   */
   GameCard _playCardAI(
       GameCard foe,
       CardType trump,
@@ -118,15 +136,20 @@ class KuenstlicheIntelligenz extends Player {
         _getWahrscheinlichkeitPlay(
             foe, trump, alreadyPlayedCards, playedCards)) {
       GameCard temp = bestCard;
+      // The next line only needed for the console game.
 //      handCards.remove(bestCard);
       return temp;
     } else {
       GameCard temp = worstCard;
+      // The next line only needed for the console game.
 //      handCards.remove(worstCard);
       return temp;
     }
   }
 
+  /*
+  This method is putting a bet for the ai.
+   */
   @override
   void putBet(int round, int betsNumber,
       {CardType trump,
@@ -148,6 +171,9 @@ class KuenstlicheIntelligenz extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
+  /*
+  This method finds the bets card in the playable handcards.
+   */
   GameCard findBestCard(CardType trump) {
     GameCard bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -157,6 +183,9 @@ class KuenstlicheIntelligenz extends Player {
     return bestCard;
   }
 
+  /*
+  This method finds the worst card in the playable handcards.
+   */
   GameCard findWorstCard(CardType trump) {
     GameCard worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -172,6 +201,9 @@ class KuenstlicheIntelligenz extends Player {
     return worstCard;
   }
 
+  /*
+  This method returns the number how many bets the ai should bet.
+   */
   int _getWahrscheinlichkeitBet(
       int roundNumber,
       CardType trump,
@@ -235,22 +267,16 @@ class KuenstlicheIntelligenz extends Player {
       check = numberOfPossibleBetterCards / gesamtAnzahl;
       if (check <= 0.19) x++;
     }
-    //todo try if it works somehow else ....maybe not worth it
-//    int lengthOfAIDeck = aiGameDeck.size() - (playerNumber * roundNumber);
-//    int cardsOnEnemyHands = roundNumber * (playerNumber - 1);
-//    int help2 = lengthOfAIDeck - numberOfPossibleBetterCards;
-//    double help =
-//        (_binominalkoeffizient(numberOfPossibleBetterCards, 0) *
-//        _binominalkoeffizient(help2, cardsOnEnemyHands)) /
-//        _binominalkoeffizient(lengthOfAIDeck, cardsOnEnemyHands);
-//    x = (help * roundNumber).toInt();
     return x;
   }
 
+  /*
+  This method returns a boolean which says if the ai should try to win
+  the trick or if the ai should not.
+   */
   bool _getWahrscheinlichkeitPlay(GameCard foe, CardType trump,
       List<GameCard> alreadyPlayedCards, List<GameCard> playedCards) {
     bool tryWinning = false;
-    int x = 0;
     double check = 0;
     int numberOfPossibleBetterCards = 0;
     int trumpNumber = 0;
@@ -325,6 +351,10 @@ class KuenstlicheIntelligenz extends Player {
     return tryWinning;
   }
 
+  /*
+  This method removes cards from a separate ai deck.
+  With the help of this deck the ai is predicting its chances to win a trick.
+   */
   Deck _removeCardsFromAiDeck(Deck aiGameDeck,
       List<GameCard> alreadyPlayedCards, List<GameCard> playedCards) {
     for (int x = 0; x < aiGameDeck.size(); x++) {
@@ -350,26 +380,10 @@ class KuenstlicheIntelligenz extends Player {
     return aiGameDeck;
   }
 
-  double _binominalkoeffizient(int n, int k) {
-    double s = 0;
-    if (k < n) {
-      s = _fakultaet(n) / _fakultaet(n - k);
-    }
-    return s;
-  }
-
-  double _fakultaet(int x) {
-    double s = 0;
-    if (x > 0 && x != 1) {
-      s = 1;
-      do {
-        s = s * x;
-        x--;
-      } while (x > 1);
-      return s;
-    }
-  }
-
+  /*
+  This method finds the best card of the hand of the ai when there is no card
+  played yet.
+   */
   GameCard findBestCardWithoutFoe(CardType trump, int roundNumber,
       int playerNumber, List<GameCard> alreadyPlayedCards) {
     GameCard temp = playableHandCards[0];
@@ -380,6 +394,9 @@ class KuenstlicheIntelligenz extends Player {
     return temp;
   }
 
+  /*
+  This method is not used yet.
+   */
   @override
   Future<GameCard> playCardFuture() {
     // TODO: implement playCardFuture

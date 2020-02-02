@@ -4,7 +4,12 @@ import '../cardType.dart';
 import 'dart:math' show Random;
 
 //todo Tests für AI
+//This has not been done yet, because the ai is totally random.
 
+/*
+This is an ai which is from type player.
+This ai is dumb and works totally random.
+ */
 class Ai extends Player {
   //Klasse Ai erbt von Klasse Player//
   Ai(name, id) {
@@ -13,6 +18,10 @@ class Ai extends Player {
     this.ai = true; //ai auf true setzen//
   }
 
+  /*
+  This method should pick a trumpcard.
+  This function is done by the method findCard().
+   */
   @override
   CardType pickTrumpCard({String testValue}) {
     CardType trumpType;
@@ -25,18 +34,28 @@ class Ai extends Player {
     return trumpType;
   }
 
+  /*
+  This method is a random operator to pick a card which will be played.
+   */
   logic.GameCard playCardAI(logic.GameCard foe, CardType Trump) {
     int pick = Random().nextInt(playableHandCards.length);
     return handCards[pick];
+    // The next line only needed for the console game.
 //    return handCards.removeAt(pick);
   }
 
+  /*
+  This is only a random operator to pick the trumpcard if needed.
+   */
   logic.GameCard findCard() {
     int temp = Random().nextInt(playableHandCards.length);
     logic.GameCard findCard = playableHandCards[temp];
     return findCard;
   }
 
+  /*
+  This method plays a card.
+   */
   @override
   logic.GameCard playCard(int pick,
       {CardType trump,
@@ -59,6 +78,9 @@ class Ai extends Player {
     }
   }
 
+  /*
+  This method put the bet of the ai.
+   */
   @override
   void putBet(int round, int betsNumber,
       {CardType trump,
@@ -71,6 +93,9 @@ class Ai extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
+  /*
+  This method is not used right now.
+   */
   @override
   Future<logic.GameCard> playCardFuture() {
     // TODO: implement playCardFuture

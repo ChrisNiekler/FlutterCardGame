@@ -3,8 +3,9 @@ import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/cardType.dart';
 import 'dart:math' show Random;
 
-//todo Tests für KI
-
+/*
+This is the ai with the medium difficulty.
+ */
 class Ki extends Player {
   Ki(name, id) {
     this.ai = true;
@@ -12,9 +13,11 @@ class Ki extends Player {
     this.id = id;
   }
 
+  /*
+  This method picks the best trumpCard for the ai if there is no trumpCard yet.
+   */
   @override
   CardType pickTrumpCard({String testValue}) {
-    //todo improve this
     CardType trumpType;
     String type;
     int counterWiz = 0,
@@ -71,6 +74,12 @@ class Ki extends Player {
     return trumpType;
   }
 
+  /*
+  This method plays a card to win the trick.
+  If there is no trump then the best card is played.
+  And if there is no card played yet then the best card is played.
+  Else it decides with the method _playCardAi().
+   */
   @override
   GameCard playCard(int pick,
       {CardType trump,
@@ -80,15 +89,15 @@ class Ki extends Player {
       List<GameCard> alreadyPlayedCards,
       List<GameCard> playedCards,
       GameCard highestCard}) {
-    //1. here it is chosen between all handcards
     if (trump == null) {
-      //todo improve (when there is no trump)
       GameCard temp = _findBestCard(trump);
+      // The next line only needed for the console game.
 //      handCards.remove(temp);
       return temp;
     } else if (foe == null) {
       GameCard temp = findBestCardWithoutFoe(
           trump, roundNumber, playerNumber, alreadyPlayedCards);
+      // The next line only needed for the console game.
 //      handCards.remove(temp);
       return temp;
     } else {
@@ -96,9 +105,11 @@ class Ki extends Player {
     }
   }
 
+  /*
+  This method returns the best or worst card. If the player wants to win a trick
+  then the best and if he does not want to win then the worst.
+   */
   GameCard _playCardAI(GameCard foe, CardType trump, GameCard highestCard) {
-    //3. here play best or worst Card -> at the  moment problem caching value of the best played card and the trump
-    //todo DONE get more intelligent (Wahrscheinlichkeiten, ...)
     GameCard bestCard = _findBestCard(trump);
     GameCard worstCard = _findWorstCard(trump);
     if (bestCard == bestCard.compare(highestCard, trump) &&
@@ -114,16 +125,9 @@ class Ki extends Player {
     }
   }
 
-  //karte legen
-  //todo DONE erste KI mit random oder erster Karte
-  //todo DONE zweite KI mit erster (oder random) legbarer Karte
-  //todo DONE dritte KI mit bester legbarer Karte
-
-  //todo DONE Wahrscheinlichkeitsberechnung für Gewinn des Stichs
-  //todo DONE vierte KI beste legbare Kartodote, wenn Wahrscheinlichkeit für Stich größer 0,75
-  //todo DONE fünfte KI beste legbare Karte, wenn hohe Wahrscheinlichkeit für Stich und auch überhaupt noch ein Stich benötigt
-  //hohe Wahrscheinlichkeit: abhängig von noch vorhanden Karten, der anderen Spieler
-
+  /*
+  This method put the bet number which is the best for the ai.
+   */
   @override
   void putBet(int round, int betsNumber,
       {CardType trump,
@@ -151,13 +155,9 @@ class Ki extends Player {
     print('$name bet he/she wins $bet tricks!');
   }
 
-  //wetten
-  //todo DONE erste bet erstmal immer 1
-  //todo DONE zweite bet alle Karten größer gleich 10 ist Anzahl der bet -> wenn nicht möglich zu legen auf Grund der Logik, dann eine weniger wetten
-
-  //todo DONE Wahrscheinlichkeitsberechnung für bessere Karten, als alle Anderen
-  //todo DONE an Hand der Wahrscheinlichkeit die dritte bet
-
+  /*
+  This method returns the best card of the possible playable handcards.
+   */
   GameCard _findBestCard(trump) {
     GameCard bestCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -167,6 +167,9 @@ class Ki extends Player {
     return bestCard;
   }
 
+  /*
+  This method returns the worst card of the possible playable handcards.
+   */
   GameCard _findWorstCard(CardType trump) {
     GameCard worstCard = this.playableHandCards[0];
     for (int i = 1; i < playableHandCards.length; i++) {
@@ -182,6 +185,10 @@ class Ki extends Player {
     return worstCard;
   }
 
+  /*
+  This method returns the best card of the possible playable handcards
+  when there is no card played yet.
+   */
   GameCard findBestCardWithoutFoe(CardType trump, int roundNumber,
       int playerNumber, List<GameCard> alreadyPlayedCards) {
     GameCard temp = playableHandCards[0];
@@ -192,6 +199,9 @@ class Ki extends Player {
     return temp;
   }
 
+  /*
+  This method is not used yet.
+   */
   @override
   Future<GameCard> playCardFuture() {
     // TODO: implement playCardFuture
