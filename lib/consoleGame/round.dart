@@ -5,6 +5,9 @@ import '../logic/humanPlayer.dart';
 import 'package:wizard/logic/deck.dart';
 import 'dart:io';
 
+/*
+This class is only for the console game.
+ */
 class Round {
   GameCard trumpCard;
   CardType trumpType;

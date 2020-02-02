@@ -7,7 +7,9 @@ import 'package:wizard/consoleGame/round.dart';
 import 'package:wizard/logic/player.dart';
 import 'dart:io';
 
-// second main is just for backend
+/*
+This class is only for the console game.
+ */
 void main() {
   // todo when all are done
   //  put more comments + clean code
