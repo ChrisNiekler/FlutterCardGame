@@ -54,8 +54,6 @@ class _GamePageState extends State<GamePage> {
     degreeOfDifficulty = widget.difficulty;
     wizard = Wizard(playerAmount: size, difficulty: degreeOfDifficulty);
     trumpCard = wizard.takeTrumpCard();
-    //tableCards = new List(size);
-    //_emptyTable = tableCards;
     _emptyTable = new List(size);
     print('We have $size players');
     print('The difficulty is $degreeOfDifficulty');
@@ -63,7 +61,6 @@ class _GamePageState extends State<GamePage> {
     wizard.determineLastPlayer();
     wizard.determineFirstPlayer();
     wizard.startGame();
-//    _helperBet();
     _putBetHelper();
   }
 
@@ -284,10 +281,12 @@ class _GamePageState extends State<GamePage> {
   }
 
   /*
-  TODO add some description
+  This widget shows either a button which will start a next round or a button
+  for the end of the game to fill the score of the human player in the
+  database.
    */
   Widget _nextRoundHelperWidget() {
-    print('ich hiab funktiriondret');
+    print('i am _nextRoundHelperWidget');
     return wizard.roundNumber == wizard.lastRound
         ? FlatButton(
             padding: EdgeInsets.all(8.0),
@@ -299,10 +298,6 @@ class _GamePageState extends State<GamePage> {
                 _saveScoreInDatabase();
               }
               _endOfGameShowDialog();
-//        setState(() {
-//          wizard.tableCards = new List(size);
-//          trumpCard = wizard.takeTrumpCard();
-//        });
             },
           )
         : FlatButton(
@@ -316,15 +311,13 @@ class _GamePageState extends State<GamePage> {
                 wizard.tableCards = new List(size);
                 trumpCard = wizard.takeTrumpCard();
               });
-//      _helperBet();
               _putBetHelper();
             },
           );
   }
 
   /*
-  TODO review this description
-  This methode opens the widget every round that the HumanPlayer
+  This method opens the widget every round that the HumanPlayer
   is able to put her/his bet.
    */
   _putBetHelper() {
@@ -333,15 +326,13 @@ class _GamePageState extends State<GamePage> {
         barrierDismissible: false,
         context: context,
         builder: (BuildContext context) => PutBetDialog(trumpCard, wizard),
-//            putBet(context, trumpCard, wizard.roundNumber),
       );
-      //TODO is this line still needed??
-//      wizard.betsNumber += wizard.getBetFromList(0, wizard.roundNumber);
     });
   }
 
   /*
-  TODO add some description
+  This method will be needed if the game is dynamic an everyone can start
+  the betting.
    */
 //  helperBet() {
 //    int bet;
@@ -378,7 +369,8 @@ class _GamePageState extends State<GamePage> {
   }
 
   /*
-  TODO add some description
+  This method sets an integer in a int-arraylist for every instance of
+   the class player.
    */
   void putInTheRightBetInList(
       int roundNumber, int playerByIndex, int betNumber) {
@@ -386,7 +378,8 @@ class _GamePageState extends State<GamePage> {
   }
 
   /*
-  TODO add some description
+  This method checks if a instance of the class player has played all
+  of his cards.
    */
   _noHandCardsAnyMore() {
     for (int i = 0; i < wizard.playerAmount; i++) {
@@ -407,6 +400,9 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  /*
+  This method fills the score in the database at the end of the round. 
+   */
   _saveScoreInDatabase() async {
     int userPoints = _giveRankingPoints();
     await DatabaseService(uid: userId).updateScoreData(username, userPoints);

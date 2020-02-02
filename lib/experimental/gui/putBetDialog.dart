@@ -4,6 +4,9 @@ import 'package:wizard/experimental/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/wizard.dart';
 
+/*
+This class shows a dialog, in which the humanplayer can set his/her bet(s).
+ */
 class PutBetDialog extends StatelessWidget {
   PutBetDialog(this.trumpCard, this.wizard);
 
@@ -19,7 +22,6 @@ class PutBetDialog extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(35, 35, 35, 35),
         title: Row(
           children: <Widget>[
-            //TODO fix betsNumber (humanplayer starts betting and sometimes there are already bets)
             Text(
                 "Put your bet for this round.\nCurrent: ${wizard.betsNumber} bet(s)"),
             Container(child: cardOnTable(trumpCard, trumpCard: true)),
@@ -41,9 +43,8 @@ class PutBetDialog extends StatelessWidget {
   }
 
   /*
-  TODO review this description
-  This methode is an for loop which will run
-   if the player has predicted her/his bet.
+  This method is an for loop which will run if the player has predicted
+  her/his bet. So the ais are able to put their bet.
    */
   _helperBet(int userBet) {
     int bet;
@@ -70,7 +71,6 @@ class PutBetDialog extends StatelessWidget {
           wizard.putInTheRightBetInList(0, i);
           Navigator.pop(context);
           _helperBet(i);
-          //Player 0 put bet
         },
       )));
     }

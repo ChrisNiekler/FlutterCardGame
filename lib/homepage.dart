@@ -11,6 +11,10 @@ final Map<int, Widget> difficulties = const <int, Widget>{
   2: Text('crazy'),
 };
 
+/*
+This class is for the homepage of the game, in which the user can start or
+resume a game or look up his score from the database.
+ */
 class HomePage extends StatefulWidget {
   HomePage(
       {Key key, this.auth, this.userId, this.username, this.logoutCallback})
@@ -44,6 +48,9 @@ class _HomePageState extends State<HomePage> {
     return amount;
   }
 
+  /*
+  This is the method to sign out.
+   */
   signOut() async {
     try {
       await widget.auth.signOut();
@@ -53,6 +60,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  /*
+  This widget is the homepage on which everything is shown.
+   */
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -221,6 +231,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /*
+  This dialog asks the humanplayer against how many players she/he wants to
+  compete in the game.
+   */
   AlertDialog choosePlayerNumberDialog(BuildContext context) {
     return AlertDialog(
       title: new Text("How many players"),
@@ -299,6 +313,11 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
+
+            /*
+            With this widget the player is able to chose the difficulty of the
+            computer players.
+             */
             new CupertinoSegmentedControl<int>(
               children: difficulties,
               onValueChanged: (int val) {
