@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/*
+These widgets show the back of the cards on the gamepage.
+ */
+
 Widget upsideDownCardsSides(int amountOfCards, String color) {
   List<Widget> cardListA = [];
   List<Widget> cardListB = [];

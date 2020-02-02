@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/*
+This widget shows the humanPlayer her/his cards.
+ */
 Widget playersCardsView(List<Widget> tempCards) {
   List<Widget> listA = [];
   List<Widget> listB = [];

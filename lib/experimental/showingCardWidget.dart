@@ -4,6 +4,10 @@ import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/deck.dart';
 import 'package:wizard/logic/player.dart';
 
+/*
+Todo add description
+TOdo Is this still needed?????
+ */
 // todo how to implement widgets other then in the main
 class showingCard extends StatefulWidget {
   showingCard(this.tcard, this.roundNumber, this.maxRound, this.players,

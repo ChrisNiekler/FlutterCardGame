@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
 
             /*
             With this widget the player is able to chose the difficulty of the
-            computer players.
+            computer players. On default it is the lowest difficulty (0).
              */
             new CupertinoSegmentedControl<int>(
               children: difficulties,
