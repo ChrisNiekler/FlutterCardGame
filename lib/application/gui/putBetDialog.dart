@@ -60,7 +60,8 @@ class PutBetDialog extends StatelessWidget {
       wizard.putInTheRightBetInList(i, bet);
     }
   }
-
+  /* This method creates the buttons 0-20 for humanplayer to bet
+   */
   List<Widget> betWidgets(BuildContext context) {
     List<Widget> listWidget = [];
     for (int i = 0; i <= 20; i++) {
