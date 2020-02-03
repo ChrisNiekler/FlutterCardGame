@@ -3,6 +3,10 @@ import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/cardType.dart';
 
+/*
+This method sets the handcards of a (human)player/ai able to play if she/he is
+allowed to play them.
+ */
 List<logic.GameCard> setAllowedToPlay(
     {@required Player player,
     @required bool wizardIsPlayed,
@@ -46,6 +50,9 @@ List<logic.GameCard> setAllowedToPlay(
   return hand;
 }
 
+/*
+This method returns the cardType which has to be served in the trick.
+ */
 CardType determineToServe(
     {@required CardType toServe, @required List<logic.GameCard> playedCards}) {
   String temp;
