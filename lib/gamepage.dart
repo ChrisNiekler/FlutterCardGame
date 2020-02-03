@@ -6,7 +6,7 @@ import 'package:wizard/application/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/wizard.dart';
 import 'application/gui/usersViewWidget.dart';
-import 'application/scoreboard.dart';
+import 'application/gui/scoreboard.dart';
 import 'application/gui/putBetDialog.dart';
 
 // some constants to make the code easier to read
