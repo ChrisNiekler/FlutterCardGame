@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "438009786000",
-    "firebase_url": "https://wizardgame-ec979.firebaseio.com",
-    "project_id": "wizardgame-ec979",
-    "storage_bucket": "wizardgame-ec979.appspot.com"
+    "project_number": "571798702847",
+    "firebase_url": "https://wizard-b78f9.firebaseio.com",
+    "project_id": "wizard-b78f9",
+    "storage_bucket": "wizard-b78f9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:438009786000:android:5e16a0295d9ca51f4a7215",
+        "mobilesdk_app_id": "1:571798702847:android:3a886258d890165b621aca",
         "android_client_info": {
-          "package_name": "com.example.wizard2"
+          "package_name": "com.example.wizard"
         }
       },
       "oauth_client": [
         {
-          "client_id": "438009786000-5ij2ubmmed4lhgqfjjlhre4qpgls7adk.apps.googleusercontent.com",
+          "client_id": "571798702847-gvj7cu9h62ipb9rbri1aderutd0uphj9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB7mzRp1Q43nVHeQ1Y8D_ZAXpbj-QbBKeY"
+          "current_key": "AIzaSyBvofafeYEu6TdEH8VZIQGtB3a9HOtoZ9o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "438009786000-5ij2ubmmed4lhgqfjjlhre4qpgls7adk.apps.googleusercontent.com",
+              "client_id": "571798702847-gvj7cu9h62ipb9rbri1aderutd0uphj9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

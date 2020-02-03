@@ -5,7 +5,14 @@ import 'dart:io';
 
 class HumanPlayer extends Player {
   @override
-  Card playCard(int pick, {CardType trump, Card foe}) {
+  Card playCard(int pick,
+      {CardType trump,
+      Card foe,
+      int roundNumber,
+      int playerNumber,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      Card highestCard}) {
     Card temp = this.handCards[pick];
     handCards.removeAt(pick);
     return temp;
@@ -28,7 +35,7 @@ class HumanPlayer extends Player {
       }
       input = input.toLowerCase();
     } while ((!types.contains(input)) && testValue == null);
-    print('$name pickt $input');
+    print('$name picked $input');
 
     return CardType.values[types.indexOf(input)];
   }
@@ -40,7 +47,13 @@ class HumanPlayer extends Player {
   }
 
   @override
-  void putBet(int round, int betsNumber, {CardType trump, String testValue}) {
+  void putBet(int round, int betsNumber,
+      {CardType trump,
+      String testValue,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      int playerNumber,
+      bool firstPlayer}) {
     bool inputAllowed = false;
     String inputString = '';
     int check;

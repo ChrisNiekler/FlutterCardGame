@@ -1,37 +1,78 @@
+import 'package:flutter/material.dart';
+import '0auth/pages/root_page.dart';
+import '0auth/services/authentication.dart';
+import 'package:wizard/ui/gamepage.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:wizard/gamepage.dart';
+import 'package:wizard/0auth/services/authentication.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return new MaterialApp(
+      title: 'Wizard',
       debugShowCheckedModeBanner: false,
-      title: 'Wizard Demo',
-      theme: ThemeData(
+      theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: new RootPage(auth: new Auth()),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  HomePage({Key key, this.auth, this.userId, this.email, this.logoutCallback})
+      : super(key: key);
+
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
+  final String email;
+
+  @override
+  State<StatefulWidget> createState() => new _HomePageState(this.email);
+}
+
+class _HomePageState extends State<HomePage> {
+  _HomePageState(this.email);
+
+  final String email;
+
+  String getUsername(String email) {
+    int end = email.indexOf("@");
+    return email.substring(0, end);
+  }
+
   //need to pass it to game.dart
-  int playerAmount(int amount ){
-    return amount;}
+  int playerAmount(int amount) {
+    return amount;
+  }
+
+  signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.logoutCallback();
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      /*appBar: AppBar(leading: new IconButton(icon: new Icon(Icons.arrow_back_ios, color: Colors.black), onPressed: null)),*/
+      appBar: new AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        actions: <Widget>[
+          new FlatButton(
+              child: new Text('Logout',
+                  style: new TextStyle(fontSize: 17.0, color: Colors.grey)),
+              onPressed: signOut)
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -183,58 +224,86 @@ class MyHomePage extends StatelessWidget {
 
   AlertDialog choosePlayerNumberDialog(BuildContext context) {
     return AlertDialog(
-
       title: new Text("How many players"),
-      content:  Container(height: 300,
-        child: Column( mainAxisAlignment: MainAxisAlignment.center,
+      content: Container(
+        height: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[new RaisedButton(
-            child: new Text("3 Players",style: TextStyle(color: Colors.black26),),
-            onPressed: () {
-              playerAmount(3);
-              print("Chose 3 Players");
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 3,)),
-
-              );
-            },
-          ),
+          children: <Widget>[
             new RaisedButton(
-              child: new Text("4 Players",style: TextStyle(color: Colors.black26),),
+              child: new Text(
+                "3 Players",
+                style: TextStyle(color: Colors.black26),
+              ),
+              onPressed: () {
+                playerAmount(3);
+                print("Chose 3 Players");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Gamepage(amountPlayers: 3, username: email)),
+                );
+              },
+            ),
+            new RaisedButton(
+              child: new Text(
+                "4 Players",
+                style: TextStyle(color: Colors.black26),
+              ),
               onPressed: () {
                 playerAmount(4);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 4,)),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Gamepage(amountPlayers: 4, username: email)),
                 );
               },
             ),
             new RaisedButton(
-              child: new Text("5 Players",style: TextStyle(color: Colors.black26),),
+              child: new Text(
+                "5 Players",
+                style: TextStyle(color: Colors.black26),
+              ),
               onPressed: () {
                 playerAmount(5);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 5,)),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Gamepage(amountPlayers: 5, username: email)),
                 );
               },
             ),
             new RaisedButton(
-              child: new Text("6 Players",style: TextStyle(color: Colors.black26),),
-              onPressed: () {playerAmount(6);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Gamepage(amountPlayers: 6,)),
-              );
+              child: new Text(
+                "6 Players",
+                style: TextStyle(color: Colors.black26),
+              ),
+              onPressed: () {
+                playerAmount(6);
+                print("6");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Gamepage(amountPlayers: 6, username: email)),
+                );
               },
             ),
             new RaisedButton(
-              child: new Text("Close",style: TextStyle(color: Colors.black26),),
+              child: new Text(
+                "Close",
+                style: TextStyle(color: Colors.black26),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-            ),],),
+            ),
+          ],
+        ),
       ),
     );
   }

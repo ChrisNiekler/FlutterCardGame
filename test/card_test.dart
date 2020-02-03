@@ -41,6 +41,21 @@ void main() {
         expect(card.typeToString(), 'CLUB');
         expect(card.value, 8);
       });
+      group('toString test', () {
+        test('Club 8', () {
+          Card card = new Card(CardType.CLUB, 8);
+          expect(card.toString(), '8clubs');
+        });
+        test('WIZARD', () {
+          Card card =
+              new Card(CardType.WIZARD, 14, passiveType: CardType.HEART);
+          expect(card.toString(), '14hearts');
+        });
+        test('JESTER', () {
+          Card card = new Card(CardType.JESTER, 0, passiveType: CardType.CLUB);
+          expect(card.toString(), '0clubs');
+        });
+      });
     }); // end of group Card
 
     group('Compare', () {
@@ -84,15 +99,19 @@ void main() {
       });
       test('wizard vs wizard', () {
         CardType trump = CardType.HEART;
-        Card wizardFirst = new Card(CardType.WIZARD, 14);
-        Card wizardSecond = new Card(CardType.WIZARD, 14);
+        Card wizardFirst =
+            new Card(CardType.WIZARD, 14, passiveType: CardType.CLUB);
+        Card wizardSecond =
+            new Card(CardType.WIZARD, 14, passiveType: CardType.HEART);
         expect(wizardSecond.compare(wizardFirst, trump), wizardFirst);
       });
 
       test('jester vs jester', () {
         CardType trump = CardType.HEART;
-        Card jesterFirst = new Card(CardType.JESTER, 0);
-        Card jesterSecond = new Card(CardType.JESTER, 0);
+        Card jesterFirst =
+            new Card(CardType.JESTER, 0, passiveType: CardType.CLUB);
+        Card jesterSecond =
+            new Card(CardType.JESTER, 0, passiveType: CardType.HEART);
         expect(jesterSecond.compare(jesterFirst, trump), jesterFirst);
       });
     }); // end of group Compare

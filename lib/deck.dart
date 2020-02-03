@@ -1,6 +1,9 @@
 import 'package:wizard/card.dart';
 import 'package:wizard/cardType.dart';
 import 'dart:math';
+/* A new instance of Deck will automatically create a Deck of 60 Cards
+   which are already shuffeld twice.
+ */
 
 class Deck {
   List<Card> deck = [];
@@ -11,20 +14,34 @@ class Deck {
     return deck.removeAt(0);
   }
 
+  void aiRemoveCard(int number) {
+    deck.removeAt(number);
+  }
+
+  Card aiShowCard(int number) {
+    return deck[number];
+  }
+
   /* _createDeck() will create a new deck of cards in increasing order*/
   void _createDeck() {
     //todo add Images for the GUI when ready F4N
     // clubs (♣), diamonds (♦), hearts (♥) and spades (♠
-
     // first loop for the four different types
     for (int i = 0; i < 4; i++) {
       // second loop for the fourteen different cards
       for (int j = 0; j < 15; j++) {
         if (j == 0) {
-          this.deck.add(new Card(CardType.values[4], j));
+          // if the value of the card is 0 then
+          // the card type is Jester
+          this.deck.add(
+              new Card(CardType.values[4], j, passiveType: CardType.values[i]));
         } else if (j == 14) {
-          this.deck.add(new Card(CardType.values[5], j));
+          // if the value of the card is 14 then
+          // the card type is Wizard
+          this.deck.add(
+              new Card(CardType.values[5], j, passiveType: CardType.values[i]));
         } else {
+          // the card type varies between the common types
           this.deck.add(new Card(CardType.values[i], j));
         }
       }
@@ -57,7 +74,7 @@ class Deck {
   }
 
   /* Constructor
-  * When creating a new Deck, the cards will be created and shuffled;*/
+  * When creating a new instance of Deck, the cards will be created and shuffled;*/
   Deck() {
     this._createDeck();
     this.shuffleDeck();

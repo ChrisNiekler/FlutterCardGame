@@ -15,6 +15,8 @@ class Round {
   CardType toServe; // the type of card that has to be served
   List<Player> players;
   List<Card> playedCards = [];
+  List<Card> alreadyPlayedCards = [];
+  bool firstPlayer;
 
   // creates a brand new Deck that gets shuffled twice
   Deck gameDeck = new Deck();
@@ -29,6 +31,9 @@ class Round {
 
     // after the distribution the card on top will determine the new trump
     determineTrump();
+
+    determineLastPlayer();
+    determineFirstPlayer();
 
     // put bets
     tricking();
@@ -46,6 +51,8 @@ class Round {
     players.forEach(
       (element) {
         element.tricks = 0;
+        element.lastPlayer = false;
+        element.firstPlayer = false;
       },
     );
     sleep(const Duration(seconds: 3));
@@ -76,6 +83,7 @@ class Round {
     String temp = '';
     Card highestPlayedCard;
     Player trickWinner;
+    int playerNumber = players.length;
 
     Player gamer;
     for (int i = 0, n = players.length; i < n; i++) {
@@ -92,10 +100,10 @@ class Round {
 
         if (trumpType != null) {
           print('The trump is $temp');
-          playedCards.add((gamer as HumanPlayer).humanPlayCard());
         } else {
           print('There is no trump in this round!');
         }
+        playedCards.add((gamer as HumanPlayer).humanPlayCard());
       } else {
         // the ai will  play a card
         if (playedCards.length == 0) {
@@ -108,7 +116,7 @@ class Round {
           );
         } else {
           playedCards
-              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0]));
+              .add(gamer.playCard(1, trump: trumpType, foe: playedCards[0], highestCard: highestPlayedCard));
         }
       }
 
@@ -158,6 +166,7 @@ class Round {
       print('');
 
       resetAllowedToPlay(gamer);
+      alreadyPlayedCards.addAll(playedCards);
       gamer.playableHandCards = [];
 
       // sleeper --> just for the console game
@@ -254,7 +263,7 @@ class Round {
       // when wizard is trump card then the dealer picks the trump
       print(
           'The open card is $cardName, therefore the dealer picks the trump.');
-      players[trickStarter].pickTrumpCard();
+      trumpType = players[trickStarter].pickTrumpCard();
     }
     print('');
   }
@@ -262,10 +271,11 @@ class Round {
   void tricking() {
     int betsNumber = 0;
     int p = trickStarter;
+    int playerNumber = players.length;
     for (int i = 0, n = players.length; i < n; i++) {
-      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType);
-      p++;
+      players[p % n].putBet(roundNumber, betsNumber, trump: trumpType, playerNumber: playerNumber, firstPlayer: firstPlayer);
       betsNumber += players[p % n].bet;
+      p++;
     }
   }
 
@@ -274,6 +284,12 @@ class Round {
       players.last.lastPlayer = true;
     else
       players[trickStarter - 1].lastPlayer = true;
+  }
+
+  void determineFirstPlayer () {
+    for(int i = 0; i < players.length; i++){
+      if(players[i].id == trickStarter) players[i].firstPlayer = true;
+    }
   }
 
   void roundEvaluation() {

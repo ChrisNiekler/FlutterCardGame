@@ -13,11 +13,24 @@ abstract class Player {
   int points = 0;
   bool ai;
   bool lastPlayer = false;
+  bool firstPlayer = false;
 
   void putBet(int roundNumber, int betsNumber,
-      {CardType trump, String testValue});
+      {CardType trump,
+      String testValue,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      int playerNumber,
+      bool firstPlayer});
 
-  Card playCard(int pick, {CardType trump, Card foe});
+  Card playCard(int pick,
+      {CardType trump,
+      Card foe,
+      int roundNumber,
+      int playerNumber,
+      List<Card> alreadyPlayedCards,
+      List<Card> playedCards,
+      Card highestCard});
 
 
   void addCard(Deck deck) {
@@ -52,16 +65,18 @@ abstract class Player {
   /* override this in  derivatives
       ask the player who deals to pick the card */
 
-  CardType pickTrumpCard({String testValue}) {
-    CardType trumpType;
-    String type;
+  CardType pickTrumpCard({String testValue});
 
-    trumpType = CardType.values[Random().nextInt(4)];
-    type =
-        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
-    print('$name pickt $type (yet random)');
-    return trumpType;
-  }
+//  {
+//    CardType trumpType;
+//    String type;
+//
+//    trumpType = CardType.values[Random().nextInt(4)];
+//    type =
+//        trumpType.toString().substring(trumpType.toString().indexOf('.') + 1);
+//    print('$name pickt $type (yet random)');
+//    return trumpType;
+//  }
 
   void printPoints() {
     print('$name has $points points.');
