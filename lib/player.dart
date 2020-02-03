@@ -19,9 +19,6 @@ abstract class Player {
 
   Card playCard(int pick, {CardType trump, Card foe});
 
-//  //done wie kann ich diese methode in round ansprechen, ohne sie auch in humanPlayer implementieren zu müssen???
-  //not necessary anymore
-//  Card playCardAI(Card foe, Card trump);
 
   void addCard(Deck deck) {
     handCards.add(deck.takeCard());
@@ -37,7 +34,7 @@ abstract class Player {
         if (element.allowedToPlay) {
           print('[$index][+] ' + temp);
         } else {
-          print('[$index][-]' + temp);
+          print('[$index][-] ' + temp);
         }
         index++;
       },
