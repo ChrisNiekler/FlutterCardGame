@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wizard/0auth/services/database.dart';
-import 'package:wizard/experimental/gui/enemyCardsWidgets.dart';
-import 'package:wizard/experimental/gui/cardsOnTable.dart';
+import 'package:wizard/application/gui/enemyCardsWidgets.dart';
+import 'package:wizard/application/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/wizard.dart';
-import 'experimental/gui/usersViewWidget.dart';
-import 'experimental/scoreboard.dart';
-import 'experimental/gui/putBetDialog.dart';
+import 'application/gui/usersViewWidget.dart';
+import 'application/scoreboard.dart';
+import 'application/gui/putBetDialog.dart';
 
 // some constants to make the code easier to read
 const user = 0;

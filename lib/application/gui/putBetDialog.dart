@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/experimental/gui/cardsOnTable.dart';
+import 'package:wizard/application/gui/cardsOnTable.dart';
 import 'package:wizard/logic/gamecard.dart' as logic;
 import 'package:wizard/logic/wizard.dart';
 

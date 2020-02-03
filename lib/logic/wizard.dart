@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wizard/experimental/backend/playersUI.dart';
+import 'package:wizard/application/backend/playersUI.dart';
 import 'package:wizard/logic/gamecard.dart';
 import 'package:wizard/logic/player.dart';
 import 'package:wizard/logic/deck.dart';
