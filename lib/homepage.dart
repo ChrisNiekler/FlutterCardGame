@@ -239,6 +239,23 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            /*
+            With this widget the player is able to chose the difficulty of the
+            computer players. On default it is the lowest difficulty (0).
+             */
+            new CupertinoSegmentedControl<int>(
+              children: difficulties,
+              onValueChanged: (int val) {
+                setState(() {
+                  difficulty = val;
+                });
+              },
+              borderColor: Colors.black,
+              unselectedColor: Colors.lightBlueAccent,
+              selectedColor: Colors.blueAccent,
+              pressedColor: Colors.grey,
+            ),
+
             new RaisedButton(
               child: new Text(
                 "3 Players",
@@ -309,22 +326,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
 
-            /*
-            With this widget the player is able to chose the difficulty of the
-            computer players. On default it is the lowest difficulty (0).
-             */
-            new CupertinoSegmentedControl<int>(
-              children: difficulties,
-              onValueChanged: (int val) {
-                setState(() {
-                  difficulty = val;
-                });
-              },
-              borderColor: Colors.black,
-              unselectedColor: Colors.lightBlueAccent,
-              selectedColor: Colors.blueAccent,
-              pressedColor: Colors.grey,
-            ),
             new RaisedButton(
               child: new Text(
                 "Close",
